@@ -92,7 +92,8 @@ def main():
     parser.add_argument("--agente", default="claudecode/haiku", help="modelo usado en demo.agente")
     parser.add_argument("--equipo", default="Equipo ECO")
     parser.add_argument("--integrantes", default="")
-    parser.add_argument("--repo", default="")
+    parser.add_argument("--repo", default="https://github.com/SadidRomero77/eco")
+    parser.add_argument("--web", default="https://eco.kibosecondbrain.com")
     args = parser.parse_args()
 
     nombre = limpio(args.modelo)
@@ -156,14 +157,17 @@ def main():
     s.append(Paragraph("ECO — ¿Cuántas fuentes hay de verdad detrás de una afirmación?", titulo))
     linea_equipo = f"{args.equipo}" + (f" · {args.integrantes}" if args.integrantes else "")
     s.append(Paragraph(f"Ficha técnica · Frente 4: Defensa epistémica · {linea_equipo}"
-                       + (f" · Repositorio: {args.repo}" if args.repo else ""), sub))
+                       + (f" · En línea: {args.web} (MCP: {args.web}/mcp)" if args.web else "")
+                       + (f" · Código: {args.repo}" if args.repo else ""), sub))
 
     s.append(Paragraph("1. Amenaza", h))
     s.append(Paragraph(
         "La IA abarata clonar una afirmación en decenas de sitios y parafrasearla para que no parezca copia. "
         "Las personas y los agentes con búsqueda web toman la repetición como corroboración: cinco páginas "
-        "parecidas se leen como cinco fuentes, y el agente transmite esa falsa confirmación. Vector concreto: "
-        "<b>lavado de fuentes</b>, un solo origen que aparenta muchas fuentes independientes.", p))
+        "parecidas se leen como cinco fuentes, y el agente transmite esa falsa confirmación (<b>lavado de fuentes</b>). "
+        "Las campañas se apoyan además en <b>evidencia sintética</b> (fotos con fecha o autoría falsas) y en "
+        "<b>voces clonadas</b> que circulan como notas de voz de WhatsApp, donde la compresión borra metadatos y "
+        "degrada los detectores.", p))
 
     s.append(Paragraph("2. Defensa", h))
     s.append(Paragraph(
@@ -174,9 +178,13 @@ def main():
         "independiente solo si aporta al menos un dato no publicado antes. <b>(c) Guardia híbrida:</b> texto casi "
         "idéntico a una página anterior (TF-IDF de caracteres, coseno ≥ 0,6) cuenta como copia aunque agregue datos. "
         "<b>(d) Salida:</b> fuentes aparentes frente a independientes, origen, árbol de copias y datos corroborados "
-        "frente a datos de una sola fuente. Se entrega como <b>extensión de Chrome</b> (personas), <b>servidor MCP</b> "
-        "(agentes), <b>panel web</b> y <b>API</b>, con cliente LLM agnóstico (OpenAI, Anthropic, OpenRouter, Ollama "
-        "local, Claude Code) y respuestas en caché para auditoría y uso sin conexión.", p))
+        "frente a datos de una sola fuente. <b>(e) Procedencia C2PA:</b> verifica las credenciales de contenido de las "
+        "fotos; la fecha firmada es un límite inferior de la publicación (una copia no puede fingir ser el origen) y usar "
+        "la foto firmada por otro medio que publicó antes, sin foto propia, implica dependencia; la misma foto sin "
+        "metadatos se reconoce por su huella visual (dHash). <b>(f) Voz:</b> un audio se revisa primero por C2PA y, si no "
+        "trae firma, con AASIST-L reentrenado con audio comprimido tipo WhatsApp. Se entrega como <b>extensión de "
+        "Chrome</b>, <b>servidor MCP</b> (stdio y HTTP), <b>panel web</b> y <b>API</b>, desplegado en AWS detrás de "
+        "Cloudflare, con cliente LLM agnóstico y respuestas en caché para auditoría.", p))
 
     s.append(Paragraph("3. Cómo se evaluó", h))
     s.append(Paragraph(
@@ -216,10 +224,46 @@ def main():
             f"{pct(tasa(org_f, 'sin_eco', 'confirmado_por_varias_fuentes'))} → "
             f"{pct(tasa(org_f, 'con_eco', 'confirmado_por_varias_fuentes'))}.", p))
 
+    proc = cargar("procedencia_claudecode_sonnet.json")
+    if proc:
+        rs = proc["resumenes"]
+        nombres = [("foto_firmada_parafrasis", "Copias reescritas con detalles inventados que reutilizan la foto firmada"),
+                   ("foto_sin_metadatos", "Lo mismo, foto recomprimida sin metadatos"),
+                   ("fecha_falsa", "Copia con fecha falsa anterior al origen (origen correcto)"),
+                   ("organico_con_fotos", "Cobertura independiente (fotos propias, agencia, IA, firma rota)")]
+
+        def c(m, t):
+            r = rs[m][t]
+            return pct(r["exactitud"]) + (f" ({pct(r['origen_ok'])})" if t == "fecha_falsa" else "")
+        filas_p = [["Procedencia C2PA (3 mundos por tipo)", "Línea base", "ECO solo texto", "ECO + C2PA"]]
+        filas_p += [[e, c("linea_base", t), c("eco_sin_procedencia", t), c("eco_con_procedencia", t)]
+                    for t, e in nombres if t in rs["eco_con_procedencia"]]
+        s.append(Spacer(1, 3))
+        s.append(tabla(filas_p, [8.9 * cm, 2.6 * cm, 2.8 * cm, 3.2 * cm]))
+        s.append(Paragraph(
+            "La procedencia cierra el ataque abierto <i>cuando las copias reutilizan la foto firmada</i>; mundos y regla se "
+            "diseñaron juntos (no es un conjunto retenido). IA declarada y firmas rotas se detectan en los 3 mundos.", p))
+    voz = cargar("voz_aasist.json")
+    if voz:
+        conds = [("limpio", "Limpio"), ("opus_16k", "Opus 16 kbps (nota de voz)"), ("opus_8k", "Opus 8 kbps")]
+        filas_v = [["Detector · EER en In-the-Wild (falsos aceptados)"] + [t for _, t in conds]]
+        for nombre_m, r in voz["modelos"].items():
+            filas_v.append([nombre_m] + [f"{pct(r[k]['eer'])} ({pct(r[k]['falsos_aceptados_como_reales'])})" for k, _ in conds])
+        s.append(Spacer(1, 3))
+        s.append(tabla(filas_v, [6.9 * cm, 3.3 * cm, 3.9 * cm, 3.4 * cm]))
+        d = voz["datos"]
+        s.append(Paragraph(
+            f"Prueba: {d['prueba']['reales']} audios reales y {d['prueba']['falsos']} falsos de {d['hablantes_prueba']} "
+            f"personas no vistas al reentrenar (partición por hablante). El control reentrena igual pero solo con audio limpio, "
+            "para separar el efecto del códec del ajuste al dominio. Falsos aceptados: con el umbral calibrado en audio limpio.", p))
+
     s.append(Paragraph("5. Límites", h))
     s.append(Paragraph(
-        "<b>Ataque abierto:</b> copias reescritas que además inventan detalles distintos en cada página se cuentan como "
-        "fuentes independientes (0 %). La guardia híbrida solo detiene la versión barata (copiar y añadir). "
+        "<b>Ataque abierto:</b> solo con texto, copias reescritas que inventan detalles se cuentan como independientes; "
+        "la procedencia lo detiene si reutilizan la foto firmada, no si fabrican fotos propias sin firma. <b>C2PA</b> "
+        "prueba procedencia, no verdad; aquí la lista de confianza es una CA de demostración y la fecha la declara el "
+        "firmante (en producción: lista oficial y sellos RFC 3161). <b>Voz:</b> evaluada en inglés con figuras públicas; "
+        "es una alerta para verificar por otro canal, nunca prueba para acusar. "
         "<b>Independencia no es verdad:</b> varias fuentes independientes pueden equivocarse. <b>Datos sintéticos:</b> "
         "eventos y paráfrasis escritos a mano, muestras pequeñas; no se probó en la web real y la extensión solo encuentra "
         "páginas relacionadas dentro del mini-internet (el MCP y el panel aceptan URLs arbitrarias). <b>Dependencia del "
@@ -228,18 +272,20 @@ def main():
     s.append(Paragraph("6. Riesgo de doble uso", h))
     s.append(Paragraph(
         "Un atacante podría usar ECO como oráculo para ajustar sus copias hasta que pasen como independientes. "
-        "Mitigaciones: no publicar umbrales de producción, limitar consultas masivas y combinar con señales que el "
-        "atacante no controla (firmas de procedencia como C2PA, historial del dominio, patrones temporales). "
+        "Lo mismo con el detector de voz: un atacante puede iterar su clon hasta que pase. Mitigaciones: límite de "
+        "consultas por IP y tope diario en el servidor público, no publicar umbrales de producción y priorizar señales "
+        "que el atacante no controla (firmas C2PA de terceros, historial del dominio). "
         "El corpus es ficticio, está marcado como sintético y no contiene personas ni medios reales. "
         "No se analizaron sistemas de terceros.", p))
 
     s.append(Paragraph("7. Reproducibilidad y créditos", h))
     s.append(Paragraph(
         "<font face='Courier'>python -m pruebas.prueba_humo; python -m evaluacion.evaluar --modelo "
-        f"{args.modelo} [--conjunto prueba]; python -m demo.agente --modelo {args.agente}</font>. Resultados, historial y "
+        f"{args.modelo} [--conjunto prueba]; python -m evaluacion.evaluar_procedencia; python deteccion_voz/experimento.py"
+        "</font>. Resultados, historial y "
         "respuestas del LLM en el repositorio. Código escrito con asistencia de Claude (Anthropic): se declara como "
-        "material generado con IA. Bibliotecas: scikit-learn, FastAPI, SDK de MCP, BeautifulSoup, SDK de OpenAI y "
-        "Anthropic, ReportLab.", p))
+        "material generado con IA. Datos de voz: In-the-Wild (CC-BY-SA 4.0); modelo AASIST (MIT, NAVER). Bibliotecas: "
+        "c2pa-python, PyTorch, scikit-learn, FastAPI, SDK de MCP, ReportLab.", p))
 
     salida = RAIZ / "docs" / "ficha_tecnica_ECO.pdf"
     doc = SimpleDocTemplate(str(salida), pagesize=letter, leftMargin=1.5 * cm, rightMargin=1.5 * cm,
