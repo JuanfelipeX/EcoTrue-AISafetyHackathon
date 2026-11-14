@@ -47,12 +47,12 @@ def resumen_texto(res):
     return " ".join(lineas)
 
 
-def analizar_documentos(documentos, afirmacion, modelo=None, metodo="hibrido"):
+def analizar_documentos(documentos, afirmacion, modelo=None, metodo="hibrido", max_tokens=None):
     if metodo == "linea_base":
         res = linea_base.analizar(documentos)
     else:
         try:
-            cliente = ClienteLLM(modelo=modelo) if modelo else ClienteLLM()
+            cliente = ClienteLLM(modelo=modelo, max_tokens=max_tokens) if modelo else ClienteLLM(max_tokens=max_tokens)
             umbral = config.umbral_similitud if metodo == "hibrido" else None
             proc = None
             if os.getenv("ECO_PROCEDENCIA", "1") == "1" and any(getattr(d, "imagenes", None) for d in documentos):

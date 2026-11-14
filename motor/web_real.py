@@ -23,6 +23,10 @@ DOMINIOS_IGNORADOS = ("facebook.", "twitter.", "x.com", "whatsapp.", "linkedin."
                       "privacidad")
 
 
+# Noticias reales: más páginas y más largas que los mundos del laboratorio; la lista de hechos necesita más espacio.
+MAX_TOKENS_WEB = 8000
+
+
 def _dominio(url):
     return urllib.parse.urlparse(url).netloc.lower().removeprefix("www.")
 
@@ -93,7 +97,7 @@ def analizar_pagina_real(url, seleccion=None, urls_extra=None, modelo=None):
         if d.url not in vistos:
             vistos.add(d.url)
             documentos.append(d)
-    res = analizar_documentos(documentos, afirmacion, modelo=modelo)
+    res = analizar_documentos(documentos, afirmacion, modelo=modelo, max_tokens=MAX_TOKENS_WEB)
     res["modo"] = "pagina_real"
     res["pagina_actual"] = url
     n_busc = len(documentos) - 1 - n_citadas
@@ -119,7 +123,7 @@ def investigar_tema(tema, n=10, dias=30, modelo=None):
         raise busqueda.SinBuscador("El buscador de noticias no está configurado en este servidor (falta EXA_API_KEY).")
     if not documentos:
         raise ValueError(f"No se encontraron noticias recientes sobre «{tema}» en los últimos {dias} días.")
-    res = analizar_documentos(documentos, tema, modelo=modelo)
+    res = analizar_documentos(documentos, tema, modelo=modelo, max_tokens=MAX_TOKENS_WEB)
     res["modo"] = "tema"
     res["nota_web_real"] = f"Se analizaron {len(documentos)} noticias de los últimos {dias} días encontradas con el buscador."
     return _finalizar(res, {"buscador": len(documentos)}, problema)

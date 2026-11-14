@@ -32,7 +32,7 @@ def buscar(consulta, n=8, dias=None, excluir=None):
     if not clave:
         raise SinBuscador("Falta EXA_API_KEY: el buscador de noticias no está configurado en este servidor.")
     cuerpo = {"query": consulta[:500], "type": "auto", "category": "news", "numResults": max(1, min(n, 15)),
-              "contents": {"text": {"maxCharacters": 6000}}}
+              "contents": {"text": {"maxCharacters": 4000}}}
     if dias:
         cuerpo["startPublishedDate"] = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=dias)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
     if excluir:
@@ -50,7 +50,7 @@ def a_documento(resultado, indice):
     url = resultado["url"]
     dominio = urllib.parse.urlparse(url).netloc.lower().removeprefix("www.")
     texto = resultado.get("text") or ""
-    parrafos = [p.strip() for p in re.split(r"\n\s*\n|\n", texto) if len(p.strip()) > 40][:60]
+    parrafos = [p.strip() for p in re.split(r"\n\s*\n|\n", texto) if len(p.strip()) > 40][:30]
     fecha = None
     if resultado.get("publishedDate"):
         try:
