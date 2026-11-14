@@ -107,7 +107,7 @@ def puntuar(m, X, lote=64):
     return np.concatenate(salida)
 
 
-def reentrenar(m, datos_por_cond, y, condiciones, epocas, semilla):
+def reentrenar(m, datos_por_cond, y, condiciones, epocas, semilla, lote_n=16):
     torch.manual_seed(semilla)
     rng = np.random.default_rng(semilla)
     opt = torch.optim.Adam(m.parameters(), lr=1e-4, weight_decay=1e-4)
@@ -118,8 +118,8 @@ def reentrenar(m, datos_por_cond, y, condiciones, epocas, semilla):
         m.train()
         orden = rng.permutation(n)
         total = 0.0
-        for i in range(0, n, 32):
-            idx = orden[i:i + 32]
+        for i in range(0, n, lote_n):
+            idx = orden[i:i + lote_n]
             conds = rng.choice(condiciones, size=len(idx))
             lote = np.stack([datos_por_cond[c][j] for c, j in zip(conds, idx)])
             ganancia = rng.uniform(0.5, 1.0, size=(len(idx), 1)).astype(np.float32)  # volumen variable
@@ -142,6 +142,8 @@ def main():
     ap.add_argument("--entreno-por-clase", type=int, default=1000)
     ap.add_argument("--epocas", type=int, default=4)
     ap.add_argument("--semilla", type=int, default=7)
+    ap.add_argument("--omitir-preentrenados", action="store_true",
+                    help="reutiliza la evaluación de los modelos preentrenados de un resultados.json anterior")
     a = ap.parse_args()
     raiz, salida = Path(a.raiz), Path(a.salida)
     salida.mkdir(parents=True, exist_ok=True)
@@ -196,10 +198,17 @@ def main():
         print(f"  {nombre:<34} " + " · ".join(f"{c}: EER {r[c]['eer']:.1%}" for c in CONDICIONES), flush=True)
         (salida / "resultados.json").write_text(json.dumps(resultados, indent=2, ensure_ascii=False))
 
-    print("Evaluando modelos preentrenados (ASVspoof 2019)…", flush=True)
-    for nombre in ("AASIST-L", "AASIST"):
-        m, _ = modelo(raiz, nombre)
-        evaluar(f"{nombre} preentrenado", m)
+    previo = salida / "resultados.json"
+    if a.omitir_preentrenados and previo.exists():
+        anteriores = json.loads(previo.read_text()).get("modelos", {})
+        resultados["modelos"].update({k: v for k, v in anteriores.items() if "preentrenado" in k})
+        print("Preentrenados: se reutiliza la evaluación anterior.", flush=True)
+    else:
+        print("Evaluando modelos preentrenados (ASVspoof 2019)…", flush=True)
+        for nombre in ("AASIST-L", "AASIST"):
+            m, _ = modelo(raiz, nombre)
+            evaluar(f"{nombre} preentrenado", m)
+
 
     print("Control: reentrenar AASIST-L solo con audio limpio…", flush=True)
     m, _ = modelo(raiz, "AASIST-L")
