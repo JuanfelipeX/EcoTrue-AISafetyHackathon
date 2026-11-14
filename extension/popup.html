@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="estilos.css">
-  <style>body { width: 400px; margin: 0; padding: 12px; }</style>
+  <style>body { width: 400px; margin: 0; padding: 12px; } #pestanas label { display: flex; gap: 6px; align-items: flex-start; font-size: 12px; margin: 6px 0; } #pestanas small { color: #777; display: block; }</style>
 </head>
 <body class="eco-raiz">
   <div class="eco-cabecera">
@@ -11,7 +11,11 @@
     <small>¿Cuántas fuentes hay de verdad?</small>
   </div>
   <div id="contenido">
-    <p>Analiza la página actual y las demás páginas que publican la misma afirmación.</p>
+    <p>Analiza la página actual: ECO la compara con las fuentes que cita y con las pestañas que elijas.</p>
+    <details id="pestanas-caja" class="eco-ajustes" open hidden>
+      <summary>Comparar con pestañas abiertas (otras notas del mismo tema)</summary>
+      <div id="pestanas"></div>
+    </details>
     <button id="analizar" class="eco-boton">Analizar esta página</button>
   </div>
   <details class="eco-ajustes">

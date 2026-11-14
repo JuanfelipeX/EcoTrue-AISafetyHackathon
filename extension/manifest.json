@@ -1,13 +1,14 @@
 {
   "manifest_version": 3,
   "name": "ECO — fuentes reales",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Muestra cuántas fuentes independientes hay detrás de una afirmación y de dónde salió.",
   "permissions": [
     "contextMenus",
     "scripting",
     "activeTab",
-    "storage"
+    "storage",
+    "tabs"
   ],
   "host_permissions": [
     "http://localhost/*",

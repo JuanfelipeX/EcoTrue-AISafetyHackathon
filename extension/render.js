@@ -65,7 +65,9 @@
       </div>
       <p class="eco-afirmacion">${esc(r.afirmacion)}</p>
       <p class="eco-resumen">${esc(r.resumen)}</p>
+      ${r.nota_web_real ? `<p class="eco-resumen"><b>Noticia real.</b> ${esc(r.nota_web_real)}</p>` : ""}
       ${r.aviso ? `<p class="eco-aviso">${esc(r.aviso)}</p>` : ""}
+      ${(r.urls_con_error || []).length ? `<p class="eco-pie">${r.urls_con_error.length} enlace(s) no se pudieron leer (el sitio bloquea lectores automáticos o no es una nota).</p>` : ""}
       <h3>Origen de la información</h3>${grupos}
       ${procedencia}
       ${hechos}

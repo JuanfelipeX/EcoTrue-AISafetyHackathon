@@ -141,6 +141,7 @@ class PeticionAudio(BaseModel):
 class PeticionPagina(BaseModel):
     url: str
     seleccion: str | None = None
+    urls_extra: list[str] = Field(default_factory=list, max_length=15)
     metodo: Metodo = "hibrido"
     modelo: str | None = None
 
@@ -243,8 +244,16 @@ def analizar_pagina(p: PeticionPagina):
         if candidatos and candidatos[0]["parecido"] >= 0.3:
             mundo = candidatos[0]
     if mundo is None:
-        raise HTTPException(404, "La página no pertenece al mini-internet de ECO. "
-                                 "Para páginas reales use /api/analizar con la afirmación y las URLs.")
+        # Noticia real: se compara con las fuentes que cita, las pestañas elegidas y (si hay clave) un buscador.
+        from motor.extraccion import URLNoPermitida
+        from motor.web_real import analizar_pagina_real
+        try:
+            return analizar_pagina_real(p.url, p.seleccion, p.urls_extra, modelo=_modelo_permitido(p.modelo))
+        except URLNoPermitida as e:
+            raise HTTPException(400, str(e))
+        except Exception as e:
+            raise HTTPException(502, f"No se pudo leer la página ({type(e).__name__}). Algunos sitios bloquean "
+                                     "lectores automáticos.")
     res = analizar_urls(mundo["afirmacion"], [x["url"] for x in mundo["paginas"]], modelo=_modelo_permitido(p.modelo), metodo=p.metodo)
     res["mundo"] = mundo["id"]
     res["pagina_actual"] = buscador.normalizar_url(p.url)
@@ -413,5 +422,6 @@ def panel():
         html = html.replace(f'"/web/{recurso}"', f'"/web/{recurso}?v={v}"')
     version_ext = json.loads((RAIZ_PROYECTO / "extension" / "manifest.json").read_text(encoding="utf-8"))["version"]
     html = html.replace('"/descargas/eco-extension.zip"', f'"/descargas/eco-extension.zip?v={version_ext}"')
-    html = html.replace('<span id="version-extension">1.3</span>', f'<span id="version-extension">{version_ext}</span>')
+    import re
+    html = re.sub(r'<span id="version-extension">[^<]*</span>', f'<span id="version-extension">{version_ext}</span>', html)
     return Response(html, media_type="text/html; charset=utf-8", headers={"Cache-Control": "no-cache"})

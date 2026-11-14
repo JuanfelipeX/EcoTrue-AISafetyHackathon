@@ -284,7 +284,7 @@ python -m demo.agente --modelo …</pre>
           No funciona en Firefox, Safari ni en celulares. Tarda unos 3 minutos.</p>
         <div class="fila-botones">
           <a class="boton-primario" href="/descargas/eco-extension.zip" download>Descargar la extensión (.zip)</a>
-          <span class="nota">Versión <span id="version-extension">1.3</span> · menos de 50 KB</span>
+          <span class="nota">Versión <span id="version-extension">1.4</span> · menos de 50 KB</span>
         </div>
 
         <ol class="guia">
@@ -323,8 +323,10 @@ python -m demo.agente --modelo …</pre>
         <h3>Qué hace y qué no</h3>
         <ul class="lista-simple">
           <li>Solo actúa cuando haces clic. Envía a este servidor la dirección de la pestaña y el texto que hayas seleccionado; no lee tu historial ni otras pestañas.</li>
-          <li>Hoy analiza las noticias del <a href="/internet" target="_blank" rel="noopener">mini-internet de ECO</a>, donde sabemos la respuesta correcta.
-            Para noticias reales usa la pestaña <a href="#urls">Analizar URLs</a> con la afirmación y los enlaces.</li>
+          <li><b>Noticias reales:</b> ECO compara la página con las fuentes que ella misma cita y con las pestañas que marques en
+            <i>«Comparar con pestañas abiertas»</i> (abre antes otras notas del mismo tema). Por eso pide el permiso de leer los
+            títulos y direcciones de tus pestañas: solo se envían las que marques.</li>
+          <li>En el <a href="/internet" target="_blank" rel="noopener">mini-internet de ECO</a> encuentra sola las páginas relacionadas, y ahí sabemos la respuesta correcta.</li>
           <li>Busca primero un servidor de ECO en tu propio computador (<code>localhost:8765</code>) y, si no hay, usa este servidor público.
             Puedes fijar otro en el ícono de ECO → <i>Servidor de ECO</i>.</li>
         </ul>

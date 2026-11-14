@@ -24,6 +24,9 @@ def resumen_texto(res):
     n, k = res["fuentes_aparentes"], res["fuentes_efectivas"]
     if n == 0:
         return "No se pudo cargar ninguna página."
+    if n == 1:
+        return ("Solo hay una página para analizar: no se puede medir independencia con una sola fuente. "
+                "ECO mide independencia de fuentes, no veracidad.")
     lineas = [f"{n} páginas analizadas, {k} fuente{'s' if k != 1 else ''} independiente{'s' if k != 1 else ''}."]
     if k == 1 and n > 1:
         g = res["grupos"][0]

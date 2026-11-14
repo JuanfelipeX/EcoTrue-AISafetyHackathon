@@ -23,7 +23,7 @@ function pintarPanel(estado, datos) {
     '<button class="eco-cerrar" title="Cerrar">×</button></div>';
   let cuerpo;
   if (estado === "cargando") {
-    cuerpo = '<div class="eco-cargando">Buscando las páginas relacionadas y comparando sus datos…</div>';
+    cuerpo = '<div class="eco-cargando">Leyendo la página y sus fuentes, y comparando sus datos…</div>';
   } else if (estado === "error") {
     cuerpo = `<div class="eco-error">${globalThis.ecoEsc(datos)}</div>`;
   } else {
@@ -58,7 +58,7 @@ async function analizarEnPestana(tab, seleccion) {
       await mostrar(tab.id, "error", datos.detail || `Error ${respuesta.status}`);
       return;
     }
-    datos.panel_url = `${ECO_API}/?mundo=${encodeURIComponent(datos.mundo || "")}#laboratorio`;
+    datos.panel_url = datos.mundo ? `${ECO_API}/?mundo=${encodeURIComponent(datos.mundo)}#laboratorio` : null;
     await mostrar(tab.id, "listo", datos);
   } catch (e) {
     await mostrar(tab.id, "error", `No se pudo conectar con el servidor de ECO en ${ECO_API}. ¿Está corriendo?`);
