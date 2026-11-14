@@ -445,9 +445,9 @@ function pintarAudio(r) {
   const cont = $("#resultado-audio");
   if (r.error || r.detail) { cont.innerHTML = `<div class="tarjeta error">${esc(r.error || r.detail)}</div>`; return; }
   const d = r.detector || {};
-  const clase = { sintetica: "alerta", real: "ok", incierto: "medio" }[d.veredicto] || "neutro";
+  const clase = { sintetica: "alerta", real: "ok", incierto: "medio", no_confiable: "medio" }[d.veredicto] || "neutro";
   const titulo = { sintetica: "⚠ Parece voz sintética", real: "✓ Parece voz real", incierto: "◐ No concluyente",
-                   no_disponible: "Detector no disponible" }[d.veredicto] || "Resultado";
+                   no_confiable: "◐ Detector sin validar: no concluyente", no_disponible: "Detector no disponible" }[d.veredicto] || "Resultado";
   const eer = d.error_de_referencia || {};
   cont.innerHTML = `<div class="tarjeta c2pa-resultado">
     <div><span class="c2pa-chip ${clase}" style="font-size:13px;padding:6px 10px">${titulo}</span></div>

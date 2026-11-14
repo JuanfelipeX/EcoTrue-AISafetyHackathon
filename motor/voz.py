@@ -92,6 +92,10 @@ def detectar(muestras):
         veredicto, texto = "real", "Parece voz real."
     else:
         veredicto, texto = "incierto", "No concluyente: el puntaje está cerca del umbral."
+    if not cal.get("confiable", True):
+        veredicto = "no_confiable"
+        texto = ("Detector sin validar para audio real: en la prueba se equivocó como el azar "
+                 f"({cal['eer']['limpio']:.0%} de error). No uses este resultado para decidir; verifica por otro canal.")
     return {"modelo": f"AASIST-L ({nombre_pesos})", "segundos_analizados": round(len(muestras) / 16000, 1),
             "ventanas": len(ventanas), "margenes": [round(x, 3) for x in margenes], "puntaje": round(mediana, 3),
             "umbral": cal["umbral"], "veredicto": veredicto, "explicacion": texto,

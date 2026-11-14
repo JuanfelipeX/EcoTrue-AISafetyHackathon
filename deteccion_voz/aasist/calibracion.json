@@ -1,0 +1,8 @@
+{
+  "pesos": "AASIST-L.pth",
+  "umbral": 0.0,
+  "banda": 1.0,
+  "eer": {"limpio": 0.485, "opus_16k": 0.497, "opus_8k": 0.557},
+  "confiable": false,
+  "nota": "AASIST-L preentrenado en ASVspoof 2019. En audio real (In-the-Wild, 1.200 audios de 17 personas) se equivoca como el azar: no sirve todavía para decidir. Se reemplaza por la versión reentrenada por ECO cuando termine el experimento."
+}
