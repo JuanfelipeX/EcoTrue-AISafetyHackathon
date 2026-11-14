@@ -625,6 +625,8 @@ def render_pagina(pagina, por_id):
     fecha_iso = pagina["fecha"].strftime("%Y-%m-%dT%H:%M:00-05:00")
     fecha_txt = pagina["fecha"].strftime("%d/%m/%Y %I:%M %p")
     cuerpo = "\n".join(f"      <p>{e(p['texto'])}</p>" for p in pagina["parrafos"])
+    figuras = "".join(f'\n      <figure><img src="{e(f["src"])}" alt="{e(f["pie"])}" width="640">'
+                      f'<figcaption>{e(f["pie"])}</figcaption></figure>' for f in pagina.get("figuras", []))
     enlace_html = ""
     if pagina["enlace"]:
         destino = por_id[pagina["enlace"]["a"]]
@@ -661,7 +663,7 @@ def render_pagina(pagina, por_id):
   <main>
     <article>
       <h1>{e(pagina['titulo'])}</h1>
-      <p class="meta">Por <span class="autor">{e(pagina['autor'])}</span> · <time datetime="{fecha_iso}">{fecha_txt}</time></p>
+      <p class="meta">Por <span class="autor">{e(pagina['autor'])}</span> · <time datetime="{fecha_iso}">{fecha_txt}</time></p>{figuras}
 {cuerpo}{enlace_html}
     </article>
   </main>
@@ -692,7 +694,7 @@ def render_indice(escenarios):
 # ---------------------------------------------------------------------------
 # Programa principal
 # ---------------------------------------------------------------------------
-def construir_escenario(ev, esc_id, tipo, rng, t0):
+def construir_escenario(ev, esc_id, tipo, rng, t0, decorar=None):
     paginas, unicos, origen = CONSTRUCTORES[tipo](ev, esc_id, rng, t0)
 
     # Renumerar páginas en orden aleatorio para que el número no revele el origen.
@@ -725,6 +727,8 @@ def construir_escenario(ev, esc_id, tipo, rng, t0):
     por_id = {p["id"]: p for p in paginas}
     carpeta = DIR_SITIOS / esc_id
     carpeta.mkdir()
+    if decorar:  # mundos de procedencia: agrega fotos firmadas (y puede cambiar fechas) antes de escribir
+        decorar(paginas, carpeta)
     for p in paginas:
         (carpeta / f"{p['id']}.html").write_text(render_pagina(p, por_id), encoding="utf-8", newline="\n")
 
@@ -756,7 +760,7 @@ def construir_escenario(ev, esc_id, tipo, rng, t0):
     }
 
 
-def generar(semilla):
+def generar(semilla, sin_procedencia=False):
     rng = random.Random(semilla)
     if DIR_SITIOS.exists():
         shutil.rmtree(DIR_SITIOS)
@@ -794,6 +798,14 @@ def generar(semilla):
             esc["conjunto"] = "prueba"
             escenarios.append(esc)
 
+    # Conjunto de procedencia (C2PA): fotos firmadas sobre los eventos de prueba, generador aparte.
+    if not sin_procedencia:
+        try:
+            from procedencia_corpus import generar_mundos
+        except ImportError:
+            from corpus.procedencia_corpus import generar_mundos
+        escenarios.extend(generar_mundos(EVENTOS_PRUEBA, construir_escenario, t_base, semilla))
+
     catalogo_hechos = {ev["id"]: ev["hechos"] for ev in EVENTOS + EVENTOS_PRUEBA}
     salida = {
         "semilla": semilla,
@@ -827,6 +839,7 @@ def resumen(escenarios):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Genera el mini-internet sintético de ECO.")
     parser.add_argument("--semilla", type=int, default=42)
+    parser.add_argument("--sin-procedencia", action="store_true", help="no generar los mundos con fotos firmadas")
     args = parser.parse_args()
-    resumen(generar(args.semilla))
+    resumen(generar(args.semilla, args.sin_procedencia))
     print("Listo. Para navegarlo: uvicorn api.servidor:app --port 8765 (desde la carpeta eco)")

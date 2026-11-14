@@ -27,6 +27,7 @@ class Documento:
     fecha: datetime | None = None
     parrafos: list = field(default_factory=list)
     enlaces: list = field(default_factory=list)
+    imagenes: list = field(default_factory=list)
 
     @property
     def texto(self):
@@ -37,7 +38,7 @@ class Documento:
             "id": self.id, "url": self.url, "titulo": self.titulo, "sitio": self.sitio,
             "dominio": self.dominio, "autor": self.autor,
             "fecha": self.fecha.isoformat() if self.fecha else None,
-            "n_parrafos": len(self.parrafos), "enlaces": self.enlaces,
+            "n_parrafos": len(self.parrafos), "enlaces": self.enlaces, "imagenes": self.imagenes,
         }
 
 
@@ -92,8 +93,14 @@ def extraer_documento(html, url, id_doc=None):
         if destino.startswith("http") and destino != url and destino not in enlaces:
             enlaces.append(destino)
 
+    imagenes = []
+    for img in contenedor.find_all("img", src=True):
+        destino = urljoin(url, img["src"])
+        if destino.startswith("http") and destino not in imagenes:
+            imagenes.append(destino)
+
     return Documento(id=id_doc or url, url=url, titulo=titulo, sitio=sitio or dominio, dominio=dominio,
-                     autor=autor, fecha=_fecha(soup), parrafos=parrafos, enlaces=enlaces)
+                     autor=autor, fecha=_fecha(soup), parrafos=parrafos, enlaces=enlaces, imagenes=imagenes)
 
 
 def cargar_desde_archivo(ruta, url, id_doc=None):

@@ -1,0 +1,469 @@
+{
+  "modelo": "claudecode/sonnet",
+  "conjunto": "procedencia",
+  "resumenes": {
+    "linea_base": {
+      "fecha_falsa": {
+        "n": 3,
+        "exactitud": 0.0,
+        "origen_ok": 0.3333333333333333
+      },
+      "foto_firmada_parafrasis": {
+        "n": 3,
+        "exactitud": 0.0,
+        "origen_ok": 1.0
+      },
+      "foto_sin_metadatos": {
+        "n": 3,
+        "exactitud": 0.0,
+        "origen_ok": 1.0
+      },
+      "organico_con_fotos": {
+        "n": 3,
+        "exactitud": 1.0,
+        "origen_ok": null
+      }
+    },
+    "eco_sin_procedencia": {
+      "fecha_falsa": {
+        "n": 3,
+        "exactitud": 0.3333333333333333,
+        "origen_ok": 0.3333333333333333
+      },
+      "foto_firmada_parafrasis": {
+        "n": 3,
+        "exactitud": 0.0,
+        "origen_ok": 1.0
+      },
+      "foto_sin_metadatos": {
+        "n": 3,
+        "exactitud": 0.0,
+        "origen_ok": 1.0
+      },
+      "organico_con_fotos": {
+        "n": 3,
+        "exactitud": 1.0,
+        "origen_ok": null
+      }
+    },
+    "eco_con_procedencia": {
+      "fecha_falsa": {
+        "n": 3,
+        "exactitud": 1.0,
+        "origen_ok": 1.0
+      },
+      "foto_firmada_parafrasis": {
+        "n": 3,
+        "exactitud": 1.0,
+        "origen_ok": 1.0
+      },
+      "foto_sin_metadatos": {
+        "n": 3,
+        "exactitud": 1.0,
+        "origen_ok": 1.0
+      },
+      "organico_con_fotos": {
+        "n": 3,
+        "exactitud": 1.0,
+        "origen_ok": null
+      }
+    }
+  },
+  "detalle": [
+    {
+      "escenario": "e07-c1",
+      "tipo": "fecha_falsa",
+      "esperado": 1,
+      "paginas": 7,
+      "linea_base": {
+        "estimado": 2,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_sin_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": false
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 7,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [
+          {
+            "pagina": "e07-c1-p04",
+            "nota": "declara 2026-12-31T10:29:00-05:00, pero usa una foto que El Dato Viral firmó el 2026-12-31T11:54:00-05:00: no pudo publicarse antes"
+          }
+        ],
+        "por_foto_ajena": []
+      }
+    },
+    {
+      "escenario": "e07-c2",
+      "tipo": "foto_sin_metadatos",
+      "esperado": 1,
+      "paginas": 7,
+      "linea_base": {
+        "estimado": 3,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_sin_procedencia": {
+        "estimado": 5,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 1,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [],
+        "por_foto_ajena": [
+          "e07-c2-p07",
+          "e07-c2-p03",
+          "e07-c2-p05",
+          "e07-c2-p06"
+        ]
+      }
+    },
+    {
+      "escenario": "e07-c3",
+      "tipo": "foto_firmada_parafrasis",
+      "esperado": 1,
+      "paginas": 7,
+      "linea_base": {
+        "estimado": 5,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_sin_procedencia": {
+        "estimado": 7,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 7,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [],
+        "por_foto_ajena": [
+          "e07-c3-p07",
+          "e07-c3-p01",
+          "e07-c3-p02",
+          "e07-c3-p03",
+          "e07-c3-p06",
+          "e07-c3-p04"
+        ]
+      }
+    },
+    {
+      "escenario": "e07-c4",
+      "tipo": "organico_con_fotos",
+      "esperado": 4,
+      "paginas": 4,
+      "linea_base": {
+        "estimado": 4,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "eco_sin_procedencia": {
+        "estimado": 4,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "eco_con_procedencia": {
+        "estimado": 4,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "senales": {
+        "firmadas_confiables": 6,
+        "firma_rota": [
+          "e07-c4-p04"
+        ],
+        "generadas_por_ia": [
+          "e07-c4-p02"
+        ],
+        "fechas_imposibles": [],
+        "por_foto_ajena": []
+      }
+    },
+    {
+      "escenario": "e08-c1",
+      "tipo": "organico_con_fotos",
+      "esperado": 5,
+      "paginas": 5,
+      "linea_base": {
+        "estimado": 5,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "eco_sin_procedencia": {
+        "estimado": 5,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "eco_con_procedencia": {
+        "estimado": 5,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "senales": {
+        "firmadas_confiables": 7,
+        "firma_rota": [
+          "e08-c1-p03"
+        ],
+        "generadas_por_ia": [
+          "e08-c1-p02"
+        ],
+        "fechas_imposibles": [],
+        "por_foto_ajena": []
+      }
+    },
+    {
+      "escenario": "e08-c2",
+      "tipo": "fecha_falsa",
+      "esperado": 1,
+      "paginas": 5,
+      "linea_base": {
+        "estimado": 3,
+        "exacto": false,
+        "origen_ok": false
+      },
+      "eco_sin_procedencia": {
+        "estimado": 2,
+        "exacto": false,
+        "origen_ok": false
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 5,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [
+          {
+            "pagina": "e08-c2-p05",
+            "nota": "declara 2027-01-06T08:38:00-05:00, pero usa una foto que Lo Que Pasa Hoy firmó el 2027-01-06T09:57:00-05:00: no pudo publicarse antes"
+          }
+        ],
+        "por_foto_ajena": [
+          "e08-c2-p04"
+        ]
+      }
+    },
+    {
+      "escenario": "e08-c3",
+      "tipo": "foto_sin_metadatos",
+      "esperado": 1,
+      "paginas": 5,
+      "linea_base": {
+        "estimado": 4,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_sin_procedencia": {
+        "estimado": 5,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 1,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [],
+        "por_foto_ajena": [
+          "e08-c3-p02",
+          "e08-c3-p01",
+          "e08-c3-p04",
+          "e08-c3-p05"
+        ]
+      }
+    },
+    {
+      "escenario": "e08-c4",
+      "tipo": "foto_firmada_parafrasis",
+      "esperado": 1,
+      "paginas": 6,
+      "linea_base": {
+        "estimado": 4,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_sin_procedencia": {
+        "estimado": 4,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 6,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [],
+        "por_foto_ajena": [
+          "e08-c4-p05",
+          "e08-c4-p03",
+          "e08-c4-p06"
+        ]
+      }
+    },
+    {
+      "escenario": "e09-c1",
+      "tipo": "organico_con_fotos",
+      "esperado": 4,
+      "paginas": 4,
+      "linea_base": {
+        "estimado": 4,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "eco_sin_procedencia": {
+        "estimado": 4,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "eco_con_procedencia": {
+        "estimado": 4,
+        "exacto": true,
+        "origen_ok": null
+      },
+      "senales": {
+        "firmadas_confiables": 6,
+        "firma_rota": [
+          "e09-c1-p02"
+        ],
+        "generadas_por_ia": [
+          "e09-c1-p04"
+        ],
+        "fechas_imposibles": [],
+        "por_foto_ajena": []
+      }
+    },
+    {
+      "escenario": "e09-c2",
+      "tipo": "fecha_falsa",
+      "esperado": 1,
+      "paginas": 5,
+      "linea_base": {
+        "estimado": 2,
+        "exacto": false,
+        "origen_ok": false
+      },
+      "eco_sin_procedencia": {
+        "estimado": 2,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 5,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [
+          {
+            "pagina": "e09-c2-p01",
+            "nota": "declara 2027-01-11T10:01:00-05:00, pero usa una foto que El Dato Viral firmó el 2027-01-11T11:28:00-05:00: no pudo publicarse antes"
+          }
+        ],
+        "por_foto_ajena": []
+      }
+    },
+    {
+      "escenario": "e09-c3",
+      "tipo": "foto_sin_metadatos",
+      "esperado": 1,
+      "paginas": 6,
+      "linea_base": {
+        "estimado": 4,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_sin_procedencia": {
+        "estimado": 4,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 1,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [],
+        "por_foto_ajena": [
+          "e09-c3-p03",
+          "e09-c3-p06",
+          "e09-c3-p02"
+        ]
+      }
+    },
+    {
+      "escenario": "e09-c4",
+      "tipo": "foto_firmada_parafrasis",
+      "esperado": 1,
+      "paginas": 6,
+      "linea_base": {
+        "estimado": 4,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_sin_procedencia": {
+        "estimado": 5,
+        "exacto": false,
+        "origen_ok": true
+      },
+      "eco_con_procedencia": {
+        "estimado": 1,
+        "exacto": true,
+        "origen_ok": true
+      },
+      "senales": {
+        "firmadas_confiables": 6,
+        "firma_rota": [],
+        "generadas_por_ia": [],
+        "fechas_imposibles": [],
+        "por_foto_ajena": [
+          "e09-c4-p03",
+          "e09-c4-p06",
+          "e09-c4-p01",
+          "e09-c4-p05"
+        ]
+      }
+    }
+  ]
+}

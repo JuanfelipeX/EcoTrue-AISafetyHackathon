@@ -19,6 +19,7 @@ Endpoints:
   POST /api/analizar_mundo                 {mundo_id, metodo?, modelo?}  ECO + línea base lado a lado
   POST /api/analizar_pagina                {url, seleccion?, metodo?}  (usado por la extensión)
   GET  /descargas/eco-extension.zip        la extensión de Chrome lista para instalar
+  POST /api/verificar_imagen               {url} o {datos_base64, nombre}: procedencia C2PA de una imagen
   GET  /api/resultados                     resultados guardados de la evaluación y de la demo del agente
   POST /mcp                                servidor MCP por HTTP (Streamable HTTP) para agentes remotos
 
@@ -108,6 +109,12 @@ class PeticionMundo(BaseModel):
     mundo_id: str
     metodo: Metodo = "hibrido"
     modelo: str | None = None
+
+
+class PeticionImagen(BaseModel):
+    url: str | None = None
+    datos_base64: str | None = Field(None, max_length=12_000_000)
+    nombre: str | None = None
 
 
 class PeticionPagina(BaseModel):
@@ -221,6 +228,55 @@ def analizar_pagina(p: PeticionPagina):
     res["mundo"] = mundo["id"]
     res["pagina_actual"] = buscador.normalizar_url(p.url)
     return res
+
+
+@app.post("/api/verificar_imagen")
+def verificar_imagen(p: PeticionImagen):
+    """Procedencia C2PA de una imagen (por URL o subida en base64): firmante, fecha firmada, IA, alteraciones."""
+    import base64
+    from motor import procedencia
+    if p.datos_base64:
+        try:
+            datos = base64.b64decode(p.datos_base64.split(",")[-1], validate=False)
+        except Exception:
+            raise HTTPException(400, "El archivo no es válido.")
+        nombre = p.nombre or "imagen.jpg"
+    elif p.url:
+        try:
+            datos = procedencia._bytes_imagen(p.url)
+        except Exception as e:
+            raise HTTPException(400, f"No se pudo descargar la imagen: {e}")
+        nombre = p.url.split("?")[0]
+    else:
+        raise HTTPException(400, "Envíe una URL o un archivo.")
+    if len(datos) > procedencia.MAX_BYTES_IMAGEN:
+        raise HTTPException(413, "La imagen supera 8 MB.")
+    sufijo = "." + nombre.rsplit(".", 1)[-1].lower() if "." in nombre else ".jpg"
+    info = procedencia.verificar(datos, procedencia.TIPOS_MIME.get(sufijo, "image/jpeg"))
+    info["nombre"] = nombre.rsplit("/", 1)[-1]
+    info["bytes"] = len(datos)
+    return info
+
+
+@lru_cache(maxsize=1)
+def _ejemplos_imagenes():
+    """Una imagen de cada caso en los mundos de procedencia del mini-internet."""
+    from motor import procedencia
+    ejemplos = {}
+    for ruta in sorted((DIR_CORPUS / "sitios").glob("*-c*/img/*.jpg")):
+        info = procedencia.verificar(ruta.read_bytes())
+        caso = ("ia" if info["generada_por_ia"] else "rota" if info["estado"] == "rota"
+                else "sin_metadatos" if info["estado"] == "ausente" else "firmada" if info["estado"] == "confiable" else None)
+        if caso and caso not in ejemplos:
+            ejemplos[caso] = "/" + ruta.relative_to(DIR_CORPUS).as_posix()
+        if len(ejemplos) == 4:
+            break
+    return ejemplos
+
+
+@app.get("/api/ejemplos_imagenes")
+def ejemplos_imagenes():
+    return _ejemplos_imagenes()
 
 
 @app.get("/api/resultados")

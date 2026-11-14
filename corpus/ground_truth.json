@@ -7274,6 +7274,1610 @@
         "e09-t6-p04-u1": "Fabio Galindo, habitante del barrio El Prado, contó a El Dato Viral que los profesores llevaron a los niños en sus propios carros.",
         "e09-t6-p04-u2": "En el barrio Villa Nueva, la asociación de padres contó 366 familias con niños afectados."
       }
+    },
+    {
+      "id": "e07-c1",
+      "evento": "e07",
+      "tipo": "fecha_falsa",
+      "conjunto": "procedencia",
+      "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+      "fuentes_aparentes": 7,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e07-c1-p02",
+      "paginas": [
+        {
+          "id": "e07-c1-p04",
+          "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p04.html",
+          "url_canonica": "https://infoexpres.test/2026/12/e07-c1-p04",
+          "medio": "InfoExprés",
+          "dominio": "infoexpres.test",
+          "tipo_sitio": "granja",
+          "fecha": "2026-12-31T10:29:00-05:00",
+          "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+          "rol": "copia_con_fecha_falsa",
+          "deriva_de": "e07-c1-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c1-p02",
+          "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p02.html",
+          "url_canonica": "https://eldatoviral.test/2026/12/e07-c1-p02",
+          "medio": "El Dato Viral",
+          "dominio": "eldatoviral.test",
+          "tipo_sitio": "granja",
+          "fecha": "2026-12-31T11:54:00-05:00",
+          "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c1-p06",
+          "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p06.html",
+          "url_canonica": "https://noticiasalinstante.test/2026/12/e07-c1-p06",
+          "medio": "Noticias al Instante",
+          "dominio": "noticiasalinstante.test",
+          "tipo_sitio": "granja",
+          "fecha": "2026-12-31T12:30:00-05:00",
+          "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+          "rol": "copia",
+          "deriva_de": "e07-c1-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c1-p05",
+          "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p05.html",
+          "url_canonica": "https://alertanacionalya.test/2026/12/e07-c1-p05",
+          "medio": "Alerta Nacional Ya",
+          "dominio": "alertanacionalya.test",
+          "tipo_sitio": "granja",
+          "fecha": "2026-12-31T13:27:00-05:00",
+          "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+          "rol": "copia",
+          "deriva_de": "e07-c1-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c1-p03",
+          "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p03.html",
+          "url_canonica": "https://pulsodigital.test/2026/12/e07-c1-p03",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2026-12-31T13:57:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia",
+          "deriva_de": "e07-c1-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c1-p07",
+          "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p07.html",
+          "url_canonica": "https://loquepasahoy.test/2026/12/e07-c1-p07",
+          "medio": "Lo Que Pasa Hoy",
+          "dominio": "loquepasahoy.test",
+          "tipo_sitio": "granja",
+          "fecha": "2026-12-31T14:01:00-05:00",
+          "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+          "rol": "copia",
+          "deriva_de": "e07-c1-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c1-p01",
+          "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p01.html",
+          "url_canonica": "https://ultimahora24.test/2026/12/e07-c1-p01",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2026-12-31T14:35:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia",
+          "deriva_de": "e07-c1-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        }
+      ],
+      "hechos_unicos": {}
+    },
+    {
+      "id": "e07-c2",
+      "evento": "e07",
+      "tipo": "foto_sin_metadatos",
+      "conjunto": "procedencia",
+      "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+      "fuentes_aparentes": 7,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e07-c2-p02",
+      "paginas": [
+        {
+          "id": "e07-c2-p02",
+          "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p02.html",
+          "url_canonica": "https://infoexpres.test/2027/01/e07-c2-p02",
+          "medio": "InfoExprés",
+          "dominio": "infoexpres.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-01T06:54:00-05:00",
+          "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c2-p07",
+          "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p07.html",
+          "url_canonica": "https://alertanacionalya.test/2027/01/e07-c2-p07",
+          "medio": "Alerta Nacional Ya",
+          "dominio": "alertanacionalya.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-01T08:28:00-05:00",
+          "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c2-p02",
+          "enlaza_a": "e07-c2-p02",
+          "hechos": [
+            "e07-c2-p05-u1",
+            "e07-c2-p05-u2",
+            "h1",
+            "h2",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c2-p05",
+          "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p05.html",
+          "url_canonica": "https://noticiasalinstante.test/2027/01/e07-c2-p05",
+          "medio": "Noticias al Instante",
+          "dominio": "noticiasalinstante.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-01T08:52:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c2-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c2-p05-u1",
+            "e07-c2-p05-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4"
+          ]
+        },
+        {
+          "id": "e07-c2-p03",
+          "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p03.html",
+          "url_canonica": "https://ultimahora24.test/2027/01/e07-c2-p03",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-01T08:52:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c2-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c2-p03-u1",
+            "e07-c2-p03-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c2-p01",
+          "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p01.html",
+          "url_canonica": "https://eldatoviral.test/2027/01/e07-c2-p01",
+          "medio": "El Dato Viral",
+          "dominio": "eldatoviral.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-01T09:27:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c2-p02",
+          "enlaza_a": "e07-c2-p02",
+          "hechos": [
+            "e07-c2-p01-u1",
+            "e07-c2-p01-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c2-p06",
+          "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p06.html",
+          "url_canonica": "https://loquepasahoy.test/2027/01/e07-c2-p06",
+          "medio": "Lo Que Pasa Hoy",
+          "dominio": "loquepasahoy.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-01T10:42:00-05:00",
+          "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c2-p03",
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c2-p06-u1",
+            "e07-c2-p06-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c2-p04",
+          "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p04.html",
+          "url_canonica": "https://pulsodigital.test/2027/01/e07-c2-p04",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-01T13:26:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c2-p06",
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c2-p06-u1",
+            "e07-c2-p06-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e07-c2-p05-u1": "Ramiro Rincón, integrante de la junta comunal del barrio Primero de Mayo, contó a Alerta Nacional Ya que el puesto de salud del barrio amaneció con filas desde las cinco de la mañana.",
+        "e07-c2-p05-u2": "En el barrio Las Brisas, la junta de acción comunal contó 303 vecinos que no pudieron ser atendidos.",
+        "e07-c2-p03-u1": "Carolina Ospina, líder comunal del barrio Los Almendros, contó a Última Hora 24 que las farmacias del centro están atendiendo heridas menores.",
+        "e07-c2-p03-u2": "En el barrio El Carmen, la junta de acción comunal contó 137 vecinos que no pudieron ser atendidos.",
+        "e07-c2-p06-u1": "Wilson Lozano, integrante de la junta comunal del barrio Las Acacias, contó a Pulso Digital que el puesto de salud del barrio amaneció con filas desde las cinco de la mañana.",
+        "e07-c2-p06-u2": "En el barrio El Bosque, la junta de acción comunal contó 99 vecinos que no pudieron ser atendidos.",
+        "e07-c2-p01-u1": "Luz Dary Toro, líder comunal del barrio La Floresta, contó a El Dato Viral que esperó toda la noche en la puerta antes de que le dijeran que no había atención.",
+        "e07-c2-p01-u2": "En el barrio El Prado, la junta de acción comunal contó 354 vecinos que no pudieron ser atendidos."
+      }
+    },
+    {
+      "id": "e07-c3",
+      "evento": "e07",
+      "tipo": "foto_firmada_parafrasis",
+      "conjunto": "procedencia",
+      "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+      "fuentes_aparentes": 7,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e07-c3-p05",
+      "paginas": [
+        {
+          "id": "e07-c3-p05",
+          "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p05.html",
+          "url_canonica": "https://noticiasalinstante.test/2027/01/e07-c3-p05",
+          "medio": "Noticias al Instante",
+          "dominio": "noticiasalinstante.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-02T06:34:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c3-p07",
+          "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p07.html",
+          "url_canonica": "https://pulsodigital.test/2027/01/e07-c3-p07",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-02T07:33:00-05:00",
+          "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c3-p05",
+          "enlaza_a": "e07-c3-p05",
+          "hechos": [
+            "e07-c3-p07-u1",
+            "e07-c3-p07-u2",
+            "h1",
+            "h2",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c3-p01",
+          "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p01.html",
+          "url_canonica": "https://infoexpres.test/2027/01/e07-c3-p01",
+          "medio": "InfoExprés",
+          "dominio": "infoexpres.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-02T07:55:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c3-p07",
+          "enlaza_a": "e07-c3-p07",
+          "hechos": [
+            "e07-c3-p07-u1",
+            "e07-c3-p07-u2",
+            "h1",
+            "h2",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c3-p02",
+          "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p02.html",
+          "url_canonica": "https://ultimahora24.test/2027/01/e07-c3-p02",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-02T08:56:00-05:00",
+          "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c3-p05",
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c3-p02-u1",
+            "e07-c3-p02-u2",
+            "h1",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c3-p03",
+          "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p03.html",
+          "url_canonica": "https://loquepasahoy.test/2027/01/e07-c3-p03",
+          "medio": "Lo Que Pasa Hoy",
+          "dominio": "loquepasahoy.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-02T09:06:00-05:00",
+          "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c3-p05",
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c3-p03-u1",
+            "e07-c3-p03-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c3-p06",
+          "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p06.html",
+          "url_canonica": "https://alertanacionalya.test/2027/01/e07-c3-p06",
+          "medio": "Alerta Nacional Ya",
+          "dominio": "alertanacionalya.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-02T10:24:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c3-p07",
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c3-p06-u1",
+            "e07-c3-p06-u2",
+            "h1",
+            "h2",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e07-c3-p04",
+          "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p04.html",
+          "url_canonica": "https://eldatoviral.test/2027/01/e07-c3-p04",
+          "medio": "El Dato Viral",
+          "dominio": "eldatoviral.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-02T12:02:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e07-c3-p03",
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c3-p06-u1",
+            "e07-c3-p06-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e07-c3-p07-u1": "Fabio Galindo, comerciante del barrio Los Almendros, contó a InfoExprés que las farmacias del centro están atendiendo heridas menores.",
+        "e07-c3-p07-u2": "En el barrio Las Brisas, la junta de acción comunal contó 265 vecinos que no pudieron ser atendidos.",
+        "e07-c3-p03-u1": "Hernán Toro, integrante de la junta comunal del barrio Las Acacias, contó a Lo Que Pasa Hoy que las ambulancias del municipio no dan abasto con los traslados.",
+        "e07-c3-p03-u2": "En el barrio La Pradera, la junta de acción comunal contó 448 vecinos que no pudieron ser atendidos.",
+        "e07-c3-p02-u1": "Yolanda Rincón, habitante del barrio El Prado, contó a Última Hora 24 que las farmacias del centro están atendiendo heridas menores.",
+        "e07-c3-p02-u2": "En el barrio El Carmen, la junta de acción comunal contó 344 vecinos que no pudieron ser atendidos.",
+        "e07-c3-p06-u1": "Édgar Toro, integrante de la junta comunal del barrio Santa Rita, contó a El Dato Viral que el puesto de salud del barrio amaneció con filas desde las cinco de la mañana.",
+        "e07-c3-p06-u2": "En el barrio Primero de Mayo, la junta de acción comunal contó 160 vecinos que no pudieron ser atendidos."
+      }
+    },
+    {
+      "id": "e07-c4",
+      "evento": "e07",
+      "tipo": "organico_con_fotos",
+      "conjunto": "procedencia",
+      "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+      "fuentes_aparentes": 4,
+      "fuentes_efectivas_esperadas": 4,
+      "origen": null,
+      "paginas": [
+        {
+          "id": "e07-c4-p01",
+          "url": "http://localhost:8765/sitios/e07-c4/e07-c4-p01.html",
+          "url_canonica": "https://vozdelvalle.test/2027/01/e07-c4-p01",
+          "medio": "Voz del Valle",
+          "dominio": "vozdelvalle.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-03T16:53:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c4-p01-u1",
+            "e07-c4-p01-u2",
+            "h1",
+            "h3",
+            "h4"
+          ]
+        },
+        {
+          "id": "e07-c4-p03",
+          "url": "http://localhost:8765/sitios/e07-c4/e07-c4-p03.html",
+          "url_canonica": "https://diariosabana.test/2027/01/e07-c4-p03",
+          "medio": "Diario Sabana",
+          "dominio": "diariosabana.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-03T22:59:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c4-p01-u1",
+            "e07-c4-p01-u2",
+            "h1",
+            "h2",
+            "h3"
+          ]
+        },
+        {
+          "id": "e07-c4-p02",
+          "url": "http://localhost:8765/sitios/e07-c4/e07-c4-p02.html",
+          "url_canonica": "https://elmirador.test/2027/01/e07-c4-p02",
+          "medio": "El Mirador",
+          "dominio": "elmirador.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-04T02:58:00-05:00",
+          "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c4-p02-u1",
+            "e07-c4-p02-u2",
+            "h1",
+            "h2",
+            "h4"
+          ]
+        },
+        {
+          "id": "e07-c4-p04",
+          "url": "http://localhost:8765/sitios/e07-c4/e07-c4-p04.html",
+          "url_canonica": "https://elfaroregional.test/2027/01/e07-c4-p04",
+          "medio": "El Faro Regional",
+          "dominio": "elfaroregional.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-04T07:35:00-05:00",
+          "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e07-c4-p04-u1",
+            "e07-c4-p04-u2",
+            "h1",
+            "h3",
+            "h4"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e07-c4-p01-u1": "Nubia Bermúdez, habitante del barrio Villa Nueva, contó a Voz del Valle que las ambulancias del municipio no dan abasto con los traslados.",
+        "e07-c4-p01-u2": "En el barrio La Pradera, la junta de acción comunal contó 378 vecinos que no pudieron ser atendidos.",
+        "e07-c4-p02-u1": "Hernán Cárdenas, comerciante del barrio San José, contó a El Mirador que las farmacias del centro están atendiendo heridas menores.",
+        "e07-c4-p02-u2": "En el barrio Los Almendros, la junta de acción comunal contó 288 vecinos que no pudieron ser atendidos.",
+        "e07-c4-p04-u1": "Luz Dary Lozano, integrante de la junta comunal del barrio El Bosque, contó a El Faro Regional que esperó toda la noche en la puerta antes de que le dijeran que no había atención.",
+        "e07-c4-p04-u2": "En el barrio Las Acacias, la junta de acción comunal contó 271 vecinos que no pudieron ser atendidos."
+      }
+    },
+    {
+      "id": "e08-c1",
+      "evento": "e08",
+      "tipo": "organico_con_fotos",
+      "conjunto": "procedencia",
+      "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+      "fuentes_aparentes": 5,
+      "fuentes_efectivas_esperadas": 5,
+      "origen": null,
+      "paginas": [
+        {
+          "id": "e08-c1-p05",
+          "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p05.html",
+          "url_canonica": "https://noticiasaltiplano.test/2027/01/e08-c1-p05",
+          "medio": "Noticias Altiplano",
+          "dominio": "noticiasaltiplano.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-05T13:01:00-05:00",
+          "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c1-p05-u1",
+            "e08-c1-p05-u2",
+            "h1",
+            "h2",
+            "h4"
+          ]
+        },
+        {
+          "id": "e08-c1-p04",
+          "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p04.html",
+          "url_canonica": "https://cronicaandina.test/2027/01/e08-c1-p04",
+          "medio": "Crónica Andina",
+          "dominio": "cronicaandina.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-05T13:12:00-05:00",
+          "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c1-p04-u1",
+            "e08-c1-p04-u2",
+            "h1",
+            "h2",
+            "h3"
+          ]
+        },
+        {
+          "id": "e08-c1-p03",
+          "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p03.html",
+          "url_canonica": "https://elmirador.test/2027/01/e08-c1-p03",
+          "medio": "El Mirador",
+          "dominio": "elmirador.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-05T17:13:00-05:00",
+          "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c1-p03-u1",
+            "e08-c1-p03-u2",
+            "h1",
+            "h3",
+            "h4"
+          ]
+        },
+        {
+          "id": "e08-c1-p02",
+          "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p02.html",
+          "url_canonica": "https://elfaroregional.test/2027/01/e08-c1-p02",
+          "medio": "El Faro Regional",
+          "dominio": "elfaroregional.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-05T18:08:00-05:00",
+          "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c1-p04-u1",
+            "e08-c1-p04-u2",
+            "h1",
+            "h2",
+            "h3"
+          ]
+        },
+        {
+          "id": "e08-c1-p01",
+          "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p01.html",
+          "url_canonica": "https://diariosabana.test/2027/01/e08-c1-p01",
+          "medio": "Diario Sabana",
+          "dominio": "diariosabana.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-06T10:45:00-05:00",
+          "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c1-p01-u1",
+            "e08-c1-p01-u2",
+            "h1",
+            "h2",
+            "h4"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e08-c1-p04-u1": "Carolina Mejía, habitante del barrio Primero de Mayo, contó a El Faro Regional que los vecinos están regalando agua y comida a los conductores.",
+        "e08-c1-p04-u2": "En la vereda Las Brisas, la asociación de transportadores contó 100 viajes cancelados.",
+        "e08-c1-p01-u1": "Gloria Toro, comerciante del barrio Los Almendros, contó a Diario Sabana que llevaba catorce horas dentro del bus sin poder avanzar.",
+        "e08-c1-p01-u2": "En la vereda La Pradera, la asociación de transportadores contó 171 viajes cancelados.",
+        "e08-c1-p03-u1": "Sandra Avendaño, líder comunal del barrio El Prado, contó a El Mirador que los niños de la vereda no pudieron llegar a la escuela.",
+        "e08-c1-p03-u2": "En la vereda Villa Nueva, la asociación de transportadores contó 455 viajes cancelados.",
+        "e08-c1-p05-u1": "Édgar Quintero, docente del barrio Santa Rita, contó a Noticias Altiplano que los camiones con leche empezaron a botar la carga.",
+        "e08-c1-p05-u2": "En la vereda El Carmen, la asociación de transportadores contó 241 viajes cancelados."
+      }
+    },
+    {
+      "id": "e08-c2",
+      "evento": "e08",
+      "tipo": "fecha_falsa",
+      "conjunto": "procedencia",
+      "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+      "fuentes_aparentes": 5,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e08-c2-p02",
+      "paginas": [
+        {
+          "id": "e08-c2-p05",
+          "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p05.html",
+          "url_canonica": "https://infoexpres.test/2027/01/e08-c2-p05",
+          "medio": "InfoExprés",
+          "dominio": "infoexpres.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-06T08:38:00-05:00",
+          "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+          "rol": "copia_con_fecha_falsa",
+          "deriva_de": "e08-c2-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c2-p02",
+          "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p02.html",
+          "url_canonica": "https://loquepasahoy.test/2027/01/e08-c2-p02",
+          "medio": "Lo Que Pasa Hoy",
+          "dominio": "loquepasahoy.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-06T09:57:00-05:00",
+          "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c2-p04",
+          "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p04.html",
+          "url_canonica": "https://pulsodigital.test/2027/01/e08-c2-p04",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-06T10:11:00-05:00",
+          "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+          "rol": "copia",
+          "deriva_de": "e08-c2-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c2-p03",
+          "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p03.html",
+          "url_canonica": "https://eldatoviral.test/2027/01/e08-c2-p03",
+          "medio": "El Dato Viral",
+          "dominio": "eldatoviral.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-06T10:14:00-05:00",
+          "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+          "rol": "copia",
+          "deriva_de": "e08-c2-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4"
+          ]
+        },
+        {
+          "id": "e08-c2-p01",
+          "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p01.html",
+          "url_canonica": "https://ultimahora24.test/2027/01/e08-c2-p01",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-06T11:46:00-05:00",
+          "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+          "rol": "copia",
+          "deriva_de": "e08-c2-p03",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4"
+          ]
+        }
+      ],
+      "hechos_unicos": {}
+    },
+    {
+      "id": "e08-c3",
+      "evento": "e08",
+      "tipo": "foto_sin_metadatos",
+      "conjunto": "procedencia",
+      "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+      "fuentes_aparentes": 5,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e08-c3-p03",
+      "paginas": [
+        {
+          "id": "e08-c3-p03",
+          "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p03.html",
+          "url_canonica": "https://ultimahora24.test/2027/01/e08-c3-p03",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-07T14:55:00-05:00",
+          "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c3-p02",
+          "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p02.html",
+          "url_canonica": "https://pulsodigital.test/2027/01/e08-c3-p02",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-07T15:57:00-05:00",
+          "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c3-p03",
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c3-p02-u1",
+            "e08-c3-p02-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4"
+          ]
+        },
+        {
+          "id": "e08-c3-p01",
+          "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p01.html",
+          "url_canonica": "https://loquepasahoy.test/2027/01/e08-c3-p01",
+          "medio": "Lo Que Pasa Hoy",
+          "dominio": "loquepasahoy.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-07T16:21:00-05:00",
+          "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c3-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c3-p01-u1",
+            "e08-c3-p01-u2",
+            "h1",
+            "h2",
+            "h4"
+          ]
+        },
+        {
+          "id": "e08-c3-p04",
+          "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p04.html",
+          "url_canonica": "https://eldatoviral.test/2027/01/e08-c3-p04",
+          "medio": "El Dato Viral",
+          "dominio": "eldatoviral.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-07T16:36:00-05:00",
+          "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c3-p03",
+          "enlaza_a": "e08-c3-p03",
+          "hechos": [
+            "e08-c3-p05-u1",
+            "e08-c3-p05-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c3-p05",
+          "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p05.html",
+          "url_canonica": "https://infoexpres.test/2027/01/e08-c3-p05",
+          "medio": "InfoExprés",
+          "dominio": "infoexpres.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-07T17:41:00-05:00",
+          "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c3-p01",
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c3-p05-u1",
+            "e08-c3-p05-u2",
+            "h1",
+            "h4"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e08-c3-p02-u1": "Carolina Avendaño, líder comunal del barrio La Pradera, contó a Pulso Digital que los niños de la vereda no pudieron llegar a la escuela.",
+        "e08-c3-p02-u2": "En la vereda La Floresta, la asociación de transportadores contó 140 viajes cancelados.",
+        "e08-c3-p01-u1": "Sandra Quintero, habitante del barrio El Prado, contó a Lo Que Pasa Hoy que los vecinos están regalando agua y comida a los conductores.",
+        "e08-c3-p01-u2": "En la vereda El Bosque, la asociación de transportadores contó 43 viajes cancelados.",
+        "e08-c3-p05-u1": "Andrés Mejía, integrante de la junta comunal del barrio Las Brisas, contó a El Dato Viral que los vecinos están regalando agua y comida a los conductores.",
+        "e08-c3-p05-u2": "En la vereda Villa Nueva, la asociación de transportadores contó 43 viajes cancelados."
+      }
+    },
+    {
+      "id": "e08-c4",
+      "evento": "e08",
+      "tipo": "foto_firmada_parafrasis",
+      "conjunto": "procedencia",
+      "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+      "fuentes_aparentes": 6,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e08-c4-p02",
+      "paginas": [
+        {
+          "id": "e08-c4-p02",
+          "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p02.html",
+          "url_canonica": "https://ultimahora24.test/2027/01/e08-c4-p02",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-08T11:30:00-05:00",
+          "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c4-p05",
+          "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p05.html",
+          "url_canonica": "https://pulsodigital.test/2027/01/e08-c4-p05",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-08T11:45:00-05:00",
+          "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c4-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c4-p05-u1",
+            "e08-c4-p05-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c4-p04",
+          "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p04.html",
+          "url_canonica": "https://loquepasahoy.test/2027/01/e08-c4-p04",
+          "medio": "Lo Que Pasa Hoy",
+          "dominio": "loquepasahoy.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-08T12:57:00-05:00",
+          "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c4-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c4-p06-u1",
+            "e08-c4-p06-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c4-p03",
+          "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p03.html",
+          "url_canonica": "https://eldatoviral.test/2027/01/e08-c4-p03",
+          "medio": "El Dato Viral",
+          "dominio": "eldatoviral.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-08T13:11:00-05:00",
+          "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c4-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c4-p03-u1",
+            "e08-c4-p03-u2",
+            "h1",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c4-p01",
+          "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p01.html",
+          "url_canonica": "https://alertanacionalya.test/2027/01/e08-c4-p01",
+          "medio": "Alerta Nacional Ya",
+          "dominio": "alertanacionalya.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-08T14:18:00-05:00",
+          "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c4-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c4-p05-u1",
+            "e08-c4-p05-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e08-c4-p06",
+          "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p06.html",
+          "url_canonica": "https://noticiasalinstante.test/2027/01/e08-c4-p06",
+          "medio": "Noticias al Instante",
+          "dominio": "noticiasalinstante.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-08T14:19:00-05:00",
+          "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e08-c4-p02",
+          "enlaza_a": null,
+          "hechos": [
+            "e08-c4-p06-u1",
+            "e08-c4-p06-u2",
+            "h1",
+            "h2",
+            "h4",
+            "h5"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e08-c4-p06-u1": "Andrés Avendaño, habitante del barrio El Prado, contó a Lo Que Pasa Hoy que llevaba catorce horas dentro del bus sin poder avanzar.",
+        "e08-c4-p06-u2": "En la vereda El Bosque, la asociación de transportadores contó 179 viajes cancelados.",
+        "e08-c4-p03-u1": "Luz Dary Salcedo, integrante de la junta comunal del barrio Primero de Mayo, contó a El Dato Viral que los comerciantes de la vía se quedaron sin mercancía.",
+        "e08-c4-p03-u2": "En la vereda Las Acacias, la asociación de transportadores contó 474 viajes cancelados.",
+        "e08-c4-p05-u1": "Édgar Bermúdez, comerciante del barrio El Carmen, contó a Alerta Nacional Ya que llevaba catorce horas dentro del bus sin poder avanzar.",
+        "e08-c4-p05-u2": "En la vereda La Floresta, la asociación de transportadores contó 203 viajes cancelados."
+      }
+    },
+    {
+      "id": "e09-c1",
+      "evento": "e09",
+      "tipo": "organico_con_fotos",
+      "conjunto": "procedencia",
+      "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+      "fuentes_aparentes": 4,
+      "fuentes_efectivas_esperadas": 4,
+      "origen": null,
+      "paginas": [
+        {
+          "id": "e09-c1-p04",
+          "url": "http://localhost:8765/sitios/e09-c1/e09-c1-p04.html",
+          "url_canonica": "https://elfaroregional.test/2027/01/e09-c1-p04",
+          "medio": "El Faro Regional",
+          "dominio": "elfaroregional.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-10T23:47:00-05:00",
+          "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c1-p04-u1",
+            "e09-c1-p04-u2",
+            "h1",
+            "h2",
+            "h3"
+          ]
+        },
+        {
+          "id": "e09-c1-p03",
+          "url": "http://localhost:8765/sitios/e09-c1/e09-c1-p03.html",
+          "url_canonica": "https://vozdelvalle.test/2027/01/e09-c1-p03",
+          "medio": "Voz del Valle",
+          "dominio": "vozdelvalle.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-11T03:52:00-05:00",
+          "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c1-p04-u1",
+            "e09-c1-p04-u2",
+            "h1",
+            "h3",
+            "h4"
+          ]
+        },
+        {
+          "id": "e09-c1-p01",
+          "url": "http://localhost:8765/sitios/e09-c1/e09-c1-p01.html",
+          "url_canonica": "https://elmirador.test/2027/01/e09-c1-p01",
+          "medio": "El Mirador",
+          "dominio": "elmirador.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-11T11:13:00-05:00",
+          "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c1-p01-u1",
+            "e09-c1-p01-u2",
+            "h1",
+            "h2",
+            "h3"
+          ]
+        },
+        {
+          "id": "e09-c1-p02",
+          "url": "http://localhost:8765/sitios/e09-c1/e09-c1-p02.html",
+          "url_canonica": "https://noticiasaltiplano.test/2027/01/e09-c1-p02",
+          "medio": "Noticias Altiplano",
+          "dominio": "noticiasaltiplano.test",
+          "tipo_sitio": "medio",
+          "fecha": "2027-01-11T12:25:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "independiente",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c1-p01-u1",
+            "e09-c1-p01-u2",
+            "h1",
+            "h2",
+            "h4"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e09-c1-p01-u1": "Jorge Salcedo, habitante del barrio San José, contó a El Mirador que los profesores llevaron a los niños en sus propios carros.",
+        "e09-c1-p01-u2": "En el barrio Los Almendros, la asociación de padres contó 33 familias con niños afectados.",
+        "e09-c1-p04-u1": "Fabio Ospina, integrante de la junta comunal del barrio El Bosque, contó a Voz del Valle que el comedor ya había recibido quejas por el olor de la comida.",
+        "e09-c1-p04-u2": "En el barrio Santa Rita, la asociación de padres contó 357 familias con niños afectados."
+      }
+    },
+    {
+      "id": "e09-c2",
+      "evento": "e09",
+      "tipo": "fecha_falsa",
+      "conjunto": "procedencia",
+      "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+      "fuentes_aparentes": 5,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e09-c2-p04",
+      "paginas": [
+        {
+          "id": "e09-c2-p01",
+          "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p01.html",
+          "url_canonica": "https://ultimahora24.test/2027/01/e09-c2-p01",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-11T10:01:00-05:00",
+          "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+          "rol": "copia_con_fecha_falsa",
+          "deriva_de": "e09-c2-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c2-p04",
+          "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p04.html",
+          "url_canonica": "https://eldatoviral.test/2027/01/e09-c2-p04",
+          "medio": "El Dato Viral",
+          "dominio": "eldatoviral.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-11T11:28:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c2-p02",
+          "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p02.html",
+          "url_canonica": "https://loquepasahoy.test/2027/01/e09-c2-p02",
+          "medio": "Lo Que Pasa Hoy",
+          "dominio": "loquepasahoy.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-11T12:59:00-05:00",
+          "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+          "rol": "copia",
+          "deriva_de": "e09-c2-p04",
+          "enlaza_a": "e09-c2-p04",
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c2-p05",
+          "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p05.html",
+          "url_canonica": "https://pulsodigital.test/2027/01/e09-c2-p05",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-11T13:07:00-05:00",
+          "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+          "rol": "copia",
+          "deriva_de": "e09-c2-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c2-p03",
+          "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p03.html",
+          "url_canonica": "https://infoexpres.test/2027/01/e09-c2-p03",
+          "medio": "InfoExprés",
+          "dominio": "infoexpres.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-11T13:55:00-05:00",
+          "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+          "rol": "copia",
+          "deriva_de": "e09-c2-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        }
+      ],
+      "hechos_unicos": {}
+    },
+    {
+      "id": "e09-c3",
+      "evento": "e09",
+      "tipo": "foto_sin_metadatos",
+      "conjunto": "procedencia",
+      "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+      "fuentes_aparentes": 6,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e09-c3-p04",
+      "paginas": [
+        {
+          "id": "e09-c3-p04",
+          "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p04.html",
+          "url_canonica": "https://loquepasahoy.test/2027/01/e09-c3-p04",
+          "medio": "Lo Que Pasa Hoy",
+          "dominio": "loquepasahoy.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-12T14:50:00-05:00",
+          "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c3-p03",
+          "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p03.html",
+          "url_canonica": "https://noticiasalinstante.test/2027/01/e09-c3-p03",
+          "medio": "Noticias al Instante",
+          "dominio": "noticiasalinstante.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-12T15:11:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c3-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c3-p03-u1",
+            "e09-c3-p03-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c3-p05",
+          "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p05.html",
+          "url_canonica": "https://alertanacionalya.test/2027/01/e09-c3-p05",
+          "medio": "Alerta Nacional Ya",
+          "dominio": "alertanacionalya.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-12T17:23:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c3-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c3-p05-u1",
+            "e09-c3-p05-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c3-p06",
+          "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p06.html",
+          "url_canonica": "https://ultimahora24.test/2027/01/e09-c3-p06",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-12T17:34:00-05:00",
+          "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c3-p03",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c3-p03-u1",
+            "e09-c3-p03-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c3-p02",
+          "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p02.html",
+          "url_canonica": "https://pulsodigital.test/2027/01/e09-c3-p02",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-12T19:16:00-05:00",
+          "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c3-p05",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c3-p02-u1",
+            "e09-c3-p02-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c3-p01",
+          "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p01.html",
+          "url_canonica": "https://infoexpres.test/2027/01/e09-c3-p01",
+          "medio": "InfoExprés",
+          "dominio": "infoexpres.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-12T19:41:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c3-p06",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c3-p01-u1",
+            "e09-c3-p01-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e09-c3-p03-u1": "Nubia Rincón, docente del barrio Santa Rita, contó a Última Hora 24 que los padres hicieron fila toda la tarde frente al hospital.",
+        "e09-c3-p03-u2": "En el barrio San José, la asociación de padres contó 160 familias con niños afectados.",
+        "e09-c3-p01-u1": "Wilson Avendaño, integrante de la junta comunal del barrio La Pradera, contó a InfoExprés que su hijo llegó a la casa con fiebre y dolor de estómago.",
+        "e09-c3-p01-u2": "En el barrio La Floresta, la asociación de padres contó 460 familias con niños afectados.",
+        "e09-c3-p05-u1": "Nubia Cárdenas, líder comunal del barrio Villa Nueva, contó a Alerta Nacional Ya que su hijo llegó a la casa con fiebre y dolor de estómago.",
+        "e09-c3-p05-u2": "En el barrio Las Acacias, la asociación de padres contó 332 familias con niños afectados.",
+        "e09-c3-p02-u1": "Édgar Cárdenas, comerciante del barrio El Prado, contó a Pulso Digital que su hijo llegó a la casa con fiebre y dolor de estómago.",
+        "e09-c3-p02-u2": "En el barrio El Carmen, la asociación de padres contó 251 familias con niños afectados."
+      }
+    },
+    {
+      "id": "e09-c4",
+      "evento": "e09",
+      "tipo": "foto_firmada_parafrasis",
+      "conjunto": "procedencia",
+      "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+      "fuentes_aparentes": 6,
+      "fuentes_efectivas_esperadas": 1,
+      "origen": "e09-c4-p04",
+      "paginas": [
+        {
+          "id": "e09-c4-p04",
+          "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p04.html",
+          "url_canonica": "https://alertanacionalya.test/2027/01/e09-c4-p04",
+          "medio": "Alerta Nacional Ya",
+          "dominio": "alertanacionalya.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-13T06:38:00-05:00",
+          "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+          "rol": "origen",
+          "deriva_de": null,
+          "enlaza_a": null,
+          "hechos": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c4-p03",
+          "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p03.html",
+          "url_canonica": "https://pulsodigital.test/2027/01/e09-c4-p03",
+          "medio": "Pulso Digital",
+          "dominio": "pulsodigital.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-13T07:23:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c4-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c4-p05-u1",
+            "e09-c4-p05-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c4-p06",
+          "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p06.html",
+          "url_canonica": "https://eldatoviral.test/2027/01/e09-c4-p06",
+          "medio": "El Dato Viral",
+          "dominio": "eldatoviral.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-13T08:27:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c4-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c4-p06-u1",
+            "e09-c4-p06-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4"
+          ]
+        },
+        {
+          "id": "e09-c4-p01",
+          "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p01.html",
+          "url_canonica": "https://infoexpres.test/2027/01/e09-c4-p01",
+          "medio": "InfoExprés",
+          "dominio": "infoexpres.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-13T08:36:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c4-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c4-p06-u1",
+            "e09-c4-p06-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c4-p02",
+          "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p02.html",
+          "url_canonica": "https://noticiasalinstante.test/2027/01/e09-c4-p02",
+          "medio": "Noticias al Instante",
+          "dominio": "noticiasalinstante.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-13T09:01:00-05:00",
+          "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c4-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c4-p02-u1",
+            "e09-c4-p02-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h5"
+          ]
+        },
+        {
+          "id": "e09-c4-p05",
+          "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p05.html",
+          "url_canonica": "https://ultimahora24.test/2027/01/e09-c4-p05",
+          "medio": "Última Hora 24",
+          "dominio": "ultimahora24.test",
+          "tipo_sitio": "granja",
+          "fecha": "2027-01-13T09:35:00-05:00",
+          "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+          "rol": "copia_con_inventos",
+          "deriva_de": "e09-c4-p04",
+          "enlaza_a": null,
+          "hechos": [
+            "e09-c4-p05-u1",
+            "e09-c4-p05-u2",
+            "h1",
+            "h2",
+            "h3",
+            "h4"
+          ]
+        }
+      ],
+      "hechos_unicos": {
+        "e09-c4-p06-u1": "Andrés Lozano, integrante de la junta comunal del barrio Las Brisas, contó a InfoExprés que los padres hicieron fila toda la tarde frente al hospital.",
+        "e09-c4-p06-u2": "En el barrio Santa Rita, la asociación de padres contó 393 familias con niños afectados.",
+        "e09-c4-p02-u1": "Sandra Rincón, integrante de la junta comunal del barrio Las Acacias, contó a Noticias al Instante que el comedor ya había recibido quejas por el olor de la comida.",
+        "e09-c4-p02-u2": "En el barrio El Prado, la asociación de padres contó 360 familias con niños afectados.",
+        "e09-c4-p05-u1": "Sandra Quintero, comerciante del barrio El Carmen, contó a Pulso Digital que los profesores llevaron a los niños en sus propios carros.",
+        "e09-c4-p05-u2": "En el barrio San José, la asociación de padres contó 252 familias con niños afectados."
+      }
     }
   ]
 }

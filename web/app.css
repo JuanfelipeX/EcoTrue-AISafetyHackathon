@@ -302,3 +302,36 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
   .tabla-compacta td { border-bottom: 0; padding: 4px 0; }
   .tabla-compacta tr { border-bottom: 1px solid var(--borde); padding: 8px 0; }
 }
+
+/* ---------------- Procedencia (C2PA) ---------------- */
+.etq.procedencia { background: var(--q0); color: var(--q5); }
+.c2pa-cifras { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin: 10px 0 14px; }
+.c2pa-cifras div { background: var(--superficie-2); border-radius: 10px; padding: 10px; }
+.c2pa-cifras b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
+.c2pa-cifras span { font-size: 12px; color: var(--tinta-3); }
+.c2pa-fila { display: grid; grid-template-columns: 190px minmax(0, 1fr) minmax(0, 1.1fr); gap: 14px; padding: 12px 0; border-top: 1px solid var(--borde); align-items: start; }
+.c2pa-pag { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+.c2pa-pag .num { width: 24px; height: 24px; border-radius: 50%; background: var(--superficie-2); display: grid; place-items: center; font-size: 12px; font-weight: 700; flex: none; }
+.c2pa-imgs { display: flex; flex-wrap: wrap; gap: 10px; }
+.c2pa-imgs figure { margin: 0; width: 150px; }
+.c2pa-imgs img { width: 150px; height: 94px; object-fit: cover; border-radius: 8px; border: 1px solid var(--borde); display: block; }
+.c2pa-imgs figcaption { font-size: 12px; color: var(--tinta-2); margin-top: 6px; line-height: 1.45; }
+.c2pa-chip { display: inline-block; font: 600 11px/1 system-ui, sans-serif; padding: 4px 7px; border-radius: 5px; margin: 0 4px 4px 0; }
+.c2pa-chip.ok { background: var(--bien-suave); color: var(--bien); }
+.c2pa-chip.medio { background: var(--alerta-suave); color: var(--alerta); }
+.c2pa-chip.alerta { background: var(--grave-suave); color: var(--grave); }
+.c2pa-chip.neutro { background: var(--superficie-2); color: var(--tinta-2); }
+.c2pa-chip.ia { background: var(--q0); color: var(--q5); }
+.c2pa-nota { font-size: 13px; color: var(--tinta-2); background: var(--superficie-2); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; }
+.c2pa-nota.alerta { background: var(--alerta-suave); color: var(--tinta); }
+.c2pa-datos { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 6px 14px; margin: 10px 0 0; font-size: 14px; }
+.c2pa-datos dt { color: var(--tinta-3); }
+.c2pa-datos dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 1000px) {
+  .c2pa-fila { grid-template-columns: minmax(0, 1fr); }
+  .c2pa-cifras { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .c2pa-datos { grid-template-columns: minmax(0, 1fr); }
+  .c2pa-datos dt { margin-top: 6px; }
+}

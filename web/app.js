@@ -106,7 +106,7 @@ function pintarMundos() {
   $("#lista-mundos").innerHTML = lista.map((m) => `
     <li data-id="${esc(m.id)}" class="${estado.mundo?.id === m.id ? "activo" : ""}" tabindex="0">
       <div class="m-id"><span>${esc(m.id)} · ${m.paginas.length} páginas</span>
-        <span class="etq ${m.conjunto}">${({ estres: "estrés", prueba: "prueba" })[m.conjunto] || "principal"}</span></div>
+        <span class="etq ${m.conjunto}">${({ estres: "estrés", prueba: "prueba", procedencia: "C2PA" })[m.conjunto] || "principal"}</span></div>
       <div class="m-af">${esc(m.afirmacion)}</div>
     </li>`).join("") || `<li class="vacia">Sin coincidencias.</li>`;
   $$("#lista-mundos li[data-id]").forEach((li) => {
@@ -248,6 +248,8 @@ function renderResultado(res, { comparar = false } = {}) {
       <span><i class="hueco"></i>copia o derivada (sin datos propios)</span></div>
     <div class="cascada-scroll">${svgCascada(N)}</div></div>`;
 
+  if (res.procedencia) html += tarjetaProcedencia(res, N);
+
   if (res.hechos && res.hechos.length) {
     html += `<div class="tarjeta"><h2>Matriz de hechos: qué aporta cada página</h2>
       <p class="nota">Columnas = páginas en orden cronológico (los números coinciden con el árbol). Una celda de color marca
@@ -274,6 +276,126 @@ function renderResultado(res, { comparar = false } = {}) {
       ${tablaSimilitud(res, N)}</div>`;
   }
   return html;
+}
+
+// ---------------- procedencia (C2PA) ----------------
+const ESTADO_C2PA = {
+  confiable: ["ok", "✓ Firma confiable"],
+  valida_no_confiable: ["medio", "◐ Firma de emisor desconocido"],
+  rota: ["alerta", "✕ Alterada después de firmar"],
+  ausente: ["neutro", "Sin credenciales"],
+  error: ["neutro", "No se pudo leer"],
+};
+
+function rutaLocal(url) {  // las imágenes del mini-internet se piden a este mismo servidor, sea cual sea el puerto
+  try { const u = new URL(url, location.href); return u.pathname.startsWith("/sitios/") ? u.pathname : url; } catch (_) { return url; }
+}
+
+function chipEstado(im) {
+  const [clase, texto] = ESTADO_C2PA[im.estado] || ESTADO_C2PA.error;
+  return `<span class="c2pa-chip ${clase}">${texto}</span>${im.generada_por_ia ? `<span class="c2pa-chip ia">Declarada como IA</span>` : ""}`;
+}
+
+function tarjetaProcedencia(res, N) {
+  const pr = res.procedencia;
+  const cifras = [
+    [pr.imagenes, "imágenes"], [pr.firmadas_confiables, "con firma confiable"],
+    [pr.fechas_imposibles.length, "fechas imposibles"], [pr.por_foto_ajena.length, "páginas que usan foto ajena"],
+    [pr.generadas_por_ia.length, "declaradas como IA"], [pr.firma_rota.length, "firmas rotas"],
+  ];
+  const filas = N.docs.map((d) => {
+    const p = N.pag[d.id] || {};
+    const imgs = p.imagenes || [];
+    if (!imgs.length) return "";
+    const num = N.orden[d.id] + 1;
+    const firmas = (p.firmas_reconocidas || []).filter((f) => f.via !== "firma C2PA")
+      .map((f) => `<div class="c2pa-nota">Reconocida por huella visual: es la foto que firmó <b>${esc(f.firmante)}</b>, sin sus metadatos.</div>`).join("");
+    return `<div class="c2pa-fila">
+      <div class="c2pa-pag"><span class="num">${num}</span><div><b>${esc(d.sitio)}</b><div class="nota" style="margin:0">${fechaCorta(d.fecha)}</div></div></div>
+      <div class="c2pa-imgs">${imgs.map((im) => `<figure>
+        <img src="${esc(rutaLocal(im.url))}" alt="" loading="lazy">
+        <figcaption>${chipEstado(im)}${im.firmante ? `<div>Firmó: <b>${esc(im.firmante)}</b></div>` : ""}
+          ${im.fecha_firmada ? `<div>Fecha firmada: ${fechaCorta(im.fecha_firmada)}</div>` : ""}</figcaption></figure>`).join("")}</div>
+      <div class="c2pa-efecto">${p.nota_fecha ? `<div class="c2pa-nota alerta"><b>Fecha imposible:</b> ${esc(p.nota_fecha)}.</div>` : ""}
+        ${p.motivo && p.motivo.startsWith("usa la foto firmada") ? `<div class="c2pa-nota"><b>Depende de otro medio:</b> ${esc(p.motivo)}.</div>` : ""}
+        ${firmas}</div>
+    </div>`;
+  }).join("");
+  return `<div class="tarjeta"><h2>Procedencia de las imágenes (C2PA)</h2>
+    <p class="nota">Credenciales de contenido: quién firmó cada foto y cuándo. ECO las usa de dos formas: una página no pudo publicarse
+      antes que la foto firmada que usa, y quien usa la foto firmada por otro medio que publicó antes, sin foto propia, depende de ese medio.
+      La misma foto sin metadatos (por ejemplo, reenviada por WhatsApp) se reconoce por su huella visual.</p>
+    <div class="c2pa-cifras">${cifras.map(([v, t]) => `<div><b>${v}</b><span>${t}</span></div>`).join("")}</div>
+    ${filas}
+    <p class="nota" style="margin-top:12px">${esc(pr.aviso)} Certificados de este laboratorio: CA de demostración, todo ficticio.</p></div>`;
+}
+
+// ---------------- verificador de imágenes (pestaña Analizar URLs) ----------------
+function pintarVerificacion(info) {
+  const cont = $("#resultado-imagen");
+  if (info.error || info.detail) { cont.innerHTML = `<div class="tarjeta error">${esc(info.error || info.detail)}</div>`; return; }
+  const explicacion = {
+    confiable: "La firma está íntegra y el emisor está en la lista de confianza.",
+    valida_no_confiable: "La firma está íntegra, pero el emisor no está en la lista de confianza: sabemos quién dice haberla firmado, no si es quien dice ser.",
+    rota: "La imagen cambió después de firmarse. Lo que dice el manifiesto ya no describe esta imagen.",
+    ausente: "No trae credenciales de contenido. Es lo normal en internet hoy y no la hace sospechosa por sí sola.",
+    error: "No se pudo leer el archivo como imagen.",
+  }[info.estado] || "";
+  cont.innerHTML = `<div class="tarjeta c2pa-resultado">
+    <div>${chipEstado(info)}</div>
+    <p style="margin:10px 0 6px">${esc(explicacion)}</p>
+    <dl class="c2pa-datos">
+      <dt>Archivo</dt><dd>${esc(info.nombre || "")} · ${Math.round((info.bytes || 0) / 1024)} KB</dd>
+      <dt>Firmante</dt><dd>${esc(info.firmante || "—")}</dd>
+      <dt>Emisor del certificado</dt><dd>${esc(info.emisor || "—")}</dd>
+      <dt>Fecha de publicación firmada</dt><dd>${info.fecha_firmada ? esc(info.fecha_firmada) : "—"}</dd>
+      <dt>Origen declarado</dt><dd>${esc(info.fuente_digital || "—")}${info.generada_por_ia ? " (generada con IA)" : ""}</dd>
+      <dt>Acciones registradas</dt><dd>${esc((info.acciones || []).join(", ") || "—")}</dd>
+      <dt>Códigos de validación</dt><dd>${esc((info.codigos || []).join(", ") || "ninguno")}</dd>
+      <dt>Huella visual</dt><dd><code>${esc(info.huella || "—")}</code></dd>
+    </dl></div>`;
+}
+
+async function verificarImagen(cuerpo) {
+  $("#resultado-imagen").innerHTML = `<div class="tarjeta"><p class="nota">Verificando la firma…</p></div>`;
+  try {
+    pintarVerificacion(await api("/api/verificar_imagen", cuerpo));
+  } catch (e) {
+    pintarVerificacion({ error: e.message });
+  }
+}
+
+function prepararVerificador() {
+  const form = $("#form-imagen");
+  if (!form) return;
+  form.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const archivo = $("#archivo-imagen").files[0];
+    if (archivo) {
+      if (archivo.size > 8 * 1024 * 1024) { pintarVerificacion({ error: "La imagen supera 8 MB." }); return; }
+      const lector = new FileReader();
+      lector.onload = () => verificarImagen({ datos_base64: lector.result, nombre: archivo.name });
+      lector.readAsDataURL(archivo);
+    } else if ($("#url-imagen").value.trim()) {
+      verificarImagen({ url: $("#url-imagen").value.trim() });
+    }
+  });
+  api("/api/ejemplos_imagenes").then((ej) => {
+    const mapa = { "data-ejemplo-ia": ej.ia, "data-ejemplo-rota": ej.rota, "data-ejemplo-sin": ej.sin_metadatos };
+    Object.entries(mapa).forEach(([attr, ruta]) => {
+      const b = document.querySelector(`[${attr}]`);
+      if (!b) return;
+      if (ruta) b.dataset.ejemploImagen = ruta; else b.hidden = true;
+    });
+    if (ej.firmada) document.querySelector("[data-ejemplo-imagen]").dataset.ejemploImagen = ej.firmada;
+  }).catch(() => {});
+  document.addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-ejemplo-imagen]");
+    if (!b) return;
+    $("#url-imagen").value = location.origin + b.dataset.ejemploImagen;
+    $("#archivo-imagen").value = "";
+    verificarImagen({ url: location.origin + b.dataset.ejemploImagen });
+  });
 }
 
 function listaSimple(items) {
@@ -656,6 +778,7 @@ function prepararInstalar() {
   });
 }
 prepararInstalar();
+prepararVerificador();
 navegar();
 cargarModelos();
 cargarMundos().then(() => {

@@ -63,7 +63,7 @@ def main():
     if args.conjunto == "prueba":
         escenarios = [(e, d) for e, d in escenarios if e.get("conjunto") == "prueba"]
     else:
-        escenarios = [(e, d) for e, d in escenarios if e.get("conjunto") != "prueba"]
+        escenarios = [(e, d) for e, d in escenarios if e.get("conjunto") in ("principal", "estres", None)]
     print(f"Conjunto: {args.conjunto} ({len(escenarios)} mundos) · modelo: {args.modelo}")
 
     filas = {m: [] for m in METODOS}

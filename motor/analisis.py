@@ -5,7 +5,10 @@ analizar_urls(afirmacion, urls) carga las páginas y aplica ECO híbrido. Si el 
 disponible, cae a la línea base y lo dice en el resultado, para que la demo nunca quede en blanco.
 """
 
+import os
+
 from . import hechos as metodo_hechos
+from . import procedencia as modulo_procedencia
 from . import linea_base
 from .buscador import cargar
 from .config import config
@@ -48,7 +51,11 @@ def analizar_documentos(documentos, afirmacion, modelo=None, metodo="hibrido"):
         try:
             cliente = ClienteLLM(modelo=modelo) if modelo else ClienteLLM()
             umbral = config.umbral_similitud if metodo == "hibrido" else None
-            res = metodo_hechos.analizar(documentos, afirmacion, cliente=cliente, umbral_copia=umbral)
+            proc = None
+            if os.getenv("ECO_PROCEDENCIA", "1") == "1" and any(getattr(d, "imagenes", None) for d in documentos):
+                proc = modulo_procedencia.analizar_documentos(documentos)
+            res = metodo_hechos.analizar(documentos, afirmacion, cliente=cliente, umbral_copia=umbral,
+                                         procedencia=proc)
         except ErrorLLM as e:
             res = linea_base.analizar(documentos)
             res["aviso"] = ("Aviso: el modelo de lenguaje no respondió, se usó solo similitud de texto, "

@@ -2146,5 +2146,479 @@
         "medio": "Alerta Nacional Ya"
       }
     ]
+  },
+  {
+    "id": "e07-c1",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-c1-p01",
+        "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p01.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e07-c1-p02",
+        "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p02.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e07-c1-p03",
+        "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p03.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e07-c1-p04",
+        "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p04.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e07-c1-p05",
+        "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p05.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e07-c1-p06",
+        "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p06.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e07-c1-p07",
+        "url": "http://localhost:8765/sitios/e07-c1/e07-c1-p07.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Lo Que Pasa Hoy"
+      }
+    ]
+  },
+  {
+    "id": "e07-c2",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-c2-p01",
+        "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p01.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e07-c2-p02",
+        "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p02.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e07-c2-p03",
+        "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p03.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e07-c2-p04",
+        "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p04.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e07-c2-p05",
+        "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p05.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e07-c2-p06",
+        "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p06.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e07-c2-p07",
+        "url": "http://localhost:8765/sitios/e07-c2/e07-c2-p07.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e07-c3",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-c3-p01",
+        "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p01.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e07-c3-p02",
+        "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p02.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e07-c3-p03",
+        "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p03.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e07-c3-p04",
+        "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p04.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e07-c3-p05",
+        "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p05.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e07-c3-p06",
+        "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p06.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e07-c3-p07",
+        "url": "http://localhost:8765/sitios/e07-c3/e07-c3-p07.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Pulso Digital"
+      }
+    ]
+  },
+  {
+    "id": "e07-c4",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-c4-p01",
+        "url": "http://localhost:8765/sitios/e07-c4/e07-c4-p01.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e07-c4-p02",
+        "url": "http://localhost:8765/sitios/e07-c4/e07-c4-p02.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e07-c4-p03",
+        "url": "http://localhost:8765/sitios/e07-c4/e07-c4-p03.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e07-c4-p04",
+        "url": "http://localhost:8765/sitios/e07-c4/e07-c4-p04.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "El Faro Regional"
+      }
+    ]
+  },
+  {
+    "id": "e08-c1",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-c1-p01",
+        "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p01.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e08-c1-p02",
+        "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p02.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e08-c1-p03",
+        "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p03.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e08-c1-p04",
+        "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p04.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e08-c1-p05",
+        "url": "http://localhost:8765/sitios/e08-c1/e08-c1-p05.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Noticias Altiplano"
+      }
+    ]
+  },
+  {
+    "id": "e08-c2",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-c2-p01",
+        "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p01.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e08-c2-p02",
+        "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p02.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e08-c2-p03",
+        "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p03.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e08-c2-p04",
+        "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p04.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e08-c2-p05",
+        "url": "http://localhost:8765/sitios/e08-c2/e08-c2-p05.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "InfoExprés"
+      }
+    ]
+  },
+  {
+    "id": "e08-c3",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-c3-p01",
+        "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p01.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e08-c3-p02",
+        "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p02.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e08-c3-p03",
+        "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p03.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e08-c3-p04",
+        "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p04.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e08-c3-p05",
+        "url": "http://localhost:8765/sitios/e08-c3/e08-c3-p05.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "InfoExprés"
+      }
+    ]
+  },
+  {
+    "id": "e08-c4",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-c4-p01",
+        "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p01.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e08-c4-p02",
+        "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p02.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e08-c4-p03",
+        "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p03.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e08-c4-p04",
+        "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p04.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e08-c4-p05",
+        "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p05.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e08-c4-p06",
+        "url": "http://localhost:8765/sitios/e08-c4/e08-c4-p06.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Noticias al Instante"
+      }
+    ]
+  },
+  {
+    "id": "e09-c1",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-c1-p01",
+        "url": "http://localhost:8765/sitios/e09-c1/e09-c1-p01.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e09-c1-p02",
+        "url": "http://localhost:8765/sitios/e09-c1/e09-c1-p02.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Noticias Altiplano"
+      },
+      {
+        "id": "e09-c1-p03",
+        "url": "http://localhost:8765/sitios/e09-c1/e09-c1-p03.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e09-c1-p04",
+        "url": "http://localhost:8765/sitios/e09-c1/e09-c1-p04.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "El Faro Regional"
+      }
+    ]
+  },
+  {
+    "id": "e09-c2",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-c2-p01",
+        "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p01.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e09-c2-p02",
+        "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p02.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e09-c2-p03",
+        "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p03.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e09-c2-p04",
+        "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p04.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e09-c2-p05",
+        "url": "http://localhost:8765/sitios/e09-c2/e09-c2-p05.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Pulso Digital"
+      }
+    ]
+  },
+  {
+    "id": "e09-c3",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-c3-p01",
+        "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p01.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e09-c3-p02",
+        "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p02.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e09-c3-p03",
+        "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p03.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e09-c3-p04",
+        "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p04.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e09-c3-p05",
+        "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p05.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e09-c3-p06",
+        "url": "http://localhost:8765/sitios/e09-c3/e09-c3-p06.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e09-c4",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-c4-p01",
+        "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p01.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e09-c4-p02",
+        "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p02.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e09-c4-p03",
+        "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p03.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e09-c4-p04",
+        "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p04.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e09-c4-p05",
+        "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p05.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e09-c4-p06",
+        "url": "http://localhost:8765/sitios/e09-c4/e09-c4-p06.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "El Dato Viral"
+      }
+    ]
   }
 ]

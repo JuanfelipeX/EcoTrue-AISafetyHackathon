@@ -11,6 +11,7 @@ Herramientas:
   evaluar_corroboracion(afirmacion, urls)   analiza un conjunto de URLs (reales o del mini-internet)
   buscar_en_mini_internet(consulta)          encuentra mundos del laboratorio sintético
   analizar_mundo(mundo_id)                   analiza un mundo completo del laboratorio
+  verificar_procedencia(url_imagen)          firma C2PA de una imagen: quién la firmó, cuándo, si se declara IA
 """
 
 import sys
@@ -25,6 +26,7 @@ except ImportError:  # SDK de MCP 1.x
     from mcp.server.fastmcp import FastMCP as _Servidor
 
 from motor import buscador  # noqa: E402
+from motor import procedencia  # noqa: E402
 from motor.analisis import analizar_urls  # noqa: E402
 
 INSTRUCCIONES = (
@@ -51,6 +53,9 @@ def _compacto(res):
         "datos_de_una_sola_fuente": res.get("de_un_solo_origen", []),
         "frases_sobre_la_noticia_excluidas": res.get("atribuciones", []),
         "paginas": [{"id": d["id"], "sitio": d["sitio"], "url": d["url"], "fecha": d["fecha"]} for d in res["documentos"]],
+        "procedencia": res.get("procedencia"),
+        "fechas_corregidas_por_firma": [{"pagina": p["id"], "nota": p["nota_fecha"]}
+                                        for p in res.get("paginas", []) if p.get("nota_fecha")],
         "urls_con_error": res.get("urls_con_error", []),
         "aviso": res.get("aviso"),
     }
@@ -106,6 +111,30 @@ def _app_http():
 
 
 app_http = _app_http()
+
+
+@mcp.tool()
+def verificar_procedencia(url_imagen: str) -> dict:
+    """Verifica la procedencia criptográfica (C2PA) de una imagen.
+
+    Devuelve si trae credenciales de contenido, si la firma es válida y de un emisor confiable, quién la firmó,
+    la fecha de publicación firmada, si se declara generada por IA y si fue alterada después de firmarse.
+    Una imagen sin firma NO es sospechosa por sí sola: casi todo el contenido real no la trae.
+    """
+    try:
+        datos = procedencia._bytes_imagen(url_imagen)
+    except Exception as e:
+        return {"error": f"No se pudo descargar la imagen: {type(e).__name__}: {e}"}
+    sufijo = url_imagen.split("?")[0].rsplit(".", 1)[-1].lower()
+    info = procedencia.verificar(datos, procedencia.TIPOS_MIME.get("." + sufijo, "image/jpeg"))
+    info["url"] = url_imagen
+    info["interpretacion"] = {
+        "confiable": "Firma íntegra de un emisor de la lista de confianza.",
+        "valida_no_confiable": "La firma es íntegra, pero el emisor no está en la lista de confianza.",
+        "rota": "La imagen cambió después de firmarse: no confíe en lo que dice el manifiesto.",
+        "ausente": "No trae credenciales de contenido (lo normal en internet hoy).",
+    }.get(info["estado"], "No se pudo verificar.")
+    return info
 
 
 def main():

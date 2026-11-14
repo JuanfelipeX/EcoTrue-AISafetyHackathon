@@ -47,6 +47,7 @@
               <button data-v="principal">Principal</button>
               <button data-v="estres">Estrés</button>
               <button data-v="prueba" title="Eventos retenidos: no se usaron para ajustar ECO">Prueba</button>
+              <button data-v="procedencia" title="Mundos con fotos firmadas (C2PA)">C2PA</button>
             </div>
           </div>
           <ul id="lista-mundos" class="lista-mundos"></ul>
@@ -145,6 +146,29 @@
         <p class="nota">Uso responsable: el hackathon exige datos sintéticos o públicos. No analices sistemas de terceros sin permiso.</p>
       </form>
       <div id="resultado-urls" class="resultado"></div>
+
+      <div class="intro" style="margin-top:28px">
+        <h1>Verifica la procedencia de una imagen</h1>
+        <p>Las credenciales de contenido (<b>C2PA</b>) son una firma criptográfica dentro del archivo: dicen quién lo creó,
+          cuándo y con qué herramienta, incluso si se generó con IA. Si alguien cambia un solo píxel, la firma se rompe.</p>
+      </div>
+      <form id="form-imagen" class="tarjeta form">
+        <label for="archivo-imagen">Sube una imagen (JPEG, PNG o WebP, máximo 8 MB)</label>
+        <input id="archivo-imagen" type="file" accept="image/jpeg,image/png,image/webp">
+        <label for="url-imagen">…o pega su dirección</label>
+        <input id="url-imagen" type="url" placeholder="https://…/foto.jpg">
+        <div class="fila-botones">
+          <button type="submit" class="boton-primario">Verificar firma</button>
+        </div>
+        <p class="nota" style="margin-top:14px">Ejemplos del mini-internet:</p>
+        <div class="fila-botones" style="margin-top:0">
+          <button type="button" class="boton-sec" data-ejemplo-imagen="/sitios/e07-c1/img/e07-c1-p01-1.jpg">Foto firmada por un medio</button>
+          <button type="button" class="boton-sec" data-ejemplo-ia>Ilustración declarada como IA</button>
+          <button type="button" class="boton-sec" data-ejemplo-rota>Foto alterada después de firmar</button>
+          <button type="button" class="boton-sec" data-ejemplo-sin>Foto reenviada sin metadatos</button>
+        </div>
+      </form>
+      <div id="resultado-imagen" class="resultado"></div>
     </section>
 
     <!-- ================= COMO FUNCIONA ================= -->

@@ -19,6 +19,8 @@ si su texto es casi idéntico a una página anterior. Esto detecta copias que ag
 inventados para parecer reportería propia, siempre que no reescriban el texto copiado.
 """
 
+from datetime import datetime
+
 from .linea_base import matriz_similitud
 from .llm import ClienteLLM
 
@@ -70,7 +72,44 @@ def extraer_hechos(afirmacion, documentos, cliente=None):
     return hechos, respuesta
 
 
-def analizar(documentos, afirmacion, cliente=None, min_novedad=1, hechos=None, umbral_copia=None):
+DISTANCIA_MISMA_FOTO = 8  # bits de 64 en la huella visual
+
+
+def _fecha(iso):
+    try:
+        return datetime.fromisoformat(iso.replace("Z", "+00:00")) if iso else None
+    except (ValueError, AttributeError):
+        return None
+
+
+def distancia_huella(h1, h2):
+    from .procedencia import distancia
+    return distancia(h1, h2)
+
+
+def _firmas_por_pagina(documentos, procedencia):
+    """Para cada página, las firmas confiables de sus fotos: directas (C2PA) o reconocidas por la huella
+    visual de una foto firmada en otra página (la misma foto sin metadatos, p. ej. tras recomprimirla)."""
+    conocidas = [(im["huella"], im["firmante"], im.get("fecha_firmada"))
+                 for infos in procedencia.values() for im in infos
+                 if im.get("estado") == "confiable" and im.get("firmante") and im.get("huella")]
+    firmas = {}
+    for d in documentos:
+        lista = []
+        for im in procedencia.get(d.id, []):
+            if im.get("estado") == "confiable" and im.get("firmante"):
+                lista.append({"firmante": im["firmante"], "fecha": im.get("fecha_firmada"), "via": "firma C2PA"})
+            elif im.get("estado") in ("ausente", "valida_no_confiable") and im.get("huella"):
+                for h, firmante, fecha in conocidas:
+                    if distancia_huella(im["huella"], h) <= DISTANCIA_MISMA_FOTO:
+                        lista.append({"firmante": firmante, "fecha": fecha,
+                                      "via": "misma foto sin metadatos, reconocida por su huella visual"})
+                        break
+        firmas[d.id] = lista
+    return firmas
+
+
+def analizar(documentos, afirmacion, cliente=None, min_novedad=1, hechos=None, umbral_copia=None, procedencia=None):
     """
     documentos: lista de Documento. afirmacion: texto de la afirmación.
     hechos: opcional, para reutilizar una extracción previa.
@@ -95,7 +134,40 @@ def analizar(documentos, afirmacion, cliente=None, min_novedad=1, hechos=None, u
     por_url = {d.url: d.id for d in documentos}
     sim = matriz_similitud(documentos) if n > 1 else [[1.0]]
 
-    orden = sorted(documentos, key=lambda d: (d.fecha is None, d.fecha.timestamp() if d.fecha else 0, d.id))
+    # Procedencia (C2PA): la fecha firmada de una foto es un límite inferior para la página que la usa.
+    procedencia = procedencia or {}
+    firmas = _firmas_por_pagina(documentos, procedencia)
+    fecha_ef, nota_fecha = {}, {}
+    for d in documentos:
+        f = d.fecha
+        for fm in firmas[d.id]:
+            ff = _fecha(fm["fecha"])
+            try:
+                posterior = ff is not None and (f is None or ff > f)
+            except TypeError:  # fechas con y sin zona horaria
+                posterior = False
+            if posterior:
+                nota_fecha[d.id] = (f"declara {d.fecha.isoformat() if d.fecha else 'sin fecha'}, pero usa una foto que "
+                                    f"{fm['firmante']} firmó el {fm['fecha']}: no pudo publicarse antes")
+                f = ff
+        fecha_ef[d.id] = f
+
+    def foto_ajena(d, anteriores):
+        """Foto firmada por otro medio del conjunto que publicó antes, sin foto propia firmada."""
+        if any(fm["firmante"] == d.sitio for fm in firmas[d.id]):
+            return None
+        for fm in firmas[d.id]:
+            for a in anteriores:
+                if a.sitio == fm["firmante"]:
+                    return a.id, fm
+        return None
+
+    def firma_propia(d):  # a igual fecha, primero quien firmó su propia foto
+        return 0 if any(fm["firmante"] == d.sitio and fm["via"] == "firma C2PA" for fm in firmas[d.id]) else 1
+
+    orden = sorted(documentos, key=lambda d: (fecha_ef[d.id] is None,
+                                              fecha_ef[d.id].timestamp() if fecha_ef[d.id] else 0,
+                                              firma_propia(d), d.id))
     vistos = set()
     detalle = {}
     for pos, d in enumerate(orden):
@@ -112,6 +184,13 @@ def analizar(documentos, afirmacion, cliente=None, min_novedad=1, hechos=None, u
                 independiente = False
                 madre = mas_parecida.id
                 motivo = "texto casi idéntico a una página anterior, con datos agregados"
+        if independiente and pos > 0 and firmas[d.id]:
+            ajena = foto_ajena(d, anteriores)
+            if ajena:
+                independiente = False
+                madre = ajena[0]
+                motivo = (f"usa la foto firmada por {ajena[1]['firmante']} ({ajena[1]['via']}), "
+                          f"que publicó antes, y no tiene foto propia firmada")
         if not independiente and madre is None:
             if enlazadas:
                 madre = enlazadas[0]
@@ -125,6 +204,12 @@ def analizar(documentos, afirmacion, cliente=None, min_novedad=1, hechos=None, u
             "fecha": d.fecha.isoformat() if d.fecha else None,
             "independiente": independiente, "deriva_de": madre, "motivo": motivo,
             "hechos": sorted(propios), "hechos_nuevos": sorted(nuevos),
+            "fecha_efectiva": fecha_ef[d.id].isoformat() if fecha_ef[d.id] else None,
+            "nota_fecha": nota_fecha.get(d.id),
+            "imagenes": [{k: im.get(k) for k in ("url", "estado", "firmante", "fecha_firmada", "generada_por_ia",
+                                                  "fuente_digital", "codigos", "huella")}
+                         for im in procedencia.get(d.id, [])],
+            "firmas_reconocidas": firmas[d.id],
         }
         vistos |= propios
 
@@ -170,7 +255,22 @@ def analizar(documentos, afirmacion, cliente=None, min_novedad=1, hechos=None, u
         "atribuciones": [h["texto"] for h in atribuciones],
         "corroborados": [h["texto"] for h in resumen_hechos if h["fuentes_independientes"] >= 2],
         "de_un_solo_origen": [h["texto"] for h in resumen_hechos if h["fuentes_independientes"] < 2],
+        "procedencia": _resumen_procedencia(procedencia, nota_fecha, detalle) if procedencia else None,
         "modelo": respuesta.modelo if respuesta else None,
         "desde_cache": respuesta.desde_cache if respuesta else None,
         "segundos_llm": respuesta.segundos if respuesta else None,
+    }
+
+
+def _resumen_procedencia(procedencia, nota_fecha, detalle):
+    imagenes = [im for infos in procedencia.values() for im in infos]
+    return {
+        "imagenes": len(imagenes),
+        "firmadas_confiables": sum(im.get("estado") == "confiable" for im in imagenes),
+        "firma_rota": [pid for pid, infos in procedencia.items() if any(im.get("estado") == "rota" for im in infos)],
+        "generadas_por_ia": [pid for pid, infos in procedencia.items() if any(im.get("generada_por_ia") for im in infos)],
+        "fechas_imposibles": [{"pagina": pid, "nota": nota} for pid, nota in nota_fecha.items()],
+        "por_foto_ajena": [pid for pid, det in detalle.items() if det["motivo"].startswith("usa la foto firmada")],
+        "aviso": ("C2PA prueba quién firmó y cuándo, no que el contenido sea cierto. Una imagen sin firma no es "
+                  "sospechosa por sí sola: casi todo el contenido real no la trae."),
     }
