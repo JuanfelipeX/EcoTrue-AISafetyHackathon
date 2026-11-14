@@ -10,16 +10,16 @@
 </head>
 <body>
   <header class="barra">
-    <a class="marca" href="#laboratorio" aria-label="ECO, inicio">
+    <a class="marca" href="#urls" aria-label="ECO, inicio">
       <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="16" r="5"/><path d="M17 9a10 10 0 0 1 0 14M22 5a15 15 0 0 1 0 22" fill="none" stroke-width="2.6" stroke-linecap="round"/></svg>
       <span>ECO</span>
     </a>
     <nav class="pestanas" aria-label="Secciones">
+      <a href="#urls" data-vista="urls">Verificar</a>
+      <a href="#instalar" data-vista="instalar" class="pestana-destacada">Instalar</a>
+      <a href="#como" data-vista="como">Cómo funciona</a>
       <a href="#laboratorio" data-vista="laboratorio">Laboratorio</a>
       <a href="#resultados" data-vista="resultados">Resultados</a>
-      <a href="#urls" data-vista="urls">Analizar URLs</a>
-      <a href="#como" data-vista="como">Cómo funciona</a>
-      <a href="#instalar" data-vista="instalar" class="pestana-destacada">Instalar</a>
     </nav>
     <div class="barra-der">
       <span id="estado-modelo" class="chip" title="Cadena de modelos configurada en .env">cargando modelos…</span>
@@ -141,7 +141,19 @@
     <!-- ================= URLS ================= -->
     <section id="vista-urls" class="vista" hidden>
       <div class="intro">
-        <h1>Analiza tus propias URLs</h1>
+        <h1>Verifica antes de compartir</h1>
+        <p>Con IA es casi gratis clonar una noticia en decenas de sitios, fabricar fotos y videos o clonar una voz.
+          ECO responde tres preguntas: <b>¿cuántas fuentes hay de verdad?</b>, <b>¿de dónde viene esta foto o video, y lo hizo una IA?</b>
+          y <b>¿es real esta voz?</b> No dice qué es verdad: muestra la evidencia para que decidas.</p>
+      </div>
+      <nav class="indice-instalar" aria-label="Qué verificar">
+        <a href="#urls" data-ir="sec-urls">1 · Una noticia (sus fuentes)</a>
+        <a href="#urls" data-ir="sec-imagen">2 · Una foto o un video</a>
+        <a href="#urls" data-ir="sec-audio">3 · Una voz</a>
+        <a href="#instalar">Instalar la extensión o el MCP →</a>
+      </nav>
+      <div class="intro" id="sec-urls">
+        <h1>¿Cuántas fuentes hay de verdad detrás de una noticia?</h1>
         <p>Pega una afirmación y las páginas que la mencionan. ECO las descarga, extrae los hechos y calcula cuántas
           fuentes independientes hay. Es la misma herramienta que usa el servidor MCP <code>evaluar_corroboracion</code>.</p>
       </div>
@@ -158,7 +170,7 @@
       </form>
       <div id="resultado-urls" class="resultado"></div>
 
-      <div class="intro" style="margin-top:28px">
+      <div class="intro" style="margin-top:28px" id="sec-imagen">
         <h1>¿De dónde viene esta foto o video? ¿Lo hizo una IA?</h1>
         <p>Las credenciales de contenido (<b>C2PA</b>) son una firma criptográfica dentro del archivo: dicen quién lo creó,
           cuándo y con qué herramienta, incluso si se generó con IA. Si alguien cambia un solo píxel, la firma se rompe.
@@ -166,9 +178,9 @@
           etiquetas de video). No usa un “detector de píxeles”: fallan con generadores nuevos y acusarían a gente inocente.</p>
       </div>
       <form id="form-imagen" class="tarjeta form">
-        <label for="archivo-imagen">Sube una imagen (JPEG, PNG, WebP; máx. 8 MB) o un video (MP4, MOV; máx. 60 MB)</label>
-        <input id="archivo-imagen" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,.mp4,.mov,.m4v">
-        <label for="url-imagen">…o pega su dirección</label>
+        <label for="archivo-imagen">Sube una imagen (JPEG, PNG, WebP, HEIC, AVIF; máx. 20 MB) o un video (MP4, MOV; máx. 60 MB)</label>
+        <input id="archivo-imagen" type="file" accept="image/*,video/mp4,video/quicktime,.heic,.heif,.avif,.mp4,.mov,.m4v">
+        <label for="url-imagen">…o pega su dirección (de la imagen o de la página que la publica)</label>
         <input id="url-imagen" type="url" placeholder="https://…/foto.jpg o …/video.mp4">
         <div class="fila-botones">
           <button type="submit" class="boton-primario">Verificar</button>
@@ -187,7 +199,7 @@
       </form>
       <div id="resultado-imagen" class="resultado"></div>
 
-      <div class="intro" style="margin-top:28px">
+      <div class="intro" style="margin-top:28px" id="sec-audio">
         <h1>¿Es una voz clonada?</h1>
         <p>Primero se revisan las credenciales de contenido del archivo. Si no tiene (lo normal, y las notas de voz de WhatsApp
           nunca las conservan), un detector <b>AASIST-L</b> reentrenado por ECO con audio comprimido estima si la voz es sintética.
@@ -284,7 +296,7 @@ python -m demo.agente --modelo …</pre>
           No funciona en Firefox, Safari ni en celulares. Tarda unos 3 minutos.</p>
         <div class="fila-botones">
           <a class="boton-primario" href="/descargas/eco-extension.zip" download>Descargar la extensión (.zip)</a>
-          <span class="nota">Versión <span id="version-extension">1.4</span> · menos de 50 KB</span>
+          <span class="nota">Versión <span id="version-extension">1.5</span> · menos de 50 KB</span>
         </div>
 
         <ol class="guia">

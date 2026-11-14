@@ -2,13 +2,16 @@
 
 importScripts("config.js");
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
-    id: "eco-analizar",
-    title: "ECO: ¿cuántas fuentes reales hay detrás de esto?",
-    contexts: ["selection", "page"],
+// El menú se recrea al instalar y cada vez que arranca el navegador (clic derecho; el clic izquierdo no abre menús).
+function crearMenus() {
+  chrome.contextMenus.removeAll(() => {
+    chrome.contextMenus.create({ id: "eco-analizar", title: "ECO: ¿cuántas fuentes reales hay detrás de esta noticia?", contexts: ["page"] });
+    chrome.contextMenus.create({ id: "eco-seleccion", title: "ECO: ¿cuántas fuentes respaldan «%s»?", contexts: ["selection"] });
+    chrome.contextMenus.create({ id: "eco-archivo", title: "ECO: ¿de dónde viene esta imagen? ¿La hizo una IA?", contexts: ["image", "video"] });
   });
-});
+}
+chrome.runtime.onInstalled.addListener(crearMenus);
+chrome.runtime.onStartup.addListener(crearMenus);
 
 // Se ejecuta dentro de la página: crea o actualiza el panel.
 function pintarPanel(estado, datos) {
@@ -24,6 +27,10 @@ function pintarPanel(estado, datos) {
   let cuerpo;
   if (estado === "cargando") {
     cuerpo = '<div class="eco-cargando">Leyendo la página y sus fuentes, y comparando sus datos…</div>';
+  } else if (estado === "cargando-archivo") {
+    cuerpo = '<div class="eco-cargando">Verificando la firma C2PA y las marcas de IA del archivo…</div>';
+  } else if (estado === "archivo") {
+    cuerpo = globalThis.ecoRenderArchivo(datos);
   } else if (estado === "error") {
     cuerpo = `<div class="eco-error">${globalThis.ecoEsc(datos)}</div>`;
   } else {
@@ -65,7 +72,38 @@ async function analizarEnPestana(tab, seleccion) {
   }
 }
 
+async function verificarArchivoEnPestana(tab, url) {
+  try {
+    await chrome.scripting.insertCSS({ target: { tabId: tab.id }, files: ["estilos.css"] });
+    await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["render.js"] });
+  } catch (e) {
+    console.error("ECO: no se pudo dibujar en esta página", e);
+    return;
+  }
+  if (!url || !/^https?:/.test(url)) {
+    await mostrar(tab.id, "error", "Esta imagen está incrustada en la página (no tiene dirección propia). Descárgala y súbela en el panel de ECO → Analizar.");
+    return;
+  }
+  await mostrar(tab.id, "cargando-archivo", null);
+  const ECO_API = await ecoApi();
+  try {
+    const respuesta = await fetch(`${ECO_API}/api/verificar_imagen`, {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url }),
+    });
+    const datos = await respuesta.json();
+    if (!respuesta.ok) {
+      await mostrar(tab.id, "error", datos.detail || `Error ${respuesta.status}`);
+      return;
+    }
+    await mostrar(tab.id, "archivo", datos);
+  } catch (e) {
+    await mostrar(tab.id, "error", `No se pudo conectar con el servidor de ECO en ${ECO_API}.`);
+  }
+}
+
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId !== "eco-analizar" || !tab || !tab.id) return;
-  analizarEnPestana(tab, info.selectionText);
+  if (!tab || !tab.id) return;
+  if (info.menuItemId === "eco-archivo") verificarArchivoEnPestana(tab, info.srcUrl);
+  else if (info.menuItemId === "eco-seleccion") analizarEnPestana(tab, info.selectionText);
+  else if (info.menuItemId === "eco-analizar") analizarEnPestana(tab, null);
 });

@@ -335,3 +335,5 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
   .c2pa-datos { grid-template-columns: minmax(0, 1fr); }
   .c2pa-datos dt { margin-top: 6px; }
 }
+
+#vista-urls .intro[id] { scroll-margin-top: 80px; }

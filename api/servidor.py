@@ -275,7 +275,10 @@ def verificar_imagen(p: PeticionImagen):
         try:
             datos = procedencia._bytes_imagen(p.url, procedencia.MAX_BYTES_VIDEO)
         except Exception as e:
-            raise HTTPException(400, f"No se pudo descargar el archivo: {e}")
+            motivo = str(e)
+            if "403" in motivo or "401" in motivo:
+                motivo = "el sitio no permite descargas automáticas; descarga el archivo y súbelo aquí"
+            raise HTTPException(400, f"No se pudo descargar el archivo: {motivo}")
         nombre = p.url.split("?")[0]
     else:
         raise HTTPException(400, "Envíe una URL o un archivo.")

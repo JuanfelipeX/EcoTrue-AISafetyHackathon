@@ -76,7 +76,29 @@
     </div>`;
   }
 
+  function ecoRenderArchivo(r) {
+    const estado = {
+      confiable: ["eco-ok", "Firma C2PA confiable"], valida_no_confiable: ["eco-medio", "Firma de un emisor desconocido"],
+      rota: ["eco-alerta", "Alterado después de firmarse"], ausente: ["", "Sin credenciales de contenido"],
+      error: ["", "No se pudo leer el archivo"],
+    }[r.estado] || ["", r.estado];
+    const ia = { declarada: ["eco-alerta", "Declarado como hecho con IA"], indicio: ["eco-medio", "Indicios de herramientas de IA"],
+      sin_senales: ["", "Sin señales de IA en los metadatos"] }[r.ia] || ["", "—"];
+    const senales = (r.senales_ia || []).map((x) => `<li><b>${esc(x.fuente)}</b>: ${esc(x.detalle)}</li>`).join("");
+    return `<div class="eco-res">
+      <h3>¿De dónde viene? (${r.tipo === "video" ? "video" : "imagen"})</h3>
+      <div class="eco-cifras ${estado[0]}" style="display:block"><b>${esc(estado[1])}</b>
+        ${r.firmante ? `<div>Firmó: <b>${esc(r.firmante)}</b>${r.fecha_firmada ? ` · ${esc(fechaCorta(r.fecha_firmada))}` : ""}</div>` : ""}</div>
+      <h3>¿Lo hizo una IA?</h3>
+      <div class="eco-cifras ${ia[0]}" style="display:block"><b>${esc(ia[1])}</b></div>
+      <p class="eco-resumen">${esc(r.ia_explicacion || "")}</p>
+      ${senales ? `<ul>${senales}</ul>` : ""}
+      <p class="eco-pie">C2PA prueba quién firmó y cuándo, no que el contenido sea cierto. Un archivo sin firma no es sospechoso por sí solo.</p>
+    </div>`;
+  }
+
   const raiz = typeof globalThis !== "undefined" ? globalThis : window;
+  raiz.ecoRenderArchivo = ecoRenderArchivo;
   raiz.ecoRender = ecoRender;
   raiz.ecoEsc = esc;
   if (typeof module !== "undefined") module.exports = { ecoRender, esc };

@@ -59,8 +59,8 @@ $("#tema").addEventListener("click", () => {
 try { const t = localStorage.getItem("eco-tema"); if (t) document.documentElement.dataset.theme = t; } catch (_) { /* nada */ }
 
 function navegar() {
-  const vista = (location.hash || "#laboratorio").slice(1);
-  const valida = ["laboratorio", "resultados", "urls", "como", "instalar"].includes(vista) ? vista : "laboratorio";
+  const vista = (location.hash || (new URLSearchParams(location.search).get("mundo") ? "#laboratorio" : "#urls")).slice(1);
+  const valida = ["laboratorio", "resultados", "urls", "como", "instalar"].includes(vista) ? vista : "urls";
   $$(".vista").forEach((v) => { v.hidden = v.id !== `vista-${valida}`; });
   $$(".pestanas a").forEach((a) => a.classList.toggle("activa", a.dataset.vista === valida));
   if (valida === "resultados") cargarResultados();
@@ -383,14 +383,16 @@ function prepararVerificador() {
     const archivo = $("#archivo-imagen").files[0];
     if (archivo) {
       const esVideo = archivo.type.startsWith("video/") || /\.(mp4|mov|m4v)$/i.test(archivo.name);
-      const limite = (esVideo ? 60 : 8) * 1024 * 1024;
-      if (archivo.size > limite) { pintarVerificacion({ error: `El archivo supera ${esVideo ? 60 : 8} MB.` }); return; }
+      const limite = (esVideo ? 60 : 20) * 1024 * 1024;
+      if (archivo.size > limite) { pintarVerificacion({ error: `El archivo supera ${esVideo ? 60 : 20} MB.` }); return; }
       $("#resultado-imagen").innerHTML = `<div class="tarjeta"><p class="nota">Verificando…</p></div>`;
       fetch(`/api/verificar_archivo?nombre=${encodeURIComponent(archivo.name)}`, { method: "POST", body: archivo })
         .then(async (r) => { const d = await r.json(); pintarVerificacion(r.ok ? d : { error: d.detail || "Error" }); })
         .catch((e) => pintarVerificacion({ error: e.message }));
     } else if ($("#url-imagen").value.trim()) {
       verificarImagen({ url: $("#url-imagen").value.trim() });
+    } else {
+      pintarVerificacion({ error: "Elige un archivo o pega una dirección." });
     }
   });
   api("/api/ejemplos_imagenes").then((ej) => {

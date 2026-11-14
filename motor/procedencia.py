@@ -29,9 +29,11 @@ from .config import RAIZ_PROYECTO
 DIR_PKI = RAIZ_PROYECTO / "corpus" / "c2pa"
 ETIQUETA_PUBLICACION = "org.eco.publicacion"
 FUENTE_IA = ("trainedAlgorithmicMedia", "compositeWithTrainedAlgorithmicMedia", "algorithmicMedia")
-MAX_BYTES_IMAGEN = 8 * 1024 * 1024
+MAX_BYTES_IMAGEN = 20 * 1024 * 1024
 MAX_BYTES_VIDEO = 60 * 1024 * 1024
 TIPOS_MIME = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp",
+              ".heic": "image/heic", ".heif": "image/heif", ".avif": "image/avif", ".gif": "image/gif",
+              ".tif": "image/tiff", ".tiff": "image/tiff",
               ".mp4": "video/mp4", ".m4v": "video/mp4", ".mov": "video/quicktime", ".avi": "video/x-msvideo"}
 
 # Nombres de herramientas de generación que aparecen en metadatos (EXIF, XMP, PNG, etiquetas de video, C2PA).
@@ -237,10 +239,32 @@ def resumen_ia(senales):
                            "al reenviar o al hacer una captura de pantalla.")
 
 
+def tipo_por_contenido(datos):
+    """Tipo MIME por los primeros bytes (para URLs sin extension)."""
+    if datos[:3] == bytes([0xFF, 0xD8, 0xFF]):
+        return "image/jpeg"
+    if datos[:8] == bytes([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]):
+        return "image/png"
+    if datos[:4] == b"RIFF" and datos[8:12] == b"WEBP":
+        return "image/webp"
+    if datos[:6] in (b"GIF87a", b"GIF89a"):
+        return "image/gif"
+    if datos[4:8] == b"ftyp":
+        marca = datos[8:12]
+        if marca in (b"heic", b"heix", b"mif1", b"msf1"):
+            return "image/heic"
+        if marca in (b"avif", b"avis"):
+            return "image/avif"
+        if marca == b"qt  ":
+            return "video/quicktime"
+        return "video/mp4"
+    return "image/jpeg"
+
+
 def analizar_archivo(datos, nombre):
     """Procedencia C2PA + señales de IA de una imagen o un video."""
-    sufijo = "." + nombre.rsplit(".", 1)[-1].lower() if "." in nombre else ".jpg"
-    mime = TIPOS_MIME.get(sufijo, "image/jpeg")
+    sufijo = "." + nombre.rsplit(".", 1)[-1].lower() if "." in nombre.rsplit("/", 1)[-1] else ""
+    mime = TIPOS_MIME.get(sufijo) or tipo_por_contenido(datos)
     limite = MAX_BYTES_VIDEO if mime.startswith("video/") else MAX_BYTES_IMAGEN
     if len(datos) > limite:
         raise ValueError(f"El archivo supera {limite // (1024 * 1024)} MB.")
@@ -255,7 +279,7 @@ def analizar_archivo(datos, nombre):
     return info
 
 
-def _bytes_imagen(url, limite=MAX_BYTES_IMAGEN):
+def _bytes_imagen(url, limite=MAX_BYTES_IMAGEN, _profundidad=0):
     """Imagen del mini-internet desde el disco; si no, descarga protegida (misma política que las páginas)."""
     from urllib.parse import urlparse
     from . import buscador
@@ -274,11 +298,22 @@ def _bytes_imagen(url, limite=MAX_BYTES_IMAGEN):
             return ruta.read_bytes()
         raise FileNotFoundError(url)
     _verificar_destino(url)
-    peticion = urllib.request.Request(url, headers={"User-Agent": "ECO/0.1 (laboratorio de defensa epistémica)"})
-    with _ABRIDOR.open(peticion, timeout=15) as r:
+    peticion = urllib.request.Request(url, headers={"User-Agent": "ECO/0.1 (laboratorio de defensa epistémica)",
+                                                    "Accept": "image/*,video/*,*/*;q=0.8"})
+    with _ABRIDOR.open(peticion, timeout=20) as r:
+        tipo = (r.headers.get("Content-Type") or "").lower()
         datos = r.read(limite + 1)
     if len(datos) > limite:
-        raise URLNoPermitida("La imagen supera el tamaño permitido")
+        raise URLNoPermitida(f"El archivo supera {limite // (1024 * 1024)} MB.")
+    if "text/html" in tipo and not _profundidad:
+        # Pegaron la dirección de una página: se verifica su imagen principal (og:image).
+        from bs4 import BeautifulSoup
+        from urllib.parse import urljoin
+        soup = BeautifulSoup(datos[:2_000_000].decode("utf-8", errors="replace"), "html.parser")
+        meta = soup.find("meta", attrs={"property": "og:image"}) or soup.find("meta", attrs={"name": "twitter:image"})
+        if not meta or not meta.get("content"):
+            raise URLNoPermitida("La dirección es una página web, no una imagen, y no declara una imagen principal.")
+        return _bytes_imagen(urljoin(url, meta["content"]), limite, _profundidad=1)
     return datos
 
 
