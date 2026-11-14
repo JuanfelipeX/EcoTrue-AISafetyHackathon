@@ -198,6 +198,91 @@ async function ejecutar(api, cuerpo, titulo) {
 }
 
 $("#analizar").addEventListener("click", analizar);
+
+// ---------------- modos: página, nota de voz y captura ----------------
+document.querySelectorAll("#modos button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll("#modos button").forEach((x) => x.classList.toggle("activo", x === b));
+  const m = b.dataset.modo;
+  $("#caja-pagina").hidden = m !== "pagina";
+  $("#caja-tema").hidden = m !== "pagina";
+  $("#caja-voz").hidden = m !== "voz";
+  $("#caja-captura").hidden = m !== "captura";
+  $("#resultado").hidden = true;
+  $("#resultado").innerHTML = "";
+}));
+
+function miniConclusion(nivel, titulo, texto) {
+  return `<div class="mini-conclusion ${nivel}"><b>${esc(titulo)}</b>${esc(texto || "")}</div>`;
+}
+
+function conclusionVoz(v) {
+  const d = (v && v.detector) || {};
+  const e = d.error_de_referencia?.opus_16k;
+  const fiab = e != null ? ` Se equivoca en ~${Math.round(e * 100)} de cada 100 notas de voz.` : "";
+  if (d.veredicto === "sintetica") return miniConclusion("alerta", "🔴 Probablemente voz sintética", "Confirma por otro canal antes de creerle." + fiab);
+  if (d.veredicto === "real") return miniConclusion("ok", "🟢 Probablemente voz real", "Si piden dinero o datos, confirma igual por otro canal." + fiab);
+  if (d.veredicto === "incierto") return miniConclusion("medio", "🟡 Voz: no concluyente", "Confirma por otro canal." + fiab);
+  return miniConclusion("medio", "⚪ Voz: sin veredicto", "El detector no es fiable con este audio.");
+}
+
+function conclusionArchivo(a) {
+  if (!a) return "";
+  if (a.estado === "rota") return miniConclusion("alerta", "🔴 Imagen alterada después de firmarse", "");
+  if (a.ia === "declarada") return miniConclusion("alerta", "🤖 Imagen hecha o modificada con IA", "Lo declara el propio archivo.");
+  if (a.estado === "confiable") return miniConclusion("ok", "✅ Imagen con origen verificado", `Firmada por ${a.firmante}.`);
+  if (a.ia === "indicio" || (a.forense?.rasgos_atipicos ?? 0) >= 2) return miniConclusion("medio", "🟡 La imagen tiene rasgos poco comunes", "Búscala con una búsqueda inversa.");
+  return miniConclusion("ok", "🟢 Imagen sin señales de IA ni de manipulación", "Sin firma digital: no se puede certificar quién la hizo.");
+}
+
+async function enviarMultimodal(ruta, blob, nombre, titulo, pintarExtra) {
+  const api = await ecoApi();
+  $("#resultado").hidden = false;
+  $("#resultado").innerHTML = `<section class="tarjeta"><div class="cargando">${esc(ruta.includes("voz") ? "Escuchando y transcribiendo…" : "Leyendo el texto de la imagen…")}</div></section>`;
+  try {
+    const r = await fetch(`${api}${ruta}?nombre=${encodeURIComponent(nombre)}`, { method: "POST", body: blob });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.detail || `Error ${r.status}`);
+    const texto = d.transcripcion ?? d.texto;
+    const alertas = (d.alertas || []).map((a) => `<li>⚠ ${esc(a)}</li>`).join("");
+    $("#resultado").innerHTML = `<section class="tarjeta">
+      <div class="seccion-cab"><span>${esc(titulo)}</span></div>
+      <div class="lectura-texto">${esc(texto || "(sin texto)")}</div>
+      ${alertas ? `<ul class="alertas">${alertas}</ul>` : ""}
+      ${d.tipo === "sin_afirmacion" ? `<p class="pista">No hay una afirmación verificable.</p>` : `
+        <div class="seccion-cab" style="margin-top:6px"><span>Lo que afirma</span><small>puedes corregirlo</small></div>
+        <textarea id="afirmacion-extraida" rows="2">${esc(d.afirmacion || "")}</textarea>
+        <button class="grande" id="verificar-extraida">Verificar qué fuentes lo respaldan</button>`}
+      ${pintarExtra(d)}
+    </section>`;
+    $("#verificar-extraida")?.addEventListener("click", async () => {
+      const tema = $("#afirmacion-extraida").value.trim();
+      if (tema.length < 4) return;
+      await ejecutar(api, { modo: "tema", tema, modelo: (await leer("ecoModelo", "")) || null }, `Verificando «${tema.slice(0, 60)}»`);
+    });
+  } catch (e) {
+    $("#resultado").innerHTML = `<div class="error">${esc(e.message)}</div>`;
+  }
+}
+
+$("#enviar-nota").addEventListener("click", () => {
+  const f = $("#archivo-nota").files[0];
+  if (!f) { $("#archivo-nota").click(); return; }
+  enviarMultimodal("/api/nota_de_voz", f, f.name, "Lo que dice la nota de voz", (d) => conclusionVoz(d.voz));
+});
+$("#archivo-captura").addEventListener("change", () => {
+  const f = $("#archivo-captura").files[0];
+  if (f) enviarMultimodal("/api/leer_captura", f, f.name, "Lo que dice la captura", (d) => conclusionArchivo(d.archivo));
+});
+$("#capturar-pestana").addEventListener("click", async () => {
+  try {
+    const url = await chrome.tabs.captureVisibleTab(undefined, { format: "png" });
+    const blob = await (await fetch(url)).blob();
+    enviarMultimodal("/api/leer_captura", blob, "pestana.png", "Lo que dice la pestaña capturada", (d) => conclusionArchivo(d.archivo));
+  } catch (e) {
+    $("#resultado").hidden = false;
+    $("#resultado").innerHTML = `<div class="error">No se pudo capturar esta pestaña (${esc(e.message)}). Sube una imagen.</div>`;
+  }
+});
 $("#limpiar").addEventListener("click", () => {
   $("#resultado").innerHTML = "";
   $("#resultado").hidden = true;

@@ -19,7 +19,25 @@
 
   <!-- ===== Vista principal ===== -->
   <main id="vista-principal">
-    <section class="tarjeta pagina">
+    <div class="segmentos modos" id="modos">
+      <button data-modo="pagina" class="activo">🌐 Página</button>
+      <button data-modo="voz">🎙️ Nota de voz</button>
+      <button data-modo="captura">🖼️ Captura</button>
+    </div>
+    <section class="tarjeta" id="caja-voz" hidden>
+      <div class="seccion-cab"><span>Nota de voz</span><small>WhatsApp .ogg/.opus, .mp3, .m4a</small></div>
+      <input id="archivo-nota" type="file" accept="audio/*,.opus,.ogg,.m4a,.webm" class="archivo">
+      <button id="enviar-nota" class="grande" style="margin-top:8px">Escuchar y verificar</button>
+      <p class="pista">ECO la transcribe, saca lo que afirma, revisa si la voz parece clonada y busca qué fuentes lo respaldan.</p>
+    </section>
+    <section class="tarjeta" id="caja-captura" hidden>
+      <div class="seccion-cab"><span>Captura de pantalla</span><small>tuit, titular, mensaje</small></div>
+      <button id="capturar-pestana" class="grande">📸 Capturar esta pestaña</button>
+      <p class="pista" style="text-align:center">o sube una imagen</p>
+      <input id="archivo-captura" type="file" accept="image/*" class="archivo">
+      <p class="pista">ECO lee el texto, saca lo que afirma, revisa si la imagen es de IA o fue alterada y busca qué fuentes lo respaldan.</p>
+    </section>
+    <section class="tarjeta pagina" id="caja-pagina">
       <div class="titulo-pagina" id="titulo-pagina">Esta página</div>
       <button id="analizar" class="grande">Analizar esta noticia</button>
       <p class="pista" style="margin-top:6px">La compara con la cobertura del mismo tema y con las fuentes que cita.</p>
