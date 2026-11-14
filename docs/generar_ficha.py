@@ -29,8 +29,8 @@ RESULTADOS = RAIZ / "evaluacion" / "resultados"
 
 TINTA = colors.HexColor("#1F1F1F")
 GRAFITO = colors.HexColor("#3A3A3A")
-ACENTO = colors.HexColor("#B4532A")
-SUAVE = colors.HexColor("#F4ECE6")
+ACENTO = colors.HexColor("#2F7A5A")
+SUAVE = colors.HexColor("#E8F2EC")
 LINEA = colors.HexColor("#D8CFC8")
 GRIS = colors.HexColor("#6B6560")
 
