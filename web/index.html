@@ -180,6 +180,7 @@
           <button type="button" class="boton-sec" data-ejemplo-rota>Foto alterada después de firmar</button>
           <button type="button" class="boton-sec" data-ejemplo-sin>Foto reenviada sin metadatos</button>
           <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/imagen_stable_diffusion.png">Imagen de Stable Diffusion</button>
+          <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/imagen_ia_iptc.jpg">Imagen con marca IPTC de IA</button>
           <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/video_firmado_medio.mp4">Video firmado por un medio</button>
           <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/video_generado_ia.mp4">Video declarado como IA</button>
         </div>
@@ -382,7 +383,7 @@ python -m demo.agente --modelo …</pre>
             <tr><td><code>evaluar_corroboracion</code></td><td>Recibe una afirmación y de 2 a 40 URLs; devuelve cuántas fuentes son independientes, el origen de cada grupo de copias y qué datos dependen de una sola fuente.</td></tr>
             <tr><td><code>buscar_en_mini_internet</code></td><td>Encuentra mundos del laboratorio sintético por tema.</td></tr>
             <tr><td><code>analizar_mundo</code></td><td>Analiza un mundo completo, por ejemplo <code>e01-s1</code>.</td></tr>
-            <tr><td><code>verificar_procedencia</code></td><td>Credenciales C2PA de una imagen: quién la firmó, cuándo, si se declara generada con IA y si se alteró.</td></tr>
+            <tr><td><code>verificar_procedencia</code></td><td>Imagen o video: credenciales C2PA (quién lo firmó, cuándo, si se alteró) y señales de IA en sus metadatos (C2PA, IPTC, EXIF, Stable Diffusion, etiquetas de video).</td></tr>
             <tr><td><code>evaluar_audio</code></td><td>¿Voz clonada? Revisa la firma C2PA del audio y, si no tiene, usa el detector AASIST-L reentrenado por ECO.</td></tr>
           </tbody>
         </table>

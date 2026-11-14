@@ -15,7 +15,7 @@ Tres capas de defensa epistémica, un mismo motor:
 | Pregunta | Capa | Dónde |
 |---|---|---|
 | ¿Cuántas fuentes hay de verdad? | Independencia de fuentes (hechos atómicos + regla cronológica) | `motor/hechos.py` |
-| ¿De dónde viene esta imagen o audio? | Procedencia criptográfica C2PA + huella visual | `motor/procedencia.py` |
+| ¿De dónde viene esta foto o video? ¿Lo hizo una IA? | Procedencia C2PA + huella visual + marcas de IA en metadatos (IPTC, EXIF, PNG de Stable Diffusion, etiquetas de video) | `motor/procedencia.py` |
 | ¿Es real esta voz? | Detector AASIST-L reentrenado con audio tipo WhatsApp | `motor/voz.py`, `deteccion_voz/` |
 
 | Pieza | Para quién | Dónde |
