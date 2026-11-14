@@ -356,7 +356,7 @@ function pintarVerificacion(info) {
     <dl class="c2pa-datos">
       <dt>Archivo</dt><dd>${esc(info.nombre || "")} · ${Math.round((info.bytes || 0) / 1024)} KB</dd>
       <dt>Firmante</dt><dd>${esc(info.firmante || "—")}</dd>
-      <dt>Emisor del certificado</dt><dd>${esc(info.emisor || "—")}</dd>
+      <dt>Organización del firmante</dt><dd>${esc(info.emisor || "—")}</dd>
       <dt>Herramienta registrada</dt><dd>${esc(info.generador || "—")}</dd>
       <dt>Fecha de publicación firmada</dt><dd>${info.fecha_firmada ? esc(info.fecha_firmada) : "—"}</dd>
       <dt>Origen declarado</dt><dd>${esc(info.fuente_digital || "—")}</dd>
