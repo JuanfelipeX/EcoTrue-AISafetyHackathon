@@ -394,3 +394,11 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
 .lectura-texto { margin: 8px 0 12px; padding: 12px 14px; border-left: 4px solid var(--acento); background: var(--superficie-2); border-radius: 0 10px 10px 0; font-size: 15px; white-space: pre-wrap; }
 .lectura input { width: 100%; }
 .sub-conclusion { margin: 18px 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: var(--tinta-3); }
+
+.barra-verificar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 14px; }
+.barra-verificar .modos-entrada { margin: 0; flex: 1 1 520px; max-width: 680px; }
+.barra-verificar .limpiar { margin-left: auto; }
+.mas-opciones, .ejemplos { margin: 4px 0 16px; }
+.mas-opciones > summary, .ejemplos > summary { cursor: pointer; color: var(--tinta-2); font-weight: 600; font-size: 14px; padding: 6px 2px; }
+.mas-opciones > summary:hover, .ejemplos > summary:hover { color: var(--acento); }
+.mas-opciones .tarjeta { margin-top: 8px; }

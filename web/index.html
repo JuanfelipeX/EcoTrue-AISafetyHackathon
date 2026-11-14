@@ -148,114 +148,81 @@
           ECO responde tres preguntas: <b>¿cuántas fuentes hay de verdad?</b>, <b>¿de dónde viene esta foto o video, y lo hizo una IA?</b>
           y <b>¿es real esta voz?</b> No dice qué es verdad: muestra la evidencia para que decidas.</p>
       </div>
-      <nav class="indice-instalar" aria-label="Qué verificar">
-        <a href="#urls" data-ir="sec-tema">1 · Un tema (buscar noticias)</a>
-        <a href="#urls" data-ir="sec-urls">2 · Unas URLs</a>
-        <a href="#urls" data-ir="sec-imagen">3 · Una foto o un video</a>
-        <a href="#urls" data-ir="sec-audio">4 · Una voz</a>
-        <a href="#instalar">Instalar la extensión o el MCP →</a>
+      <div class="barra-verificar">
+        <div class="segmentado modos-entrada" id="modo-entrada" role="tablist" aria-label="Qué quieres verificar">
+          <button data-v="noticia" class="activo">🌐 Tema o noticia</button>
+          <button data-v="voz">🎙️ Nota de voz</button>
+          <button data-v="imagen">🖼️ Imagen o captura</button>
+        </div>
         <button type="button" id="limpiar-analisis" class="boton-sec limpiar" title="Borra de la pantalla todos los resultados">🧹 Limpiar análisis</button>
-      </nav>
-      <div class="intro" id="sec-tema">
-        <h1>¿Qué se sabe de verdad sobre un tema?</h1>
-        <p>Escribe un tema o una afirmación. ECO busca noticias recientes, extrae sus datos y separa a los medios con
-          <b>reportería propia</b> de los que <b>solo repiten</b> a otros. No califica medios por reputación: ordena por evidencia.</p>
       </div>
-      <div class="segmentado modos-entrada" id="modo-entrada" role="tablist" aria-label="Qué quieres verificar">
-        <button data-v="tema" class="activo">🌐 Tema o noticia</button>
-        <button data-v="voz">🎙️ Nota de voz</button>
-        <button data-v="captura">🖼️ Captura de pantalla</button>
-      </div>
-      <form id="form-voz-nota" class="tarjeta form" hidden>
-        <label for="archivo-nota">Sube la nota de voz (WhatsApp .ogg/.opus, .mp3, .m4a…) o grábala</label>
-        <input id="archivo-nota" type="file" accept="audio/*,.opus,.ogg,.m4a,.webm">
-        <div class="fila-botones">
-          <button type="submit" class="boton-primario">Escuchar y verificar</button>
-          <button type="button" id="grabar-nota" class="boton-sec">● Grabar 10 segundos</button>
-        </div>
-        <p class="nota">ECO la transcribe, saca la afirmación central, revisa si la voz parece clonada y busca qué fuentes la respaldan.</p>
-      </form>
-      <form id="form-captura" class="tarjeta form" hidden>
-        <label for="archivo-captura">Sube una captura de pantalla (un tuit, un titular, un mensaje reenviado)</label>
-        <input id="archivo-captura" type="file" accept="image/*">
-        <div class="fila-botones"><button type="submit" class="boton-primario">Leer y verificar</button></div>
-        <p class="nota">ECO lee el texto de la imagen, saca la afirmación central, revisa si la imagen fue generada o alterada y busca qué fuentes la respaldan.</p>
-      </form>
-      <div id="resultado-entrada" class="resultado"></div>
-      <form id="form-tema" class="tarjeta form">
-        <label for="tema-texto">Tema, afirmación o URL de una noticia</label>
-        <input id="tema-texto" required minlength="4" placeholder="Ej.: suspensión de vuelos en Estados Unidos, o https://…">
-        <label for="tema-dias">Período</label>
-        <select id="tema-dias"><option value="7">Últimos 7 días</option><option value="30" selected>Últimos 30 días</option><option value="90">Últimos 90 días</option></select>
-        <div class="fila-botones"><button type="submit" class="boton-primario">Investigar</button></div>
-        <p class="nota">Verás en vivo lo que hace el agente: qué busca, qué encuentra, qué lee y cómo decide cada fuente.</p>
-        <p class="nota" id="nota-buscador"></p>
-      </form>
-      <div id="resultado-tema" class="resultado"></div>
 
-      <div class="intro" id="sec-urls" style="margin-top:28px">
-        <h1>¿Cuántas fuentes hay de verdad detrás de una noticia?</h1>
-        <p>Pega una afirmación y las páginas que la mencionan. ECO las descarga, extrae los hechos y calcula cuántas
-          fuentes independientes hay. Es la misma herramienta que usa el servidor MCP <code>evaluar_corroboracion</code>.</p>
+      <!-- ===== Tema o noticia ===== -->
+      <div class="panel-modo" id="panel-noticia">
+        <form id="form-tema" class="tarjeta form">
+          <label for="tema-texto">Escribe un tema, una afirmación o pega la URL de una noticia</label>
+          <input id="tema-texto" required minlength="4" placeholder="Ej.: suspensión de vuelos en Estados Unidos, o https://…">
+          <label for="tema-dias">Buscar noticias de</label>
+          <select id="tema-dias"><option value="7">Últimos 7 días</option><option value="30" selected>Últimos 30 días</option><option value="90">Últimos 90 días</option></select>
+          <div class="fila-botones"><button type="submit" class="boton-primario">Investigar</button></div>
+          <p class="nota">Verás en vivo lo que hace el agente: qué busca, qué encuentra y cómo decide cada fuente.</p>
+          <p class="nota" id="nota-buscador"></p>
+        </form>
+        <details class="mas-opciones">
+          <summary>¿Ya tienes varias URLs? Compáralas directamente</summary>
+          <form id="form-urls" class="tarjeta form">
+            <label for="afirmacion">Afirmación</label>
+            <input id="afirmacion" required minlength="3" placeholder="Ej.: El acueducto de San Aurelio suspendió el servicio por mercurio.">
+            <label for="lista-urls">URLs (una por línea, máximo 40)</label>
+            <textarea id="lista-urls" rows="5" required placeholder="https://…"></textarea>
+            <div class="fila-botones">
+              <button type="submit" class="boton-primario">Comparar URLs</button>
+              <button type="button" id="ejemplo-urls" class="boton-sec">Cargar un ejemplo</button>
+            </div>
+          </form>
+        </details>
+        <div id="resultado-urls" class="resultado"></div>
+        <div id="resultado-tema" class="resultado"></div>
       </div>
-      <form id="form-urls" class="tarjeta form">
-        <label for="afirmacion">Afirmación</label>
-        <input id="afirmacion" required minlength="3" placeholder="Ej.: El acueducto de San Aurelio suspendió el servicio por mercurio.">
-        <label for="lista-urls">URLs (una por línea, máximo 40)</label>
-        <textarea id="lista-urls" rows="6" required placeholder="https://…"></textarea>
-        <div class="fila-botones">
-          <button type="submit" class="boton-primario">Analizar URLs</button>
-          <button type="button" id="ejemplo-urls" class="boton-sec">Cargar un ejemplo del mini-internet</button>
-        </div>
-        <p class="nota">Uso responsable: el hackathon exige datos sintéticos o públicos. No analices sistemas de terceros sin permiso.</p>
-      </form>
-      <div id="resultado-urls" class="resultado"></div>
 
-      <div class="intro" style="margin-top:28px" id="sec-imagen">
-        <h1>¿De dónde viene esta foto o video? ¿Lo hizo una IA?</h1>
-        <p>Las credenciales de contenido (<b>C2PA</b>) son una firma criptográfica dentro del archivo: dicen quién lo creó,
-          cuándo y con qué herramienta, incluso si se generó con IA. Si alguien cambia un solo píxel, la firma se rompe.
-          ECO también lee las marcas de IA que dejan los generadores en los metadatos (IPTC, EXIF, textos de Stable Diffusion,
-          etiquetas de video). No usa un “detector de píxeles”: fallan con generadores nuevos y acusarían a gente inocente.</p>
+      <!-- ===== Nota de voz ===== -->
+      <div class="panel-modo" id="panel-voz" hidden>
+        <form id="form-voz-nota" class="tarjeta form">
+          <label for="archivo-nota">Sube la nota de voz (WhatsApp .ogg/.opus, .mp3, .m4a, .wav; máx. 10 MB) o grábala</label>
+          <input id="archivo-nota" type="file" accept="audio/*,.opus,.ogg,.m4a,.webm">
+          <div class="fila-botones">
+            <button type="submit" class="boton-primario">Analizar nota de voz</button>
+            <button type="button" id="grabar-nota" class="boton-sec">● Grabar 10 segundos</button>
+          </div>
+          <p class="nota">ECO te dice qué afirma, si la voz parece clonada y qué fuentes lo respaldan. El audio no se guarda.</p>
+        </form>
+        <div id="resultado-voz" class="resultado"></div>
+        <div id="agente-voz" class="resultado"></div>
       </div>
-      <form id="form-imagen" class="tarjeta form">
-        <label for="archivo-imagen">Sube una imagen (JPEG, PNG, WebP, HEIC, AVIF; máx. 20 MB) o un video (MP4, MOV; máx. 60 MB)</label>
-        <input id="archivo-imagen" type="file" accept="image/*,video/mp4,video/quicktime,.heic,.heif,.avif,.mp4,.mov,.m4v">
-        <label for="url-imagen">…o pega su dirección (de la imagen o de la página que la publica)</label>
-        <input id="url-imagen" type="url" placeholder="https://…/foto.jpg o …/video.mp4">
-        <div class="fila-botones">
-          <button type="submit" class="boton-primario">Verificar</button>
-        </div>
-        <p class="nota" style="margin-top:14px">Ejemplos del mini-internet:</p>
-        <div class="fila-botones" style="margin-top:0">
-          <button type="button" class="boton-sec" data-ejemplo-imagen="/sitios/e07-c1/img/e07-c1-p01-1.jpg">Foto firmada por un medio</button>
-          <button type="button" class="boton-sec" data-ejemplo-ia>Ilustración declarada como IA</button>
-          <button type="button" class="boton-sec" data-ejemplo-rota>Foto alterada después de firmar</button>
-          <button type="button" class="boton-sec" data-ejemplo-sin>Foto reenviada sin metadatos</button>
-          <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/imagen_stable_diffusion.png">Imagen de Stable Diffusion</button>
-          <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/imagen_ia_iptc.jpg">Imagen con marca IPTC de IA</button>
-          <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/video_firmado_medio.mp4">Video firmado por un medio</button>
-          <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/video_generado_ia.mp4">Video declarado como IA</button>
-        </div>
-      </form>
-      <div id="resultado-imagen" class="resultado"></div>
 
-      <div class="intro" style="margin-top:28px" id="sec-audio">
-        <h1>¿Es una voz clonada?</h1>
-        <p>Primero se revisan las credenciales de contenido del archivo. Si no tiene (lo normal, y las notas de voz de WhatsApp
-          nunca las conservan), un detector <b>AASIST-L</b> reentrenado por ECO con audio comprimido estima si la voz es sintética.
-          Es una alerta para verificar por otro canal, no una prueba.</p>
+      <!-- ===== Imagen o captura ===== -->
+      <div class="panel-modo" id="panel-imagen" hidden>
+        <form id="form-imagen" class="tarjeta form">
+          <label for="archivo-imagen">Sube una foto, una captura de pantalla (máx. 20 MB) o un video (MP4/MOV, máx. 60 MB)</label>
+          <input id="archivo-imagen" type="file" accept="image/*,video/mp4,video/quicktime,.heic,.heif,.avif,.mp4,.mov,.m4v">
+          <label for="url-imagen">…o pega su dirección</label>
+          <input id="url-imagen" type="url" placeholder="https://…/foto.jpg">
+          <div class="fila-botones"><button type="submit" class="boton-primario">Analizar imagen</button></div>
+          <p class="nota">ECO te dice si fue hecha o alterada con IA, de dónde viene y, si tiene texto (un tuit, un titular), qué fuentes lo respaldan.</p>
+          <details class="ejemplos">
+            <summary>Probar con ejemplos</summary>
+            <div class="fila-botones">
+              <button type="button" class="boton-sec" data-ejemplo-imagen="/sitios/e07-c1/img/e07-c1-p01-1.jpg">Foto firmada por un medio</button>
+              <button type="button" class="boton-sec" data-ejemplo-ia>Ilustración declarada como IA</button>
+              <button type="button" class="boton-sec" data-ejemplo-rota>Foto alterada después de firmar</button>
+              <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/imagen_stable_diffusion.png">Imagen de Stable Diffusion</button>
+              <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/video_generado_ia.mp4">Video declarado como IA</button>
+            </div>
+          </details>
+        </form>
+        <div id="resultado-imagen" class="resultado"></div>
+        <div id="agente-imagen" class="resultado"></div>
       </div>
-      <form id="form-audio" class="tarjeta form">
-        <label for="archivo-audio">Sube un audio (WAV, MP3, M4A, OGG, OPUS o WebM; máximo 10 MB, se analizan 30 s)</label>
-        <input id="archivo-audio" type="file" accept="audio/*,.opus,.ogg,.m4a,.webm">
-        <div class="fila-botones">
-          <button type="submit" class="boton-primario">Analizar audio</button>
-          <button type="button" id="grabar-audio" class="boton-sec">● Grabar 8 segundos con el micrófono</button>
-        </div>
-        <p class="nota" style="margin-top:12px">El audio se procesa en el servidor de ECO y no se guarda. No subas grabaciones de otras personas sin su permiso.</p>
-      </form>
-      <div id="resultado-audio" class="resultado"></div>
     </section>
 
     <!-- ================= COMO FUNCIONA ================= -->

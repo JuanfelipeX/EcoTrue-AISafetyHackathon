@@ -384,77 +384,75 @@ function prepararTema() {
   });
 }
 
-function lanzarAgente(cuerpo, titulo, boton) {
-  const cont = $("#resultado-tema");
+function lanzarAgente(cuerpo, titulo, boton, destino = "#resultado-tema") {
+  const cont = $(destino);
+  const suf = destino.replace(/[^a-z]/gi, "");
   if (boton) boton.disabled = true;
-  cont.innerHTML = `<div id="bitacora-tema"></div><div id="resultado-tema-final"></div>`;
+  cont.innerHTML = `<div id="bitacora-${suf}"></div><div id="final-${suf}"></div>`;
   cont.scrollIntoView({ behavior: "smooth", block: "start" });
-  const bit = ecoBitacora($("#bitacora-tema"), titulo);
+  const bit = ecoBitacora($(`#bitacora-${suf}`), titulo);
   ecoAgente("", cuerpo, {
     alEvento: (e) => bit.evento(e),
     alError: (e) => { bit.terminar(false, e.message); if (boton) boton.disabled = false; },
     alFin: (res) => {
       bit.terminar(true, `Listo: ${res.fuentes_aparentes} páginas → ${res.fuentes_efectivas} fuente${res.fuentes_efectivas === 1 ? "" : "s"} independiente${res.fuentes_efectivas === 1 ? "" : "s"}`);
       if (boton) boton.disabled = false;
-      $("#resultado-tema-final").innerHTML = tarjetaConclusion(conclusionNoticia(res))
-        + `<div class="tarjeta"><h2>Grafo de procedencia</h2><p class="nota">Cada columna es una fuente independiente; las líneas van de la publicación original a quien la repite. Toca un nodo.</p><div id="grafo-tema"></div></div>`
+      $(`#final-${suf}`).innerHTML = tarjetaConclusion(conclusionNoticia(res))
+        + `<div class="tarjeta"><h2>Grafo de procedencia</h2><p class="nota">Cada columna es una fuente independiente; las líneas van de la publicación original a quien la repite. Toca un nodo.</p><div id="grafo-${suf}"></div></div>`
         + `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>`
         + renderResultado(res).replace(/^<div class="conclusion[\s\S]*?<\/div>\s*(?=<details)/, "");
-      ecoGrafo($("#grafo-tema"), res);
+      ecoGrafo($(`#grafo-${suf}`), res);
     },
   });
 }
 
-// ---------------- entradas multimodales: nota de voz y captura ----------------
-function tarjetaLectura(titulo, texto, r, extra) {
+// ---------------- pestañas de Verificar y nota de voz ----------------
+function tarjetaLectura(titulo, texto, r, suf) {
   const alertas = (r.alertas || []).map((a) => `<li>⚠ ${esc(a)}</li>`).join("");
+  const verificable = r.tipo !== "sin_afirmacion" && (r.afirmacion || "").length > 3;
   return `<div class="tarjeta lectura">
     <h2>${esc(titulo)}</h2>
     <blockquote class="lectura-texto">${esc(texto || "(no se detectó texto)")}</blockquote>
     ${alertas ? `<h3>Señales de manipulación en el mensaje</h3><ul class="lista-simple">${alertas}</ul>` : ""}
-    ${r.tipo === "sin_afirmacion" ? `<p class="nota">No encontramos una afirmación verificable en este contenido.</p>` : `
-    <label for="afirmacion-extraida">Afirmación a verificar (puedes corregirla)</label>
-    <input id="afirmacion-extraida" value="${esc(r.afirmacion || "")}">
-    <div class="fila-botones"><button type="button" class="boton-primario" id="verificar-extraida">Verificar qué fuentes lo respaldan</button></div>`}
-  </div>${extra || ""}`;
+    ${verificable ? `<label for="afirmacion-${suf}">Lo que afirma (puedes corregirlo)</label>
+      <input id="afirmacion-${suf}" value="${esc(r.afirmacion)}">
+      <div class="fila-botones"><button type="button" class="boton-primario" id="verificar-${suf}">Verificar qué fuentes lo respaldan</button></div>`
+      : `<p class="nota">No hay una afirmación verificable en este contenido.</p>`}
+  </div>`;
+}
+
+function enlazarVerificacion(suf, destino) {
+  $(`#verificar-${suf}`)?.addEventListener("click", (ev) => {
+    const a = $(`#afirmacion-${suf}`).value.trim();
+    if (a.length >= 4) lanzarAgente({ modo: "tema", tema: a, dias: 30 }, `El agente está verificando «${a}»`, ev.currentTarget, destino);
+  });
 }
 
 function prepararEntradas() {
   segmentado("modo-entrada", (v) => {
-    $("#form-tema").hidden = v !== "tema";
-    $("#form-voz-nota").hidden = v !== "voz";
-    $("#form-captura").hidden = v !== "captura";
-    $("#resultado-entrada").innerHTML = "";
+    ["noticia", "voz", "imagen"].forEach((m) => { $(`#panel-${m}`).hidden = m !== v; });
   });
-  const enviar = async (ruta, archivo, pintar) => {
-    const cont = $("#resultado-entrada");
-    cont.innerHTML = `<div class="tarjeta"><p class="nota cargando-puntos">${ruta.includes("voz") ? "Escuchando y transcribiendo la nota de voz" : "Leyendo el texto de la captura"}</p></div>`;
+  const analizarNota = async (archivo, nombre) => {
+    const cont = $("#resultado-voz");
+    $("#agente-voz").innerHTML = "";
+    if (archivo.size > 10 * 1024 * 1024) { cont.innerHTML = `<div class="tarjeta error">El audio supera 10 MB.</div>`; return; }
+    cont.innerHTML = `<div class="tarjeta"><p class="nota cargando-puntos">Escuchando la nota de voz, transcribiéndola y revisando la voz</p></div>`;
     try {
-      const r = await fetch(`${ruta}?nombre=${encodeURIComponent(archivo.name || "archivo")}`, { method: "POST", body: archivo });
+      const r = await fetch(`/api/nota_de_voz?nombre=${encodeURIComponent(nombre)}`, { method: "POST", body: archivo });
       const d = await r.json();
       if (!r.ok) throw new Error(d.detail || `Error ${r.status}`);
-      cont.innerHTML = pintar(d);
-      $("#verificar-extraida")?.addEventListener("click", () => {
-        const a = $("#afirmacion-extraida").value.trim();
-        if (a.length >= 4) lanzarAgente({ modo: "tema", tema: a, dias: 30 }, `El agente está verificando «${a}»`, $("#verificar-extraida"));
-      });
+      cont.innerHTML = (d.voz && !d.voz.error ? tarjetaConclusion(conclusionAudio(d.voz)) : "")
+        + tarjetaLectura(`Lo que dice la nota de voz (${d.segundos} s)`, d.transcripcion, d, "voz");
+      enlazarVerificacion("voz", "#agente-voz");
     } catch (e) {
       cont.innerHTML = `<div class="tarjeta error">${esc(e.message)}</div>`;
     }
   };
-  const pintarVoz = (d) => tarjetaLectura(`Lo que dice la nota de voz (${d.segundos} s)`, d.transcripcion, d,
-    d.voz && !d.voz.error ? `<h3 class="sub-conclusion">¿Es real esta voz?</h3>${tarjetaConclusion(conclusionAudio(d.voz))}` : "");
-  const pintarCaptura = (d) => tarjetaLectura("Lo que dice la captura", d.texto, d,
-    d.archivo ? `<h3 class="sub-conclusion">¿Y la imagen?</h3>${tarjetaConclusion(conclusionImagen(d.archivo))}` : "");
   $("#form-voz-nota").addEventListener("submit", (ev) => {
     ev.preventDefault();
     const f = $("#archivo-nota").files[0];
-    if (f) enviar("/api/nota_de_voz", f, pintarVoz);
-  });
-  $("#form-captura").addEventListener("submit", (ev) => {
-    ev.preventDefault();
-    const f = $("#archivo-captura").files[0];
-    if (f) enviar("/api/leer_captura", f, pintarCaptura);
+    if (f) analizarNota(f, f.name);
+    else $("#resultado-voz").innerHTML = `<div class="tarjeta error">Elige un archivo de audio o graba uno.</div>`;
   });
   $("#grabar-nota").addEventListener("click", async (ev) => {
     const boton = ev.currentTarget;
@@ -467,9 +465,7 @@ function prepararEntradas() {
         flujo.getTracks().forEach((t) => t.stop());
         boton.disabled = false;
         boton.textContent = "● Grabar 10 segundos";
-        const blob = new Blob(trozos, { type: grabador.mimeType });
-        blob.name = "grabacion.webm";
-        enviar("/api/nota_de_voz", blob, pintarVoz);
+        analizarNota(new Blob(trozos, { type: grabador.mimeType }), "grabacion.webm");
       };
       boton.disabled = true;
       let quedan = 10;
@@ -478,7 +474,7 @@ function prepararEntradas() {
       grabador.start();
       setTimeout(() => grabador.stop(), 10000);
     } catch (e) {
-      $("#resultado-entrada").innerHTML = `<div class="tarjeta error">No se pudo usar el micrófono: ${esc(e.message)}</div>`;
+      $("#resultado-voz").innerHTML = `<div class="tarjeta error">No se pudo usar el micrófono: ${esc(e.message)}</div>`;
     }
   });
 }
@@ -536,8 +532,9 @@ function tarjetaProcedencia(res, N) {
 }
 
 // ---------------- verificador de imágenes (pestaña Analizar URLs) ----------------
-function pintarVerificacion(info) {
+function pintarVerificacion(info, lectura = null) {
   const cont = $("#resultado-imagen");
+  $("#agente-imagen").innerHTML = "";
   if (info.error || info.detail) { cont.innerHTML = `<div class="tarjeta error">${esc(info.error || info.detail)}</div>`; return; }
   const explicacion = {
     confiable: "La firma está íntegra y el emisor está en la lista de confianza.",
@@ -549,7 +546,8 @@ function pintarVerificacion(info) {
   const ia = { declarada: ["alerta", "Declarado como hecho con IA"], indicio: ["medio", "Indicios de herramientas de IA"],
                sin_senales: ["neutro", "Sin señales de IA en los metadatos"] }[info.ia] || ["neutro", "—"];
   const senales = (info.senales_ia || []).map((x) => `<li><b>${esc(x.fuente)}</b> (${x.fuerza === "declarada" ? "declarada" : "indicio"}): ${esc(x.detalle)}</li>`).join("");
-  cont.innerHTML = tarjetaConclusion(conclusionImagen(info)) + `<details class="detalle-completo"><summary>Ver detalles técnicos (firma, metadatos y filtros)</summary><div class="tarjeta c2pa-resultado">
+  const conTexto = lectura && ((lectura.texto || "").trim().length > 10 || lectura.tipo === "noticia");
+  cont.innerHTML = tarjetaConclusion(conclusionImagen(info)) + (conTexto ? tarjetaLectura("Lo que dice la imagen", lectura.texto, lectura, "imagen") : "") + `<details class="detalle-completo"><summary>Ver detalles técnicos (firma, metadatos y filtros)</summary><div class="tarjeta c2pa-resultado">
     <h3 style="margin-top:0">¿De dónde viene? · ${info.tipo === "video" ? "video" : "imagen"}</h3>
     <div>${chipEstado(info)}</div>
     <p style="margin:10px 0 6px">${esc(explicacion)}</p>
@@ -570,6 +568,7 @@ function pintarVerificacion(info) {
       <dt>Códigos de validación</dt><dd>${esc((info.codigos || []).join(", ") || "ninguno")}</dd>
       ${info.huella ? `<dt>Huella visual</dt><dd><code>${esc(info.huella)}</code></dd>` : ""}
     </dl></div></details>`;
+  if (conTexto) enlazarVerificacion("imagen", "#agente-imagen");
 }
 
 function tarjetaForense(fo) {
@@ -604,9 +603,15 @@ function prepararVerificador() {
       const esVideo = archivo.type.startsWith("video/") || /\.(mp4|mov|m4v)$/i.test(archivo.name);
       const limite = (esVideo ? 60 : 20) * 1024 * 1024;
       if (archivo.size > limite) { pintarVerificacion({ error: `El archivo supera ${esVideo ? 60 : 20} MB.` }); return; }
-      $("#resultado-imagen").innerHTML = `<div class="tarjeta"><p class="nota">Verificando…</p></div>`;
-      fetch(`/api/verificar_archivo?nombre=${encodeURIComponent(archivo.name)}`, { method: "POST", body: archivo })
-        .then(async (r) => { const d = await r.json(); pintarVerificacion(r.ok ? d : { error: d.detail || "Error" }); })
+      $("#resultado-imagen").innerHTML = `<div class="tarjeta"><p class="nota cargando-puntos">${esVideo ? "Verificando el video" : "Revisando la imagen y leyendo su texto"}</p></div>`;
+      const ruta = esVideo ? "/api/verificar_archivo" : "/api/leer_captura";
+      fetch(`${ruta}?nombre=${encodeURIComponent(archivo.name)}`, { method: "POST", body: archivo })
+        .then(async (r) => {
+          const d = await r.json();
+          if (!r.ok) { pintarVerificacion({ error: d.detail || "Error" }); return; }
+          if (esVideo) pintarVerificacion(d);
+          else pintarVerificacion(d.archivo || { estado: "error" }, d);
+        })
         .catch((e) => pintarVerificacion({ error: e.message }));
     } else if ($("#url-imagen").value.trim()) {
       verificarImagen({ url: $("#url-imagen").value.trim() });
@@ -1117,9 +1122,9 @@ prepararAudio();
 prepararTema();
 prepararEntradas();
 $("#limpiar-analisis")?.addEventListener("click", () => {
-  ["#resultado-tema", "#resultado-urls", "#resultado-imagen", "#resultado-audio", "#resultado-entrada"].forEach((sel) => { const el = $(sel); if (el) el.innerHTML = ""; });
-  ["#form-tema", "#form-urls", "#form-imagen", "#form-audio", "#form-voz-nota", "#form-captura"].forEach((sel) => $(sel)?.reset());
-  $("#form-tema button[type=submit]")?.removeAttribute("disabled");
+  ["#resultado-tema", "#resultado-urls", "#resultado-imagen", "#agente-imagen", "#resultado-voz", "#agente-voz"].forEach((sel) => { const el = $(sel); if (el) el.innerHTML = ""; });
+  ["#form-tema", "#form-urls", "#form-imagen", "#form-voz-nota"].forEach((sel) => $(sel)?.reset());
+  $$("button[disabled]").forEach((b) => { if (!b.id || b.id !== "analizar") b.disabled = false; });
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 navegar();
