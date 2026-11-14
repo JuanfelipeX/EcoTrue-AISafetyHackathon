@@ -102,6 +102,38 @@ def extension():
     return f"manifest v{manifest['manifest_version']}, archivos completos"
 
 
+def procedencia():
+    from motor import procedencia as pr
+    from motor.extraccion import cargar_desde_archivo
+    gt = json.loads((RAIZ_PROYECTO / "corpus" / "ground_truth.json").read_text(encoding="utf-8"))
+    mundos = [e for e in gt["escenarios"] if e.get("conjunto") == "procedencia"]
+    assert mundos, "faltan los mundos de procedencia (python corpus/generar_corpus.py)"
+    imagenes = sorted((RAIZ_PROYECTO / "corpus" / "sitios").glob("*-c*/img/*.jpg"))
+    estados = {}
+    for ruta in imagenes[:40]:
+        estados.setdefault(pr.verificar(ruta.read_bytes())["estado"], 0)
+        estados[pr.verificar(ruta.read_bytes())["estado"]] += 1
+    assert estados.get("confiable"), estados
+    esc = next(e for e in mundos if e["tipo"] == "fecha_falsa")
+    docs = [cargar_desde_archivo(RAIZ_PROYECTO / "corpus" / "sitios" / esc["id"] / f"{p['id']}.html", p["url"], p["id"])
+            for p in esc["paginas"]]
+    assert all(d.imagenes for d in docs)
+    return f"{len(mundos)} mundos, {len(imagenes)} imágenes; estados en muestra: {estados}"
+
+
+def voz():
+    from motor import voz as v
+    if not v.disponible():
+        return "omitido aquí (sin PyTorch/ffmpeg; corre en el servidor Docker)"
+    import io, math, struct, wave
+    buf = io.BytesIO()
+    w = wave.open(buf, "wb"); w.setnchannels(1); w.setsampwidth(2); w.setframerate(16000)
+    w.writeframes(b"".join(struct.pack("<h", int(8000 * math.sin(2 * math.pi * 220 * i / 16000))) for i in range(16000 * 3)))
+    w.close()
+    r = v.analizar_audio(buf.getvalue(), "tono.wav")
+    return f"detector {r['detector']['modelo']}: tono puro → {r['detector']['veredicto']}"
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--modelo", default=MODELO_CACHE)
@@ -112,6 +144,8 @@ def main():
     chequeo(f"API ({args.modelo})", lambda: api(args.modelo))
     chequeo("Servidor MCP", mcp)
     chequeo("Extensión", extension)
+    chequeo("Procedencia C2PA", procedencia)
+    chequeo("Detector de voz", voz)
     for ok, nombre, detalle in resultados:
         print(f"{'OK   ' if ok else 'FALLA'} {nombre:<32} {detalle}")
     sys.exit(0 if all(ok for ok, _, _ in resultados) else 1)
