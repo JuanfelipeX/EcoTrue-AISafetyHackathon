@@ -319,16 +319,27 @@ function prepararTema() {
   api("/api/modelos").then((m) => {
     if (!m.buscador) $("#nota-buscador").textContent = "El buscador de noticias todavía no está configurado en este servidor.";
   }).catch(() => {});
-  form.addEventListener("submit", async (ev) => {
+  form.addEventListener("submit", (ev) => {
     ev.preventDefault();
     const cont = $("#resultado-tema");
-    cont.innerHTML = `<div class="tarjeta"><p class="nota">Buscando noticias, extrayendo sus datos y comparando quién informa qué… (unos 20 a 40 segundos)</p></div>`;
-    try {
-      const res = await api("/api/investigar", { tema: $("#tema-texto").value.trim(), dias: Number($("#tema-dias").value) });
-      cont.innerHTML = `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>` + renderResultado(res);
-    } catch (e) {
-      cont.innerHTML = `<div class="tarjeta error">${esc(e.message)}</div>`;
-    }
+    const valor = $("#tema-texto").value.trim();
+    const esUrl = /^https?:\/\//i.test(valor);
+    const boton = form.querySelector("button[type=submit]");
+    boton.disabled = true;
+    cont.innerHTML = `<div id="bitacora-tema"></div><div id="resultado-tema-final"></div>`;
+    const bit = ecoBitacora($("#bitacora-tema"), esUrl ? "El agente está analizando la noticia" : `El agente está investigando «${valor}»`);
+    ecoAgente("", esUrl ? { modo: "pagina", url: valor } : { modo: "tema", tema: valor, dias: Number($("#tema-dias").value) }, {
+      alEvento: (e) => bit.evento(e),
+      alError: (e) => { bit.terminar(false, e.message); boton.disabled = false; },
+      alFin: (res) => {
+        bit.terminar(true, `Listo: ${res.fuentes_aparentes} páginas → ${res.fuentes_efectivas} fuente${res.fuentes_efectivas === 1 ? "" : "s"} independiente${res.fuentes_efectivas === 1 ? "" : "s"}`);
+        boton.disabled = false;
+        $("#resultado-tema-final").innerHTML = `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>
+          <div class="tarjeta"><h2>Grafo de procedencia</h2><p class="nota">Cada columna es una fuente independiente; las líneas van de la publicación original a quien la repite.</p><div id="grafo-tema"></div></div>`
+          + renderResultado(res);
+        ecoGrafo($("#grafo-tema"), res);
+      },
+    });
   });
 }
 

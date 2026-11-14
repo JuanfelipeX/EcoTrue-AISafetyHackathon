@@ -66,6 +66,49 @@ def _documentos_buscados(consulta, n, excluir_url=None, dias=None):
     return [busqueda.a_documento(r, i) for i, r in enumerate(resultados, start=1)], None
 
 
+def _nada(**_):
+    pass
+
+
+def _emitir_decisiones(res, progreso):
+    """Cuenta, página por página y en orden cronológico, lo que decidió la regla de independencia."""
+    sitios = {d["id"]: d.get("sitio") for d in res.get("documentos", [])}
+    for pag in res.get("paginas", []):
+        madre = sitios.get(pag.get("deriva_de")) if pag.get("deriva_de") else None
+        progreso(etapa="decision", sitio=pag.get("sitio"), fecha=pag.get("fecha"), independiente=pag.get("independiente"),
+                 nuevos=len(pag.get("hechos_nuevos", [])), deriva_de=madre, motivo=pag.get("motivo"))
+    pr = res.get("procedencia")
+    if pr:
+        progreso(etapa="imagenes", imagenes=pr.get("imagenes"), confiables=pr.get("firmadas_confiables"),
+                 ia=len(pr.get("generadas_por_ia", [])), rotas=len(pr.get("firma_rota", [])),
+                 fechas=len(pr.get("fechas_imposibles", [])))
+
+
+def _documentos_con_progreso(consulta, n, progreso, excluir_url=None, dias=None):
+    progreso(etapa="buscar", consulta=consulta, dias=dias)
+    docs, problema = _documentos_buscados(consulta, n, excluir_url=excluir_url, dias=dias)
+    for d in docs:
+        progreso(etapa="encontrada", sitio=d.sitio, titulo=d.titulo, url=d.url,
+                 fecha=d.fecha.isoformat() if d.fecha else None)
+    if problema:
+        progreso(etapa="aviso", texto="El buscador no está disponible: se usan solo las fuentes citadas."
+                 if problema == "sin_buscador" else f"El buscador no respondió ({problema}).")
+    return docs, problema
+
+
+def _analizar_con_progreso(documentos, afirmacion, modelo, progreso):
+    from .config import config
+    nombre = modelo or next((m for m in [config.llm_modelo, *config.llm_modelos_respaldo]
+                             if not m.startswith(("claudecode/", "manual/"))), config.llm_modelo)
+    palabras = sum(len(" ".join(d.parrafos).split()) for d in documentos)
+    progreso(etapa="llm", modelo=nombre.split("/")[-1], paginas=len(documentos), palabras=palabras)
+    res = analizar_documentos(documentos, afirmacion, modelo=modelo, max_tokens=MAX_TOKENS_WEB)
+    progreso(etapa="hechos", n=len(res.get("hechos", [])), modelo=res.get("modelo"), aviso=res.get("aviso"))
+    progreso(etapa="regla", paginas=res.get("fuentes_aparentes"), independientes=res.get("fuentes_efectivas"))
+    _emitir_decisiones(res, progreso)
+    return res
+
+
 def _finalizar(res, origenes, problema_buscador):
     res["fuentes"] = busqueda.resumen_fuentes(res)
     res["comparada_con"] = origenes
@@ -76,8 +119,10 @@ def _finalizar(res, origenes, problema_buscador):
     return res
 
 
-def analizar_pagina_real(url, seleccion=None, urls_extra=None, modelo=None):
+def analizar_pagina_real(url, seleccion=None, urls_extra=None, modelo=None, progreso=_nada):
+    progreso(etapa="leer", url=url, texto="Leyendo la página que estás viendo")
     doc = cargar_desde_url(url)
+    progreso(etapa="leida", sitio=doc.sitio, titulo=doc.titulo, parrafos=len(doc.parrafos), imagenes=len(doc.imagenes))
     doc.id = "actual"
     afirmacion = re.sub(r"\s+", " ", (seleccion or "").strip())[:400] or _consulta(doc.titulo) or "Afirmación de la página"
     documentos, vistos = [doc], {doc.url}
@@ -85,19 +130,22 @@ def analizar_pagina_real(url, seleccion=None, urls_extra=None, modelo=None):
         if u in vistos:
             continue
         try:
+            progreso(etapa="leer", url=u, texto="Abriendo una fuente que la nota cita")
             d = cargar_desde_url(u)
             d.id = f"cita{len(documentos):02d}"
             documentos.append(d)
             vistos.add(u)
+            progreso(etapa="leida", sitio=d.sitio, titulo=d.titulo, parrafos=len(d.parrafos), imagenes=len(d.imagenes))
         except Exception:
+            progreso(etapa="aviso", texto=f"No se pudo abrir {u[:80]}")
             continue
     n_citadas = len(documentos) - 1
-    buscados, problema = _documentos_buscados(afirmacion, 8, excluir_url=url, dias=45)
+    buscados, problema = _documentos_con_progreso(afirmacion, 8, progreso, excluir_url=url, dias=45)
     for d in buscados:
         if d.url not in vistos:
             vistos.add(d.url)
             documentos.append(d)
-    res = analizar_documentos(documentos, afirmacion, modelo=modelo, max_tokens=MAX_TOKENS_WEB)
+    res = _analizar_con_progreso(documentos, afirmacion, modelo, progreso)
     res["modo"] = "pagina_real"
     res["pagina_actual"] = url
     n_busc = len(documentos) - 1 - n_citadas
@@ -114,16 +162,16 @@ def analizar_pagina_real(url, seleccion=None, urls_extra=None, modelo=None):
     return _finalizar(res, {"buscador": n_busc, "enlaces_citados": n_citadas}, problema)
 
 
-def investigar_tema(tema, n=10, dias=30, modelo=None):
+def investigar_tema(tema, n=10, dias=30, modelo=None, progreso=_nada):
     tema = re.sub(r"\s+", " ", (tema or "").strip())[:400]
     if len(tema) < 4:
         raise ValueError("Escribe un tema o una afirmación más concreta.")
-    documentos, problema = _documentos_buscados(tema, n, dias=dias)
+    documentos, problema = _documentos_con_progreso(tema, n, progreso, dias=dias)
     if problema == "sin_buscador":
         raise busqueda.SinBuscador("El buscador de noticias no está configurado en este servidor (falta EXA_API_KEY).")
     if not documentos:
         raise ValueError(f"No se encontraron noticias recientes sobre «{tema}» en los últimos {dias} días.")
-    res = analizar_documentos(documentos, tema, modelo=modelo, max_tokens=MAX_TOKENS_WEB)
+    res = _analizar_con_progreso(documentos, tema, modelo, progreso)
     res["modo"] = "tema"
     res["nota_web_real"] = f"Se analizaron {len(documentos)} noticias de los últimos {dias} días encontradas con el buscador."
     return _finalizar(res, {"buscador": len(documentos)}, problema)

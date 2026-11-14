@@ -176,6 +176,14 @@ class PeticionTema(BaseModel):
     modelo: str | None = None
 
 
+class PeticionAgente(BaseModel):
+    modo: Literal["tema", "pagina"]
+    tema: str | None = Field(None, max_length=400)
+    url: str | None = None
+    dias: int = Field(30, ge=1, le=365)
+    modelo: str | None = None
+
+
 class PeticionAudio(BaseModel):
     url: str | None = None
     datos_base64: str | None = Field(None, max_length=15_000_000)
@@ -356,6 +364,67 @@ def investigar(p: PeticionTema):
         raise HTTPException(404, str(e))
 
 
+@app.post("/api/agente")
+def agente(p: PeticionAgente):
+    """Igual que /api/investigar o /api/analizar_pagina, pero transmite en vivo (text/event-stream) lo que hace el agente:
+    qué busca, qué encontró, qué lee, cuánto lleva el modelo y la decisión sobre cada página. Último evento: 'fin'."""
+    import queue
+    import threading
+    from fastapi.responses import StreamingResponse
+    from motor import busqueda
+    from motor.web_real import analizar_pagina_real, investigar_tema
+
+    cola = queue.Queue()
+
+    def progreso(**evento):
+        cola.put(evento)
+
+    def trabajar():
+        try:
+            if p.modo == "tema":
+                res = investigar_tema(p.tema or "", dias=p.dias, modelo=_modelo_permitido(p.modelo), progreso=progreso)
+            else:
+                if not p.url:
+                    raise ValueError("Falta la URL de la página.")
+                mundo = buscador.mundo_de_url(p.url)
+                if mundo:  # página del mini-internet: sus páginas relacionadas ya son conocidas
+                    from motor.web_real import _emitir_decisiones
+                    progreso(etapa="buscar", consulta=mundo["afirmacion"], dias=None)
+                    for x in mundo["paginas"]:
+                        progreso(etapa="encontrada", sitio=x["medio"], titulo=x["titulo"], url=x["url"])
+                    progreso(etapa="llm", modelo="(respuestas guardadas del laboratorio)", paginas=len(mundo["paginas"]), palabras="—")
+                    res = analizar_urls(mundo["afirmacion"], [x["url"] for x in mundo["paginas"]], modelo=_modelo_permitido(p.modelo))
+                    res["mundo"] = mundo["id"]
+                    res["pagina_actual"] = buscador.normalizar_url(p.url)
+                    progreso(etapa="hechos", n=len(res.get("hechos", [])), modelo=res.get("modelo"), aviso=res.get("aviso"))
+                    progreso(etapa="regla", paginas=res["fuentes_aparentes"], independientes=res["fuentes_efectivas"])
+                    _emitir_decisiones(res, progreso)
+                else:
+                    res = analizar_pagina_real(p.url, modelo=_modelo_permitido(p.modelo), progreso=progreso)
+            cola.put({"etapa": "fin", "resultado": _guardar_informe(res, p.url)})
+        except (busqueda.SinBuscador, ValueError) as e:
+            cola.put({"etapa": "error", "texto": str(e)})
+        except Exception as e:
+            cola.put({"etapa": "error", "texto": f"No se pudo completar el análisis ({type(e).__name__})."})
+        cola.put(None)
+
+    threading.Thread(target=trabajar, daemon=True).start()
+
+    def eventos():
+        while True:
+            try:
+                evento = cola.get(timeout=15)
+            except queue.Empty:
+                yield ": sigo trabajando\n\n"  # mantiene viva la conexión (Cloudflare corta a los 100 s sin datos)
+                continue
+            if evento is None:
+                break
+            yield "data: " + json.dumps(evento, ensure_ascii=False, default=str) + "\n\n"
+
+    return StreamingResponse(eventos(), media_type="text/event-stream",
+                             headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"})
+
+
 @app.post("/api/verificar_archivo")
 async def verificar_archivo(request: Request, nombre: str = "archivo.jpg"):
     """Imagen o video subido como cuerpo binario (hasta 60 MB): procedencia C2PA y señales de IA en metadatos."""
@@ -488,7 +557,7 @@ def panel():
     guardado en la caché de Cloudflare o del navegador."""
     import hashlib
     html = (DIR_WEB / "index.html").read_text(encoding="utf-8")
-    for recurso in ("app.js", "app.css", "i18n.js", "dinamico.js"):
+    for recurso in ("app.js", "app.css", "i18n.js", "dinamico.js", "agente.js", "agente.css"):
         v = hashlib.sha256((DIR_WEB / recurso).read_bytes()).hexdigest()[:10]
         html = html.replace(f'"/web/{recurso}"', f'"/web/{recurso}?v={v}"')
     version_ext = json.loads((RAIZ_PROYECTO / "extension" / "manifest.json").read_text(encoding="utf-8"))["version"]

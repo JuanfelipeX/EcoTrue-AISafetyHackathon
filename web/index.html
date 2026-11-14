@@ -7,6 +7,7 @@
   <meta name="description" content="ECO mide cuántas fuentes independientes hay detrás de una afirmación.">
   <link rel="icon" href="/web/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/web/app.css">
+  <link rel="stylesheet" href="/web/agente.css">
 </head>
 <body>
   <header class="barra">
@@ -160,11 +161,12 @@
           <b>reportería propia</b> de los que <b>solo repiten</b> a otros. No califica medios por reputación: ordena por evidencia.</p>
       </div>
       <form id="form-tema" class="tarjeta form">
-        <label for="tema-texto">Tema o afirmación</label>
-        <input id="tema-texto" required minlength="4" placeholder="Ej.: suspensión de vuelos en Estados Unidos">
+        <label for="tema-texto">Tema, afirmación o URL de una noticia</label>
+        <input id="tema-texto" required minlength="4" placeholder="Ej.: suspensión de vuelos en Estados Unidos, o https://…">
         <label for="tema-dias">Período</label>
         <select id="tema-dias"><option value="7">Últimos 7 días</option><option value="30" selected>Últimos 30 días</option><option value="90">Últimos 90 días</option></select>
         <div class="fila-botones"><button type="submit" class="boton-primario">Investigar</button></div>
+        <p class="nota">Verás en vivo lo que hace el agente: qué busca, qué encuentra, qué lee y cómo decide cada fuente.</p>
         <p class="nota" id="nota-buscador"></p>
       </form>
       <div id="resultado-tema" class="resultado"></div>
@@ -502,6 +504,7 @@ pip install -r requirements.txt</pre><button class="copiar">Copiar</button></div
   <footer class="pie">ECO · Hackathon Def/Acc · AI Safety Colombia × IEEE CS Uniandes · Frente 4: defensa epistémica · Datos sintéticos y públicos</footer>
   <script src="/web/i18n.js"></script>
   <script src="/web/dinamico.js"></script>
+  <script src="/web/agente.js"></script>
   <script src="/web/app.js"></script>
 </body>
 </html>

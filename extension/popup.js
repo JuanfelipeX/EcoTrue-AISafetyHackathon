@@ -112,7 +112,7 @@ function pintarResultado(d, api) {
     if (!chips.length) chips.push(`<span class="chip">${pl(pr.imagenes, "imagen sin credenciales", "imágenes sin credenciales")}</span>`);
   }
   const informe = d.informe_id ? `${api}/#informe/${d.informe_id}` : null;
-  $("#resultado").innerHTML = `
+  $("#final").innerHTML = `
     <section class="tarjeta">
       <div class="medidor">${arco(n ? k / n : 0, color)}
         <div><div class="cifras-grandes">${n} → ${k}<small>página${n === 1 ? "" : "s"} → fuente${k === 1 ? "" : "s"} independiente${k === 1 ? "" : "s"}</small></div>
@@ -123,6 +123,7 @@ function pintarResultado(d, api) {
     </section>
     ${propias ? `<section class="tarjeta"><div class="seccion-cab"><span>Con reportería propia</span><small>ordenadas por datos propios</small></div><ul class="fuentes">${propias}</ul>
       ${f.solo_repiten.length ? `<p class="pista">${f.solo_repiten.length} nota${f.solo_repiten.length === 1 ? "" : "s"} solo repite${f.solo_repiten.length === 1 ? "" : "n"} a otras.</p>` : ""}</section>` : ""}
+    <section class="tarjeta"><div class="seccion-cab"><span>Grafo de procedencia</span></div><div id="grafo"></div></section>
     ${fuentes ? `<section class="tarjeta"><div class="seccion-cab"><span>De dónde sale</span></div><ul class="fuentes">${fuentes}</ul></section>` : ""}
     ${(d.corroborados || []).length ? `<section class="tarjeta"><div class="seccion-cab"><span>Corroborado por 2+ fuentes</span></div><ul class="fuentes">${d.corroborados.slice(0, 4).map((t) => `<li><i style="background:var(--bien)"></i><div>${esc(t)}</div></li>`).join("")}</ul></section>` : ""}
     ${chips.length ? `<section class="tarjeta"><div class="seccion-cab"><span>Imágenes (C2PA)</span></div><div class="chips">${chips.join("")}</div></section>` : ""}
@@ -130,6 +131,7 @@ function pintarResultado(d, api) {
       ${informe ? `<a class="grande" style="text-align:center;text-decoration:none" href="${esc(informe)}" target="_blank">Ver informe completo</a>` : "<span></span>"}
       <button class="grande secundario" id="otra-vez">Analizar de nuevo</button>
     </div>`;
+  ecoGrafo($("#grafo"), d);
   $("#resultado").hidden = false;
   $("#otra-vez").addEventListener("click", () => {
     $("#resultado").hidden = true;
@@ -146,36 +148,40 @@ async function analizar() {
     $("#resultado").hidden = false;
     return;
   }
-  await ejecutar(`${api}/api/analizar_pagina`, { url, modelo: (await leer("ecoModelo", "")) || null },
-    "Leyendo la página, buscando la cobertura del mismo tema y comparando sus datos…", api);
+  await ejecutar(api, { modo: "pagina", url, modelo: (await leer("ecoModelo", "")) || null }, "El agente está analizando esta noticia");
 }
 
 async function investigar() {
   const api = await ecoApi();
   const tema = $("#tema").value.trim();
   if (tema.length < 4) { $("#tema").focus(); return; }
-  await ejecutar(`${api}/api/investigar`, { tema, modelo: (await leer("ecoModelo", "")) || null },
-    `Buscando noticias sobre «${tema}» y comparando quién informa qué…`, api);
+  await ejecutar(api, { modo: "tema", tema, modelo: (await leer("ecoModelo", "")) || null }, `Investigando «${tema}»`);
 }
 $("#investigar").addEventListener("click", investigar);
 $("#tema").addEventListener("keydown", (e) => { if (e.key === "Enter") investigar(); });
 
-async function ejecutar(ruta, cuerpo, mensaje, api) {
+async function ejecutar(api, cuerpo, titulo) {
   $("#analizar").disabled = true;
   $("#caja-tema").hidden = true;
   $("#resultado").hidden = false;
-  $("#resultado").innerHTML = `<section class="tarjeta"><div class="cargando">${esc(mensaje)}</div></section>`;
-  try {
-    const r = await fetch(ruta, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(cuerpo) });
-    const d = await r.json();
-    if (!r.ok) throw new Error(d.detail || `Error ${r.status}`);
-    pintarResultado(d, api);
-  } catch (e) {
-    $("#resultado").innerHTML = `<div class="error">${esc(e.message.includes("Failed to fetch") ? `No se pudo conectar con el servidor de ECO (${api}).` : e.message)}</div>
-      <button class="grande secundario" id="otra-vez" style="margin-top:8px">Intentar de nuevo</button>`;
-    $("#otra-vez").addEventListener("click", () => { $("#resultado").hidden = true; $("#caja-tema").hidden = false; $("#analizar").disabled = false; });
-  }
+  $("#resultado").innerHTML = `<div id="bitacora"></div><div id="final"></div>`;
+  const bit = ecoBitacora($("#bitacora"), titulo);
+  const reintentar = () => { $("#resultado").hidden = true; $("#caja-tema").hidden = false; $("#analizar").disabled = false; };
+  await ecoAgente(api, cuerpo, {
+    alEvento: (e) => bit.evento(e),
+    alError: (e) => {
+      bit.terminar(false, e.message.includes("Failed to fetch") ? `No se pudo conectar con el servidor de ECO (${api}).` : e.message);
+      $("#final").innerHTML = `<button class="grande secundario" id="otra-vez">Intentar de nuevo</button>`;
+      $("#otra-vez").addEventListener("click", reintentar);
+    },
+    alFin: (d) => {
+      bit.terminar(true, `Listo: ${d.fuentes_aparentes} → ${d.fuentes_efectivas}`);
+      $("#bitacora .ag-pasos").style.maxHeight = "150px";
+      pintarResultado(d, api);
+    },
+  });
 }
+
 $("#analizar").addEventListener("click", analizar);
 
 // ---------------- inicio ----------------
