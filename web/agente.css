@@ -1,7 +1,7 @@
 /* Bitácora en vivo del agente y grafo de procedencia (compartido por el panel web y la extensión).
    Usa variables con respaldo para funcionar en ambos: --ag-fondo, --ag-tinta, etc. */
 .ag-bitacora { --af: var(--superficie-2, var(--tarjeta-2, #f1eee9)); --at: var(--tinta, #1b1a19); --at2: var(--tinta-3, #7a7873);
-  --ab: var(--borde, #e2ddd6); --aa: var(--acento, #b4532a);
+  --ab: var(--borde, #e2ddd6); --aa: var(--acento, #2f7a5a);
   background: var(--superficie, var(--tarjeta, #fff)); border: 1px solid var(--ab); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
 .ag-cab { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--at); }
 .ag-cab b { flex: 1; }
@@ -9,7 +9,7 @@
 .ag-pulso { width: 10px; height: 10px; border-radius: 50%; background: var(--aa); box-shadow: 0 0 0 0 var(--aa); animation: ag-pulso 1.4s infinite; flex: none; }
 .ag-pulso.listo { background: #2f8a43; animation: none; }
 .ag-pulso.fallo { background: #c0362c; animation: none; }
-@keyframes ag-pulso { 0% { box-shadow: 0 0 0 0 rgba(196, 87, 44, .55); } 70% { box-shadow: 0 0 0 10px rgba(196, 87, 44, 0); } 100% { box-shadow: 0 0 0 0 rgba(196, 87, 44, 0); } }
+@keyframes ag-pulso { 0% { box-shadow: 0 0 0 0 rgba(47, 122, 90, .55); } 70% { box-shadow: 0 0 0 10px rgba(47, 122, 90, 0); } 100% { box-shadow: 0 0 0 0 rgba(47, 122, 90, 0); } }
 .ag-pasos { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; max-height: 340px; overflow-y: auto; scroll-behavior: smooth; }
 .ag-paso { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; font-size: 13px; line-height: 1.45; color: var(--at);
   padding: 6px 8px; border-radius: 8px; background: var(--af); animation: ag-entra .35s ease both; }
@@ -40,11 +40,11 @@
 .gr-halo { fill: none; stroke-width: 1.2; stroke-opacity: .45; animation: gr-halo 2.4s ease-in-out infinite; transform-origin: center; }
 @keyframes gr-halo { 0%, 100% { stroke-opacity: .2; } 50% { stroke-opacity: .7; } }
 .gr-nodo:hover .gr-disco, .gr-nodo.sel .gr-disco, .gr-nodo:focus .gr-disco { stroke-width: 4; }
-.gr-nodo.actual .gr-disco { filter: drop-shadow(0 0 5px rgba(196, 87, 44, .8)); }
+.gr-nodo.actual .gr-disco { filter: drop-shadow(0 0 5px rgba(47, 122, 90, .8)); }
 .gr-nombre { font: 600 10.5px system-ui, sans-serif; fill: var(--tinta, #1c1b19); text-anchor: middle; }
 .gr-hora { font: 9.5px ui-monospace, Consolas, monospace; fill: var(--tinta-3, #8a877f); text-anchor: middle; }
-.gr-nodo.sel .gr-nombre { fill: var(--acento, #c4572c); }
-.gr-ficha { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--acento, #c4572c); background: var(--superficie, var(--tarjeta, #fff)); font-size: 13px; animation: ag-entra .25s ease both; }
+.gr-nodo.sel .gr-nombre { fill: var(--acento, #2f7a5a); }
+.gr-ficha { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--acento, #2f7a5a); background: var(--superficie, var(--tarjeta, #fff)); font-size: 13px; animation: ag-entra .25s ease both; }
 .gr-ficha-cab { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .gr-etq { font: 650 11px/1 system-ui, sans-serif; padding: 4px 8px; border-radius: 999px; }
 .gr-etq.propia { background: rgba(47, 138, 67, .15); color: #2f8a43; }
@@ -54,6 +54,6 @@
 .gr-titulo { margin: 8px 0 4px; font-weight: 600; }
 .gr-titulo a { color: inherit; }
 .gr-motivo { margin: 4px 0; color: var(--tinta-2, #55534f); }
-.gr-motivo a { color: var(--acento, #c4572c); }
+.gr-motivo a { color: var(--acento, #2f7a5a); }
 .gr-tenue { margin: 4px 0 0; color: var(--tinta-3, #8a877f); font-size: 12px; }
 @media (prefers-reduced-motion: reduce) { .gr-arista, .gr-halo, .ag-pulso, .ag-paso { animation: none !important; } }

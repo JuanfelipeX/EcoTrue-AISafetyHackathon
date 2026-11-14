@@ -5,14 +5,14 @@
 .eco-raiz h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .4px; color: #6b6560; margin: 14px 0 6px; }
 .eco-raiz ul { margin: 4px 0 0; padding-left: 18px; }
 .eco-raiz li { margin: 2px 0; }
-.eco-cabecera { display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; border-bottom: 2px solid #b4532a; }
+.eco-cabecera { display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; border-bottom: 2px solid #2f7a5a; }
 .eco-cabecera small { color: #6b6560; }
 .eco-cifras { display: flex; align-items: center; gap: 14px; padding: 12px; border-radius: 8px; margin: 10px 0 8px; }
 .eco-cifras > div { display: flex; flex-direction: column; align-items: center; }
 .eco-num { font-size: 28px; font-weight: 700; line-height: 1; }
 .eco-etq { font-size: 11px; color: #3a3a3a; text-align: center; }
 .eco-flecha { font-size: 22px; color: #6b6560; }
-.eco-alerta { background: #f6e3da; border: 1px solid #b4532a; }
+.eco-alerta { background: #fae1de; border: 1px solid #c0362c; }
 .eco-medio { background: #f6efdc; border: 1px solid #b08a2e; }
 .eco-ok { background: #e6efe3; border: 1px solid #5b7f4f; }
 .eco-afirmacion { font-weight: 600; margin: 6px 0; }
@@ -22,12 +22,12 @@
 .eco-grupo-titulo b { color: #1f1f1f; }
 .eco-fecha { float: right; color: #6b6560; font-size: 11px; }
 .eco-copias { margin-top: 4px; color: #3a3a3a; font-size: 12px; }
-.eco-aqui { background: #b4532a; color: #fff; border-radius: 3px; padding: 0 4px; font-size: 10px; margin-left: 4px; }
+.eco-aqui { background: #2f7a5a; color: #fff; border-radius: 3px; padding: 0 4px; font-size: 10px; margin-left: 4px; }
 .eco-vacio { color: #6b6560; margin: 2px 0; }
 .eco-mas { color: #6b6560; list-style: none; }
 .eco-pie { font-size: 11px; color: #6b6560; margin-top: 12px; border-top: 1px solid #d8cfc8; padding-top: 6px; }
 .eco-cargando { padding: 18px 4px; color: #3a3a3a; }
-.eco-error { background: #f6e3da; border-left: 3px solid #b4532a; padding: 8px; margin-top: 10px; }
+.eco-error { background: #fae1de; border-left: 3px solid #c0362c; padding: 8px; margin-top: 10px; }
 .eco-boton { background: #3a3a3a; color: #fff; border: 0; border-radius: 6px; padding: 7px 12px; cursor: pointer; font-size: 13px; }
 .eco-boton:hover { background: #1f1f1f; }
 
@@ -37,7 +37,7 @@
   padding: 14px; z-index: 2147483647; }
 #eco-panel .eco-cerrar { background: none; border: 0; font-size: 18px; cursor: pointer; color: #6b6560; }
 
-.eco-enlace { color: #b4532a; font-weight: 600; text-decoration: none; }
+.eco-enlace { color: #2f7a5a; font-weight: 600; text-decoration: none; }
 .eco-enlace:hover { text-decoration: underline; }
 .eco-ajustes { margin-top: 14px; font-size: 12px; color: #6b6560; }
 .eco-ajustes input { width: 100%; margin: 6px 0; padding: 5px 7px; border: 1px solid #d8cfc8; border-radius: 5px; }

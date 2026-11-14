@@ -85,6 +85,14 @@ function arco(fraccion, color) {
       stroke-dasharray="${lleno} ${largo}"/></svg>`;
 }
 
+function fraseConclusion(d) {
+  const n = d.fuentes_aparentes, k = d.fuentes_efectivas, origen = (d.grupos || [])[0]?.origen_sitio || "un mismo medio";
+  if (n <= 1) return "Solo hay una página: no se puede saber si otras fuentes lo confirman.";
+  if (k === 1) return `Todo sale de ${origen}: que muchas webs lo repitan no lo hace más confiable.`;
+  if (k < n) return `${k} medios informan por su cuenta; ${n - k} solo repiten. Apóyate en los ${k}.`;
+  return `${k} medios lo informan por su cuenta: hay cobertura independiente.`;
+}
+
 function pintarResultado(d, api) {
   const n = d.fuentes_aparentes, k = d.fuentes_efectivas;
   const nivel = n <= 1 ? "medio" : k <= 1 ? "alerta" : k < n ? "medio" : "ok";
@@ -117,6 +125,7 @@ function pintarResultado(d, api) {
       <div class="medidor">${arco(n ? k / n : 0, color)}
         <div><div class="cifras-grandes">${n} → ${k}<small>página${n === 1 ? "" : "s"} → fuente${k === 1 ? "" : "s"} independiente${k === 1 ? "" : "s"}</small></div>
           <span class="veredicto v-${nivel}">${texto}</span></div></div>
+      <p class="resumen"><b>${esc(fraseConclusion(d))}</b></p>
       <p class="resumen">${esc(d.nota_web_real || "")}</p>
       ${d.aviso ? `<div class="aviso">${esc(d.aviso)}</div>` : ""}
       ${d.aviso_buscador ? `<div class="aviso">${esc(d.aviso_buscador)}</div>` : ""}
@@ -183,6 +192,14 @@ async function ejecutar(api, cuerpo, titulo) {
 }
 
 $("#analizar").addEventListener("click", analizar);
+$("#limpiar").addEventListener("click", () => {
+  $("#resultado").innerHTML = "";
+  $("#resultado").hidden = true;
+  $("#caja-tema").hidden = false;
+  $("#tema").value = "";
+  $("#analizar").disabled = false;
+  mostrarVista("principal");
+});
 
 // ---------------- inicio ----------------
 (async () => {

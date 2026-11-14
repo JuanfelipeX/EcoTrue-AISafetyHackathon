@@ -8,8 +8,8 @@
   --tinta: #1b1a19;
   --tinta-2: #52514e;
   --tinta-3: #7a7873;
-  --acento: #b4532a;
-  --acento-suave: #f6e3da;
+  --acento: #2f7a5a;
+  --acento-suave: #e2f1e9;
   --rejilla: #e8e4de;
   /* paleta categórica (orden fijo) */
   --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #6250d6; --s8: #e34948;
@@ -25,7 +25,7 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --fondo: #121211; --superficie: #1a1a19; --superficie-2: #232321; --borde: #34332f;
-    --tinta: #f0efec; --tinta-2: #c3c2b7; --tinta-3: #8f8d86; --acento: #e0774a; --acento-suave: #3a2318; --rejilla: #2c2b28;
+    --tinta: #f0efec; --tinta-2: #c3c2b7; --tinta-3: #8f8d86; --acento: #6cbf95; --acento-suave: #173126; --rejilla: #2c2b28;
     --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
     --bien: #6cc07a; --bien-suave: #1b2e1e; --alerta: #e9a55a; --alerta-suave: #33260f; --grave: #f08a82; --grave-suave: #3a1c1a;
     --q0: #1e2228; --q1: #104281; --q2: #184f95; --q3: #256abf; --q4: #3987e5; --q5: #6da7ec; --q6: #9ec5f4;
@@ -35,7 +35,7 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --fondo: #121211; --superficie: #1a1a19; --superficie-2: #232321; --borde: #34332f;
-  --tinta: #f0efec; --tinta-2: #c3c2b7; --tinta-3: #8f8d86; --acento: #e0774a; --acento-suave: #3a2318; --rejilla: #2c2b28;
+  --tinta: #f0efec; --tinta-2: #c3c2b7; --tinta-3: #8f8d86; --acento: #6cbf95; --acento-suave: #173126; --rejilla: #2c2b28;
   --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
   --bien: #6cc07a; --bien-suave: #1b2e1e; --alerta: #e9a55a; --alerta-suave: #33260f; --grave: #f08a82; --grave-suave: #3a1c1a;
   --q0: #1e2228; --q1: #104281; --q2: #184f95; --q3: #256abf; --q4: #3987e5; --q5: #6da7ec; --q6: #9ec5f4;
@@ -371,3 +371,20 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
   #vista-urls > .intro:first-child::before, #vista-urls > .intro:first-child::after { animation: none; opacity: .5; }
   .tarjeta:hover { transform: none; }
 }
+
+/* ---------------- Conclusión en lenguaje sencillo ---------------- */
+.conclusion { border-radius: 16px; padding: 18px 20px; margin-bottom: 14px; border: 1px solid var(--borde); border-left: 6px solid var(--tinta-3); background: var(--superficie); box-shadow: var(--sombra); }
+.conclusion.ok { border-left-color: var(--bien); background: linear-gradient(90deg, var(--bien-suave), var(--superficie) 55%); }
+.conclusion.medio { border-left-color: var(--alerta); background: linear-gradient(90deg, var(--alerta-suave), var(--superficie) 55%); }
+.conclusion.alerta { border-left-color: var(--grave); background: linear-gradient(90deg, var(--grave-suave), var(--superficie) 55%); }
+.conclusion-titulo { font-size: clamp(19px, 2.4vw, 24px); font-weight: 750; letter-spacing: -.3px; color: var(--tinta); }
+.conclusion-texto { font-size: 16px; margin: 6px 0 0; color: var(--tinta); }
+.conclusion-puntos { margin: 10px 0 0; padding-left: 4px; list-style: none; display: grid; gap: 4px; font-size: 14px; color: var(--tinta-2); }
+.conclusion-consejo { margin: 10px 0 0; font-size: 14px; color: var(--tinta-2); padding-top: 10px; border-top: 1px dashed var(--borde); }
+.detalle-completo { margin-bottom: 16px; }
+.detalle-completo > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px;
+  border: 1px solid var(--borde); background: var(--superficie); color: var(--tinta-2); font-weight: 600; font-size: 14px; margin-bottom: 12px; }
+.detalle-completo > summary::before { content: "▸"; transition: transform .2s; }
+.detalle-completo[open] > summary::before { transform: rotate(90deg); }
+.detalle-completo > summary:hover { color: var(--tinta); border-color: var(--tinta-3); }
+.limpiar { margin-left: auto; }

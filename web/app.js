@@ -229,7 +229,61 @@ function fechaCorta(iso, conDia = true) {
 }
 
 // ---------------- render principal ----------------
-function renderResultado(res, { comparar = false } = {}) {
+// ---------------- conclusiones en lenguaje sencillo ----------------
+function tarjetaConclusion(c) {
+  return `<div class="conclusion ${c.nivel}">
+    <div class="conclusion-titulo">${esc(c.titulo)}</div>
+    <p class="conclusion-texto">${esc(c.texto)}</p>
+    ${(c.puntos || []).length ? `<ul class="conclusion-puntos">${c.puntos.map((x) => `<li>${x}</li>`).join("")}</ul>` : ""}
+    ${c.consejo ? `<p class="conclusion-consejo"><b>Qué hacer:</b> ${esc(c.consejo)}</p>` : ""}
+  </div>`;
+}
+
+function conclusionNoticia(res) {
+  const n = res.fuentes_aparentes, k = res.fuentes_efectivas;
+  const origen = (res.grupos || [])[0]?.origen_sitio || "un mismo medio";
+  const corro = res.corroborados || [], solos = res.de_un_solo_origen || [];
+  const puntos = [];
+  if (corro.length) puntos.push(`✔ <b>Confirmado por 2 o más fuentes</b> (${corro.length}): ${esc(corro.slice(0, 2).join(" · "))}${corro.length > 2 ? "…" : ""}`);
+  if (solos.length && n > 1) puntos.push(`⚠ <b>Lo dice una sola fuente</b>: ${solos.length} dato${solos.length === 1 ? "" : "s"}. Tómalos con cautela.`);
+  const pr = res.procedencia;
+  if (pr && pr.fechas_imposibles.length) puntos.push(`⏱ <b>${pr.fechas_imposibles.length} página${pr.fechas_imposibles.length === 1 ? "" : "s"} con fecha falsa</b>: dicen ser anteriores a la foto firmada que usan.`);
+  if (pr && pr.generadas_por_ia.length) puntos.push(`🤖 <b>${pr.generadas_por_ia.length} imagen${pr.generadas_por_ia.length === 1 ? "" : "es"} declarada${pr.generadas_por_ia.length === 1 ? "" : "s"} como IA.</b>`);
+  if (res.aviso) puntos.push(`ℹ ${esc(res.aviso)}`);
+  if (n <= 1) return { nivel: "medio", titulo: "⚪ Solo hay una página para comparar", texto: "Con una sola página no se puede saber si otras fuentes lo confirman.", puntos, consejo: "Busca la misma noticia en otros medios (o usa «Investigar un tema»)." };
+  if (k === 1) return { nivel: "alerta", titulo: "🔴 Una sola fuente detrás de todo", texto: `Las ${n} páginas repiten lo que publicó ${origen}. Que muchas webs lo digan no lo hace más confiable.`, puntos, consejo: `Antes de compartir, busca si algún medio distinto de ${origen} lo confirmó con datos propios.` };
+  if (k < n) return { nivel: "medio", titulo: `🟡 ${k} fuentes reales entre ${n} páginas`, texto: `${n - k} página${n - k === 1 ? "" : "s"} solo repite${n - k === 1 ? "" : "n"} a otras. Apóyate en las ${k} que informan por su cuenta.`, puntos, consejo: "Fíjate en los datos confirmados por varias fuentes; los demás aún no están verificados." };
+  return { nivel: "ok", titulo: `🟢 ${k} fuentes independientes`, texto: "Cada página aporta información propia: varios medios lo informan por su cuenta.", puntos, consejo: "Buena señal, aunque varias fuentes independientes también pueden equivocarse." };
+}
+
+function conclusionImagen(info) {
+  const atip = info.forense?.rasgos_atipicos ?? 0;
+  const que = info.tipo === "video" ? "el video" : "la imagen";
+  const fecha = info.fecha_firmada ? ` el ${fechaCorta(info.fecha_firmada)}` : "";
+  if (info.estado === "error") return { nivel: "medio", titulo: "⚪ No se pudo analizar el archivo", texto: "El formato no se pudo leer. Prueba con JPEG, PNG o MP4." };
+  if (info.estado === "rota") return { nivel: "alerta", titulo: "🔴 Alterado después de firmarse", texto: `Tenía una firma digital, pero ${que} cambió después. Lo que dice sobre su origen ya no es fiable.`, consejo: "Busca la versión original, con la firma intacta." };
+  if (info.ia === "declarada") return { nivel: "alerta", titulo: "🤖 Hecho o modificado con IA", texto: `El propio archivo declara que ${que} se generó o compuso con inteligencia artificial${info.firmante ? ` (firma de ${info.firmante})` : ""}.`, consejo: "No lo compartas como si fuera un registro real." };
+  if (info.estado === "confiable") return { nivel: "ok", titulo: "✅ Origen verificado", texto: `Firmado digitalmente por ${info.firmante}${fecha}. La firma está intacta: no se modificó desde entonces.`, consejo: "Aun así, algo auténtico puede usarse fuera de contexto: revisa de qué hecho habla." };
+  if (info.ia === "indicio") return { nivel: "medio", titulo: "🟡 Posible uso de IA", texto: "Sus metadatos mencionan una herramienta de IA: pudo generarse o solo editarse con ella.", consejo: "Pregunta por el archivo original a quien lo publicó." };
+  if (atip >= 2) return { nivel: "medio", titulo: "🟡 Rasgos poco comunes: míralo con cuidado", texto: `Los filtros de visión encontraron ${atip} de 4 rasgos atípicos. No prueba que sea falso, pero vale la pena buscar su origen.`, consejo: "Haz una búsqueda inversa de la imagen para ver dónde apareció primero." };
+  return { nivel: "ok", titulo: "🟢 Sin señales de IA ni de manipulación", texto: info.tipo === "video" ? "No tiene marcas de IA en sus metadatos." : "No tiene marcas de IA en sus datos y los filtros de visión no ven nada raro.",
+           puntos: ["ℹ No tiene firma digital, así que no podemos certificar quién lo creó ni cuándo (es lo normal en internet)."],
+           consejo: "Si es importante, confirma con quien lo publicó primero o con una búsqueda inversa." };
+}
+
+function conclusionAudio(r) {
+  const d = r.detector || {};
+  const eer = d.error_de_referencia || {};
+  const fiab = eer.opus_16k != null ? `El detector se equivoca en unos ${Math.round(eer.opus_16k * 100)} de cada 100 notas de voz de prueba.` : "";
+  const consejo = "Llama de vuelta a la persona por otro medio o pregúntale algo que solo ella sabría.";
+  if (r.procedencia?.estado === "confiable" && r.procedencia?.generada_por_ia) return { nivel: "alerta", titulo: "🤖 Voz generada con IA", texto: "El propio archivo declara que la voz se generó con inteligencia artificial.", consejo };
+  if (d.veredicto === "sintetica") return { nivel: "alerta", titulo: "🔴 Probablemente voz sintética", texto: `El detector encuentra rasgos de voz generada o clonada. ${fiab}`, consejo };
+  if (d.veredicto === "real") return { nivel: "ok", titulo: "🟢 Probablemente voz real", texto: `El detector no encuentra rasgos de voz clonada. ${fiab}`, consejo: "Si te piden dinero o datos, confirma igual por otro canal: los clones mejoran rápido." };
+  if (d.veredicto === "incierto") return { nivel: "medio", titulo: "🟡 No concluyente", texto: `El audio está en la zona gris del detector. ${fiab}`, consejo };
+  return { nivel: "medio", titulo: "⚪ No podemos decidir con este audio", texto: "El detector de voz todavía no es fiable con audios reales comprimidos, así que no damos un veredicto.", consejo };
+}
+
+function renderResultado(res, { comparar = false, plegar = !comparar } = {}) {
   const n = res.fuentes_aparentes, k = res.fuentes_efectivas;
   const nivel = k <= 1 && n > 1 ? "alerta" : k < n ? "medio" : "ok";
   const insignia = { alerta: "⚠ Un solo origen", medio: "◐ Parte es repetición", ok: "✓ Cobertura independiente" }[nivel];
@@ -296,7 +350,9 @@ function renderResultado(res, { comparar = false } = {}) {
         Una paráfrasis hecha con IA baja la similitud y se escapa; dos medios que cubren el mismo hecho la suben y se fusionan por error.</p>
       ${tablaSimilitud(res, N)}</div>`;
   }
-  return html;
+  const conclusion = tarjetaConclusion(conclusionNoticia(res));
+  return plegar ? conclusion + `<details class="detalle-completo"><summary>Ver el análisis completo: árbol de origen, datos y fuentes</summary>${html}</details>`
+    : conclusion + html;
 }
 
 // ---------------- fuentes ordenadas por evidencia ----------------
@@ -409,7 +465,7 @@ function pintarVerificacion(info) {
   const ia = { declarada: ["alerta", "Declarado como hecho con IA"], indicio: ["medio", "Indicios de herramientas de IA"],
                sin_senales: ["neutro", "Sin señales de IA en los metadatos"] }[info.ia] || ["neutro", "—"];
   const senales = (info.senales_ia || []).map((x) => `<li><b>${esc(x.fuente)}</b> (${x.fuerza === "declarada" ? "declarada" : "indicio"}): ${esc(x.detalle)}</li>`).join("");
-  cont.innerHTML = `<div class="tarjeta c2pa-resultado">
+  cont.innerHTML = tarjetaConclusion(conclusionImagen(info)) + `<details class="detalle-completo"><summary>Ver detalles técnicos (firma, metadatos y filtros)</summary><div class="tarjeta c2pa-resultado">
     <h3 style="margin-top:0">¿De dónde viene? · ${info.tipo === "video" ? "video" : "imagen"}</h3>
     <div>${chipEstado(info)}</div>
     <p style="margin:10px 0 6px">${esc(explicacion)}</p>
@@ -429,7 +485,7 @@ function pintarVerificacion(info) {
       <dt>Acciones registradas</dt><dd>${esc((info.acciones || []).join(", ") || "—")}</dd>
       <dt>Códigos de validación</dt><dd>${esc((info.codigos || []).join(", ") || "ninguno")}</dd>
       ${info.huella ? `<dt>Huella visual</dt><dd><code>${esc(info.huella)}</code></dd>` : ""}
-    </dl></div>`;
+    </dl></div></details>`;
 }
 
 function tarjetaForense(fo) {
@@ -508,7 +564,7 @@ function pintarAudio(r) {
   const titulo = { sintetica: "⚠ Parece voz sintética", real: "✓ Parece voz real", incierto: "◐ No concluyente",
                    no_confiable: "◐ Detector sin validar: no concluyente", no_disponible: "Detector no disponible" }[d.veredicto] || "Resultado";
   const eer = d.error_de_referencia || {};
-  cont.innerHTML = `<div class="tarjeta c2pa-resultado">
+  cont.innerHTML = tarjetaConclusion(conclusionAudio(r)) + `<details class="detalle-completo"><summary>Ver detalles técnicos</summary><div class="tarjeta c2pa-resultado">
     <div><span class="c2pa-chip ${clase}" style="font-size:13px;padding:6px 10px">${titulo}</span></div>
     <p style="margin:10px 0 6px"><b>${esc(r.conclusion || "")}</b></p>
     <dl class="c2pa-datos">
@@ -518,7 +574,7 @@ function pintarAudio(r) {
       <dt>Puntaje (umbral ${d.umbral ?? "—"})</dt><dd>${d.puntaje ?? "—"} <span class="nota">(mayor = más parecido a voz real)</span></dd>
       ${Object.keys(eer).length ? `<dt>Error de referencia (EER)</dt><dd>${Object.entries(eer).map(([k, v]) => `${esc(k)}: ${(v * 100).toFixed(1)} %`).join(" · ")}</dd>` : ""}
     </dl>
-    <p class="nota" style="margin-top:12px">${esc(r.aviso || "")}</p></div>`;
+    <p class="nota" style="margin-top:12px">${esc(r.aviso || "")}</p></div></details>`;
 }
 
 async function enviarAudio(blob, nombre) {
@@ -975,6 +1031,12 @@ prepararInstalar();
 prepararVerificador();
 prepararAudio();
 prepararTema();
+$("#limpiar-analisis")?.addEventListener("click", () => {
+  ["#resultado-tema", "#resultado-urls", "#resultado-imagen", "#resultado-audio"].forEach((sel) => { const el = $(sel); if (el) el.innerHTML = ""; });
+  ["#form-tema", "#form-urls", "#form-imagen", "#form-audio"].forEach((sel) => $(sel)?.reset());
+  $("#form-tema button[type=submit]")?.removeAttribute("disabled");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 navegar();
 cargarModelos();
 cargarMundos().then(() => {
