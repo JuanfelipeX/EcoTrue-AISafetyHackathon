@@ -48,8 +48,8 @@ def anclas_de_confianza():
 
 def huella(datos):
     """dHash de 64 bits en hexadecimal (None si no es una imagen legible)."""
-    from PIL import Image
     try:
+        from PIL import Image
         img = Image.open(io.BytesIO(datos)).convert("L").resize((9, 8), Image.Resampling.LANCZOS)
     except Exception:
         return None
