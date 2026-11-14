@@ -23,6 +23,7 @@
     </nav>
     <div class="barra-der">
       <span id="estado-modelo" class="chip" title="Cadena de modelos configurada en .env">cargando modelos…</span>
+      <button id="idioma" class="icono idioma" title="View in English" aria-label="English / Español" data-sin-traducir>EN</button>
       <button id="tema" class="icono" title="Cambiar tema" aria-label="Cambiar tema claro u oscuro">◐</button>
     </div>
   </header>
@@ -159,8 +160,8 @@
           <b>reportería propia</b> de los que <b>solo repiten</b> a otros. No califica medios por reputación: ordena por evidencia.</p>
       </div>
       <form id="form-tema" class="tarjeta form">
-        <label for="tema">Tema o afirmación</label>
-        <input id="tema" required minlength="4" placeholder="Ej.: suspensión de vuelos en Estados Unidos">
+        <label for="tema-texto">Tema o afirmación</label>
+        <input id="tema-texto" required minlength="4" placeholder="Ej.: suspensión de vuelos en Estados Unidos">
         <label for="tema-dias">Período</label>
         <select id="tema-dias"><option value="7">Últimos 7 días</option><option value="30" selected>Últimos 30 días</option><option value="90">Últimos 90 días</option></select>
         <div class="fila-botones"><button type="submit" class="boton-primario">Investigar</button></div>
@@ -176,8 +177,8 @@
       <form id="form-urls" class="tarjeta form">
         <label for="afirmacion">Afirmación</label>
         <input id="afirmacion" required minlength="3" placeholder="Ej.: El acueducto de San Aurelio suspendió el servicio por mercurio.">
-        <label for="urls">URLs (una por línea, máximo 40)</label>
-        <textarea id="urls" rows="6" required placeholder="https://…"></textarea>
+        <label for="lista-urls">URLs (una por línea, máximo 40)</label>
+        <textarea id="lista-urls" rows="6" required placeholder="https://…"></textarea>
         <div class="fila-botones">
           <button type="submit" class="boton-primario">Analizar URLs</button>
           <button type="button" id="ejemplo-urls" class="boton-sec">Cargar un ejemplo del mini-internet</button>
@@ -499,6 +500,8 @@ pip install -r requirements.txt</pre><button class="copiar">Copiar</button></div
 
   <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
   <footer class="pie">ECO · Hackathon Def/Acc · AI Safety Colombia × IEEE CS Uniandes · Frente 4: defensa epistémica · Datos sintéticos y públicos</footer>
+  <script src="/web/i18n.js"></script>
+  <script src="/web/dinamico.js"></script>
   <script src="/web/app.js"></script>
 </body>
 </html>

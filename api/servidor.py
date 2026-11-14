@@ -488,7 +488,7 @@ def panel():
     guardado en la caché de Cloudflare o del navegador."""
     import hashlib
     html = (DIR_WEB / "index.html").read_text(encoding="utf-8")
-    for recurso in ("app.js", "app.css"):
+    for recurso in ("app.js", "app.css", "i18n.js", "dinamico.js"):
         v = hashlib.sha256((DIR_WEB / recurso).read_bytes()).hexdigest()[:10]
         html = html.replace(f'"/web/{recurso}"', f'"/web/{recurso}?v={v}"')
     version_ext = json.loads((RAIZ_PROYECTO / "extension" / "manifest.json").read_text(encoding="utf-8"))["version"]

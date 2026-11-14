@@ -324,7 +324,7 @@ function prepararTema() {
     const cont = $("#resultado-tema");
     cont.innerHTML = `<div class="tarjeta"><p class="nota">Buscando noticias, extrayendo sus datos y comparando quién informa qué… (unos 20 a 40 segundos)</p></div>`;
     try {
-      const res = await api("/api/investigar", { tema: $("#tema").value.trim(), dias: Number($("#tema-dias").value) });
+      const res = await api("/api/investigar", { tema: $("#tema-texto").value.trim(), dias: Number($("#tema-dias").value) });
       cont.innerHTML = `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>` + renderResultado(res);
     } catch (e) {
       cont.innerHTML = `<div class="tarjeta error">${esc(e.message)}</div>`;
@@ -704,11 +704,11 @@ $("#ejemplo-urls").addEventListener("click", () => {
   const m = estado.mundos.find((x) => x.id === "e01-s1") || estado.mundos[0];
   if (!m) return;
   $("#afirmacion").value = m.afirmacion;
-  $("#urls").value = m.paginas.map((p) => p.url).join("\n");
+  $("#lista-urls").value = m.paginas.map((p) => p.url).join("\n");
 });
 $("#form-urls").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const urls = $("#urls").value.split(/\s+/).map((u) => u.trim()).filter(Boolean);
+  const urls = $("#lista-urls").value.split(/\s+/).map((u) => u.trim()).filter(Boolean);
   const cont = $("#resultado-urls");
   const parar = mostrarCarga(cont, urls.length, estado.modelo);
   try {

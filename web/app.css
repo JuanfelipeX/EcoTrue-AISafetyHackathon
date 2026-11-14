@@ -344,3 +344,30 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
 .forense-mapas figcaption { font-size: 12px; color: var(--tinta-2); margin-top: 6px; line-height: 1.4; }
 .forense-mapas figcaption b { display: block; color: var(--tinta); }
 @media (max-width: 640px) { .forense-mapas { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------------- Movimiento ---------------- */
+.animable { opacity: 0; transform: translateY(14px); }
+.animable.aparece { opacity: 1; transform: none; transition: opacity .45s ease, transform .5s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--retardo, 0ms); }
+.tarjeta { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.tarjeta:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(20, 18, 15, .06), 0 12px 30px rgba(20, 18, 15, .08); }
+.boton-primario, .boton-sec, .copiar { transition: transform .12s ease, filter .15s ease, background .15s ease; }
+.boton-primario:active, .boton-sec:active { transform: scale(.97); }
+.pestanas a { transition: background .15s ease, color .15s ease; }
+.icono.idioma { width: auto; padding: 0 9px; font-weight: 700; font-size: 12px; letter-spacing: .5px; }
+#vista-urls > .intro:first-child { position: relative; padding: 26px 28px 26px 150px; border-radius: 18px; overflow: hidden;
+  background: radial-gradient(circle at 70px 50%, var(--acento-suave), transparent 260px), var(--superficie); border: 1px solid var(--borde); max-width: none; }
+#vista-urls > .intro:first-child::before, #vista-urls > .intro:first-child::after { content: ""; position: absolute; left: 46px; top: 50%; width: 48px; height: 48px;
+  margin-top: -24px; border-radius: 50%; border: 3px solid var(--acento); opacity: 0; animation: onda 2.8s ease-out infinite; }
+#vista-urls > .intro:first-child::after { animation-delay: 1.4s; }
+@keyframes onda { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(2.6); opacity: 0; } }
+.nota.cargando-puntos::after, .cargando-puntos::after { content: ""; display: inline-block; width: 1.2em; text-align: left; animation: puntos 1.2s steps(4) infinite; }
+@keyframes puntos { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
+.veredicto .cifra b { display: inline-block; }
+.veredicto.aparece .cifra b { animation: latido .6s ease .3s; }
+@keyframes latido { 0% { transform: scale(1); } 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+@media (max-width: 640px) { #vista-urls > .intro:first-child { padding: 20px 18px 20px 96px; } #vista-urls > .intro:first-child::before, #vista-urls > .intro:first-child::after { left: 26px; } }
+@media (prefers-reduced-motion: reduce) {
+  .animable { opacity: 1 !important; transform: none !important; }
+  #vista-urls > .intro:first-child::before, #vista-urls > .intro:first-child::after { animation: none; opacity: .5; }
+  .tarjeta:hover { transform: none; }
+}
