@@ -188,7 +188,9 @@ def main():
         e_limpio, umbral = eer(punt["limpio"], y_p)
         for c in CONDICIONES:
             e, _ = eer(punt[c], y_p)
-            r[c] = {"eer": e, **exactitud(punt[c], y_p, umbral)}
+            r[c] = {"eer": e, **exactitud(punt[c], y_p, umbral),
+                    "percentiles_reales": np.percentile(punt[c][y_p == 1], [10, 25, 50, 75, 90]).round(3).tolist(),
+                    "percentiles_falsos": np.percentile(punt[c][y_p == 0], [10, 25, 50, 75, 90]).round(3).tolist()}
         r["umbral_calibrado_en_limpio"] = umbral
         resultados["modelos"][nombre] = r
         print(f"  {nombre:<34} " + " · ".join(f"{c}: EER {r[c]['eer']:.1%}" for c in CONDICIONES), flush=True)
