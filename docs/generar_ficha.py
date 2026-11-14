@@ -188,7 +188,14 @@ def main():
         "Chrome</b>, <b>servidor MCP</b> (stdio y HTTP), <b>panel web</b> y <b>API</b>, desplegado en AWS detrás de "
         "Cloudflare, con cliente LLM agnóstico y respuestas en caché para auditoría.", p))
 
-    s.append(Paragraph("3. Cómo se evaluó", h))
+    s.append(Paragraph("3. Arquitectura", h))
+    from docs.arquitectura import diagrama
+    s.append(diagrama(18.0 * cm, N, B, "es"))
+    s.append(Paragraph("Todas las entradas convergen en una afirmación y un mismo motor de evidencia, que sirve a personas (web, "
+                       "extensión) y a agentes (MCP). El LLM solo extrae hechos y lee medios; la decisión de independencia es una "
+                       "regla determinista y auditable.", p))
+
+    s.append(Paragraph("4. Cómo se evaluó", h))
     s.append(Paragraph(
         "Mini-internet sintético con respuesta conocida: <b>desarrollo</b>, 36 mundos de 6 eventos (203 páginas), usado "
         "para diseñar y ajustar ECO; <b>prueba retenida</b>, 18 mundos de 3 eventos nuevos (101 páginas) escritos después "
@@ -198,7 +205,7 @@ def main():
         f"Extractor principal: <b>{args.modelo}</b>, llamado por la CLI de Claude Code sin herramientas y desde una carpeta "
         "vacía (no ve el corpus ni las respuestas).", p))
 
-    s.append(Paragraph("4. Resultados", h))
+    s.append(Paragraph("5. Resultados", h))
     s.append(tabla(filas, [5.0 * cm, 2.1 * cm, 2.4 * cm, 2.6 * cm, 2.6 * cm, 2.8 * cm], negrita_ultimas=2))
     s.append(Spacer(1, 3))
     s.append(Paragraph(
@@ -259,7 +266,7 @@ def main():
             f"personas no vistas al reentrenar (partición por hablante). El control reentrena igual pero solo con audio limpio, "
             "para separar el efecto del códec del ajuste al dominio. Falsos aceptados: con el umbral calibrado en audio limpio.", p))
 
-    s.append(Paragraph("5. Límites", h))
+    s.append(Paragraph("6. Límites", h))
     s.append(Paragraph(
         "<b>Ataque abierto:</b> solo con texto, copias reescritas que inventan detalles se cuentan como independientes; "
         "la procedencia lo detiene si reutilizan la foto firmada, no si fabrican fotos propias sin firma. <b>C2PA</b> "
@@ -271,7 +278,7 @@ def main():
         "páginas relacionadas dentro del mini-internet (el MCP y el panel aceptan URLs arbitrarias). <b>Dependencia del "
         "extractor:</b> con un modelo pequeño los errores de alineación cambian el conteo.", p))
 
-    s.append(Paragraph("6. Riesgo de doble uso", h))
+    s.append(Paragraph("7. Riesgo de doble uso", h))
     s.append(Paragraph(
         "Un atacante podría usar ECO como oráculo para ajustar sus copias hasta que pasen como independientes. "
         "Lo mismo con el detector de voz: un atacante puede iterar su clon hasta que pase. Mitigaciones: límite de "
@@ -280,7 +287,7 @@ def main():
         "El corpus es ficticio, está marcado como sintético y no contiene personas ni medios reales. "
         "No se analizaron sistemas de terceros.", p))
 
-    s.append(Paragraph("7. Reproducibilidad y créditos", h))
+    s.append(Paragraph("8. Reproducibilidad y créditos", h))
     s.append(Paragraph(
         "<font face='Courier'>python -m pruebas.prueba_humo; python -m evaluacion.evaluar --modelo "
         f"{args.modelo} [--conjunto prueba]; python -m evaluacion.evaluar_procedencia; python deteccion_voz/experimento.py"

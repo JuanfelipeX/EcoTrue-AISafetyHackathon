@@ -35,6 +35,7 @@ def main():
     ap.add_argument("--members", default="")
     ap.add_argument("--repo", default="https://github.com/SadidRomero77/eco")
     ap.add_argument("--web", default="https://eco.kibosecondbrain.com")
+    ap.add_argument("--out", default=None, help="nombre del PDF de salida dentro de docs/")
     a = ap.parse_args()
 
     dev = cargar("comparacion_claudecode_sonnet.json")["resumenes"]
@@ -97,7 +98,14 @@ def main():
         "images, voice note, tab capture) and an MCP server (stdio + HTTP, 6 tools), deployed on AWS (Bedrock Claude) behind "
         "Cloudflare with per-IP rate limits, a daily LLM cap and SSRF protection.", p))
 
-    s.append(Paragraph("3. Evaluation design", h))
+    s.append(Paragraph("3. Architecture", h))
+    from docs.arquitectura import diagrama
+    s.append(diagrama(18.6 * cm, N, B, "en"))
+    s.append(Paragraph("Every entry point converges on one claim and one evidence engine; the same engine serves people (web, "
+                       "extension) and agents (MCP). The LLM only extracts facts and reads media; the independence decision is "
+                       "a deterministic, auditable rule.", p))
+
+    s.append(Paragraph("4. Evaluation design", h))
     s.append(Paragraph(
         "Synthetic mini-internet with known ground truth (all outlets fictitious): <b>development</b> 36 worlds (6 events) "
         "used to design and tune ECO; <b>held-out test</b> 18 worlds from 3 new events, written after the last tuning and "
@@ -106,7 +114,7 @@ def main():
         "<b>speaker-disjoint split</b> (train 37 speakers, test 17 speakers, 600 real + 600 fake test clips), Opus at 16 kbps "
         "(voice note) and 8 kbps (bad network); metric: equal error rate (EER).", p))
 
-    s.append(Paragraph("4. Results", h))
+    s.append(Paragraph("5. Results", h))
     rows = [["World type (exact count of independent sources)", "Baseline (dev)", "ECO (dev)", "Baseline (held-out)", "ECO (held-out)"]]
     for t, label in TYPES:
         rows.append([label, pct(exactitud(dev, "linea_base", t)), pct(exactitud(dev, "hibrido", t)),
@@ -160,7 +168,7 @@ def main():
             "makes it nearly flat under compression (+1.7 points clean→8 kbps vs +9.0 for the control) at a small cost on "
             "clean audio. Shown to users as \"probably real / probably synthetic\" with its error rate, never as proof.", p))
 
-    s.append(Paragraph("5. Live test on real news (public server)", h))
+    s.append(Paragraph("6. Live test on real news (public server)", h))
     s.append(Paragraph(
         "Topic <i>\"FAA nationwide ground stop in the US\"</i> (last 7 days): the agent found 10 articles (FAA statement, El País, "
         "BBC, AP, CNN en Español, Telemundo, Infobae, Bloomberg Línea…), Claude Sonnet 4.6 extracted 47 facts in about 30 s, and "
@@ -171,7 +179,7 @@ def main():
         "<i>\"(red light) One single source behind everything: the 5 pages repeat what X published. Many websites saying it does not "
         "make it more reliable.\"</i>", p))
 
-    s.append(Paragraph("6. Limits", h))
+    s.append(Paragraph("7. Limits", h))
     s.append(Paragraph(
         "<b>ECO measures independence and provenance, not truth</b>: several independent sources can be wrong. "
         "<b>Open attack (text only):</b> rewritten copies that invent different details per page count as independent; "
@@ -181,7 +189,7 @@ def main():
         "dates (wire agencies published later may look like copies). <b>Voice</b> evaluated in English on public figures. "
         "<b>CV forensics</b> are experimental and not evaluated. Synthetic benchmark, small n.", p))
 
-    s.append(Paragraph("7. Dual-use risk and mitigations", h))
+    s.append(Paragraph("8. Dual-use risk and mitigations", h))
     s.append(Paragraph(
         "An attacker could use ECO or the voice detector as an oracle to polish copies or clones until they pass. Mitigations: "
         "per-IP rate limits and a daily LLM cap on the public server, no published production thresholds, and priority to "
@@ -189,7 +197,7 @@ def main():
         "verify through another channel, never to accuse a person. The benchmark is fictitious and labeled synthetic; no "
         "third-party systems were tested.", p))
 
-    s.append(Paragraph("8. Reproducibility and credits", h))
+    s.append(Paragraph("9. Reproducibility and credits", h))
     s.append(Paragraph(
         "<font face='Courier'>python -m pruebas.prueba_humo · python -m evaluacion.evaluar --modelo claudecode/sonnet "
         "[--conjunto prueba] · python -m evaluacion.evaluar_procedencia · python deteccion_voz/experimento.py</font>. All "
@@ -197,7 +205,7 @@ def main():
         "(Anthropic), declared as AI-generated material. Data: synthetic corpus; In-the-Wild (CC-BY-SA 4.0); AASIST (MIT, "
         "NAVER). Stack: FastAPI, MCP SDK, c2pa-python, PyTorch, faster-whisper, Amazon Bedrock, Exa, Cloudflare.", p))
 
-    out = RAIZ / "docs" / "ECO_technical_sheet_EN.pdf"
+    out = RAIZ / "docs" / (a.out or "ECO_technical_sheet_EN.pdf")
     SimpleDocTemplate(str(out), pagesize=letter, leftMargin=1.45 * cm, rightMargin=1.45 * cm, topMargin=1.1 * cm,
                       bottomMargin=1.0 * cm, title="ECO — Technical sheet").build(s)
     from pypdf import PdfReader
