@@ -100,6 +100,14 @@ function fraseConclusion(d) {
 }
 
 function pintarResultado(d, api) {
+  if (d.sin_cobertura) {
+    $("#final").innerHTML = `<section class="tarjeta"><div class="mini-conclusion alerta"><b>⚪ Ningún medio lo reporta</b>
+      ${esc(d.nota_web_real || "")} No lo reenvíes hasta que un medio o una fuente oficial lo confirme.</div></section>
+      <button class="grande secundario" id="otra-vez">Analizar de nuevo</button>`;
+    $("#resultado").hidden = false;
+    $("#otra-vez").addEventListener("click", () => { $("#resultado").hidden = true; $("#caja-tema").hidden = false; $("#analizar").disabled = false; });
+    return;
+  }
   const n = d.fuentes_aparentes, k = d.fuentes_efectivas;
   const nivel = n <= 1 ? "medio" : k <= 1 ? "alerta" : k < n ? "medio" : "ok";
   const color = { alerta: "var(--mal)", medio: "var(--medio)", ok: "var(--bien)" }[nivel];

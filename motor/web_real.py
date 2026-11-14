@@ -9,6 +9,7 @@ En ambos casos el resultado separa los medios con reportería propia de los que 
 califica medios por reputación: ordena por evidencia (quién publicó primero, quién aporta datos propios).
 """
 
+import json
 import re
 import urllib.parse
 
@@ -84,6 +85,46 @@ def _emitir_decisiones(res, progreso):
                  fechas=len(pr.get("fechas_imposibles", [])))
 
 
+SISTEMA_RELEVANCIA = (
+    "Eres un verificador. Te dan una afirmación y una lista de notas encontradas por un buscador (título y comienzo del "
+    "texto). Para cada nota decide si informa sobre EL MISMO hecho concreto de la afirmación (mismo suceso, mismo lugar si "
+    "se menciona), no solo un tema parecido. Responde SOLO JSON: {\"relevantes\": [ids], \"motivo\": {\"id\": \"frase corta\"}}.")
+
+
+def filtrar_relevantes(afirmacion, documentos, progreso, modelo=None):
+    """Descarta las notas que el buscador trajo pero que hablan de otra cosa (evita contar fuentes de otro hecho)."""
+    if not documentos:
+        return []
+    from .llm import ClienteLLM
+    lista = [{"id": d.id, "medio": d.sitio, "titulo": d.titulo, "inicio": " ".join(d.parrafos)[:350]} for d in documentos]
+    try:
+        cliente = ClienteLLM(modelo=modelo) if modelo else ClienteLLM()
+        datos, _ = cliente.completar_json(f"Afirmación: {afirmacion}\n\nNotas:\n" + json.dumps(lista, ensure_ascii=False),
+                                          sistema=SISTEMA_RELEVANCIA)
+        ok = {str(x) for x in datos.get("relevantes", [])}
+        motivos = datos.get("motivo", {}) or {}
+    except Exception:
+        return documentos  # si falla el filtro, no se pierde el análisis
+    salida = []
+    for d in documentos:
+        if d.id in ok:
+            salida.append(d)
+            progreso(etapa="relevante", sitio=d.sitio, si=True)
+        else:
+            progreso(etapa="relevante", sitio=d.sitio, si=False, motivo=str(motivos.get(d.id, ""))[:120])
+    return salida
+
+
+def _sin_cobertura(afirmacion, dias, descartadas):
+    return {"modo": "tema", "sin_cobertura": True, "afirmacion": afirmacion, "fuentes_aparentes": 0, "fuentes_efectivas": 0,
+            "grupos": [], "paginas": [], "documentos": [], "hechos": [], "corroborados": [], "de_un_solo_origen": [],
+            "descartadas": descartadas,
+            "nota_web_real": (f"Se buscaron noticias de los últimos {dias} días: " +
+                              (f"{descartadas} hablaban de otra cosa y ninguna informa este hecho." if descartadas
+                               else "no se encontró ninguna nota sobre este hecho.")),
+            "resumen": "Ningún medio encontrado informa este hecho."}
+
+
 def _documentos_con_progreso(consulta, n, progreso, excluir_url=None, dias=None):
     progreso(etapa="buscar", consulta=consulta, dias=dias)
     docs, problema = _documentos_buscados(consulta, n, excluir_url=excluir_url, dias=dias)
@@ -141,6 +182,9 @@ def analizar_pagina_real(url, seleccion=None, urls_extra=None, modelo=None, prog
             continue
     n_citadas = len(documentos) - 1
     buscados, problema = _documentos_con_progreso(afirmacion, 8, progreso, excluir_url=url, dias=45)
+    if buscados:
+        progreso(etapa="filtrar", n=len(buscados))
+        buscados = filtrar_relevantes(afirmacion, buscados, progreso, modelo)
     for d in buscados:
         if d.url not in vistos:
             vistos.add(d.url)
@@ -169,10 +213,16 @@ def investigar_tema(tema, n=10, dias=30, modelo=None, progreso=_nada):
     documentos, problema = _documentos_con_progreso(tema, n, progreso, dias=dias)
     if problema == "sin_buscador":
         raise busqueda.SinBuscador("El buscador de noticias no está configurado en este servidor (falta EXA_API_KEY).")
+    encontrados = len(documentos)
+    if documentos:
+        progreso(etapa="filtrar", n=encontrados)
+        documentos = filtrar_relevantes(tema, documentos, progreso, modelo)
     if not documentos:
-        raise ValueError(f"No se encontraron noticias recientes sobre «{tema}» en los últimos {dias} días.")
+        progreso(etapa="sin_cobertura", descartadas=encontrados)
+        return _sin_cobertura(tema, dias, encontrados)
     res = _analizar_con_progreso(documentos, tema, modelo, progreso)
     res["modo"] = "tema"
+    res["descartadas"] = encontrados - len(documentos)
     res["nota_web_real"] = f"Se analizaron {len(documentos)} noticias de los últimos {dias} días encontradas con el buscador."
     return _finalizar(res, {"buscador": len(documentos)}, problema)
 

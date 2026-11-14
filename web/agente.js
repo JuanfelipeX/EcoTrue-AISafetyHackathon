@@ -78,6 +78,10 @@
             break;
           }
           case "imagenes": agregar("🖼️", "", `Imágenes: ${e.imagenes} revisadas · ${e.confiables} con firma C2PA${e.ia ? ` · ${e.ia} declaradas IA` : ""}${e.rotas ? ` · ${e.rotas} firmas rotas` : ""}${e.fechas ? ` · ${e.fechas} fechas imposibles` : ""}`); break;
+          case "filtrar": agregar("🔍", "", `Revisando si las ${e.n} notas hablan del <b>mismo hecho</b> o solo de un tema parecido`); break;
+          case "relevante": agregar(e.si ? "✓" : "✗", `sub ${e.si ? "propia" : "copia"}`, e.si ? `<b>${esc(e.sitio)}</b> informa este hecho`
+            : `<b>${esc(e.sitio)}</b> descartada: habla de otra cosa <span class="ag-tenue">${esc(e.motivo || "")}</span>`); break;
+          case "sin_cobertura": agregar("⚪", "alerta", "<b>Ningún medio encontrado informa este hecho.</b>"); break;
           case "aviso": agregar("⚠", "alerta", esc(e.texto)); break;
           default: break;
         }

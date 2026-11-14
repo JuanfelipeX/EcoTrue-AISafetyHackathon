@@ -240,6 +240,9 @@ function tarjetaConclusion(c) {
 }
 
 function conclusionNoticia(res) {
+  if (res.sin_cobertura) return { nivel: "alerta", titulo: "⚪ Ningún medio lo reporta",
+    texto: `Buscamos noticias recientes sobre esta afirmación y ninguna la informa${res.descartadas ? ` (${res.descartadas} notas encontradas hablaban de otra cosa)` : ""}. Un mensaje que ningún medio respalda es una señal de alerta.`,
+    consejo: "No lo reenvíes hasta que un medio o una fuente oficial lo confirme." };
   const n = res.fuentes_aparentes, k = res.fuentes_efectivas;
   const origen = (res.grupos || [])[0]?.origen_sitio || "un mismo medio";
   const corro = res.corroborados || [], solos = res.de_un_solo_origen || [];
@@ -397,6 +400,7 @@ function lanzarAgente(cuerpo, titulo, boton, destino = "#resultado-tema") {
     alFin: (res) => {
       bit.terminar(true, `Listo: ${res.fuentes_aparentes} páginas → ${res.fuentes_efectivas} fuente${res.fuentes_efectivas === 1 ? "" : "s"} independiente${res.fuentes_efectivas === 1 ? "" : "s"}`);
       if (boton) boton.disabled = false;
+      if (res.sin_cobertura) { $(`#final-${suf}`).innerHTML = tarjetaConclusion(conclusionNoticia(res)); return; }
       $(`#final-${suf}`).innerHTML = tarjetaConclusion(conclusionNoticia(res))
         + `<div class="tarjeta"><h2>Grafo de procedencia</h2><p class="nota">Cada columna es una fuente independiente; las líneas van de la publicación original a quien la repite. Toca un nodo.</p><div id="grafo-${suf}"></div></div>`
         + `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>`
@@ -449,6 +453,11 @@ function prepararEntradas() {
       cont.innerHTML = `<div class="tarjeta error">${esc(e.message)}</div>`;
     }
   };
+  $$("[data-nota-ejemplo]").forEach((b) => b.addEventListener("click", async () => {
+    const ruta = b.dataset.notaEjemplo;
+    const blob = await (await fetch(ruta)).blob();
+    analizarNota(blob, ruta.split("/").pop());
+  }));
   $("#form-voz-nota").addEventListener("submit", (ev) => {
     ev.preventDefault();
     const f = $("#archivo-nota").files[0];
