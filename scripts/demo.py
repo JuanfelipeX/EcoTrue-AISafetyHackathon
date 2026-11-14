@@ -81,12 +81,9 @@ def main():
         if chrome:
             perfil = DIR_NAVEGADOR / "perfil"
             perfil.mkdir(parents=True, exist_ok=True)
-            # La extensión lee el servidor de config.js; si el puerto no es el de siempre, se lo indicamos.
-            config = DIR_EXTENSION / "config.js"
-            texto = config.read_text(encoding="utf-8")
-            if f"localhost:{args.puerto}" not in texto:
-                print("Aviso: la extensión apunta por defecto a http://localhost:8765. "
-                      "Cámbielo en el popup → «Servidor de ECO».")
+            # La extensión detecta sola el servidor en 8765, 8766, 8770 u 8000; otro puerto se fija en el popup.
+            if args.puerto not in (8765, 8766, 8770, 8000):
+                print(f"Aviso: en el popup de la extensión → «Servidor de ECO» escriba {base}")
             subprocess.Popen([str(chrome), f"--user-data-dir={perfil}", f"--load-extension={DIR_EXTENSION}",
                               "--no-first-run", "--no-default-browser-check",
                               f"{base}/", f"{base}/sitios/e01-s1/e01-s1-p03.html"])
