@@ -55,17 +55,21 @@ T = {
               "recibe y reenvía rumores, sobre todo en América Latina, donde circulan por WhatsApp, que borra los metadatos. Los "
               "verificadores no escalan y los detectores de voz de laboratorio fallan con audio comprimido.",
         "s2_t": "2. Lo que construimos",
-        "s2": "ECO no dice qué es verdad: mide cuánta evidencia independiente hay y de dónde viene. Un modelo (Claude en Amazon "
-              "Bedrock) extrae los datos verificables de cada página; luego una <b>regla auditable, sin LLM</b>, recorre las páginas "
-              "en orden cronológico y solo cuenta como fuente a la que aporta al menos un dato que nadie había publicado. Dos "
-              "refuerzos: las <b>firmas C2PA</b> y una huella visual de cada foto delatan copias que reutilizan una imagen ajena o "
-              "fingen una fecha anterior, y un <b>detector AASIST-L</b> que reentrenamos con compresión tipo WhatsApp estima si una voz "
-              "es sintética. Se usa en la web (español e inglés), en una extensión de Chrome o desde cualquier agente vía MCP. "
-              "Entra un tema, una URL, una nota de voz o una captura; sale una conclusión en una frase, el árbol de origen y la "
-              "fuente recomendada para leer primero.",
-        "fig": "<b>Figura 1.</b> Arquitectura de ECO. Cuatro tipos de entrada pasan por una ingesta segura y un motor de cinco "
-               "pasos; el resultado llega a la web, la extensión, el servidor MCP y un informe para compartir. Corre en AWS detrás "
-               "de Cloudflare.",
+        "s2": (
+            "ECO es <b>un agente investigador</b>, no multiagente: un código orquesta sus pasos y el agente usa herramienta"
+            "s. Busca notas recientes con la <b>API de Exa</b>, descarta las que hablan de otro hecho y Claude (en Amazon B"
+            "edrock) extrae los datos verificables de cada una. Luego una <b>regla auditable, sin LLM</b>, recorre las nota"
+            "s por fecha y solo cuenta como fuente a la que aporta un dato nuevo. Además, las <b>firmas C2PA</b> y una huel"
+            "la visual delatan fotos ajenas o fechas falsas, y un <b>detector AASIST-L</b> reentrenado con compresión tipo "
+            "WhatsApp evalúa la voz. Entra un tema, una URL, una nota de voz (Whisper) o una captura (Claude visión); sale "
+            "una conclusión, el árbol de origen y la fuente recomendada para leer primero. Funciona en la web, una extensió"
+            "n de Chrome o como <b>servidor MCP con 6 herramientas</b>, para que otro agente verifique antes de decir «conf"
+            "irmado»."),
+        "fig": (
+            "<b>Figura 1.</b> Arquitectura de ECO: un solo agente orquestado por código. Cuatro tipos de entrada pasan por "
+            "una ingesta segura (búsqueda con Exa, transcripción con Whisper, lectura de capturas con Claude) y un motor de"
+            " cinco pasos; el resultado llega a la web, la extensión, el servidor MCP y un informe para compartir. Corre en"
+            " AWS detrás de Cloudflare."),
         "s3_t": "3. Cómo lo evaluamos",
         "s3": "Creamos «mundos» sintéticos (medios, personas y lugares ficticios), cada uno con su respuesta correcta guardada "
               "aparte: 36 para ajustar, 18 de eventos nuevos como examen final evaluado una sola vez, y 12 con fotos firmadas. "
@@ -116,16 +120,20 @@ T = {
               "receives and forwards rumors, especially in Latin America, where they spread on WhatsApp, which strips metadata. "
               "Human fact-checkers do not scale, and lab-trained voice detectors fail on compressed audio.",
         "s2_t": "2. What we built",
-        "s2": "ECO does not say what is true: it measures how much independent evidence exists and where it comes from. A model "
-              "(Claude on Amazon Bedrock) extracts the checkable facts on each page; then an <b>auditable, LLM-free rule</b> walks "
-              "the pages in chronological order and counts a page as a source only if it adds at least one fact nobody had "
-              "published before. Two reinforcements: <b>C2PA signatures</b> and a perceptual hash of each photo expose copies that "
-              "reuse another outlet's image or fake an earlier date, and an <b>AASIST-L detector</b> we retrained with WhatsApp-like "
-              "compression estimates whether a voice is synthetic. It runs on the web (Spanish and English), as a Chrome "
-              "extension, or from any agent via MCP. Input: a topic, URL, voice note or screenshot. Output: a one-sentence "
-              "verdict, the origin tree and the recommended source to read first.",
-        "fig": "<b>Figure 1.</b> ECO architecture. Four input types go through safe ingestion and a five-step engine; results reach "
-               "the web app, the extension, the MCP server and a shareable report. Runs on AWS behind Cloudflare.",
+        "s2": (
+            "ECO is <b>a single investigating agent</b>, not a multi-agent system: code orchestrates its steps and the agen"
+            "t calls tools. It searches recent news with the <b>Exa API</b>, discards articles about a different event, and"
+            " a model (Claude on Amazon Bedrock) extracts the checkable facts in each one. Then an <b>auditable, LLM-free r"
+            "ule</b> walks the articles in chronological order and counts one as a source only if it adds a new fact. Two r"
+            "einforcements: <b>C2PA signatures</b> and a perceptual hash expose reused photos or fake dates, and an <b>AASI"
+            "ST-L detector</b> retrained with WhatsApp-like compression checks the voice. Input: a topic, URL, voice note ("
+            "Whisper) or screenshot (Claude vision). Output: a one-sentence verdict, the origin tree and the recommended so"
+            "urce to read first. It runs on the web, as a Chrome extension or as an <b>MCP server with 6 tools</b>, so othe"
+            "r agents can check before saying \"confirmed\"."),
+        "fig": (
+            "<b>Figure 1.</b> ECO architecture: a single agent orchestrated by code. Four input types go through safe inges"
+            "tion (Exa search, Whisper transcription, Claude reading screenshots) and a five-step engine; results reach the"
+            " web app, the extension, the MCP server and a shareable report. Runs on AWS behind Cloudflare."),
         "s3_t": "3. How we evaluated it",
         "s3": "We built synthetic \"worlds\" (fictitious outlets, people and places), each with its ground truth stored apart: 36 "
               "for tuning, 18 from new events as a final exam evaluated once, and 12 with signed photos. The baseline groups pages "
@@ -174,9 +182,9 @@ def registrar():
     pdfmetrics.registerFontFamily("Sans", normal="Sans", bold="SansB", italic="SansI", boldItalic="SansBI")
 
 
-def construir(idioma, contacto):
+def construir(idioma, contacto, sufijo=""):
     t = T[idioma]
-    salida = RAIZ / t["archivo"]
+    salida = RAIZ / t["archivo"].replace(".pdf", f"{sufijo}.pdf")
     doc = SimpleDocTemplate(str(salida), pagesize=letter, leftMargin=2.1 * cm, rightMargin=2.1 * cm,
                             topMargin=1.7 * cm, bottomMargin=1.6 * cm, title=f"ECO · {t['cabecera']}",
                             author="ECO TRACE Team")
@@ -236,10 +244,11 @@ def construir(idioma, contacto):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--contacto", default="", help="correo de contacto del equipo (no se guarda en el repositorio)")
+    ap.add_argument("--sufijo", default="", help="sufijo del nombre del PDF (si el anterior está abierto en el visor)")
     a = ap.parse_args()
     registrar()
     for idioma in ("es", "en"):
-        salida, paginas, conteo = construir(idioma, a.contacto)
+        salida, paginas, conteo = construir(idioma, a.contacto, a.sufijo)
         print(idioma, salida.name, "páginas:", paginas, "palabras:", conteo, "total:", sum(conteo.values()))
 
 
