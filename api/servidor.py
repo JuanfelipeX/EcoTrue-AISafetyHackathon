@@ -66,6 +66,19 @@ def _ip_cliente(request):
 
 
 @app.middleware("http")
+async def _cabeceras_cache(request: Request, call_next):
+    """Cloudflare guarda .js/.css/.zip por 4 h si el origen no dice nada. El panel y la extensión cambian con cada
+    despliegue: los recursos versionados (?v=) se pueden guardar; lo demás se revalida siempre."""
+    respuesta = await call_next(request)
+    ruta = request.url.path
+    if ruta.startswith("/web/") and request.url.query.startswith("v="):
+        respuesta.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+    elif ruta.startswith(("/web/", "/api/", "/descargas/", "/mcp")) or ruta == "/":
+        respuesta.headers["Cache-Control"] = "no-store" if ruta.startswith(("/api/", "/descargas/", "/mcp")) else "no-cache"
+    return respuesta
+
+
+@app.middleware("http")
 async def _modo_publico(request: Request, call_next):
     if not config.modo_publico:
         return await call_next(request)
@@ -378,4 +391,14 @@ def internet():
 
 @app.get("/")
 def panel():
-    return FileResponse(DIR_WEB / "index.html")
+    """index.html con los recursos versionados por contenido: un despliegue nuevo nunca usa un app.js viejo
+    guardado en la caché de Cloudflare o del navegador."""
+    import hashlib
+    html = (DIR_WEB / "index.html").read_text(encoding="utf-8")
+    for recurso in ("app.js", "app.css"):
+        v = hashlib.sha256((DIR_WEB / recurso).read_bytes()).hexdigest()[:10]
+        html = html.replace(f'"/web/{recurso}"', f'"/web/{recurso}?v={v}"')
+    version_ext = json.loads((RAIZ_PROYECTO / "extension" / "manifest.json").read_text(encoding="utf-8"))["version"]
+    html = html.replace('"/descargas/eco-extension.zip"', f'"/descargas/eco-extension.zip?v={version_ext}"')
+    html = html.replace('<span id="version-extension">1.3</span>', f'<span id="version-extension">{version_ext}</span>')
+    return Response(html, media_type="text/html; charset=utf-8", headers={"Cache-Control": "no-cache"})
