@@ -19,6 +19,7 @@ Endpoints:
   POST /api/analizar_mundo                 {mundo_id, metodo?, modelo?}  ECO + línea base lado a lado
   POST /api/analizar_pagina                {url, seleccion?, metodo?}  (usado por la extensión)
   GET  /descargas/eco-extension.zip        la extensión de Chrome lista para instalar
+  POST /api/analizar_audio                 {url} o {datos_base64, nombre}: ¿voz clonada? (C2PA + AASIST-L)
   POST /api/verificar_imagen               {url} o {datos_base64, nombre}: procedencia C2PA de una imagen
   GET  /api/resultados                     resultados guardados de la evaluación y de la demo del agente
   POST /mcp                                servidor MCP por HTTP (Streamable HTTP) para agentes remotos
@@ -114,6 +115,12 @@ class PeticionMundo(BaseModel):
 class PeticionImagen(BaseModel):
     url: str | None = None
     datos_base64: str | None = Field(None, max_length=12_000_000)
+    nombre: str | None = None
+
+
+class PeticionAudio(BaseModel):
+    url: str | None = None
+    datos_base64: str | None = Field(None, max_length=15_000_000)
     nombre: str | None = None
 
 
@@ -256,6 +263,37 @@ def verificar_imagen(p: PeticionImagen):
     info["nombre"] = nombre.rsplit("/", 1)[-1]
     info["bytes"] = len(datos)
     return info
+
+
+@app.post("/api/analizar_audio")
+def analizar_audio(p: PeticionAudio):
+    """¿Voz clonada? Primero credenciales C2PA del archivo; si no hay, el detector AASIST-L reentrenado por ECO."""
+    import base64
+    from motor import procedencia, voz
+    if p.datos_base64:
+        try:
+            datos = base64.b64decode(p.datos_base64.split(",")[-1], validate=False)
+        except Exception:
+            raise HTTPException(400, "El archivo no es válido.")
+        nombre = p.nombre or "audio.webm"
+    elif p.url:
+        try:
+            datos = procedencia._bytes_imagen(p.url)
+        except Exception as e:
+            raise HTTPException(400, f"No se pudo descargar el audio: {e}")
+        nombre = p.url.split("?")[0].rsplit("/", 1)[-1]
+    else:
+        raise HTTPException(400, "Envíe una URL o un archivo.")
+    try:
+        return voz.analizar_audio(datos, nombre)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+
+
+@app.get("/api/voz/estado")
+def voz_estado():
+    from motor import voz
+    return {"disponible": voz.disponible(), "calibracion": voz.calibracion()}
 
 
 @lru_cache(maxsize=1)

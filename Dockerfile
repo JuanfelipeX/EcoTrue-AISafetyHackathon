@@ -2,8 +2,9 @@
 FROM python:3.11-slim
 ENV PYTHONUNBUFFERED=1 PYTHONIOENCODING=utf-8 PIP_NO_CACHE_DIR=1
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt requirements-voz.txt ./
+RUN pip install -r requirements.txt && pip install -r requirements-voz.txt --extra-index-url https://download.pytorch.org/whl/cpu
 COPY . .
 RUN useradd --create-home eco && chown -R eco /app/.cache
 USER eco

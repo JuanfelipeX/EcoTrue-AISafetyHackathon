@@ -398,6 +398,73 @@ function prepararVerificador() {
   });
 }
 
+// ---------------- ¿voz clonada? ----------------
+function pintarAudio(r) {
+  const cont = $("#resultado-audio");
+  if (r.error || r.detail) { cont.innerHTML = `<div class="tarjeta error">${esc(r.error || r.detail)}</div>`; return; }
+  const d = r.detector || {};
+  const clase = { sintetica: "alerta", real: "ok", incierto: "medio" }[d.veredicto] || "neutro";
+  const titulo = { sintetica: "⚠ Parece voz sintética", real: "✓ Parece voz real", incierto: "◐ No concluyente",
+                   no_disponible: "Detector no disponible" }[d.veredicto] || "Resultado";
+  const eer = d.error_de_referencia || {};
+  cont.innerHTML = `<div class="tarjeta c2pa-resultado">
+    <div><span class="c2pa-chip ${clase}" style="font-size:13px;padding:6px 10px">${titulo}</span></div>
+    <p style="margin:10px 0 6px"><b>${esc(r.conclusion || "")}</b></p>
+    <dl class="c2pa-datos">
+      <dt>Credenciales C2PA</dt><dd>${chipEstado(r.procedencia || { estado: "error" })}${r.procedencia?.firmante ? ` firmó <b>${esc(r.procedencia.firmante)}</b>` : ""}</dd>
+      <dt>Detector</dt><dd>${esc(d.modelo || "—")}</dd>
+      <dt>Analizado</dt><dd>${d.segundos_analizados ?? "—"} s en ${d.ventanas ?? "—"} ventanas de 4 s</dd>
+      <dt>Puntaje (umbral ${d.umbral ?? "—"})</dt><dd>${d.puntaje ?? "—"} <span class="nota">(mayor = más parecido a voz real)</span></dd>
+      ${Object.keys(eer).length ? `<dt>Error de referencia (EER)</dt><dd>${Object.entries(eer).map(([k, v]) => `${esc(k)}: ${(v * 100).toFixed(1)} %`).join(" · ")}</dd>` : ""}
+    </dl>
+    <p class="nota" style="margin-top:12px">${esc(r.aviso || "")}</p></div>`;
+}
+
+async function enviarAudio(blob, nombre) {
+  if (blob.size > 10 * 1024 * 1024) { pintarAudio({ error: "El audio supera 10 MB." }); return; }
+  $("#resultado-audio").innerHTML = `<div class="tarjeta"><p class="nota">Analizando el audio…</p></div>`;
+  const lector = new FileReader();
+  lector.onload = async () => {
+    try { pintarAudio(await api("/api/analizar_audio", { datos_base64: lector.result, nombre })); }
+    catch (e) { pintarAudio({ error: e.message }); }
+  };
+  lector.readAsDataURL(blob);
+}
+
+function prepararAudio() {
+  const form = $("#form-audio");
+  if (!form) return;
+  form.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const f = $("#archivo-audio").files[0];
+    if (f) enviarAudio(f, f.name);
+  });
+  $("#grabar-audio").addEventListener("click", async (ev) => {
+    const boton = ev.currentTarget;
+    if (!navigator.mediaDevices?.getUserMedia) { pintarAudio({ error: "Este navegador no permite grabar audio." }); return; }
+    try {
+      const flujo = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const grabador = new MediaRecorder(flujo);
+      const trozos = [];
+      grabador.ondataavailable = (e) => trozos.push(e.data);
+      grabador.onstop = () => {
+        flujo.getTracks().forEach((t) => t.stop());
+        boton.disabled = false;
+        boton.textContent = "● Grabar 8 segundos con el micrófono";
+        enviarAudio(new Blob(trozos, { type: grabador.mimeType }), "grabacion.webm");
+      };
+      boton.disabled = true;
+      let quedan = 8;
+      boton.textContent = `Grabando… ${quedan} s`;
+      const reloj = setInterval(() => { quedan -= 1; boton.textContent = `Grabando… ${quedan} s`; if (quedan <= 0) clearInterval(reloj); }, 1000);
+      grabador.start();
+      setTimeout(() => grabador.stop(), 8000);
+    } catch (e) {
+      pintarAudio({ error: "No se pudo usar el micrófono: " + e.message });
+    }
+  });
+}
+
 function listaSimple(items) {
   if (!items || !items.length) return `<p class="vacia">Ninguno.</p>`;
   return `<ul>${items.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`;
@@ -779,6 +846,7 @@ function prepararInstalar() {
 }
 prepararInstalar();
 prepararVerificador();
+prepararAudio();
 navegar();
 cargarModelos();
 cargarMundos().then(() => {

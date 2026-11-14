@@ -12,6 +12,7 @@ Herramientas:
   buscar_en_mini_internet(consulta)          encuentra mundos del laboratorio sintético
   analizar_mundo(mundo_id)                   analiza un mundo completo del laboratorio
   verificar_procedencia(url_imagen)          firma C2PA de una imagen: quién la firmó, cuándo, si se declara IA
+  evaluar_audio(url_audio)                   ¿voz clonada? credenciales C2PA y detector AASIST-L
 """
 
 import sys
@@ -135,6 +136,25 @@ def verificar_procedencia(url_imagen: str) -> dict:
         "ausente": "No trae credenciales de contenido (lo normal en internet hoy).",
     }.get(info["estado"], "No se pudo verificar.")
     return info
+
+
+@mcp.tool()
+def evaluar_audio(url_audio: str) -> dict:
+    """Estima si un audio de voz es sintético (clonado o generado con IA).
+
+    Primero revisa credenciales de contenido C2PA del archivo; si no hay, usa el detector AASIST-L reentrenado por ECO
+    con audio comprimido como el de las notas de voz. Devuelve veredicto (real / sintetica / incierto), puntaje y el
+    error de referencia del detector. Es una alerta, no una prueba: recomiende verificar por otro canal.
+    """
+    from motor import voz
+    try:
+        datos = procedencia._bytes_imagen(url_audio)
+    except Exception as e:
+        return {"error": f"No se pudo descargar el audio: {type(e).__name__}: {e}"}
+    try:
+        return voz.analizar_audio(datos, url_audio.split("?")[0].rsplit("/", 1)[-1])
+    except ValueError as e:
+        return {"error": str(e)}
 
 
 def main():

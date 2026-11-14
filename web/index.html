@@ -169,6 +169,23 @@
         </div>
       </form>
       <div id="resultado-imagen" class="resultado"></div>
+
+      <div class="intro" style="margin-top:28px">
+        <h1>¿Es una voz clonada?</h1>
+        <p>Primero se revisan las credenciales de contenido del archivo. Si no tiene (lo normal, y las notas de voz de WhatsApp
+          nunca las conservan), un detector <b>AASIST-L</b> reentrenado por ECO con audio comprimido estima si la voz es sintética.
+          Es una alerta para verificar por otro canal, no una prueba.</p>
+      </div>
+      <form id="form-audio" class="tarjeta form">
+        <label for="archivo-audio">Sube un audio (WAV, MP3, M4A, OGG, OPUS o WebM; máximo 10 MB, se analizan 30 s)</label>
+        <input id="archivo-audio" type="file" accept="audio/*,.opus,.ogg,.m4a,.webm">
+        <div class="fila-botones">
+          <button type="submit" class="boton-primario">Analizar audio</button>
+          <button type="button" id="grabar-audio" class="boton-sec">● Grabar 8 segundos con el micrófono</button>
+        </div>
+        <p class="nota" style="margin-top:12px">El audio se procesa en el servidor de ECO y no se guarda. No subas grabaciones de otras personas sin su permiso.</p>
+      </form>
+      <div id="resultado-audio" class="resultado"></div>
     </section>
 
     <!-- ================= COMO FUNCIONA ================= -->
