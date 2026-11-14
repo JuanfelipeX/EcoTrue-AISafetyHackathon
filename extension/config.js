@@ -1,15 +1,13 @@
-// Dirección del servidor de ECO (uvicorn api.servidor:app --port 8765).
-// Si el usuario la fijó en el popup ("Servidor de ECO") se usa esa; si no, se busca un servidor de ECO
-// vivo en los puertos habituales y, si no hay ninguno local, se usa el servidor público de ECO en AWS.
+// Servidor de ECO. Por defecto, el público (https://eco.kibosecondbrain.com). Solo se usa otro si la persona lo
+// fija en Ajustes → «Servidor de ECO» (por ejemplo, uno local para desarrollo). Si el fijado no responde, se vuelve
+// al público para que la extensión nunca quede inservible.
 const ECO_API_PUBLICA = "https://eco.kibosecondbrain.com";
 const ECO_API_DEFECTO = ECO_API_PUBLICA;
-const ECO_CANDIDATOS = ["http://localhost:8765", "http://localhost:8766", "http://localhost:8770", "http://localhost:8000",
-                        ECO_API_PUBLICA, "https://ecolab.kibosecondbrain.com"];
 
 async function ecoVivo(base) {
   try {
     const control = new AbortController();
-    const reloj = setTimeout(() => control.abort(), 800);
+    const reloj = setTimeout(() => control.abort(), 1500);
     const r = await fetch(`${base}/api/salud`, { signal: control.signal });
     clearTimeout(reloj);
     return r.ok && (await r.json()).estado === "ok";
@@ -23,9 +21,9 @@ async function ecoApi() {
   try {
     fijado = (await chrome.storage.local.get("ecoApi")).ecoApi || null;
   } catch (_) { /* sin almacenamiento */ }
-  if (fijado) return fijado.replace(/\/+$/, "");
-  for (const base of ECO_CANDIDATOS) {
-    if (await ecoVivo(base)) return base;
+  if (fijado) {
+    fijado = fijado.replace(/\/+$/, "");
+    if (fijado === ECO_API_PUBLICA || await ecoVivo(fijado)) return fijado;
   }
-  return ECO_API_DEFECTO;
+  return ECO_API_PUBLICA;
 }

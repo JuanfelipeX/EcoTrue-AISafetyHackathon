@@ -161,6 +161,27 @@
         <p>Escribe un tema o una afirmación. ECO busca noticias recientes, extrae sus datos y separa a los medios con
           <b>reportería propia</b> de los que <b>solo repiten</b> a otros. No califica medios por reputación: ordena por evidencia.</p>
       </div>
+      <div class="segmentado modos-entrada" id="modo-entrada" role="tablist" aria-label="Qué quieres verificar">
+        <button data-v="tema" class="activo">🌐 Tema o noticia</button>
+        <button data-v="voz">🎙️ Nota de voz</button>
+        <button data-v="captura">🖼️ Captura de pantalla</button>
+      </div>
+      <form id="form-voz-nota" class="tarjeta form" hidden>
+        <label for="archivo-nota">Sube la nota de voz (WhatsApp .ogg/.opus, .mp3, .m4a…) o grábala</label>
+        <input id="archivo-nota" type="file" accept="audio/*,.opus,.ogg,.m4a,.webm">
+        <div class="fila-botones">
+          <button type="submit" class="boton-primario">Escuchar y verificar</button>
+          <button type="button" id="grabar-nota" class="boton-sec">● Grabar 10 segundos</button>
+        </div>
+        <p class="nota">ECO la transcribe, saca la afirmación central, revisa si la voz parece clonada y busca qué fuentes la respaldan.</p>
+      </form>
+      <form id="form-captura" class="tarjeta form" hidden>
+        <label for="archivo-captura">Sube una captura de pantalla (un tuit, un titular, un mensaje reenviado)</label>
+        <input id="archivo-captura" type="file" accept="image/*">
+        <div class="fila-botones"><button type="submit" class="boton-primario">Leer y verificar</button></div>
+        <p class="nota">ECO lee el texto de la imagen, saca la afirmación central, revisa si la imagen fue generada o alterada y busca qué fuentes la respaldan.</p>
+      </form>
+      <div id="resultado-entrada" class="resultado"></div>
       <form id="form-tema" class="tarjeta form">
         <label for="tema-texto">Tema, afirmación o URL de una noticia</label>
         <input id="tema-texto" required minlength="4" placeholder="Ej.: suspensión de vuelos en Estados Unidos, o https://…">

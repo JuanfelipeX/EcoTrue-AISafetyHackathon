@@ -64,6 +64,12 @@ async function prepararServidor() {
   $("#servidor").value = api;
   $("#abrir-panel").href = `${api}/`;
   $("#abrir-instalar").href = `${api}/#instalar`;
+  $("#servidor-publico").addEventListener("click", async () => {
+    try { await chrome.storage.local.remove("ecoApi"); } catch (_) { /* nada */ }
+    $("#servidor").value = ECO_API_PUBLICA;
+    $("#estado-servidor").textContent = "Listo: se usa el servidor público.";
+    cargarModelos();
+  });
   $("#guardar-servidor").addEventListener("click", async () => {
     const valor = $("#servidor").value.trim().replace(/\/+$/, "") || ECO_API_DEFECTO;
     $("#estado-servidor").textContent = "Probando…";

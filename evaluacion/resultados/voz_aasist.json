@@ -1,0 +1,264 @@
+{
+  "datos": {
+    "hablantes_total": 54,
+    "hablantes_entreno": 37,
+    "hablantes_prueba": 17,
+    "prueba": {
+      "reales": 600,
+      "falsos": 600
+    },
+    "entreno": {
+      "reales": 600,
+      "falsos": 600
+    },
+    "clips_totales_dataset": 31779
+  },
+  "condiciones": {
+    "opus_16k": "Opus 16 kbps mono 16 kHz voip (nota de voz)",
+    "opus_8k": "Opus 8 kbps (red mala)"
+  },
+  "modelos": {
+    "AASIST-L preentrenado": {
+      "limpio": {
+        "eer": 0.485,
+        "exactitud": 0.515,
+        "falsos_aceptados_como_reales": 0.485,
+        "percentiles_reales": [
+          -8.913,
+          -6.389,
+          -2.046,
+          1.494,
+          4.627
+        ],
+        "percentiles_falsos": [
+          -6.974,
+          -4.883,
+          -2.695,
+          -0.41,
+          1.774
+        ]
+      },
+      "opus_16k": {
+        "eer": 0.4966666666666667,
+        "exactitud": 0.5275,
+        "falsos_aceptados_como_reales": 0.39666666666666667,
+        "percentiles_reales": [
+          -9.695,
+          -7.346,
+          -3.072,
+          0.293,
+          3.395
+        ],
+        "percentiles_falsos": [
+          -7.467,
+          -5.54,
+          -3.251,
+          -1.017,
+          1.333
+        ]
+      },
+      "opus_8k": {
+        "eer": 0.5566666666666666,
+        "exactitud": 0.5083333333333333,
+        "falsos_aceptados_como_reales": 0.255,
+        "percentiles_reales": [
+          -11.368,
+          -9.117,
+          -6.218,
+          -2.212,
+          0.256
+        ],
+        "percentiles_falsos": [
+          -8.628,
+          -6.741,
+          -4.766,
+          -2.486,
+          -0.226
+        ]
+      },
+      "umbral_calibrado_en_limpio": -2.5380353927612305
+    },
+    "AASIST preentrenado": {
+      "limpio": {
+        "eer": 0.4966666666666667,
+        "exactitud": 0.5033333333333333,
+        "falsos_aceptados_como_reales": 0.49666666666666665,
+        "percentiles_reales": [
+          -8.253,
+          -5.304,
+          -0.827,
+          2.773,
+          5.077
+        ],
+        "percentiles_falsos": [
+          -5.03,
+          -3.053,
+          -0.888,
+          0.948,
+          2.642
+        ]
+      },
+      "opus_16k": {
+        "eer": 0.5416666666666667,
+        "exactitud": 0.4891666666666667,
+        "falsos_aceptados_como_reales": 0.43333333333333335,
+        "percentiles_reales": [
+          -8.891,
+          -6.355,
+          -2.178,
+          1.611,
+          4.167
+        ],
+        "percentiles_falsos": [
+          -5.813,
+          -3.619,
+          -1.327,
+          0.602,
+          2.252
+        ]
+      },
+      "opus_8k": {
+        "eer": 0.5666666666666667,
+        "exactitud": 0.495,
+        "falsos_aceptados_como_reales": 0.295,
+        "percentiles_reales": [
+          -9.641,
+          -7.863,
+          -4.202,
+          -0.432,
+          1.86
+        ],
+        "percentiles_falsos": [
+          -6.819,
+          -4.802,
+          -2.383,
+          -0.434,
+          1.511
+        ]
+      },
+      "umbral_calibrado_en_limpio": -0.8810635805130005
+    },
+    "AASIST-L reentrenado (solo limpio)": {
+      "limpio": {
+        "eer": 0.2466666666666667,
+        "exactitud": 0.7533333333333333,
+        "falsos_aceptados_como_reales": 0.24666666666666667,
+        "percentiles_reales": [
+          -7.123,
+          -3.74,
+          1.433,
+          5.061,
+          8.192
+        ],
+        "percentiles_falsos": [
+          -13.057,
+          -10.477,
+          -7.634,
+          -3.827,
+          1.532
+        ]
+      },
+      "opus_16k": {
+        "eer": 0.2583333333333333,
+        "exactitud": 0.7316666666666667,
+        "falsos_aceptados_como_reales": 0.23,
+        "percentiles_reales": [
+          -8.198,
+          -4.659,
+          -0.074,
+          3.885,
+          7.362
+        ],
+        "percentiles_falsos": [
+          -13.546,
+          -10.728,
+          -7.829,
+          -4.318,
+          1.764
+        ]
+      },
+      "opus_8k": {
+        "eer": 0.33666666666666667,
+        "exactitud": 0.6133333333333333,
+        "falsos_aceptados_como_reales": 0.135,
+        "percentiles_reales": [
+          -13.022,
+          -9.975,
+          -5.957,
+          -1.641,
+          3.041
+        ],
+        "percentiles_falsos": [
+          -16.253,
+          -13.845,
+          -10.693,
+          -6.882,
+          -2.536
+        ]
+      },
+      "umbral_calibrado_en_limpio": -3.807938575744629
+    },
+    "AASIST-L reentrenado (con códec)": {
+      "limpio": {
+        "eer": 0.28833333333333333,
+        "exactitud": 0.7116666666666667,
+        "falsos_aceptados_como_reales": 0.28833333333333333,
+        "percentiles_reales": [
+          -5.958,
+          -2.163,
+          2.375,
+          6.405,
+          9.424
+        ],
+        "percentiles_falsos": [
+          -10.598,
+          -8.16,
+          -5.031,
+          -0.405,
+          5.768
+        ]
+      },
+      "opus_16k": {
+        "eer": 0.2866666666666666,
+        "exactitud": 0.71,
+        "falsos_aceptados_como_reales": 0.265,
+        "percentiles_reales": [
+          -6.171,
+          -2.64,
+          1.706,
+          5.826,
+          8.744
+        ],
+        "percentiles_falsos": [
+          -10.937,
+          -8.251,
+          -5.179,
+          -0.998,
+          5.669
+        ]
+      },
+      "opus_8k": {
+        "eer": 0.30500000000000005,
+        "exactitud": 0.6566666666666666,
+        "falsos_aceptados_como_reales": 0.23333333333333334,
+        "percentiles_reales": [
+          -8.009,
+          -4.357,
+          -0.692,
+          3.313,
+          6.489
+        ],
+        "percentiles_falsos": [
+          -13.025,
+          -9.591,
+          -6.203,
+          -2.076,
+          3.929
+        ]
+      },
+      "umbral_calibrado_en_limpio": -1.297083854675293
+    }
+  },
+  "umbral_mitigado": -1.297083854675293,
+  "segundos": 3881
+}

@@ -1,8 +1,8 @@
 {
-  "pesos": "AASIST-L.pth",
-  "umbral": 0.0,
-  "banda": 1.0,
-  "eer": {"limpio": 0.485, "opus_16k": 0.497, "opus_8k": 0.557},
-  "confiable": false,
-  "nota": "AASIST-L preentrenado en ASVspoof 2019. En audio real (In-the-Wild, 1.200 audios de 17 personas) se equivoca como el azar: no sirve todavía para decidir. Se reemplaza por la versión reentrenada por ECO cuando termine el experimento."
+  "pesos": "AASIST-L_eco_codec.pth",
+  "umbral": -1.3,
+  "banda": 1.5,
+  "eer": {"limpio": 0.288, "opus_16k": 0.287, "opus_8k": 0.305},
+  "confiable": true,
+  "nota": "AASIST-L reentrenado por ECO con audio de In-the-Wild comprimido con Opus (como las notas de voz). Prueba con 1.200 audios de 17 personas no vistas: se equivoca en ~29 de cada 100 notas de voz. Umbral calibrado en audio limpio; entre umbral±banda, no concluyente."
 }

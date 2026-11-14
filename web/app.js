@@ -377,25 +377,109 @@ function prepararTema() {
   }).catch(() => {});
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
-    const cont = $("#resultado-tema");
     const valor = $("#tema-texto").value.trim();
     const esUrl = /^https?:\/\//i.test(valor);
-    const boton = form.querySelector("button[type=submit]");
-    boton.disabled = true;
-    cont.innerHTML = `<div id="bitacora-tema"></div><div id="resultado-tema-final"></div>`;
-    const bit = ecoBitacora($("#bitacora-tema"), esUrl ? "El agente está analizando la noticia" : `El agente está investigando «${valor}»`);
-    ecoAgente("", esUrl ? { modo: "pagina", url: valor } : { modo: "tema", tema: valor, dias: Number($("#tema-dias").value) }, {
-      alEvento: (e) => bit.evento(e),
-      alError: (e) => { bit.terminar(false, e.message); boton.disabled = false; },
-      alFin: (res) => {
-        bit.terminar(true, `Listo: ${res.fuentes_aparentes} páginas → ${res.fuentes_efectivas} fuente${res.fuentes_efectivas === 1 ? "" : "s"} independiente${res.fuentes_efectivas === 1 ? "" : "s"}`);
+    lanzarAgente(esUrl ? { modo: "pagina", url: valor } : { modo: "tema", tema: valor, dias: Number($("#tema-dias").value) },
+      esUrl ? "El agente está analizando la noticia" : `El agente está investigando «${valor}»`, form.querySelector("button[type=submit]"));
+  });
+}
+
+function lanzarAgente(cuerpo, titulo, boton) {
+  const cont = $("#resultado-tema");
+  if (boton) boton.disabled = true;
+  cont.innerHTML = `<div id="bitacora-tema"></div><div id="resultado-tema-final"></div>`;
+  cont.scrollIntoView({ behavior: "smooth", block: "start" });
+  const bit = ecoBitacora($("#bitacora-tema"), titulo);
+  ecoAgente("", cuerpo, {
+    alEvento: (e) => bit.evento(e),
+    alError: (e) => { bit.terminar(false, e.message); if (boton) boton.disabled = false; },
+    alFin: (res) => {
+      bit.terminar(true, `Listo: ${res.fuentes_aparentes} páginas → ${res.fuentes_efectivas} fuente${res.fuentes_efectivas === 1 ? "" : "s"} independiente${res.fuentes_efectivas === 1 ? "" : "s"}`);
+      if (boton) boton.disabled = false;
+      $("#resultado-tema-final").innerHTML = tarjetaConclusion(conclusionNoticia(res))
+        + `<div class="tarjeta"><h2>Grafo de procedencia</h2><p class="nota">Cada columna es una fuente independiente; las líneas van de la publicación original a quien la repite. Toca un nodo.</p><div id="grafo-tema"></div></div>`
+        + `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>`
+        + renderResultado(res).replace(/^<div class="conclusion[\s\S]*?<\/div>\s*(?=<details)/, "");
+      ecoGrafo($("#grafo-tema"), res);
+    },
+  });
+}
+
+// ---------------- entradas multimodales: nota de voz y captura ----------------
+function tarjetaLectura(titulo, texto, r, extra) {
+  const alertas = (r.alertas || []).map((a) => `<li>⚠ ${esc(a)}</li>`).join("");
+  return `<div class="tarjeta lectura">
+    <h2>${esc(titulo)}</h2>
+    <blockquote class="lectura-texto">${esc(texto || "(no se detectó texto)")}</blockquote>
+    ${alertas ? `<h3>Señales de manipulación en el mensaje</h3><ul class="lista-simple">${alertas}</ul>` : ""}
+    ${r.tipo === "sin_afirmacion" ? `<p class="nota">No encontramos una afirmación verificable en este contenido.</p>` : `
+    <label for="afirmacion-extraida">Afirmación a verificar (puedes corregirla)</label>
+    <input id="afirmacion-extraida" value="${esc(r.afirmacion || "")}">
+    <div class="fila-botones"><button type="button" class="boton-primario" id="verificar-extraida">Verificar qué fuentes lo respaldan</button></div>`}
+  </div>${extra || ""}`;
+}
+
+function prepararEntradas() {
+  segmentado("modo-entrada", (v) => {
+    $("#form-tema").hidden = v !== "tema";
+    $("#form-voz-nota").hidden = v !== "voz";
+    $("#form-captura").hidden = v !== "captura";
+    $("#resultado-entrada").innerHTML = "";
+  });
+  const enviar = async (ruta, archivo, pintar) => {
+    const cont = $("#resultado-entrada");
+    cont.innerHTML = `<div class="tarjeta"><p class="nota cargando-puntos">${ruta.includes("voz") ? "Escuchando y transcribiendo la nota de voz" : "Leyendo el texto de la captura"}</p></div>`;
+    try {
+      const r = await fetch(`${ruta}?nombre=${encodeURIComponent(archivo.name || "archivo")}`, { method: "POST", body: archivo });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.detail || `Error ${r.status}`);
+      cont.innerHTML = pintar(d);
+      $("#verificar-extraida")?.addEventListener("click", () => {
+        const a = $("#afirmacion-extraida").value.trim();
+        if (a.length >= 4) lanzarAgente({ modo: "tema", tema: a, dias: 30 }, `El agente está verificando «${a}»`, $("#verificar-extraida"));
+      });
+    } catch (e) {
+      cont.innerHTML = `<div class="tarjeta error">${esc(e.message)}</div>`;
+    }
+  };
+  const pintarVoz = (d) => tarjetaLectura(`Lo que dice la nota de voz (${d.segundos} s)`, d.transcripcion, d,
+    d.voz && !d.voz.error ? `<h3 class="sub-conclusion">¿Es real esta voz?</h3>${tarjetaConclusion(conclusionAudio(d.voz))}` : "");
+  const pintarCaptura = (d) => tarjetaLectura("Lo que dice la captura", d.texto, d,
+    d.archivo ? `<h3 class="sub-conclusion">¿Y la imagen?</h3>${tarjetaConclusion(conclusionImagen(d.archivo))}` : "");
+  $("#form-voz-nota").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const f = $("#archivo-nota").files[0];
+    if (f) enviar("/api/nota_de_voz", f, pintarVoz);
+  });
+  $("#form-captura").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const f = $("#archivo-captura").files[0];
+    if (f) enviar("/api/leer_captura", f, pintarCaptura);
+  });
+  $("#grabar-nota").addEventListener("click", async (ev) => {
+    const boton = ev.currentTarget;
+    try {
+      const flujo = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const grabador = new MediaRecorder(flujo);
+      const trozos = [];
+      grabador.ondataavailable = (e) => trozos.push(e.data);
+      grabador.onstop = () => {
+        flujo.getTracks().forEach((t) => t.stop());
         boton.disabled = false;
-        $("#resultado-tema-final").innerHTML = `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>
-          <div class="tarjeta"><h2>Grafo de procedencia</h2><p class="nota">Cada columna es una fuente independiente; las líneas van de la publicación original a quien la repite.</p><div id="grafo-tema"></div></div>`
-          + renderResultado(res);
-        ecoGrafo($("#grafo-tema"), res);
-      },
-    });
+        boton.textContent = "● Grabar 10 segundos";
+        const blob = new Blob(trozos, { type: grabador.mimeType });
+        blob.name = "grabacion.webm";
+        enviar("/api/nota_de_voz", blob, pintarVoz);
+      };
+      boton.disabled = true;
+      let quedan = 10;
+      boton.textContent = `Grabando… ${quedan} s`;
+      const reloj = setInterval(() => { quedan -= 1; boton.textContent = `Grabando… ${quedan} s`; if (quedan <= 0) clearInterval(reloj); }, 1000);
+      grabador.start();
+      setTimeout(() => grabador.stop(), 10000);
+    } catch (e) {
+      $("#resultado-entrada").innerHTML = `<div class="tarjeta error">No se pudo usar el micrófono: ${esc(e.message)}</div>`;
+    }
   });
 }
 
@@ -1031,9 +1115,10 @@ prepararInstalar();
 prepararVerificador();
 prepararAudio();
 prepararTema();
+prepararEntradas();
 $("#limpiar-analisis")?.addEventListener("click", () => {
-  ["#resultado-tema", "#resultado-urls", "#resultado-imagen", "#resultado-audio"].forEach((sel) => { const el = $(sel); if (el) el.innerHTML = ""; });
-  ["#form-tema", "#form-urls", "#form-imagen", "#form-audio"].forEach((sel) => $(sel)?.reset());
+  ["#resultado-tema", "#resultado-urls", "#resultado-imagen", "#resultado-audio", "#resultado-entrada"].forEach((sel) => { const el = $(sel); if (el) el.innerHTML = ""; });
+  ["#form-tema", "#form-urls", "#form-imagen", "#form-audio", "#form-voz-nota", "#form-captura"].forEach((sel) => $(sel)?.reset());
   $("#form-tema button[type=submit]")?.removeAttribute("disabled");
   window.scrollTo({ top: 0, behavior: "smooth" });
 });

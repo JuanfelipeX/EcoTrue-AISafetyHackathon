@@ -5,8 +5,10 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
 COPY requirements.txt requirements-voz.txt ./
 RUN pip install -r requirements.txt && pip install -r requirements-voz.txt --extra-index-url https://download.pytorch.org/whl/cpu
+ENV ECO_WHISPER=base ECO_WHISPER_DIR=/app/modelos
+RUN python -c "from faster_whisper import WhisperModel; WhisperModel('base', device='cpu', compute_type='int8', download_root='/app/modelos')"
 COPY . .
-RUN useradd --create-home eco && chown -R eco /app/.cache
+RUN useradd --create-home eco && chown -R eco /app/.cache /app/modelos
 USER eco
 EXPOSE 8765
 HEALTHCHECK --interval=30s --timeout=5s CMD python -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8765/api/salud',timeout=4)"

@@ -19,6 +19,8 @@ Endpoints:
   POST /api/analizar_mundo                 {mundo_id, metodo?, modelo?}  ECO + línea base lado a lado
   POST /api/analizar_pagina                {url, seleccion?, metodo?}  (usado por la extensión)
   GET  /descargas/eco-extension.zip        la extensión de Chrome lista para instalar
+  POST /api/leer_captura?nombre=x.png      captura → texto (Claude visión) + afirmación + procedencia/IA
+  POST /api/nota_de_voz?nombre=x.ogg       nota de voz → transcripción (Whisper) + afirmación + detector de voz
   POST /api/analizar_audio                 {url} o {datos_base64, nombre}: ¿voz clonada? (C2PA + AASIST-L)
   POST /api/investigar                     {tema, dias?}: busca noticias (Exa) y separa reportería propia de repetición
   POST /api/verificar_archivo?nombre=x.mp4 cuerpo binario: imagen o video → C2PA + señales de IA
@@ -436,6 +438,47 @@ async def verificar_archivo(request: Request, nombre: str = "archivo.jpg"):
         return procedencia.analizar_archivo(datos, nombre)
     except ValueError as e:
         raise HTTPException(413, str(e))
+
+
+@app.post("/api/leer_captura")
+async def leer_captura(request: Request, nombre: str = "captura.png"):
+    """Captura de pantalla (tuit, titular, mensaje): Claude lee el texto, se extrae la afirmación a verificar y la
+    imagen pasa por procedencia, marcas de IA y filtros forenses."""
+    from motor import multimodal, procedencia
+    datos = await request.body()
+    if not datos or len(datos) > procedencia.MAX_BYTES_IMAGEN:
+        raise HTTPException(400, "Envíe una imagen de hasta 20 MB.")
+    try:
+        lectura = multimodal.leer_captura(datos)
+    except Exception as e:
+        raise HTTPException(502, f"No se pudo leer el texto de la imagen ({type(e).__name__}).")
+    salida = {"texto": lectura["texto"], "descripcion": lectura["descripcion"]}
+    salida.update(multimodal.afirmacion_de(lectura["texto"] + " " + lectura["descripcion"]))
+    try:
+        salida["archivo"] = procedencia.analizar_archivo(datos, nombre)
+    except ValueError:
+        salida["archivo"] = None
+    return salida
+
+
+@app.post("/api/nota_de_voz")
+async def nota_de_voz(request: Request, nombre: str = "nota.ogg"):
+    """Nota de voz: se transcribe (Whisper), se extrae la afirmación y la voz pasa por el detector de voz sintética."""
+    from motor import multimodal, voz
+    datos = await request.body()
+    if not datos or len(datos) > voz.MAX_BYTES_AUDIO:
+        raise HTTPException(400, "Envíe un audio de hasta 10 MB.")
+    try:
+        trans = multimodal.transcribir(datos)
+    except Exception as e:
+        raise HTTPException(502, f"No se pudo transcribir el audio ({type(e).__name__}).")
+    salida = {"transcripcion": trans["texto"], "idioma": trans["idioma"], "segundos": trans["segundos"]}
+    salida.update(multimodal.afirmacion_de(trans["texto"]))
+    try:
+        salida["voz"] = voz.analizar_audio(datos, nombre)
+    except ValueError as e:
+        salida["voz"] = {"error": str(e)}
+    return salida
 
 
 @app.post("/api/analizar_audio")

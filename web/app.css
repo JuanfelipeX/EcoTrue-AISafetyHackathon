@@ -388,3 +388,9 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
 .detalle-completo[open] > summary::before { transform: rotate(90deg); }
 .detalle-completo > summary:hover { color: var(--tinta); border-color: var(--tinta-3); }
 .limpiar { margin-left: auto; }
+
+.modos-entrada { margin: 0 0 12px; max-width: 640px; }
+.modos-entrada button { flex: 1; padding: 10px 12px; font-size: 14px; }
+.lectura-texto { margin: 8px 0 12px; padding: 12px 14px; border-left: 4px solid var(--acento); background: var(--superficie-2); border-radius: 0 10px 10px 0; font-size: 15px; white-space: pre-wrap; }
+.lectura input { width: 100%; }
+.sub-conclusion { margin: 18px 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: var(--tinta-3); }
