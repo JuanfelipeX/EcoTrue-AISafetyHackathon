@@ -18,6 +18,7 @@ Endpoints:
   POST /api/analizar                       {afirmacion, urls, metodo?, modelo?}
   POST /api/analizar_mundo                 {mundo_id, metodo?, modelo?}  ECO + línea base lado a lado
   POST /api/analizar_pagina                {url, seleccion?, metodo?}  (usado por la extensión)
+  GET  /descargas/eco-extension.zip        la extensión de Chrome lista para instalar
   GET  /api/resultados                     resultados guardados de la evaluación y de la demo del agente
   POST /mcp                                servidor MCP por HTTP (Streamable HTTP) para agentes remotos
 
@@ -246,6 +247,25 @@ def resultados():
 app.router.routes.extend(mcp_http.routes)  # POST /mcp (sin redirección a /mcp/)
 app.mount("/sitios", StaticFiles(directory=DIR_CORPUS / "sitios"), name="sitios")
 app.mount("/web", StaticFiles(directory=DIR_WEB), name="web")
+
+
+@lru_cache(maxsize=1)
+def _zip_extension():
+    """La carpeta extension/ empaquetada como eco-extension/ (lista para 'Cargar descomprimida')."""
+    import io
+    import zipfile
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as z:
+        for ruta in sorted((RAIZ_PROYECTO / "extension").rglob("*")):
+            if ruta.is_file():
+                z.write(ruta, "eco-extension/" + ruta.relative_to(RAIZ_PROYECTO / "extension").as_posix())
+    return buffer.getvalue()
+
+
+@app.get("/descargas/eco-extension.zip")
+def descargar_extension():
+    return Response(_zip_extension(), media_type="application/zip",
+                    headers={"Content-Disposition": 'attachment; filename="eco-extension.zip"'})
 
 
 @app.get("/internet")

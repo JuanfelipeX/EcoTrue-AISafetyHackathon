@@ -265,3 +265,40 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
   .ejemplo { grid-template-columns: 1fr; }
   .cifra b { font-size: 40px; }
 }
+
+/* ---------------- Instalar ---------------- */
+.pestanas a.pestana-destacada:not(.activa) { color: var(--acento); font-weight: 650; }
+.indice-instalar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.indice-instalar a { padding: 7px 12px; border: 1px solid var(--borde); border-radius: 999px; text-decoration: none; color: var(--tinta-2); background: var(--superficie); font-size: 14px; }
+.indice-instalar a:hover { color: var(--tinta); border-color: var(--tinta-3); }
+#vista-instalar .tarjeta { scroll-margin-top: 80px; }
+#vista-instalar .tarjeta h2 { font-size: 18px; margin-bottom: 4px; }
+#vista-instalar a.boton-primario, #vista-instalar a.boton-sec { text-decoration: none; display: inline-block; }
+.guia { counter-reset: g; list-style: none; padding: 0; margin: 16px 0 6px; display: grid; gap: 12px; }
+.guia > li { position: relative; padding: 2px 0 2px 40px; color: var(--tinta-2); font-size: 15px; line-height: 1.55; min-width: 0; }
+.guia > li::before { counter-increment: g; content: counter(g); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--acento-suave); color: var(--acento); font-weight: 700; display: grid; place-items: center; font-size: 13px; }
+.guia > li b { color: var(--tinta); }
+.guia ul, .lista-simple { margin: 6px 0; padding-left: 20px; color: var(--tinta-2); line-height: 1.55; }
+.lista-simple li { margin: 4px 0; }
+.copiables { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px 10px; align-items: center; margin: 8px 0 4px; max-width: 520px; }
+.copiables.una { max-width: 640px; margin: 12px 0; }
+.copiables span { font-size: 13px; color: var(--tinta-3); }
+.copiables code { overflow-wrap: anywhere; font-size: 14px; padding: 4px 8px; }
+.copiar { background: var(--superficie); border: 1px solid var(--borde); border-radius: 7px; padding: 4px 10px; font-size: 13px; cursor: pointer; color: var(--tinta-2); white-space: nowrap; }
+.copiar:hover { background: var(--superficie-2); color: var(--tinta); }
+.bloque-copiar { position: relative; margin: 8px 0; min-width: 0; }
+.bloque-copiar pre { margin: 0; padding-right: 86px; }
+.bloque-copiar .copiar { position: absolute; top: 6px; right: 6px; }
+.sistema { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 6px; }
+.sistema > div > span { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--tinta-3); }
+.tabla-compacta th, .tabla-compacta td { text-align: left; vertical-align: top; font-variant-numeric: normal; }
+.tabla-compacta td:first-child { width: 34%; color: var(--tinta); }
+@media (max-width: 640px) {
+  .sistema { grid-template-columns: minmax(0, 1fr); }
+  .tabla-compacta td:first-child { width: auto; }
+  .tabla-compacta, .tabla-compacta tbody, .tabla-compacta tr, .tabla-compacta td { display: block; }
+  .tabla-compacta thead { display: none; }
+  .tabla-compacta td { border-bottom: 0; padding: 4px 0; }
+  .tabla-compacta tr { border-bottom: 1px solid var(--borde); padding: 8px 0; }
+}

@@ -19,6 +19,7 @@
       <a href="#resultados" data-vista="resultados">Resultados</a>
       <a href="#urls" data-vista="urls">Analizar URLs</a>
       <a href="#como" data-vista="como">Cómo funciona</a>
+      <a href="#instalar" data-vista="instalar" class="pestana-destacada">Instalar</a>
     </nav>
     <div class="barra-der">
       <span id="estado-modelo" class="chip" title="Cadena de modelos configurada en .env">cargando modelos…</span>
@@ -187,6 +188,199 @@ python -m demo.agente --modelo …</pre>
           <li><b>Doble uso:</b> un atacante podría usar ECO para pulir sus copias hasta que pasen. Mitigación: no publicar umbrales de producción y combinar con señales de procedencia (C2PA, firmas) que el atacante no controla.</li>
           <li><b>Independencia no es verdad:</b> varias fuentes independientes también pueden equivocarse.</li>
         </ul>
+      </div>
+    </section>
+    <!-- ================= INSTALAR ================= -->
+    <section id="vista-instalar" class="vista" hidden>
+      <div class="intro">
+        <h1>Usa ECO en tu navegador y en tu agente de IA</h1>
+        <p>Dos formas de usarlo, gratis y sin crear cuenta: la <b>extensión</b> para revisar noticias mientras navegas,
+          y el <b>servidor MCP</b> para que un agente (Claude, Cursor, VS Code…) revise sus fuentes antes de decir
+          “varias fuentes lo confirman”. Ambas usan este servidor: <code class="origen"></code></p>
+      </div>
+
+      <nav class="indice-instalar" aria-label="Contenido">
+        <a href="#instalar" data-ir="inst-extension">1 · Extensión de navegador</a>
+        <a href="#instalar" data-ir="inst-mcp-remoto">2 · MCP sin instalar nada</a>
+        <a href="#instalar" data-ir="inst-mcp-local">3 · MCP en tu computador</a>
+        <a href="#instalar" data-ir="inst-problemas">4 · Si algo falla</a>
+      </nav>
+
+      <!-- ---------- EXTENSIÓN ---------- -->
+      <div class="tarjeta" id="inst-extension">
+        <h2>1 · Extensión de navegador</h2>
+        <p class="nota">Funciona en <b>Google Chrome, Microsoft Edge, Brave y Opera</b> en computador (Windows, macOS o Linux).
+          No funciona en Firefox, Safari ni en celulares. Tarda unos 3 minutos.</p>
+        <div class="fila-botones">
+          <a class="boton-primario" href="/descargas/eco-extension.zip" download>Descargar la extensión (.zip)</a>
+          <span class="nota">Versión <span id="version-extension">1.2</span> · menos de 50 KB</span>
+        </div>
+
+        <ol class="guia">
+          <li><b>Descarga el archivo</b> con el botón de arriba. Queda en tu carpeta <i>Descargas</i> como <code>eco-extension.zip</code>.</li>
+          <li><b>Descomprímelo.</b>
+            <ul>
+              <li>Windows: clic derecho sobre el archivo → <i>Extraer todo…</i> → <i>Extraer</i>.</li>
+              <li>macOS: doble clic sobre el archivo.</li>
+              <li>Linux: <code>unzip eco-extension.zip</code>.</li>
+            </ul>
+            Se crea una carpeta <code>eco-extension</code>. Adentro debe estar el archivo <code>manifest.json</code>.
+            <b>No borres ni muevas esa carpeta después</b>: el navegador la usa mientras la extensión esté instalada.</li>
+          <li><b>Abre la página de extensiones.</b> Copia la dirección de tu navegador y pégala en la barra de direcciones
+            (por seguridad, no se puede abrir con un enlace):
+            <div class="copiables">
+              <span>Chrome</span><code>chrome://extensions</code><button class="copiar" data-copiar="chrome://extensions">Copiar</button>
+              <span>Edge</span><code>edge://extensions</code><button class="copiar" data-copiar="edge://extensions">Copiar</button>
+              <span>Brave</span><code>brave://extensions</code><button class="copiar" data-copiar="brave://extensions">Copiar</button>
+              <span>Opera</span><code>opera://extensions</code><button class="copiar" data-copiar="opera://extensions">Copiar</button>
+            </div></li>
+          <li><b>Activa el “Modo de desarrollador”.</b> Es un interruptor: en Chrome y Brave está arriba a la derecha;
+            en Edge, en la columna de la izquierda. Aparecen botones nuevos.</li>
+          <li><b>Haz clic en “Cargar descomprimida”</b> (en inglés <i>Load unpacked</i>) y elige la carpeta
+            <code>eco-extension</code>, la que contiene <code>manifest.json</code>. Aparece la tarjeta <b>ECO</b>.</li>
+          <li><b>Fíjala en la barra.</b> Haz clic en el ícono de rompecabezas (<i>Extensiones</i>) junto a la barra de direcciones
+            y en el alfiler al lado de <b>ECO</b>.</li>
+          <li><b>Pruébala.</b> Abre <a id="pagina-prueba" href="/sitios/e01-s1/e01-s1-p03.html" target="_blank" rel="noopener">esta noticia del mini-internet</a>
+            y usa cualquiera de las dos formas:
+            <ul>
+              <li>Clic derecho sobre la página → <i>“ECO: ¿cuántas fuentes reales hay detrás de esto?”</i>. Aparece un panel a la derecha.</li>
+              <li>Clic en el ícono de ECO → <i>Analizar esta página</i>.</li>
+            </ul>
+            Debe decir <b>5 páginas → 1 fuente independiente</b>: las cinco noticias copian a un solo medio.</li>
+        </ol>
+
+        <h3>Qué hace y qué no</h3>
+        <ul class="lista-simple">
+          <li>Solo actúa cuando haces clic. Envía a este servidor la dirección de la pestaña y el texto que hayas seleccionado; no lee tu historial ni otras pestañas.</li>
+          <li>Hoy analiza las noticias del <a href="/internet" target="_blank" rel="noopener">mini-internet de ECO</a>, donde sabemos la respuesta correcta.
+            Para noticias reales usa la pestaña <a href="#urls">Analizar URLs</a> con la afirmación y los enlaces.</li>
+          <li>Busca primero un servidor de ECO en tu propio computador (<code>localhost:8765</code>) y, si no hay, usa este servidor público.
+            Puedes fijar otro en el ícono de ECO → <i>Servidor de ECO</i>.</li>
+        </ul>
+      </div>
+
+      <!-- ---------- MCP REMOTO ---------- -->
+      <div class="tarjeta" id="inst-mcp-remoto">
+        <h2>2 · Servidor MCP sin instalar nada (recomendado)</h2>
+        <p class="nota">MCP es el estándar con el que los agentes de IA usan herramientas externas. Solo tienes que darle a tu
+          cliente esta dirección; el análisis corre en nuestro servidor.</p>
+        <div class="copiables una">
+          <span>Dirección</span><code class="origen-mcp"></code><button class="copiar" data-copiar-origen="/mcp">Copiar</button>
+        </div>
+
+        <h3>Claude Code (terminal)</h3>
+        <ol class="guia">
+          <li>En una terminal, ejecuta:
+            <div class="bloque-copiar"><pre data-plantilla="claude mcp add --transport http eco {MCP}"></pre><button class="copiar">Copiar</button></div></li>
+          <li>Abre Claude Code y escribe <code>/mcp</code>: debe aparecer <b>eco</b> como conectado.</li>
+        </ol>
+
+        <h3>Claude Desktop o claude.ai</h3>
+        <ol class="guia">
+          <li>Abre <i>Configuración</i> → <i>Conectores</i> → <i>Agregar conector personalizado</i>.
+            Si tu plan no muestra esa opción, usa la sección 3 (MCP en tu computador).</li>
+          <li>Nombre: <code>ECO</code>. URL: la dirección de arriba. Guarda.</li>
+          <li>En una conversación nueva, activa ECO en el menú de herramientas (ícono de “+” o de conectores).</li>
+        </ol>
+
+        <h3>Cursor</h3>
+        <p class="nota">Archivo <code>~/.cursor/mcp.json</code> (o <code>.cursor/mcp.json</code> dentro de tu proyecto). Si ya existe, agrega solo la entrada <code>eco</code>.</p>
+        <div class="bloque-copiar"><pre data-plantilla='{
+  "mcpServers": {
+    "eco": { "url": "{MCP}" }
+  }
+}'></pre><button class="copiar">Copiar</button></div>
+
+        <h3>VS Code (GitHub Copilot, modo agente)</h3>
+        <p class="nota">Archivo <code>.vscode/mcp.json</code> en tu proyecto, o el comando <i>MCP: Add Server</i> → <i>HTTP</i>.</p>
+        <div class="bloque-copiar"><pre data-plantilla='{
+  "servers": {
+    "eco": { "type": "http", "url": "{MCP}" }
+  }
+}'></pre><button class="copiar">Copiar</button></div>
+
+        <h3>Otros clientes</h3>
+        <p class="nota">Cualquier cliente compatible con <i>Streamable HTTP</i> sirve: usa la dirección de arriba, sin autenticación.</p>
+
+        <h3>Pruébalo</h3>
+        <p>Pídele a tu agente, por ejemplo:</p>
+        <div class="bloque-copiar"><pre>Busca en el mini-internet de ECO la noticia del mercurio en San Aurelio. ¿Cuántas fuentes independientes hay de verdad y cuál es el origen?</pre><button class="copiar">Copiar</button></div>
+        <h3>Herramientas que recibe el agente</h3>
+        <table class="tabla tabla-compacta">
+          <thead><tr><th>Herramienta</th><th>Qué hace</th></tr></thead>
+          <tbody>
+            <tr><td><code>evaluar_corroboracion</code></td><td>Recibe una afirmación y de 2 a 40 URLs; devuelve cuántas fuentes son independientes, el origen de cada grupo de copias y qué datos dependen de una sola fuente.</td></tr>
+            <tr><td><code>buscar_en_mini_internet</code></td><td>Encuentra mundos del laboratorio sintético por tema.</td></tr>
+            <tr><td><code>analizar_mundo</code></td><td>Analiza un mundo completo, por ejemplo <code>e01-s1</code>.</td></tr>
+          </tbody>
+        </table>
+        <p class="nota">Límites del servidor público: 30 peticiones por minuto por persona y un tope diario de análisis nuevos con el modelo.
+          Los 54 mundos del laboratorio no gastan ese tope.</p>
+      </div>
+
+      <!-- ---------- MCP LOCAL ---------- -->
+      <div class="tarjeta" id="inst-mcp-local">
+        <h2>3 · Servidor MCP en tu computador</h2>
+        <p class="nota">Para usarlo sin internet, con tu propio modelo o con Claude Desktop en cualquier plan.
+          Necesitas <b>Python 3.11 o superior</b> (<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>). Tarda unos 5 minutos.</p>
+        <div class="fila-botones">
+          <a class="boton-primario" href="https://github.com/SadidRomero77/eco/archive/refs/heads/main.zip">Descargar ECO completo (.zip)</a>
+          <a class="boton-sec" href="https://github.com/SadidRomero77/eco" target="_blank" rel="noopener">Ver el código en GitHub ↗</a>
+        </div>
+        <ol class="guia">
+          <li><b>Descomprime</b> el archivo. Queda una carpeta <code>eco-main</code>. Abre una terminal dentro de ella
+            (Windows: en la carpeta, clic derecho → <i>Abrir en Terminal</i>). Con Git también puedes usar
+            <code>git clone https://github.com/SadidRomero77/eco.git</code>.</li>
+          <li><b>Crea el entorno e instala las dependencias:</b>
+            <div class="sistema">
+              <div><span>Windows</span><div class="bloque-copiar"><pre>python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt</pre><button class="copiar">Copiar</button></div></div>
+              <div><span>macOS / Linux</span><div class="bloque-copiar"><pre>python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt</pre><button class="copiar">Copiar</button></div></div>
+            </div></li>
+          <li><b>Elige el modelo</b> (opcional). Copia <code>.env.example</code> como <code>.env</code> y pon una clave:
+            <code>ANTHROPIC_API_KEY</code>, <code>OPENROUTER_API_KEY</code> o un modelo local de Ollama
+            (por ejemplo <code>LLM_MODELO=ollama/qwen2.5:7b</code>). <b>Sin clave</b> también funciona con los 54 mundos del laboratorio,
+            porque las respuestas del modelo vienen guardadas.</li>
+          <li><b>Regístralo en Claude Desktop y Claude Code</b> con un solo comando:
+            <div class="bloque-copiar"><pre>python -m scripts.config_mcp --instalar</pre><button class="copiar">Copiar</button></div>
+            Luego <b>cierra Claude Desktop por completo y vuelve a abrirlo</b> (en Windows, también desde el ícono junto al reloj).
+            Para ver la configuración sin instalarla: <code>python -m scripts.config_mcp</code>.</li>
+          <li><b>Compruébalo:</b>
+            <div class="bloque-copiar"><pre>python -m scripts.probar_mcp</pre><button class="copiar">Copiar</button></div>
+            Debe terminar con <i>“OK: el servidor MCP responde por stdio.”</i></li>
+        </ol>
+        <h3>Configuración manual (otros clientes por stdio)</h3>
+        <p class="nota">Cambia la ruta por la de tu carpeta. En Windows, el Python es <code>.venv\Scripts\python.exe</code>.</p>
+        <div class="bloque-copiar"><pre>{
+  "mcpServers": {
+    "eco": {
+      "command": "/ruta/a/eco-main/.venv/bin/python",
+      "args": ["/ruta/a/eco-main/mcp_eco/servidor.py"],
+      "env": { "PYTHONIOENCODING": "utf-8" }
+    }
+  }
+}</pre><button class="copiar">Copiar</button></div>
+        <p class="nota">Para tener también el panel y la extensión en local: <code>python -m scripts.demo</code> (abre <code>http://localhost:8765</code>).</p>
+      </div>
+
+      <!-- ---------- PROBLEMAS ---------- -->
+      <div class="tarjeta" id="inst-problemas">
+        <h2>4 · Si algo falla</h2>
+        <table class="tabla tabla-compacta">
+          <thead><tr><th>Lo que ves</th><th>Qué hacer</th></tr></thead>
+          <tbody>
+            <tr><td>“Falta el archivo de manifiesto” al cargar la extensión</td><td>Elegiste la carpeta equivocada. Debe ser la que tiene <code>manifest.json</code> directamente adentro; a veces queda una carpeta dentro de otra con el mismo nombre.</td></tr>
+            <tr><td>No aparece “Cargar descomprimida”</td><td>Falta activar el <i>Modo de desarrollador</i>. En computadores de empresa o universidad puede estar bloqueado por el administrador: usa el MCP o el panel web.</td></tr>
+            <tr><td>Aviso “Desactiva las extensiones en modo de desarrollador”</td><td>Es normal para extensiones instaladas a mano. Elige <i>Mantener</i> o cierra el aviso.</td></tr>
+            <tr><td>La extensión dice que no encuentra el servidor</td><td>Clic en el ícono de ECO → <i>Servidor de ECO</i> → escribe <code class="origen"></code> → <i>Guardar</i>.</td></tr>
+            <tr><td>La página no carga en una red nueva</td><td>Algunas redes guardan la respuesta de DNS por unos minutos. Prueba con datos móviles o activa el DNS seguro del navegador (Configuración → Privacidad y seguridad → Seguridad → Usar DNS seguro).</td></tr>
+            <tr><td>El agente no ve las herramientas de ECO</td><td>Reinicia el cliente. En Claude Code, <code>claude mcp list</code> debe mostrar <code>eco</code>; en Claude Desktop, revisa que el conector esté activado en la conversación.</td></tr>
+            <tr><td>Error 429 “Demasiadas peticiones”</td><td>Espera un minuto: el servidor público limita las peticiones por persona.</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </main>

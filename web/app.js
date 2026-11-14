@@ -60,7 +60,7 @@ try { const t = localStorage.getItem("eco-tema"); if (t) document.documentElemen
 
 function navegar() {
   const vista = (location.hash || "#laboratorio").slice(1);
-  const valida = ["laboratorio", "resultados", "urls", "como"].includes(vista) ? vista : "laboratorio";
+  const valida = ["laboratorio", "resultados", "urls", "como", "instalar"].includes(vista) ? vista : "laboratorio";
   $$(".vista").forEach((v) => { v.hidden = v.id !== `vista-${valida}`; });
   $$(".pestanas a").forEach((a) => a.classList.toggle("activa", a.dataset.vista === valida));
   if (valida === "resultados") cargarResultados();
@@ -628,6 +628,34 @@ function pintarAgente() {
 }
 
 // ---------------- inicio ----------------
+// ---------------- Instalar: direcciones de este servidor y botones de copiar ----------------
+function prepararInstalar() {
+  const origen = location.origin;
+  const mcp = `${origen}/mcp`;
+  $$(".origen").forEach((e) => { e.textContent = origen; });
+  $$(".origen-mcp").forEach((e) => { e.textContent = mcp; });
+  $$("[data-plantilla]").forEach((e) => { e.textContent = e.dataset.plantilla.replaceAll("{MCP}", mcp); });
+  $$("[data-copiar-origen]").forEach((b) => { b.dataset.copiar = origen + b.dataset.copiarOrigen; });
+  document.addEventListener("click", async (ev) => {
+    const ir = ev.target.closest("[data-ir]");
+    if (ir) {
+      ev.preventDefault();
+      document.getElementById(ir.dataset.ir)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    const boton = ev.target.closest(".copiar");
+    if (!boton) return;
+    const texto = boton.dataset.copiar ?? boton.parentElement.querySelector("pre, code")?.textContent ?? "";
+    try {
+      await navigator.clipboard.writeText(texto);
+      boton.textContent = "Copiado ✓";
+    } catch (_) {
+      boton.textContent = "Selecciona y copia";
+    }
+    setTimeout(() => { boton.textContent = "Copiar"; }, 1600);
+  });
+}
+prepararInstalar();
 navegar();
 cargarModelos();
 cargarMundos().then(() => {
