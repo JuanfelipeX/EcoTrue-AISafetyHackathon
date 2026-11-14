@@ -2,27 +2,67 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="estilos.css">
-  <style>body { width: 400px; margin: 0; padding: 12px; } #pestanas label { display: flex; gap: 6px; align-items: flex-start; font-size: 12px; margin: 6px 0; } #pestanas small { color: #777; display: block; }</style>
+  <link rel="stylesheet" href="popup.css">
 </head>
-<body class="eco-raiz">
-  <div class="eco-cabecera">
-    <h1>ECO</h1>
-    <small>¿Cuántas fuentes hay de verdad?</small>
-  </div>
-  <div id="contenido">
-    <p>Analiza la página actual: ECO la compara con las fuentes que cita y con las pestañas que elijas.</p>
-    <details id="pestanas-caja" class="eco-ajustes" open hidden>
-      <summary>Comparar con pestañas abiertas (otras notas del mismo tema)</summary>
-      <div id="pestanas"></div>
-    </details>
-    <button id="analizar" class="eco-boton">Analizar esta página</button>
-  </div>
-  <details class="eco-ajustes">
-    <summary>Servidor de ECO</summary>
-    <input id="servidor" type="url" placeholder="https://eco.kibosecondbrain.com">
-    <button id="guardar-servidor" class="eco-boton">Guardar</button> <span id="estado-servidor"></span>
-  </details>
+<body>
+  <header class="cab">
+    <div class="marca">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="16" r="5"/><path d="M17 9a10 10 0 0 1 0 14M22 5a15 15 0 0 1 0 22" fill="none" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <div><b>ECO</b><small id="sitio">—</small></div>
+    </div>
+    <button id="ir-ajustes" class="icono" title="Ajustes" aria-label="Ajustes">⚙</button>
+  </header>
+
+  <!-- ===== Vista principal ===== -->
+  <main id="vista-principal">
+    <section class="tarjeta pagina">
+      <div class="titulo-pagina" id="titulo-pagina">Esta página</div>
+      <button id="analizar" class="grande">Analizar esta noticia</button>
+      <div class="pista" id="pista-modelo"></div>
+    </section>
+
+    <section class="tarjeta" id="caja-comparar">
+      <div class="seccion-cab"><span>Comparar con</span><small>otras notas del mismo tema</small></div>
+      <ul id="lista-pestanas" class="lista-interruptores"></ul>
+      <div class="agregar">
+        <input id="url-extra" type="url" placeholder="Pegar otra URL…">
+        <button id="agregar-url" class="pequeno" title="Agregar">+</button>
+      </div>
+      <p class="pista">ECO también revisa las fuentes que la nota cita.</p>
+    </section>
+
+    <section id="resultado" hidden></section>
+  </main>
+
+  <!-- ===== Ajustes ===== -->
+  <main id="vista-ajustes" hidden>
+    <section class="tarjeta">
+      <div class="seccion-cab"><span>Modelo de lenguaje</span></div>
+      <div id="modelos" class="segmentos"></div>
+      <p class="pista" id="detalle-modelo"></p>
+    </section>
+    <section class="tarjeta">
+      <div class="seccion-cab"><span>Tema</span></div>
+      <div class="segmentos" id="temas">
+        <button data-tema="auto">Automático</button><button data-tema="oscuro">Oscuro</button><button data-tema="claro">Claro</button>
+      </div>
+    </section>
+    <section class="tarjeta">
+      <div class="seccion-cab"><span>Servidor de ECO</span></div>
+      <div class="agregar">
+        <input id="servidor" type="url" placeholder="https://eco.kibosecondbrain.com">
+        <button id="guardar-servidor" class="pequeno">Guardar</button>
+      </div>
+      <p class="pista" id="estado-servidor"></p>
+    </section>
+    <section class="tarjeta enlaces">
+      <a id="abrir-panel" href="#" target="_blank">Abrir el panel de ECO ↗</a>
+      <a id="abrir-instalar" href="#" target="_blank">Cómo funciona e instrucciones ↗</a>
+    </section>
+    <button id="volver" class="grande secundario">← Volver</button>
+  </main>
+
+  <footer class="pie">ECO mide independencia de fuentes y procedencia, no verdad.</footer>
   <script src="config.js"></script>
   <script src="render.js"></script>
   <script src="popup.js"></script>

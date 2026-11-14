@@ -58,14 +58,15 @@ async function analizarEnPestana(tab, seleccion) {
     const respuesta = await fetch(`${ECO_API}/api/analizar_pagina`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url: tab.url, seleccion: seleccion || null }),
+      body: JSON.stringify({ url: tab.url, seleccion: seleccion || null,
+        modelo: ((await chrome.storage.local.get("ecoModelo")).ecoModelo) || null }),
     });
     const datos = await respuesta.json();
     if (!respuesta.ok) {
       await mostrar(tab.id, "error", datos.detail || `Error ${respuesta.status}`);
       return;
     }
-    datos.panel_url = datos.mundo ? `${ECO_API}/?mundo=${encodeURIComponent(datos.mundo)}#laboratorio` : null;
+    datos.panel_url = datos.informe_id ? `${ECO_API}/#informe/${datos.informe_id}` : null;
     await mostrar(tab.id, "listo", datos);
   } catch (e) {
     await mostrar(tab.id, "error", `No se pudo conectar con el servidor de ECO en ${ECO_API}. ¿Está corriendo?`);

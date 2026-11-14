@@ -97,7 +97,7 @@ def mcp():
 def extension():
     ruta = RAIZ_PROYECTO / "extension"
     manifest = json.loads((ruta / "manifest.json").read_text(encoding="utf-8"))
-    for f in ["background.js", "popup.html", "popup.js", "render.js", "config.js", "estilos.css"]:
+    for f in ["background.js", "popup.html", "popup.js", "render.js", "config.js", "estilos.css", "popup.css"]:
         assert (ruta / f).exists(), f
     return f"manifest v{manifest['manifest_version']}, archivos completos"
 

@@ -71,7 +71,7 @@
       <h3>Origen de la información</h3>${grupos}
       ${procedencia}
       ${hechos}
-      ${r.panel_url ? `<p><a class="eco-enlace" href="${esc(r.panel_url)}" target="_blank" rel="noopener">Ver árbol de origen y matriz de hechos en el panel de ECO ↗</a></p>` : ""}
+      ${r.panel_url ? `<p><a class="eco-enlace" href="${esc(r.panel_url)}" target="_blank" rel="noopener">Ver el informe completo: árbol de origen, datos e imágenes ↗</a></p>` : ""}
       <p class="eco-pie">Método: ${esc(metodo)}. ECO no dice si algo es verdad: mide cuánta evidencia independiente lo respalda.</p>
     </div>`;
   }

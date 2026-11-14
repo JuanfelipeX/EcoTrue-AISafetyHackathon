@@ -58,7 +58,27 @@ $("#tema").addEventListener("click", () => {
 });
 try { const t = localStorage.getItem("eco-tema"); if (t) document.documentElement.dataset.theme = t; } catch (_) { /* nada */ }
 
+async function mostrarInforme(ident) {
+  const cont = $("#informe");
+  cont.innerHTML = `<div class="tarjeta"><p class="nota">Cargando el informe…</p></div>`;
+  try {
+    const res = await api(`/api/informe/${encodeURIComponent(ident)}`);
+    const pagina = res.pagina_actual || (res.documentos || [])[0]?.url || "";
+    $("#informe-pagina").innerHTML = pagina ? `Página analizada: <a href="${esc(pagina)}" target="_blank" rel="noopener">${esc(pagina)}</a>` +
+      (res.nota_web_real ? ` · ${esc(res.nota_web_real)}` : "") : "";
+    cont.innerHTML = renderResultado(res);
+  } catch (e) {
+    cont.innerHTML = `<div class="tarjeta error">${esc(e.message)}</div>`;
+  }
+}
+
 function navegar() {
+  if (location.hash.startsWith("#informe/")) {
+    $$(".vista").forEach((v) => { v.hidden = v.id !== "vista-informe"; });
+    $$(".pestanas a").forEach((a) => a.classList.remove("activa"));
+    mostrarInforme(location.hash.slice("#informe/".length));
+    return;
+  }
   const vista = (location.hash || (new URLSearchParams(location.search).get("mundo") ? "#laboratorio" : "#urls")).slice(1);
   const valida = ["laboratorio", "resultados", "urls", "como", "instalar"].includes(vista) ? vista : "urls";
   $$(".vista").forEach((v) => { v.hidden = v.id !== `vista-${valida}`; });

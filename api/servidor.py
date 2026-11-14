@@ -103,9 +103,46 @@ async def _modo_publico(request: Request, call_next):
     return respuesta
 
 
+ETIQUETAS_MODELO = {"haiku": ("Rápido", "Claude Haiku: responde en segundos; un poco menos fino con paráfrasis."),
+                    "sonnet": ("Preciso", "Claude Sonnet: el que usamos para medir los resultados de ECO."),
+                    "opus": ("Máximo", "Claude Opus: el más capaz y el más costoso.")}
+
+
+def _modelos_para_clientes():
+    """Modelos que un visitante puede elegir: solo los que el servidor ya tiene configurados y operativos."""
+    salida = []
+    for m in [config.llm_modelo, *config.llm_modelos_respaldo]:
+        if m.startswith(("claudecode/", "manual/", "ollama/")) and config.modo_publico:
+            continue
+        familia = next((f for f in ETIQUETAS_MODELO if f in m.lower()), None)
+        if familia and all(x["id"] != m and x["etiqueta"] != ETIQUETAS_MODELO[familia][0] for x in salida):
+            etiqueta, detalle = ETIQUETAS_MODELO[familia]
+            salida.append({"id": m, "etiqueta": etiqueta, "detalle": detalle})
+    return salida
+
+
 def _modelo_permitido(modelo):
-    """En modo público el cliente no elige el modelo (evita gastar en modelos caros o tocar servicios internos)."""
-    return None if config.modo_publico else modelo
+    """En modo público el cliente solo puede elegir entre los modelos configurados en el servidor."""
+    if not config.modo_publico:
+        return modelo
+    return modelo if modelo and any(x["id"] == modelo for x in _modelos_para_clientes()) else None
+
+
+# Informes: cada análisis queda disponible un tiempo para abrirlo completo en el panel (#informe/<id>).
+_INFORMES = {}
+
+
+def _guardar_informe(res, url=None):
+    import uuid
+    if len(_INFORMES) > 400:
+        for clave in list(_INFORMES)[:100]:
+            _INFORMES.pop(clave, None)
+    ident = uuid.uuid4().hex[:12]
+    res["informe_id"] = ident
+    if url:
+        res.setdefault("pagina_actual", url)
+    _INFORMES[ident] = res
+    return res
 
 Metodo = Literal["hibrido", "hechos", "linea_base"]
 DIR_CORPUS = buscador.DIR_CORPUS
@@ -185,7 +222,16 @@ def modelos():
     sugeridos = [config.llm_modelo, *config.llm_modelos_respaldo]
     sugeridos += [f"ollama/{m}" for m in ollama if f"ollama/{m}" not in sugeridos]
     return {"principal": config.llm_modelo, "respaldo": config.llm_modelos_respaldo,
-            "proveedores": proveedores, "ollama": ollama, "sugeridos": sugeridos}
+            "proveedores": proveedores, "ollama": ollama, "sugeridos": sugeridos,
+            "para_clientes": _modelos_para_clientes()}
+
+
+@app.get("/api/informe/{ident}")
+def informe(ident: str):
+    res = _INFORMES.get(ident)
+    if res is None:
+        raise HTTPException(404, "Este informe ya no está disponible (se guardan por unas horas). Vuelve a analizar la página.")
+    return res
 
 
 @app.get("/api/mundos")
@@ -216,7 +262,7 @@ def buscar(q: str, n: int = 5):
 
 @app.post("/api/analizar")
 def analizar(p: PeticionAnalisis):
-    return analizar_urls(p.afirmacion, p.urls, modelo=_modelo_permitido(p.modelo), metodo=p.metodo)
+    return _guardar_informe(analizar_urls(p.afirmacion, p.urls, modelo=_modelo_permitido(p.modelo), metodo=p.metodo))
 
 
 @app.post("/api/analizar_mundo")
@@ -248,7 +294,8 @@ def analizar_pagina(p: PeticionPagina):
         from motor.extraccion import URLNoPermitida
         from motor.web_real import analizar_pagina_real
         try:
-            return analizar_pagina_real(p.url, p.seleccion, p.urls_extra, modelo=_modelo_permitido(p.modelo))
+            return _guardar_informe(analizar_pagina_real(p.url, p.seleccion, p.urls_extra,
+                                                         modelo=_modelo_permitido(p.modelo)), p.url)
         except URLNoPermitida as e:
             raise HTTPException(400, str(e))
         except Exception as e:
@@ -257,7 +304,7 @@ def analizar_pagina(p: PeticionPagina):
     res = analizar_urls(mundo["afirmacion"], [x["url"] for x in mundo["paginas"]], modelo=_modelo_permitido(p.modelo), metodo=p.metodo)
     res["mundo"] = mundo["id"]
     res["pagina_actual"] = buscador.normalizar_url(p.url)
-    return res
+    return _guardar_informe(res, p.url)
 
 
 @app.post("/api/verificar_imagen")
