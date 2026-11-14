@@ -18,17 +18,17 @@
     <section class="tarjeta pagina">
       <div class="titulo-pagina" id="titulo-pagina">Esta página</div>
       <button id="analizar" class="grande">Analizar esta noticia</button>
+      <p class="pista" style="margin-top:6px">La compara con la cobertura del mismo tema y con las fuentes que cita.</p>
       <div class="pista" id="pista-modelo"></div>
     </section>
 
-    <section class="tarjeta" id="caja-comparar">
-      <div class="seccion-cab"><span>Comparar con</span><small>otras notas del mismo tema</small></div>
-      <ul id="lista-pestanas" class="lista-interruptores"></ul>
+    <section class="tarjeta" id="caja-tema">
+      <div class="seccion-cab"><span>Investigar un tema</span><small>noticias recientes</small></div>
       <div class="agregar">
-        <input id="url-extra" type="url" placeholder="Pegar otra URL…">
-        <button id="agregar-url" class="pequeno" title="Agregar">+</button>
+        <input id="tema" type="text" placeholder="Ej.: suspensión de vuelos en EE. UU.">
+        <button id="investigar" class="pequeno">Buscar</button>
       </div>
-      <p class="pista">ECO también revisa las fuentes que la nota cita.</p>
+      <p class="pista">ECO busca la cobertura, separa a quien hace reportería propia de quien solo repite y muestra qué está corroborado.</p>
     </section>
 
     <section id="resultado" hidden></section>

@@ -13,6 +13,7 @@ Herramientas:
   analizar_mundo(mundo_id)                   analiza un mundo completo del laboratorio
   verificar_procedencia(url_imagen)          firma C2PA de una imagen: quién la firmó, cuándo, si se declara IA
   evaluar_audio(url_audio)                   ¿voz clonada? credenciales C2PA y detector AASIST-L
+  investigar_tema(tema)                      busca noticias recientes y separa reportería propia de repetición
 """
 
 import sys
@@ -157,6 +158,25 @@ def evaluar_audio(url_audio: str) -> dict:
         return voz.analizar_audio(datos, url_audio.split("?")[0].rsplit("/", 1)[-1])
     except ValueError as e:
         return {"error": str(e)}
+
+
+@mcp.tool()
+def investigar_tema(tema: str, dias: int = 30) -> dict:
+    """Busca noticias recientes sobre un tema o afirmación y mide cuántas fuentes independientes hay.
+
+    Devuelve los medios con reportería propia (ordenados por cuántos datos propios aportan), los que solo repiten
+    a otros, los datos corroborados por 2 o más fuentes independientes y los que dependen de una sola. Úselo antes
+    de resumir "qué se sabe" de un tema: le dice en qué fuentes apoyarse y qué no está confirmado.
+    """
+    from motor import busqueda
+    from motor.web_real import investigar_tema as investigar
+    try:
+        res = investigar(tema, dias=max(1, min(dias, 365)))
+    except (busqueda.SinBuscador, ValueError) as e:
+        return {"error": str(e)}
+    salida = _compacto(res)
+    salida["fuentes"] = res.get("fuentes")
+    return salida
 
 
 def main():

@@ -147,12 +147,28 @@
           y <b>¿es real esta voz?</b> No dice qué es verdad: muestra la evidencia para que decidas.</p>
       </div>
       <nav class="indice-instalar" aria-label="Qué verificar">
-        <a href="#urls" data-ir="sec-urls">1 · Una noticia (sus fuentes)</a>
-        <a href="#urls" data-ir="sec-imagen">2 · Una foto o un video</a>
-        <a href="#urls" data-ir="sec-audio">3 · Una voz</a>
+        <a href="#urls" data-ir="sec-tema">1 · Un tema (buscar noticias)</a>
+        <a href="#urls" data-ir="sec-urls">2 · Unas URLs</a>
+        <a href="#urls" data-ir="sec-imagen">3 · Una foto o un video</a>
+        <a href="#urls" data-ir="sec-audio">4 · Una voz</a>
         <a href="#instalar">Instalar la extensión o el MCP →</a>
       </nav>
-      <div class="intro" id="sec-urls">
+      <div class="intro" id="sec-tema">
+        <h1>¿Qué se sabe de verdad sobre un tema?</h1>
+        <p>Escribe un tema o una afirmación. ECO busca noticias recientes, extrae sus datos y separa a los medios con
+          <b>reportería propia</b> de los que <b>solo repiten</b> a otros. No califica medios por reputación: ordena por evidencia.</p>
+      </div>
+      <form id="form-tema" class="tarjeta form">
+        <label for="tema">Tema o afirmación</label>
+        <input id="tema" required minlength="4" placeholder="Ej.: suspensión de vuelos en Estados Unidos">
+        <label for="tema-dias">Período</label>
+        <select id="tema-dias"><option value="7">Últimos 7 días</option><option value="30" selected>Últimos 30 días</option><option value="90">Últimos 90 días</option></select>
+        <div class="fila-botones"><button type="submit" class="boton-primario">Investigar</button></div>
+        <p class="nota" id="nota-buscador"></p>
+      </form>
+      <div id="resultado-tema" class="resultado"></div>
+
+      <div class="intro" id="sec-urls" style="margin-top:28px">
         <h1>¿Cuántas fuentes hay de verdad detrás de una noticia?</h1>
         <p>Pega una afirmación y las páginas que la mencionan. ECO las descarga, extrae los hechos y calcula cuántas
           fuentes independientes hay. Es la misma herramienta que usa el servidor MCP <code>evaluar_corroboracion</code>.</p>

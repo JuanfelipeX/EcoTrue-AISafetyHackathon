@@ -268,6 +268,7 @@ function renderResultado(res, { comparar = false } = {}) {
       <span><i class="hueco"></i>copia o derivada (sin datos propios)</span></div>
     <div class="cascada-scroll">${svgCascada(N)}</div></div>`;
 
+  if (res.fuentes) html += tarjetaFuentes(res.fuentes);
   if (res.procedencia) html += tarjetaProcedencia(res, N);
 
   if (res.hechos && res.hechos.length) {
@@ -296,6 +297,39 @@ function renderResultado(res, { comparar = false } = {}) {
       ${tablaSimilitud(res, N)}</div>`;
   }
   return html;
+}
+
+// ---------------- fuentes ordenadas por evidencia ----------------
+function tarjetaFuentes(f) {
+  const propias = f.con_reporteria_propia.map((x) => `<tr><td><a href="${esc(x.url || "#")}" target="_blank" rel="noopener"><b>${esc(x.sitio)}</b></a>
+      <div class="nota" style="margin:0">${esc(x.titulo || "")}</div></td><td>${fechaCorta(x.fecha)}</td><td>${x.datos_propios}</td>
+      <td>${x.lo_repiten.length ? esc(x.lo_repiten.join(", ")) : "—"}</td></tr>`).join("");
+  const repiten = f.solo_repiten.map((x) => `<li><a href="${esc(x.url || "#")}" target="_blank" rel="noopener">${esc(x.sitio)}</a> repite a <b>${esc(x.repite_a)}</b></li>`).join("");
+  return `<div class="tarjeta"><h2>Fuentes ordenadas por evidencia</h2>
+    <p class="nota">Primero, quienes aportan datos propios (reportería), por cuántos aportan. ECO no juzga la reputación del medio:
+      un medio con reportería propia también puede equivocarse.</p>
+    <table class="tabla tabla-compacta"><thead><tr><th>Con reportería propia</th><th>Publicó</th><th>Datos propios</th><th>La repiten</th></tr></thead>
+      <tbody>${propias}</tbody></table>
+    ${repiten ? `<h3>Solo repiten a otros</h3><ul class="lista-simple">${repiten}</ul>` : ""}</div>`;
+}
+
+function prepararTema() {
+  const form = $("#form-tema");
+  if (!form) return;
+  api("/api/modelos").then((m) => {
+    if (!m.buscador) $("#nota-buscador").textContent = "El buscador de noticias todavía no está configurado en este servidor.";
+  }).catch(() => {});
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const cont = $("#resultado-tema");
+    cont.innerHTML = `<div class="tarjeta"><p class="nota">Buscando noticias, extrayendo sus datos y comparando quién informa qué… (unos 20 a 40 segundos)</p></div>`;
+    try {
+      const res = await api("/api/investigar", { tema: $("#tema").value.trim(), dias: Number($("#tema-dias").value) });
+      cont.innerHTML = `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>` + renderResultado(res);
+    } catch (e) {
+      cont.innerHTML = `<div class="tarjeta error">${esc(e.message)}</div>`;
+    }
+  });
 }
 
 // ---------------- procedencia (C2PA) ----------------
@@ -915,6 +949,7 @@ function prepararInstalar() {
 prepararInstalar();
 prepararVerificador();
 prepararAudio();
+prepararTema();
 navegar();
 cargarModelos();
 cargarMundos().then(() => {

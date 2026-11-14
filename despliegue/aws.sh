@@ -105,6 +105,15 @@ en_instancia() {
 case "${1:-}" in
   crear) crear ;;
   actualizar) en_instancia "cd /opt/eco && git pull --ff-only && docker compose up -d --build 2>&1 | tail -5 && docker compose ps" ;;
+  secreto)
+    # Sube una clave del .env local a SSM (cifrada) y la escribe en .env.servidor de la instancia: bash despliegue/aws.sh secreto EXA_API_KEY
+    var="${2:?Uso: aws.sh secreto NOMBRE_VARIABLE}"
+    valor=$(grep -E "^$var=" "$RAIZ/.env" | head -1 | cut -d= -f2- | tr -d '"')
+    [ -n "$valor" ] || { echo "Falta $var en .env"; exit 1; }
+    param="/eco/$(echo "$var" | tr 'A-Z' 'a-z')"
+    aws_ ssm put-parameter --name "$param" --type SecureString --overwrite --value "$valor" >/dev/null
+    en_instancia "cd /opt/eco && V=\$(aws ssm get-parameter --region $REGION --name $param --with-decryption --query Parameter.Value --output text) && (grep -q '^$var=' .env.servidor && sed -i \"s|^$var=.*|$var=\$V|\" .env.servidor || echo \"$var=\$V\" >> .env.servidor) && docker compose up -d eco 2>&1 | tail -1"
+    echo "$var cargada en el servidor (parámetro $param)." ;;
   estado)
     aws_ ec2 describe-instances --filters "Name=tag:Name,Values=$NOMBRE" \
       --query "Reservations[].Instances[].[InstanceId,InstanceType,State.Name,LaunchTime]"

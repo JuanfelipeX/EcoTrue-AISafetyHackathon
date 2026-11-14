@@ -32,50 +32,6 @@ function mostrarVista(nombre) {
 $("#ir-ajustes").addEventListener("click", () => mostrarVista($("#vista-ajustes").hidden ? "ajustes" : "principal"));
 $("#volver").addEventListener("click", () => mostrarVista("principal"));
 
-// ---------------- pestañas para comparar ----------------
-const PALABRAS_VACIAS = new Set("de la el los las un una y o en por para con del al que se su sus es son a lo como más tras sobre news noticias".split(" "));
-function palabras(t) {
-  return new Set((t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").split(/[^a-z0-9ñ]+/)
-    .filter((w) => w.length > 3 && !PALABRAS_VACIAS.has(w)));
-}
-
-function filaInterruptor(url, titulo, marcado) {
-  let host = url;
-  try { host = new URL(url).hostname.replace(/^www\./, ""); } catch (_) { /* url rara */ }
-  const li = document.createElement("li");
-  li.innerHTML = `<div class="texto"><b title="${esc(titulo)}">${esc(titulo || host)}</b><small>${esc(host)}</small></div>
-    <label class="interruptor"><input type="checkbox" value="${esc(url)}" ${marcado ? "checked" : ""}><span></span></label>`;
-  return li;
-}
-
-async function listarPestanas() {
-  const lista = $("#lista-pestanas");
-  if (PRUEBA) { lista.innerHTML = `<li class="vacia">Modo de prueba.</li>`; return; }
-  const todas = await chrome.tabs.query({ currentWindow: true });
-  const otras = todas.filter((t) => t.id !== pestanaActual?.id && /^https?:/.test(t.url || ""));
-  if (!otras.length) {
-    lista.innerHTML = `<li class="vacia">Abre en otras pestañas notas del mismo tema para compararlas, o pega su URL abajo.</li>`;
-    return;
-  }
-  const base = palabras(pestanaActual?.title);
-  lista.innerHTML = "";
-  otras.slice(0, 15).forEach((t) => {
-    const comunes = [...palabras(t.title)].filter((w) => base.has(w)).length;
-    lista.appendChild(filaInterruptor(t.url, t.title, comunes >= 2));
-  });
-}
-
-$("#agregar-url").addEventListener("click", () => {
-  const campo = $("#url-extra");
-  const url = campo.value.trim();
-  if (!/^https?:\/\//.test(url)) { campo.focus(); return; }
-  const lista = $("#lista-pestanas");
-  lista.querySelector(".vacia")?.remove();
-  lista.prepend(filaInterruptor(url, "URL agregada", true));
-  campo.value = "";
-});
-$("#url-extra").addEventListener("keydown", (e) => { if (e.key === "Enter") $("#agregar-url").click(); });
-
 // ---------------- modelos ----------------
 async function cargarModelos() {
   const api = await ecoApi();
@@ -136,7 +92,11 @@ function pintarResultado(d, api) {
   const texto = n <= 1 ? "Solo una página" : { alerta: "Un solo origen", medio: "Parte es repetición", ok: "Cobertura independiente" }[nivel];
   const sitios = {};
   (d.documentos || []).forEach((x) => { sitios[x.id] = x.sitio; });
-  const fuentes = (d.grupos || []).map((g, i) => {
+  const f = d.fuentes;
+  const propias = f ? f.con_reporteria_propia.slice(0, 6).map((x, i) => `<li><i style="background:${COLORES[i % COLORES.length]}"></i><div>
+      <a href="${esc(x.url || "#")}" target="_blank"><b>${esc(x.sitio)}</b></a>
+      <small>${x.datos_propios} dato${x.datos_propios === 1 ? "" : "s"} propio${x.datos_propios === 1 ? "" : "s"}${x.lo_repiten.length ? ` · la repiten: ${esc(x.lo_repiten.join(", "))}` : ""}</small></div></li>`).join("") : "";
+  const fuentes = propias ? "" : (d.grupos || []).map((g, i) => {
     const copias = g.miembros.filter((m) => m !== g.origen).map((m) => sitios[m] || m);
     return `<li><i style="background:${COLORES[i % COLORES.length]}"></i><div><b>${esc(g.origen_sitio)}</b>
       <small>${copias.length ? `la repiten: ${esc(copias.join(", "))}` : "sin copias"}</small></div></li>`;
@@ -159,8 +119,12 @@ function pintarResultado(d, api) {
           <span class="veredicto v-${nivel}">${texto}</span></div></div>
       <p class="resumen">${esc(d.nota_web_real || "")}</p>
       ${d.aviso ? `<div class="aviso">${esc(d.aviso)}</div>` : ""}
+      ${d.aviso_buscador ? `<div class="aviso">${esc(d.aviso_buscador)}</div>` : ""}
     </section>
+    ${propias ? `<section class="tarjeta"><div class="seccion-cab"><span>Con reportería propia</span><small>ordenadas por datos propios</small></div><ul class="fuentes">${propias}</ul>
+      ${f.solo_repiten.length ? `<p class="pista">${f.solo_repiten.length} nota${f.solo_repiten.length === 1 ? "" : "s"} solo repite${f.solo_repiten.length === 1 ? "" : "n"} a otras.</p>` : ""}</section>` : ""}
     ${fuentes ? `<section class="tarjeta"><div class="seccion-cab"><span>De dónde sale</span></div><ul class="fuentes">${fuentes}</ul></section>` : ""}
+    ${(d.corroborados || []).length ? `<section class="tarjeta"><div class="seccion-cab"><span>Corroborado por 2+ fuentes</span></div><ul class="fuentes">${d.corroborados.slice(0, 4).map((t) => `<li><i style="background:var(--bien)"></i><div>${esc(t)}</div></li>`).join("")}</ul></section>` : ""}
     ${chips.length ? `<section class="tarjeta"><div class="seccion-cab"><span>Imágenes (C2PA)</span></div><div class="chips">${chips.join("")}</div></section>` : ""}
     <div class="acciones">
       ${informe ? `<a class="grande" style="text-align:center;text-decoration:none" href="${esc(informe)}" target="_blank">Ver informe completo</a>` : "<span></span>"}
@@ -169,7 +133,7 @@ function pintarResultado(d, api) {
   $("#resultado").hidden = false;
   $("#otra-vez").addEventListener("click", () => {
     $("#resultado").hidden = true;
-    $("#caja-comparar").hidden = false;
+    $("#caja-tema").hidden = false;
     $("#analizar").disabled = false;
   });
 }
@@ -182,23 +146,34 @@ async function analizar() {
     $("#resultado").hidden = false;
     return;
   }
-  const extra = [...document.querySelectorAll("#lista-pestanas input:checked")].map((c) => c.value);
+  await ejecutar(`${api}/api/analizar_pagina`, { url, modelo: (await leer("ecoModelo", "")) || null },
+    "Leyendo la página, buscando la cobertura del mismo tema y comparando sus datos…", api);
+}
+
+async function investigar() {
+  const api = await ecoApi();
+  const tema = $("#tema").value.trim();
+  if (tema.length < 4) { $("#tema").focus(); return; }
+  await ejecutar(`${api}/api/investigar`, { tema, modelo: (await leer("ecoModelo", "")) || null },
+    `Buscando noticias sobre «${tema}» y comparando quién informa qué…`, api);
+}
+$("#investigar").addEventListener("click", investigar);
+$("#tema").addEventListener("keydown", (e) => { if (e.key === "Enter") investigar(); });
+
+async function ejecutar(ruta, cuerpo, mensaje, api) {
   $("#analizar").disabled = true;
-  $("#caja-comparar").hidden = true;
+  $("#caja-tema").hidden = true;
   $("#resultado").hidden = false;
-  $("#resultado").innerHTML = `<section class="tarjeta"><div class="cargando">Leyendo la página${extra.length ? ` y ${extra.length} más` : ""}, extrayendo sus datos y revisando sus imágenes…</div></section>`;
+  $("#resultado").innerHTML = `<section class="tarjeta"><div class="cargando">${esc(mensaje)}</div></section>`;
   try {
-    const r = await fetch(`${api}/api/analizar_pagina`, {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url, urls_extra: extra, modelo: (await leer("ecoModelo", "")) || null }),
-    });
+    const r = await fetch(ruta, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(cuerpo) });
     const d = await r.json();
     if (!r.ok) throw new Error(d.detail || `Error ${r.status}`);
     pintarResultado(d, api);
   } catch (e) {
     $("#resultado").innerHTML = `<div class="error">${esc(e.message.includes("Failed to fetch") ? `No se pudo conectar con el servidor de ECO (${api}).` : e.message)}</div>
       <button class="grande secundario" id="otra-vez" style="margin-top:8px">Intentar de nuevo</button>`;
-    $("#otra-vez").addEventListener("click", () => { $("#resultado").hidden = true; $("#caja-comparar").hidden = false; $("#analizar").disabled = false; });
+    $("#otra-vez").addEventListener("click", () => { $("#resultado").hidden = true; $("#caja-tema").hidden = false; $("#analizar").disabled = false; });
   }
 }
 $("#analizar").addEventListener("click", analizar);
@@ -213,7 +188,6 @@ $("#analizar").addEventListener("click", analizar);
   }
   try { $("#sitio").textContent = new URL(pestanaActual.url).hostname.replace(/^www\./, ""); } catch (_) { /* nada */ }
   $("#titulo-pagina").textContent = pestanaActual?.title || "Esta página";
-  listarPestanas();
   prepararServidor();
   cargarModelos();
 })();

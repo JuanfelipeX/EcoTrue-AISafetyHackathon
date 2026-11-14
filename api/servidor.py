@@ -20,6 +20,7 @@ Endpoints:
   POST /api/analizar_pagina                {url, seleccion?, metodo?}  (usado por la extensión)
   GET  /descargas/eco-extension.zip        la extensión de Chrome lista para instalar
   POST /api/analizar_audio                 {url} o {datos_base64, nombre}: ¿voz clonada? (C2PA + AASIST-L)
+  POST /api/investigar                     {tema, dias?}: busca noticias (Exa) y separa reportería propia de repetición
   POST /api/verificar_archivo?nombre=x.mp4 cuerpo binario: imagen o video → C2PA + señales de IA
   POST /api/verificar_imagen               {url} o {datos_base64, nombre}: procedencia C2PA de una imagen
   GET  /api/resultados                     resultados guardados de la evaluación y de la demo del agente
@@ -169,6 +170,12 @@ class PeticionImagen(BaseModel):
     nombre: str | None = None
 
 
+class PeticionTema(BaseModel):
+    tema: str = Field(..., min_length=4, max_length=400)
+    dias: int = Field(30, ge=1, le=365)
+    modelo: str | None = None
+
+
 class PeticionAudio(BaseModel):
     url: str | None = None
     datos_base64: str | None = Field(None, max_length=15_000_000)
@@ -221,9 +228,10 @@ def modelos():
     }
     sugeridos = [config.llm_modelo, *config.llm_modelos_respaldo]
     sugeridos += [f"ollama/{m}" for m in ollama if f"ollama/{m}" not in sugeridos]
+    from motor import busqueda
     return {"principal": config.llm_modelo, "respaldo": config.llm_modelos_respaldo,
             "proveedores": proveedores, "ollama": ollama, "sugeridos": sugeridos,
-            "para_clientes": _modelos_para_clientes()}
+            "para_clientes": _modelos_para_clientes(), "buscador": busqueda.disponible()}
 
 
 @app.get("/api/informe/{ident}")
@@ -333,6 +341,19 @@ def verificar_imagen(p: PeticionImagen):
         return procedencia.analizar_archivo(datos, nombre)
     except ValueError as e:
         raise HTTPException(413, str(e))
+
+
+@app.post("/api/investigar")
+def investigar(p: PeticionTema):
+    """Busca noticias recientes sobre un tema (Exa) y separa reportería propia de repetición."""
+    from motor import busqueda
+    from motor.web_real import investigar_tema
+    try:
+        return _guardar_informe(investigar_tema(p.tema, dias=p.dias, modelo=_modelo_permitido(p.modelo)))
+    except busqueda.SinBuscador as e:
+        raise HTTPException(503, str(e))
+    except ValueError as e:
+        raise HTTPException(404, str(e))
 
 
 @app.post("/api/verificar_archivo")
