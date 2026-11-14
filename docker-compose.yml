@@ -1,14 +1,27 @@
-# Despliegue público: ECO + túnel de Cloudflare (sin puertos abiertos en la máquina).
-# Variables en .env.servidor (ver despliegue/servidor.env.ejemplo); el token del túnel nunca va al repositorio.
+# Despliegue público de ECO.
+# Por defecto: Caddy en 80/443 detrás de un registro DNS A con proxy de Cloudflare (el grupo de seguridad
+# de AWS solo admite las IPs de Cloudflare). Alternativa: túnel de Cloudflare (perfil "tunel", sin puertos abiertos).
+# Variables en .env.servidor (ver despliegue/servidor.env.ejemplo); los secretos nunca van al repositorio.
 services:
   eco:
     build: .
     restart: unless-stopped
     env_file: .env.servidor
     mem_limit: 2500m
+  caddy:
+    image: caddy:2.8.4
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./despliegue/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_datos:/data
+    depends_on: [eco]
   cloudflared:
     image: cloudflare/cloudflared:2025.10.0
+    profiles: ["tunel"]
     restart: unless-stopped
     command: tunnel --no-autoupdate run
     env_file: .env.servidor
     depends_on: [eco]
+volumes:
+  caddy_datos:

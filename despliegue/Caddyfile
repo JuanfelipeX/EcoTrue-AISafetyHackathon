@@ -1,0 +1,14 @@
+# Proxy de entrada para el despliegue con registro DNS A (Cloudflare con nube naranja delante).
+# Cloudflare en modo "Full" llega por 443 (certificado propio de Caddy); en "Flexible", por 80.
+{
+	auto_https disable_redirects
+}
+
+:80 {
+	reverse_proxy eco:8765
+}
+
+https://eco.kibosecondbrain.com {
+	tls internal
+	reverse_proxy eco:8765
+}
