@@ -406,3 +406,6 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
 /* Botón principal legible sobre el verde claro del modo oscuro */
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .boton-primario { color: #0c2117; } }
 :root[data-theme="dark"] .boton-primario { color: #0c2117; }
+
+.ejemplo-audio { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: 100%; }
+.ejemplo-audio audio { height: 36px; max-width: 100%; }
