@@ -153,7 +153,7 @@
         <p>ECO no dice si algo es verdad. Dice cuánta evidencia <b>independiente</b> lo respalda.</p>
       </div>
       <ol class="pasos">
-        <li><b>Hechos atómicos.</b> Un LLM lee todas las páginas y lista los datos verificables (cifras, testimonios, lugares), marcando en qué páginas aparece cada uno. Dos redacciones del mismo dato cuentan como un solo hecho: la paráfrasis no engaña.</li>
+        <li><b>Hechos atómicos.</b> Un LLM lee todas las páginas y lista los datos verificables (cifras, testimonios, lugares), marcando en qué páginas aparece cada uno. Dos redacciones del mismo dato cuentan como un solo hecho: la paráfrasis no engaña. Las frases sobre la noticia (quién la informó, que es tendencia) no cuentan.</li>
         <li><b>Regla de independencia</b> (sin LLM, auditable). En orden cronológico, una página es fuente independiente solo si aporta al menos un dato que nadie había publicado antes.</li>
         <li><b>Guardia híbrida.</b> Si el texto es casi idéntico a una página anterior, cuenta como copia aunque agregue datos inventados.</li>
         <li><b>Qué se puede demostrar.</b> Para cada dato se cuenta cuántas fuentes independientes lo respaldan.</li>
@@ -168,12 +168,12 @@
         <div class="tarjeta">
           <h2>Servidor MCP</h2>
           <p>Para agentes. Antes de decir “varias fuentes lo confirman”, el agente llama a <code>evaluar_corroboracion(afirmacion, urls)</code>.</p>
-          <pre>python -m scripts.config_mcp
-claude mcp add eco -- python mcp_eco/servidor.py</pre>
+          <pre>python -m scripts.config_mcp --instalar
+python -m scripts.probar_mcp</pre>
         </div>
         <div class="tarjeta">
           <h2>API y benchmark</h2>
-          <p>Para investigación. 36 mundos sintéticos con respuesta conocida, una línea base y la comparación por tipo de ataque.</p>
+          <p>Para investigación. 54 mundos sintéticos con respuesta conocida (18 retenidos para la prueba final), una línea base y la comparación por tipo de ataque.</p>
           <pre>python -m evaluacion.evaluar --modelo …
 python -m demo.agente --modelo …</pre>
           <a href="/docs" target="_blank" rel="noopener">Documentación de la API ↗</a>
