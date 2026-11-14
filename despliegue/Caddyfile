@@ -8,7 +8,7 @@
 	reverse_proxy eco:8765
 }
 
-https://eco.kibosecondbrain.com {
+https://eco.kibosecondbrain.com, https://ecolab.kibosecondbrain.com {
 	tls internal
 	reverse_proxy eco:8765
 }
