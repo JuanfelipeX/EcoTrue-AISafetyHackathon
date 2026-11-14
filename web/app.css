@@ -337,3 +337,10 @@ pre { background: var(--superficie-2); padding: 10px 12px; border-radius: 8px; o
 }
 
 #vista-urls .intro[id] { scroll-margin-top: 80px; }
+
+.forense-mapas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 10px 0; }
+.forense-mapas figure { margin: 0; }
+.forense-mapas img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--borde); background: #000; display: block; }
+.forense-mapas figcaption { font-size: 12px; color: var(--tinta-2); margin-top: 6px; line-height: 1.4; }
+.forense-mapas figcaption b { display: block; color: var(--tinta); }
+@media (max-width: 640px) { .forense-mapas { grid-template-columns: minmax(0, 1fr); } }

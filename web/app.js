@@ -406,6 +406,7 @@ function pintarVerificacion(info) {
     <div><span class="c2pa-chip ${ia[0]}">${ia[1]}</span></div>
     <p style="margin:8px 0 4px">${esc(info.ia_explicacion || "")}</p>
     ${senales ? `<ul class="lista-simple">${senales}</ul>` : ""}
+    ${tarjetaForense(info.forense)}
     <h3>Detalles</h3>
     <dl class="c2pa-datos">
       <dt>Archivo</dt><dd>${esc(info.nombre || "")} · ${Math.round((info.bytes || 0) / 1024)} KB</dd>
@@ -418,6 +419,19 @@ function pintarVerificacion(info) {
       <dt>Códigos de validación</dt><dd>${esc((info.codigos || []).join(", ") || "ninguno")}</dd>
       ${info.huella ? `<dt>Huella visual</dt><dd><code>${esc(info.huella)}</code></dd>` : ""}
     </dl></div>`;
+}
+
+function tarjetaForense(fo) {
+  if (!fo) return "";
+  if (fo.error) return `<h3>Filtros de visión por computadora</h3><p class="nota">${esc(fo.error)}</p>`;
+  const mapas = [["ela", "ELA: nivel de error", "Zonas que responden distinto a la recompresión brillan más."],
+    ["residuo", "Residuo de ruido", "El ruido fino que queda al quitar el contenido. En una cámara es parejo."],
+    ["espectro", "Espectro de frecuencias", "Puntos brillantes repetidos lejos del centro sugieren escalado artificial."]];
+  return `<h3>Filtros de visión por computadora <span class="c2pa-chip medio">experimental</span></h3>
+    <p style="margin:6px 0">${esc(fo.lectura)}</p>
+    <div class="forense-mapas">${mapas.map(([k, t, d]) => `<figure><img src="${fo.mapas[k]}" alt="${esc(t)}"><figcaption><b>${esc(t)}</b><span>${esc(d)}</span></figcaption></figure>`).join("")}</div>
+    <ul class="lista-simple">${fo.indicadores.map((i) => `<li>${i.atipico ? "⚠" : "✓"} <b>${esc(i.nombre)}</b> (${i.valor}): ${esc(i.lectura)}</li>`).join("")}</ul>
+    <p class="nota">${esc(fo.aviso)}</p>`;
 }
 
 async function verificarImagen(cuerpo) {

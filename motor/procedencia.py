@@ -276,6 +276,12 @@ def analizar_archivo(datos, nombre):
     info["bytes"] = len(datos)
     if info["tipo"] == "video":
         info["huella"] = None
+    else:
+        try:
+            from . import forense
+            info["forense"] = forense.analizar(datos)
+        except Exception as e:  # formatos que Pillow no abre (HEIC), imágenes diminutas, etc.
+            info["forense"] = {"error": f"No se pudieron aplicar los filtros: {str(e)[:120]}"}
     return info
 
 
