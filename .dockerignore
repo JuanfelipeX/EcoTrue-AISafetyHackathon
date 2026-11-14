@@ -1,0 +1,10 @@
+.git
+.venv
+.env
+.navegador
+node_modules
+.cache/pendientes
+.cache/respuestas
+**/__pycache__
+*.pyc
+docs/*.pdf

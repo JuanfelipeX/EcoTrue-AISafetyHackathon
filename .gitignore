@@ -6,3 +6,4 @@ __pycache__/
 .venv/
 .navegador/
 node_modules/
+.env.servidor

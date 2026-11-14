@@ -23,7 +23,7 @@ from dataclasses import dataclass, asdict
 
 from .config import config
 
-PROVEEDORES = ("openai", "anthropic", "openrouter", "ollama", "claudecode", "manual")
+PROVEEDORES = ("openai", "anthropic", "openrouter", "ollama", "claudecode", "bedrock", "manual")
 # "manual": no llama a ninguna API. Si la respuesta no está en caché, guarda el prompt en
 # .cache/pendientes/ para que una persona (u otro modelo fuera del pipeline) lo responda y
 # luego se importe con scripts/importar_respuestas.py. Sirve para pruebas y como modo sin conexión.
@@ -74,6 +74,22 @@ def extraer_json(texto):
             except json.JSONDecodeError:
                 continue
     raise ErrorLLM("La respuesta del modelo no contiene JSON válido:\n" + texto[:500])
+
+
+_USO_DIARIO = {"dia": None, "llamadas": 0}
+
+
+def _cupo_llm_disponible():
+    """En modo público limita las llamadas nuevas al modelo por día (protege los créditos)."""
+    if not config.modo_publico:
+        return True
+    hoy = time.strftime("%Y-%m-%d")
+    if _USO_DIARIO["dia"] != hoy:
+        _USO_DIARIO.update(dia=hoy, llamadas=0)
+    if _USO_DIARIO["llamadas"] >= config.limite_llm_diario:
+        return False
+    _USO_DIARIO["llamadas"] += 1
+    return True
 
 
 class ClienteLLM:
@@ -180,6 +196,23 @@ class ClienteLLM:
         entrada = uso.get("input_tokens", 0) + uso.get("cache_read_input_tokens", 0) + uso.get("cache_creation_input_tokens", 0)
         return d.get("result", ""), entrada, uso.get("output_tokens", 0)
 
+    def _llamar_bedrock(self, modelo, sistema, prompt):
+        """Amazon Bedrock (API Converse). Credenciales del entorno de AWS; en EC2, el rol de la instancia."""
+        if "bedrock" not in self._clientes:
+            import boto3
+            from botocore.config import Config as ConfigBoto
+            self._clientes["bedrock"] = boto3.client(
+                "bedrock-runtime", region_name=config.bedrock_region,
+                config=ConfigBoto(read_timeout=max(config.llm_timeout, 120), retries={"max_attempts": 3}))
+        params = {"modelId": modelo, "messages": [{"role": "user", "content": [{"text": prompt}]}],
+                  "inferenceConfig": {"maxTokens": self.max_tokens}}
+        if sistema:
+            params["system"] = [{"text": sistema}]
+        r = self._clientes["bedrock"].converse(**params)
+        texto = "".join(b.get("text", "") for b in r["output"]["message"]["content"])
+        uso = r.get("usage", {})
+        return texto, uso.get("inputTokens", 0), uso.get("outputTokens", 0)
+
     def _llamar(self, especificacion, sistema, prompt):
         proveedor, modelo = separar_modelo(especificacion)
         inicio = time.time()
@@ -187,6 +220,8 @@ class ClienteLLM:
             texto, t_in, t_out = self._llamar_claude_code(modelo, sistema, prompt)
         elif proveedor == "ollama":
             texto, t_in, t_out = self._llamar_ollama(modelo, sistema, prompt)
+        elif proveedor == "bedrock":
+            texto, t_in, t_out = self._llamar_bedrock(modelo, sistema, prompt)
         elif proveedor == "anthropic":
             texto, t_in, t_out = self._llamar_anthropic(modelo, sistema, prompt)
         else:
@@ -219,6 +254,12 @@ class ClienteLLM:
                     raise PendienteManual(f"Prompt pendiente de respuesta manual: {pendiente}")
                 errores.append(f"{especificacion}: pendiente en {pendiente}")
                 continue
+            if especificacion.startswith("claudecode/") and not __import__("shutil").which("claude"):
+                errores.append(f"{especificacion}: la CLI de Claude Code no está instalada aquí")
+                continue
+            if not _cupo_llm_disponible():
+                errores.append(f"{especificacion}: se alcanzó el tope diario de llamadas al modelo (ECO_LIMITE_LLM_DIARIO)")
+                break
             try:
                 respuesta = self._llamar(especificacion, sistema, prompt)
             except Exception as e:

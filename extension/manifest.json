@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ECO — fuentes reales",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Muestra cuántas fuentes independientes hay detrás de una afirmación y de dónde salió.",
   "permissions": [
     "contextMenus",
@@ -11,7 +11,8 @@
   ],
   "host_permissions": [
     "http://localhost/*",
-    "http://127.0.0.1/*"
+    "http://127.0.0.1/*",
+    "https://eco.kibosecondbrain.com/*"
   ],
   "background": {
     "service_worker": "background.js"

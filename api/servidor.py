@@ -19,25 +19,76 @@ Endpoints:
   POST /api/analizar_mundo                 {mundo_id, metodo?, modelo?}  ECO + línea base lado a lado
   POST /api/analizar_pagina                {url, seleccion?, metodo?}  (usado por la extensión)
   GET  /api/resultados                     resultados guardados de la evaluación y de la demo del agente
+  POST /mcp                                servidor MCP por HTTP (Streamable HTTP) para agentes remotos
+
+Modo público (ECO_MODO_PUBLICO=1, usado en AWS): límite de peticiones por IP, tope diario de llamadas al
+modelo, el cliente no puede elegir modelo, y las URLs del mini-internet se devuelven con el dominio público.
 """
 
+import contextlib
 import json
+import time
+from collections import defaultdict, deque
 from functools import lru_cache
 from typing import Literal
 
 import httpx
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from motor import buscador, linea_base
 from motor.analisis import analizar_urls
 from motor.config import RAIZ_PROYECTO, config
+from mcp_eco.servidor import app_http as mcp_http, mcp
 
-app = FastAPI(title="ECO", description="¿Cuántas fuentes hay de verdad detrás de una afirmación?", version="1.1")
+@contextlib.asynccontextmanager
+async def _ciclo_de_vida(_app):
+    async with mcp.session_manager.run():  # el MCP montado en /mcp necesita su gestor de sesiones
+        yield
+
+
+app = FastAPI(title="ECO", description="¿Cuántas fuentes hay de verdad detrás de una afirmación?", version="1.2",
+              lifespan=_ciclo_de_vida)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+
+_PETICIONES = defaultdict(deque)
+
+
+def _ip_cliente(request):
+    # Detrás de Cloudflare la IP real llega en CF-Connecting-IP.
+    return request.headers.get("cf-connecting-ip") or (request.client.host if request.client else "?")
+
+
+@app.middleware("http")
+async def _modo_publico(request: Request, call_next):
+    if not config.modo_publico:
+        return await call_next(request)
+    if request.method == "POST":
+        ventana = _PETICIONES[_ip_cliente(request)]
+        ahora = time.time()
+        while ventana and ahora - ventana[0] > 60:
+            ventana.popleft()
+        if len(ventana) >= config.limite_peticiones_minuto:
+            return JSONResponse({"detail": "Demasiadas peticiones; espere un minuto."}, status_code=429)
+        ventana.append(ahora)
+    respuesta = await call_next(request)
+    host = (request.headers.get("host") or "").split(":")[0].lower()
+    tipo = respuesta.headers.get("content-type", "")
+    if host in {h.lower() for h in config.hosts_publicos} and tipo.startswith("application/json"):
+        # Las URLs del mini-internet se guardan con la base local; se reescriben al dominio público.
+        cuerpo = b"".join([trozo async for trozo in respuesta.body_iterator])
+        cuerpo = cuerpo.replace(buscador.URL_BASE_CORPUS.encode(), f"https://{host}".encode())
+        cabeceras = {k: v for k, v in respuesta.headers.items() if k.lower() != "content-length"}
+        return Response(cuerpo, status_code=respuesta.status_code, headers=cabeceras, media_type=tipo)
+    return respuesta
+
+
+def _modelo_permitido(modelo):
+    """En modo público el cliente no elige el modelo (evita gastar en modelos caros o tocar servicios internos)."""
+    return None if config.modo_publico else modelo
 
 Metodo = Literal["hibrido", "hechos", "linea_base"]
 DIR_CORPUS = buscador.DIR_CORPUS
@@ -135,7 +186,7 @@ def buscar(q: str, n: int = 5):
 
 @app.post("/api/analizar")
 def analizar(p: PeticionAnalisis):
-    return analizar_urls(p.afirmacion, p.urls, modelo=p.modelo, metodo=p.metodo)
+    return analizar_urls(p.afirmacion, p.urls, modelo=_modelo_permitido(p.modelo), metodo=p.metodo)
 
 
 @app.post("/api/analizar_mundo")
@@ -143,7 +194,7 @@ def analizar_mundo(p: PeticionMundo):
     """Análisis de ECO y de la línea base sobre el mismo mundo, para compararlos lado a lado."""
     mundo = _mundo(p.mundo_id)
     urls = [x["url"] for x in mundo["paginas"]]
-    res = analizar_urls(mundo["afirmacion"], urls, modelo=p.modelo, metodo=p.metodo)
+    res = analizar_urls(mundo["afirmacion"], urls, modelo=_modelo_permitido(p.modelo), metodo=p.metodo)
     documentos = [buscador.cargar(u) for u in urls]
     base = linea_base.analizar(documentos)
     sim = linea_base.matriz_similitud(documentos) if len(documentos) > 1 else [[1.0]]
@@ -165,7 +216,7 @@ def analizar_pagina(p: PeticionPagina):
     if mundo is None:
         raise HTTPException(404, "La página no pertenece al mini-internet de ECO. "
                                  "Para páginas reales use /api/analizar con la afirmación y las URLs.")
-    res = analizar_urls(mundo["afirmacion"], [x["url"] for x in mundo["paginas"]], modelo=p.modelo, metodo=p.metodo)
+    res = analizar_urls(mundo["afirmacion"], [x["url"] for x in mundo["paginas"]], modelo=_modelo_permitido(p.modelo), metodo=p.metodo)
     res["mundo"] = mundo["id"]
     res["pagina_actual"] = buscador.normalizar_url(p.url)
     return res
@@ -192,6 +243,7 @@ def resultados():
 
 
 # ---------------- archivos estáticos ----------------
+app.router.routes.extend(mcp_http.routes)  # POST /mcp (sin redirección a /mcp/)
 app.mount("/sitios", StaticFiles(directory=DIR_CORPUS / "sitios"), name="sitios")
 app.mount("/web", StaticFiles(directory=DIR_WEB), name="web")
 

@@ -5,10 +5,12 @@ Desktop o Claude Code, lista las herramientas y llama a cada una.
 Uso (desde la carpeta eco):
   python -m scripts.probar_mcp
   python -m scripts.probar_mcp --modelo manual/claude-opus-5-5-sesion   (sin API, respuestas guardadas)
+  python -m scripts.probar_mcp --url https://eco.kibosecondbrain.com/mcp   (servidor remoto por HTTP)
 """
 
 import argparse
 import asyncio
+import contextlib
 import json
 import os
 import sys
@@ -30,13 +32,24 @@ def _texto(resultado):
         return "".join(partes)
 
 
-async def principal(modelo):
+@contextlib.asynccontextmanager
+async def _transporte(modelo, url):
+    if url:
+        from mcp.client.streamable_http import streamable_http_client
+        async with streamable_http_client(url) as flujos:
+            yield flujos[0], flujos[1]
+        return
     entorno = dict(os.environ, PYTHONIOENCODING="utf-8")
     if modelo:
         entorno["LLM_MODELO"] = modelo
     parametros = StdioServerParameters(command=sys.executable, args=[str(RAIZ_PROYECTO / "mcp_eco" / "servidor.py")],
                                        env=entorno)
     async with stdio_client(parametros) as (lectura, escritura):
+        yield lectura, escritura
+
+
+async def principal(modelo, url=None):
+    async with _transporte(modelo, url) as (lectura, escritura):
         async with ClientSession(lectura, escritura) as sesion:
             info = await sesion.initialize()
             servidor = getattr(info, "server_info", None) or getattr(info, "serverInfo")
@@ -57,10 +70,12 @@ async def principal(modelo):
                 "afirmacion": "Afirmación del mundo e03-s2", "urls": urls}))
             print(f"evaluar_corroboracion(4 URLs de e03-s2) -> {r['fuentes_aparentes']} páginas, "
                   f"{r['fuentes_independientes']} fuentes independientes")
-    print("\nOK: el servidor MCP responde por stdio.")
+    print(f"\nOK: el servidor MCP responde por {'HTTP en ' + url if url else 'stdio'}.")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--modelo", help="forzar LLM_MODELO para esta prueba (proveedor/modelo)")
-    asyncio.run(principal(parser.parse_args().modelo))
+    parser.add_argument("--url", help="probar un servidor MCP remoto por HTTP (por ejemplo https://…/mcp)")
+    args = parser.parse_args()
+    asyncio.run(principal(args.modelo, args.url))

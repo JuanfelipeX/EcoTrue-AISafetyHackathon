@@ -93,6 +93,21 @@ def analizar_mundo(mundo_id: str) -> dict:
     return res
 
 
+def _app_http():
+    """Versión HTTP (Streamable HTTP) del mismo servidor; api.servidor agrega su ruta /mcp.
+    Sin estado y con respuestas JSON: sirve detrás de Cloudflare y para varios agentes a la vez."""
+    try:
+        from mcp.server.transport_security import TransportSecuritySettings
+        seguridad = TransportSecuritySettings(enable_dns_rebinding_protection=False)
+    except ImportError:
+        seguridad = None
+    return mcp.streamable_http_app(streamable_http_path="/mcp", stateless_http=True, json_response=True,
+                                   transport_security=seguridad)
+
+
+app_http = _app_http()
+
+
 def main():
     mcp.run("stdio")
 

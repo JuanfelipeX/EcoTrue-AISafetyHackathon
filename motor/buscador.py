@@ -18,12 +18,14 @@ from urllib.parse import urlparse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from .config import RAIZ_PROYECTO
+from .config import RAIZ_PROYECTO, config
 from .extraccion import cargar_desde_archivo, cargar_desde_url
 
 DIR_CORPUS = RAIZ_PROYECTO / "corpus"
 # El mini-internet se reconoce en cualquier puerto local (el 8000 suele estar ocupado en Windows).
-HOSTS_LOCALES = {"localhost", "127.0.0.1"}
+# En el despliegue público también se reconoce el dominio (ECO_HOSTS_PUBLICOS); las URLs se normalizan
+# a la base local para que la caché de respuestas del modelo siga sirviendo.
+HOSTS_LOCALES = {"localhost", "127.0.0.1", *[h.lower() for h in config.hosts_publicos]}
 URL_BASE_CORPUS = "http://localhost:8765"
 
 

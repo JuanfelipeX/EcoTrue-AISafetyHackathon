@@ -29,12 +29,19 @@ class Config:
     openrouter_base_url: str = field(default_factory=lambda: _texto("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"))
     ollama_base_url: str = field(default_factory=lambda: _texto("OLLAMA_BASE_URL", "http://localhost:11434/v1"))
     openai_base_url: str = field(default_factory=lambda: _texto("OPENAI_BASE_URL"))
+    # Bedrock usa las credenciales de AWS del entorno (en EC2, el rol de la instancia): no hay claves en .env.
+    bedrock_region: str = field(default_factory=lambda: _texto("BEDROCK_REGION", _texto("AWS_REGION", "us-east-1")))
     llm_temperatura: float = field(default_factory=lambda: float(_texto("LLM_TEMPERATURA", "0")))
     llm_max_tokens: int = field(default_factory=lambda: int(_texto("LLM_MAX_TOKENS", "2000")))
     llm_timeout: float = field(default_factory=lambda: float(_texto("LLM_TIMEOUT_SEGUNDOS", "60")))
     llm_cache: bool = field(default_factory=lambda: _texto("LLM_CACHE", "1") == "1")
     umbral_similitud: float = field(default_factory=lambda: float(_texto("ECO_UMBRAL_SIMILITUD", "0.6")))
     dir_cache: Path = RAIZ_PROYECTO / ".cache" / "llm"
+    # Despliegue público (AWS): límites contra abuso y hosts con los que se sirve el mini-internet.
+    modo_publico: bool = field(default_factory=lambda: _texto("ECO_MODO_PUBLICO", "0") == "1")
+    hosts_publicos: list = field(default_factory=lambda: _lista("ECO_HOSTS_PUBLICOS"))
+    limite_llm_diario: int = field(default_factory=lambda: int(_texto("ECO_LIMITE_LLM_DIARIO", "300")))
+    limite_peticiones_minuto: int = field(default_factory=lambda: int(_texto("ECO_LIMITE_PETICIONES_MINUTO", "10")))
 
 
 config = Config()

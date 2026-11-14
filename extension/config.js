@@ -1,8 +1,10 @@
 // Dirección del servidor de ECO (uvicorn api.servidor:app --port 8765).
 // Si el usuario la fijó en el popup ("Servidor de ECO") se usa esa; si no, se busca un servidor de ECO
-// vivo en los puertos habituales (útil cuando el 8765 está ocupado y se arrancó con --puerto).
-const ECO_API_DEFECTO = "http://localhost:8765";
-const ECO_CANDIDATOS = ["http://localhost:8765", "http://localhost:8766", "http://localhost:8770", "http://localhost:8000"];
+// vivo en los puertos habituales y, si no hay ninguno local, se usa el servidor público de ECO en AWS.
+const ECO_API_PUBLICA = "https://eco.kibosecondbrain.com";
+const ECO_API_DEFECTO = ECO_API_PUBLICA;
+const ECO_CANDIDATOS = ["http://localhost:8765", "http://localhost:8766", "http://localhost:8770", "http://localhost:8000",
+                        ECO_API_PUBLICA];
 
 async function ecoVivo(base) {
   try {

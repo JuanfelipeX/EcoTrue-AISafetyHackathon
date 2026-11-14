@@ -100,8 +100,44 @@ def cargar_desde_archivo(ruta, url, id_doc=None):
     return extraer_documento(Path(ruta).read_text(encoding="utf-8"), url, id_doc)
 
 
+class URLNoPermitida(ValueError):
+    """La URL apunta a una red interna o usa un esquema no permitido."""
+
+
+def _verificar_destino(url):
+    """Bloquea esquemas distintos de http(s) y destinos privados (SSRF): loopback, redes internas,
+    la dirección de metadatos de la nube (169.254.169.254) y similares. Comprueba TODAS las IPs del nombre."""
+    import ipaddress
+    import socket
+    p = urlparse(url)
+    if p.scheme not in ("http", "https") or not p.hostname:
+        raise URLNoPermitida(f"Solo se permiten URLs http(s): {url}")
+    try:
+        infos = socket.getaddrinfo(p.hostname, p.port or (443 if p.scheme == "https" else 80), type=socket.SOCK_STREAM)
+    except socket.gaierror:
+        raise URLNoPermitida(f"No se pudo resolver {p.hostname}")
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0].split("%")[0])
+        if not ip.is_global or ip.is_multicast:
+            raise URLNoPermitida(f"Destino no permitido (red interna): {p.hostname}")
+
+
+class _RedireccionSegura(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        _verificar_destino(newurl)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+_ABRIDOR = urllib.request.build_opener(_RedireccionSegura)
+MAX_BYTES_PAGINA = 3 * 1024 * 1024
+
+
 def cargar_desde_url(url, id_doc=None, timeout=15):
+    _verificar_destino(url)
     peticion = urllib.request.Request(url, headers={"User-Agent": "ECO/0.1 (laboratorio de defensa epistémica)"})
-    with urllib.request.urlopen(peticion, timeout=timeout) as r:
-        html = r.read().decode(r.headers.get_content_charset() or "utf-8", errors="replace")
+    with _ABRIDOR.open(peticion, timeout=timeout) as r:
+        crudo = r.read(MAX_BYTES_PAGINA + 1)
+        if len(crudo) > MAX_BYTES_PAGINA:
+            raise URLNoPermitida(f"La página supera {MAX_BYTES_PAGINA // (1024 * 1024)} MB")
+        html = crudo.decode(r.headers.get_content_charset() or "utf-8", errors="replace")
     return extraer_documento(html, url, id_doc)
