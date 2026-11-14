@@ -87,7 +87,7 @@ USERDATA
        --metadata-options HttpTokens=required,HttpPutResponseHopLimit=2,HttpEndpoint=enabled \
        --block-device-mappings 'DeviceName=/dev/xvda,Ebs={VolumeSize=20,VolumeType=gp3,Encrypted=true}' \
        --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$NOMBRE},{Key=proyecto,Value=eco}]" \
-       --user-data "file://$datos" --query "Instances[0].InstanceId")
+       --user-data "file://$(command -v cygpath >/dev/null && cygpath -m "$datos" || echo "$datos")" --query "Instances[0].InstanceId")
   rm -f "$datos"
   echo "5/5 Instancia $id creada. Arranque + build de la imagen tardan ~4 minutos."
   echo "Seguimiento: bash despliegue/aws.sh estado"
