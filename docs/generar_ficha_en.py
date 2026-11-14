@@ -31,8 +31,8 @@ MAIN = [t for t, _ in TYPES[:4]]
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--team", default="Team ECO")
-    ap.add_argument("--members", default="")
+    ap.add_argument("--team", default="ECO TRACE Team")
+    ap.add_argument("--members", default="Sadid Romero, Juan Felipe Jimenez, Ana Maria Vargas")
     ap.add_argument("--repo", default="https://github.com/SadidRomero77/eco")
     ap.add_argument("--web", default="https://eco.kibosecondbrain.com")
     ap.add_argument("--out", default=None, help="nombre del PDF de salida dentro de docs/")

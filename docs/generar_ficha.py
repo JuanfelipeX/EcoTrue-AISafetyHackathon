@@ -90,8 +90,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--modelo", default="claudecode/sonnet", help="modelo extractor principal de la ficha")
     parser.add_argument("--agente", default="claudecode/haiku", help="modelo usado en demo.agente")
-    parser.add_argument("--equipo", default="Equipo ECO")
-    parser.add_argument("--integrantes", default="")
+    parser.add_argument("--equipo", default="ECO TRACE Team")
+    parser.add_argument("--integrantes", default="Sadid Romero, Juan Felipe Jimenez, Ana Maria Vargas")
     parser.add_argument("--repo", default="https://github.com/SadidRomero77/eco")
     parser.add_argument("--web", default="https://eco.kibosecondbrain.com")
     args = parser.parse_args()
@@ -257,7 +257,7 @@ def main():
         conds = [("limpio", "Limpio"), ("opus_16k", "Opus 16 kbps (nota de voz)"), ("opus_8k", "Opus 8 kbps")]
         filas_v = [["Detector · EER en In-the-Wild (falsos aceptados)"] + [t for _, t in conds]]
         for nombre_m, r in voz["modelos"].items():
-            filas_v.append([nombre_m] + [f"{pct(r[k]['eer'])} ({pct(r[k]['falsos_aceptados_como_reales'])})" for k, _ in conds])
+            filas_v.append([nombre_m] + [f"{r[k]['eer'] * 100:.1f} % ({r[k]['falsos_aceptados_como_reales'] * 100:.0f} %)" for k, _ in conds])
         s.append(Spacer(1, 3))
         s.append(tabla(filas_v, [6.9 * cm, 3.3 * cm, 3.9 * cm, 3.4 * cm]))
         d = voz["datos"]
@@ -274,9 +274,9 @@ def main():
         "firmante (en producción: lista oficial y sellos RFC 3161). <b>Voz:</b> evaluada en inglés con figuras públicas; "
         "es una alerta para verificar por otro canal, nunca prueba para acusar. "
         "<b>Independencia no es verdad:</b> varias fuentes independientes pueden equivocarse. <b>Datos sintéticos:</b> "
-        "eventos y paráfrasis escritos a mano, muestras pequeñas; no se probó en la web real y la extensión solo encuentra "
-        "páginas relacionadas dentro del mini-internet (el MCP y el panel aceptan URLs arbitrarias). <b>Dependencia del "
-        "extractor:</b> con un modelo pequeño los errores de alineación cambian el conteo.", p))
+        "eventos y paráfrasis escritos a mano, muestras pequeñas; en la web real se probó en vivo (con Exa y Claude en Bedrock), sin "
+        "respuesta conocida para medir. <b>Cronología:</b> se confía en las fechas de publicación (una agencia publicada más tarde puede "
+        "parecer copia). <b>Dependencia del extractor:</b> con un modelo pequeño los errores de alineación cambian el conteo.", p))
 
     s.append(Paragraph("7. Riesgo de doble uso", h))
     s.append(Paragraph(

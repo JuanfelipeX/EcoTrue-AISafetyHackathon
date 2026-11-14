@@ -2,6 +2,7 @@
 
 from reportlab.graphics.shapes import Drawing, Line, Polygon, Rect, String
 from reportlab.lib import colors
+from reportlab.pdfbase.pdfmetrics import stringWidth
 
 VERDE = colors.HexColor("#2F7A5A")
 VERDE_SUAVE = colors.HexColor("#E8F2EC")
@@ -32,9 +33,23 @@ TEXTOS = {
 }
 
 
+def _ajustar(texto, fuente, tam, ancho_max, tam_min=5.6):
+    """Achica la letra hasta que el texto quepa; si ni así cabe, lo recorta con «…». Nunca se sale de su caja."""
+    while tam > tam_min and stringWidth(texto, fuente, tam) > ancho_max:
+        tam -= 0.2
+    while stringWidth(texto, fuente, tam) > ancho_max and len(texto) > 4:
+        texto = texto[:-2].rstrip() + "…"
+    return texto, tam
+
+
+def _texto(d, x, y, texto, fuente, tam, ancho_max, color=TINTA):
+    texto, tam = _ajustar(texto, fuente, tam, ancho_max)
+    d.add(String(x, y, texto, fontName=fuente, fontSize=tam, fillColor=color))
+
+
 def _caja(d, x, y, w, h, texto, fuente, tam=6.9, relleno=colors.white, borde=BORDE, color=TINTA, negrita=None):
     d.add(Rect(x, y, w, h, rx=4, ry=4, fillColor=relleno, strokeColor=borde, strokeWidth=0.7))
-    d.add(String(x + 5, y + h / 2 - tam / 3, texto, fontName=negrita or fuente, fontSize=tam, fillColor=color))
+    _texto(d, x + 5, y + h / 2 - tam / 3, texto, negrita or fuente, tam, w - 9, color)
 
 
 def _flecha(d, x1, y1, x2, y2):
@@ -57,7 +72,7 @@ def diagrama(ancho, fuente, negrita, idioma="en"):
     x4 = x3 + c3 + sep
     y_top, h, g = alto - 26, 18, 6
     for x, titulo in ((x1, t["entradas"]), (x2, t["ingesta"]), (x3, t["motor"]), (x4, t["salidas"])):
-        d.add(String(x + 2, alto - 13, titulo, fontName=negrita, fontSize=7.2, fillColor=VERDE))
+        _texto(d, x + 2, alto - 13, titulo, negrita, 7.2, 150, VERDE)
     filas = [y_top - i * (h + g) - h for i in range(4)]
     for i in range(4):
         _caja(d, x1, filas[i], c1, h, t["e"][i], fuente)
@@ -69,12 +84,11 @@ def diagrama(ancho, fuente, negrita, idioma="en"):
     d.add(Rect(x3, y_m0, c3, y_m1 - y_m0, rx=5, ry=5, fillColor=colors.white, strokeColor=VERDE, strokeWidth=1.3))
     paso = (y_m1 - y_m0 - 8) / len(t["m"])
     for i, linea in enumerate(t["m"]):
-        d.add(String(x3 + 7, y_m1 - 12 - i * paso, linea, fontName=negrita if linea[:1].isdigit() else fuente,
-                     fontSize=6.9, fillColor=TINTA))
+        _texto(d, x3 + 7, y_m1 - 12 - i * paso, linea, negrita if linea[:1].isdigit() else fuente, 6.9, c3 - 12)
     for i in range(4):
         _flecha(d, x2 + c2 + 2, filas[i] + h / 2, x3 - 2, filas[i] + h / 2)
         _flecha(d, x3 + c3 + 2, filas[i] + h / 2, x4 - 2, filas[i] + h / 2)
     # infraestructura
     d.add(Rect(m, 6, ancho - 2 * m, 16, rx=4, ry=4, fillColor=GRIS, strokeColor=None))
-    d.add(String(m + 6, 11, t["infra"], fontName=fuente, fontSize=6.9, fillColor=colors.white))
+    _texto(d, m + 6, 11, t["infra"], fuente, 6.9, ancho - 2 * m - 12, colors.white)
     return d
