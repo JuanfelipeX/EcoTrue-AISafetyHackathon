@@ -334,7 +334,16 @@ def resultados():
     barrido = None
     if (DIR_RESULTADOS / "linea_base_barrido.json").exists():
         barrido = json.loads((DIR_RESULTADOS / "linea_base_barrido.json").read_text(encoding="utf-8"))
-    return {"comparaciones": comparaciones, "agentes": agentes, "barrido_linea_base": barrido}
+    procedencia = None
+    rutas = sorted(DIR_RESULTADOS.glob("procedencia_*.json"))
+    if rutas:
+        d = json.loads(rutas[-1].read_text(encoding="utf-8"))
+        procedencia = {"modelo": d.get("modelo"), "resumenes": d.get("resumenes"), "n": len(d.get("detalle", []))}
+    voz = None
+    if (DIR_RESULTADOS / "voz_aasist.json").exists():
+        voz = json.loads((DIR_RESULTADOS / "voz_aasist.json").read_text(encoding="utf-8"))
+    return {"comparaciones": comparaciones, "agentes": agentes, "barrido_linea_base": barrido,
+            "procedencia": procedencia, "voz": voz}
 
 
 # ---------------- archivos estáticos ----------------

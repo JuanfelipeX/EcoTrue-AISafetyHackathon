@@ -7,12 +7,24 @@ Las personas y los agentes con búsqueda web cuentan esa repetición como corrob
 ECO detecta cuándo muchas páginas vienen en realidad de un solo origen. No dice si algo es verdad:
 dice cuánta evidencia independiente lo respalda.
 
+**En línea:** <https://eco.kibosecondbrain.com> · MCP remoto: `https://eco.kibosecondbrain.com/mcp` ·
+instrucciones para instalar la extensión y el MCP: <https://eco.kibosecondbrain.com/#instalar>
+
+Tres capas de defensa epistémica, un mismo motor:
+
+| Pregunta | Capa | Dónde |
+|---|---|---|
+| ¿Cuántas fuentes hay de verdad? | Independencia de fuentes (hechos atómicos + regla cronológica) | `motor/hechos.py` |
+| ¿De dónde viene esta imagen o audio? | Procedencia criptográfica C2PA + huella visual | `motor/procedencia.py` |
+| ¿Es real esta voz? | Detector AASIST-L reentrenado con audio tipo WhatsApp | `motor/voz.py`, `deteccion_voz/` |
+
 | Pieza | Para quién | Dónde |
 |---|---|---|
-| Panel web (laboratorio, resultados, URLs propias) | Jurado, investigadores | `web/` → `http://localhost:8765/` |
-| Extensión de Chrome | Personas que leen noticias | `extension/` |
-| Servidor MCP | Agentes (Claude Desktop, Claude Code, otros clientes MCP) | `mcp_eco/` |
+| Panel web (laboratorio, resultados, URLs, imágenes, audio, instalar) | Jurado, investigadores, público | `web/` → `http://localhost:8765/` |
+| Extensión de Chrome | Personas que leen noticias | `extension/` (descarga en `/descargas/eco-extension.zip`) |
+| Servidor MCP (stdio y HTTP) | Agentes (Claude, Cursor, VS Code…) | `mcp_eco/` |
 | API + mini-internet sintético + benchmark | Demo, pruebas y evaluación | `api/`, `corpus/`, `evaluacion/` |
+| Despliegue en AWS (EC2 + Docker + Caddy, detrás de Cloudflare) | Acceso desde cualquier red | `Dockerfile`, `docker-compose.yml`, `despliegue/` |
 
 ## Cómo funciona
 
@@ -23,6 +35,11 @@ dice cuánta evidencia independiente lo respalda.
    solo si aporta al menos un dato que nadie había publicado antes.
 3. **Guardia híbrida.** Si el texto es casi idéntico a una página anterior, cuenta como copia aunque agregue datos.
 4. **Qué se puede demostrar.** Para cada dato se cuenta cuántas fuentes independientes lo respaldan.
+5. **Procedencia (C2PA).** Si las páginas traen fotos con credenciales de contenido, ECO las verifica. La fecha
+   firmada de una foto es un límite inferior para la página que la usa (una copia no puede hacerse pasar por el
+   origen con una fecha falsa), y usar la foto firmada por otro medio que publicó antes, sin foto propia, implica
+   dependencia. La misma foto sin metadatos (recomprimida al reenviarla) se reconoce por su huella visual (dHash).
+6. **Voz.** Un audio se revisa primero por C2PA; si no tiene firma, el detector AASIST-L estima si es sintético.
 
 ## Instalación
 
@@ -66,20 +83,23 @@ Clic derecho en una página del mini-internet → *ECO: ¿cuántas fuentes reale
 cambia en el popup → «Servidor de ECO». (`python -m scripts.demo` usa Chrome for Testing porque el Chrome normal ya no
 acepta `--load-extension`.)
 
-**MCP:** herramientas `evaluar_corroboracion(afirmacion, urls)`, `buscar_en_mini_internet(consulta)` y `analizar_mundo(mundo_id)`.
+**MCP:** herramientas `evaluar_corroboracion(afirmacion, urls)`, `buscar_en_mini_internet(consulta)`, `analizar_mundo(mundo_id)`,
+`verificar_procedencia(url_imagen)` y `evaluar_audio(url_audio)`. Remoto, sin instalar nada:
+`claude mcp add --transport http eco https://eco.kibosecondbrain.com/mcp`.
 Ejemplo en Claude: *"¿Es cierto que el acueducto de San Aurelio suspendió el agua por mercurio? Usa ECO con el mundo e01-s1."*
 
 Guía de la demo y del pitch: [DEMO.md](DEMO.md). Resumen para el envío: [docs/resumen.md](docs/resumen.md).
 
 ## Mini-internet sintético (`corpus/`)
 
-`python corpus/generar_corpus.py` crea 54 mundos (9 eventos ficticios) con 304 páginas.
+`python corpus/generar_corpus.py` crea 66 mundos (9 eventos ficticios) con 371 páginas.
 
 | Conjunto | Mundos | Uso |
 |---|---|---|
 | desarrollo: principal | 24 (eventos e01–e06) | orgánico, copia literal, paráfrasis, comunicado |
 | desarrollo: estrés | 12 (eventos e01–e06) | copias que inventan testimonios y cifras (literal y parafraseada) |
 | **prueba retenida** | 18 (eventos e07–e09) | los 6 tipos; escritos después del último ajuste y evaluados una sola vez |
+| procedencia (C2PA) | 12 (eventos e07–e09) | fotos firmadas por una CA de demostración (`corpus/c2pa/`): foto reutilizada, foto sin metadatos, fecha falsa, cobertura independiente con fotos de agencia, IA y una firma rota |
 
 `ground_truth.json` guarda las respuestas; `indice_busqueda.json` solo temas y URLs (lo único que usa el buscador
 simulado, así que la API nunca ve las respuestas). Todo el contenido es ficticio y cada página lo indica.
@@ -110,13 +130,37 @@ Exactitud del conteo de fuentes independientes. Extractor: Claude Sonnet vía Cl
   v2 separa frases de atribución, v3 suma comentarios sobre la difusión y pide no partir un dato en sub-detalles.
   El 100 % de desarrollo está sobreajustado; la cifra a reportar es la del conjunto de prueba retenido (92 %, n = 3 por tipo).
 - Las paráfrasis del corpus están escritas a mano; las de un LLM serían más variadas.
-- Ataque no resuelto: reescribir el texto e inventar detalles nuevos en cada copia.
+- Ataque no resuelto **solo con texto**: reescribir el texto e inventar detalles nuevos en cada copia (ver procedencia).
+
+### Procedencia C2PA (`python -m evaluacion.evaluar_procedencia --modelo claudecode/sonnet`)
+
+Mismos hechos extraídos; solo cambia si ECO usa la procedencia. 3 mundos por tipo.
+
+| Mundo | Línea base | ECO solo texto | ECO + C2PA |
+|---|---|---|---|
+| copias reescritas con detalles inventados que reutilizan la foto firmada | 0 % | 0 % | **100 %** |
+| lo mismo, con la foto recomprimida sin metadatos (huella visual) | 0 % | 0 % | **100 %** |
+| una copia con fecha falsa anterior al origen (origen correcto) | 0 % (33 %) | 33 % (33 %) | **100 % (100 %)** |
+| cobertura independiente con fotos propias, de agencia, IA y una firma rota | 100 % | 100 % | 100 % |
+
+Las imágenes declaradas como IA y las firmas rotas se detectan en los 3 mundos donde aparecen. **Advertencia:** los
+mundos y la regla se diseñaron juntos; muestra que el mecanismo funciona cuando el atacante reutiliza la foto firmada.
+Si fabrica sus propias fotos sin firma, ECO solo puede decir «sin procedencia». C2PA prueba procedencia, no verdad, y
+la lista de confianza aquí es una CA de demostración.
+
+### Voz clonada (AASIST-L, In-the-Wild)
+
+Ver `deteccion_voz/` y `evaluacion/resultados/voz_aasist.json`: degradación con Opus a 16 y 8 kbps (como una nota de voz
+de WhatsApp y una red mala) y mitigación por reentrenamiento con aumento de códec, comparada con un control que se
+reentrena solo con audio limpio. Partición por hablante.
 
 ## Estructura
 
 ```
-corpus/       generador y mini-internet sintético (desarrollo + prueba retenida)
-motor/        config, cliente LLM agnóstico, extracción, línea base, hechos, buscador, análisis
+corpus/       generador y mini-internet sintético (desarrollo + prueba retenida + procedencia C2PA)
+motor/        config, cliente LLM agnóstico, extracción, línea base, hechos, buscador, análisis, procedencia, voz
+deteccion_voz/ experimento AASIST con códec tipo WhatsApp; modelo AASIST (MIT, NAVER) y pesos
+despliegue/   AWS (aws.sh), Caddy y configuración del servidor público
 api/          servidor FastAPI (panel + mini-internet + API)
 web/          panel web (HTML/CSS/JS sin dependencias externas: funciona sin internet)
 mcp_eco/      servidor MCP
@@ -130,6 +174,8 @@ docs/         resumen para el envío y ficha técnica
 
 ## Uso responsable y créditos
 
-Datos 100 % sintéticos: no se analizaron sitios reales de terceros. El código fue escrito con asistencia de
+Datos sintéticos o públicos: no se analizaron sitios reales de terceros. El mini-internet, sus fotos y sus certificados
+son ficticios. El experimento de voz usa el dataset público In-the-Wild (CC-BY-SA 4.0, Müller et al.) y el modelo
+AASIST (MIT, NAVER Corp.). El código fue escrito con asistencia de
 Claude (Anthropic) y se declara como material generado con IA. Las respuestas de los modelos usados en la
 evaluación están en `.cache/llm/` para auditoría.

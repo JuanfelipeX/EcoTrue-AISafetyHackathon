@@ -652,6 +652,32 @@ async function cargarResultados() {
   pintarResultados();
   pintarBarrido();
   pintarAgente();
+  pintarProcedenciaYVoz();
+}
+
+function pintarProcedenciaYVoz() {
+  const pr = estado.resultados.procedencia;
+  if (pr && pr.resumenes) {
+    const nombres = { foto_firmada_parafrasis: "Copias reescritas con detalles inventados que reutilizan la foto firmada",
+      foto_sin_metadatos: "Lo mismo, con la foto recomprimida sin metadatos (huella visual)",
+      fecha_falsa: "Una copia con fecha falsa anterior al origen", organico_con_fotos: "Cobertura independiente (fotos propias, de agencia, IA y una firma rota)" };
+    const metodos = [["linea_base", "Línea base"], ["eco_sin_procedencia", "ECO solo texto"], ["eco_con_procedencia", "ECO + C2PA"]];
+    const celda = (r) => `${Math.round(r.exactitud * 100)} %${r.origen_ok != null ? `<div class="nota" style="margin:0">origen ${Math.round(r.origen_ok * 100)} %</div>` : ""}`;
+    $("#tabla-procedencia").innerHTML = `<table class="tabla"><thead><tr><th>Mundo (3 de cada tipo)</th>${metodos.map(([, t]) => `<th>${t}</th>`).join("")}</tr></thead><tbody>
+      ${Object.keys(nombres).filter((t) => pr.resumenes.eco_con_procedencia?.[t]).map((t) => `<tr><td>${esc(nombres[t])}</td>${metodos.map(([m]) => `<td>${celda(pr.resumenes[m][t])}</td>`).join("")}</tr>`).join("")}
+      </tbody></table><p class="nota">Exactitud del conteo de fuentes independientes y, donde aplica, si se identificó el origen real. Extractor: ${esc(pr.modelo)}.</p>`;
+    $("#procedencia-wrap").hidden = false;
+  }
+  const voz = estado.resultados.voz;
+  if (voz && voz.modelos) {
+    const conds = [["limpio", "Audio limpio"], ["opus_16k", "Nota de voz (Opus 16 kbps)"], ["opus_8k", "Red mala (Opus 8 kbps)"]];
+    $("#voz-nota").textContent = `In-the-Wild: ${voz.datos.prueba.reales + voz.datos.prueba.falsos} audios de prueba de ${voz.datos.hablantes_prueba} personas que no se usaron para reentrenar. ` +
+      "EER = tasa de error igual (menor es mejor). Entre paréntesis: audios falsos aceptados como reales con el umbral calibrado en audio limpio.";
+    $("#tabla-voz").innerHTML = `<table class="tabla"><thead><tr><th>Detector</th>${conds.map(([, t]) => `<th>${t}</th>`).join("")}</tr></thead><tbody>
+      ${Object.entries(voz.modelos).map(([nombre, r]) => `<tr><td>${esc(nombre)}</td>${conds.map(([c]) => `<td>${(r[c].eer * 100).toFixed(1)} %<div class="nota" style="margin:0">(${(r[c].falsos_aceptados_como_reales * 100).toFixed(0)} % falsos aceptados)</div></td>`).join("")}</tr>`).join("")}
+      </tbody></table>`;
+    $("#voz-wrap").hidden = false;
+  }
 }
 
 $("#ver-tabla").addEventListener("click", () => {

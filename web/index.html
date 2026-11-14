@@ -121,6 +121,17 @@
           <div id="grafico-agente"></div>
         </div>
       </div>
+      <div class="tarjeta" id="procedencia-wrap" hidden>
+        <h2>Procedencia (C2PA): el ataque que el texto no detiene</h2>
+        <p class="nota">12 mundos con fotos firmadas por una CA de demostración. Mismos hechos extraídos; solo cambia si ECO usa la procedencia.
+          Los mundos y la regla se diseñaron juntos: muestra que el mecanismo funciona, no es un conjunto retenido.</p>
+        <div id="tabla-procedencia"></div>
+      </div>
+      <div class="tarjeta" id="voz-wrap" hidden>
+        <h2>Voz clonada: cuánto empeora el detector con audio de WhatsApp</h2>
+        <p class="nota" id="voz-nota"></p>
+        <div id="tabla-voz"></div>
+      </div>
       <div class="tarjeta" id="ejemplos-agente-wrap" hidden>
         <h2>Respuestas del agente, sin ECO y con ECO</h2>
         <div id="ejemplos-agente"></div>
@@ -200,6 +211,17 @@
         <li><b>Guardia híbrida.</b> Si el texto es casi idéntico a una página anterior, cuenta como copia aunque agregue datos inventados.</li>
         <li><b>Qué se puede demostrar.</b> Para cada dato se cuenta cuántas fuentes independientes lo respaldan.</li>
       </ol>
+      <div class="tarjeta">
+        <h2>Tres capas de defensa epistémica</h2>
+        <table class="tabla tabla-compacta">
+          <thead><tr><th>Pregunta</th><th>Cómo responde ECO</th></tr></thead>
+          <tbody>
+            <tr><td><b>¿De dónde viene?</b> Procedencia criptográfica (C2PA)</td><td>Verifica las credenciales de contenido de imágenes y audios: quién firmó, cuándo, si se declara generado con IA y si se alteró después. En el análisis de fuentes, la fecha firmada de una foto impide que una copia se haga pasar por el origen con una fecha falsa, y usar la foto firmada por otro medio revela de quién depende una página, incluso si la foto perdió sus metadatos (se reconoce por su huella visual).</td></tr>
+            <tr><td><b>¿Es real esta voz?</b> Detector de voz sintética</td><td>Si el audio no trae firma (las notas de voz de WhatsApp nunca la conservan), un detector AASIST-L reentrenado con audio comprimido como el de WhatsApp estima si la voz es clonada. Es una alerta para verificar por otro canal, no una prueba.</td></tr>
+            <tr><td><b>¿Cuántas fuentes hay de verdad?</b> Independencia de fuentes</td><td>Hechos atómicos y regla cronológica: separa las fuentes aparentes de las independientes frente a campañas que clonan y reescriben una noticia.</td></tr>
+          </tbody>
+        </table>
+      </div>
       <div class="tres-col">
         <div class="tarjeta">
           <h2>Extensión de Chrome</h2>
@@ -224,7 +246,9 @@ python -m demo.agente --modelo …</pre>
       <div class="tarjeta limites">
         <h2>Límites y doble uso</h2>
         <ul>
-          <li><b>Ataque abierto:</b> reescribir cada copia e inventar detalles distintos en cada una. ECO lo cuenta como cobertura independiente. La guardia híbrida solo detiene la versión barata (copiar y añadir).</li>
+          <li><b>Ataque abierto:</b> reescribir cada copia e inventar detalles distintos en cada una. Solo con texto, ECO lo cuenta como cobertura independiente. Si las copias reutilizan la foto firmada del origen (con o sin metadatos), la procedencia lo detecta; si el atacante fabrica sus propias fotos, no.</li>
+          <li><b>C2PA prueba procedencia, no falsedad:</b> una imagen sin firma no es sospechosa por sí sola, y la lista de confianza de este laboratorio es una CA de demostración. En producción: lista oficial de C2PA y sellos de tiempo RFC 3161.</li>
+          <li><b>El detector de voz se equivoca:</b> se evaluó en inglés, con figuras públicas (In-the-Wild); con otros idiomas o códecs puede fallar más. Nunca debe usarse solo para acusar a alguien.</li>
           <li><b>Depende del extractor:</b> un modelo pequeño separa “tres días” y “72 horas” en dos hechos y sobrecuenta fuentes. Por eso publicamos la línea base y los errores.</li>
           <li><b>Doble uso:</b> un atacante podría usar ECO para pulir sus copias hasta que pasen. Mitigación: no publicar umbrales de producción y combinar con señales de procedencia (C2PA, firmas) que el atacante no controla.</li>
           <li><b>Independencia no es verdad:</b> varias fuentes independientes también pueden equivocarse.</li>
@@ -353,6 +377,8 @@ python -m demo.agente --modelo …</pre>
             <tr><td><code>evaluar_corroboracion</code></td><td>Recibe una afirmación y de 2 a 40 URLs; devuelve cuántas fuentes son independientes, el origen de cada grupo de copias y qué datos dependen de una sola fuente.</td></tr>
             <tr><td><code>buscar_en_mini_internet</code></td><td>Encuentra mundos del laboratorio sintético por tema.</td></tr>
             <tr><td><code>analizar_mundo</code></td><td>Analiza un mundo completo, por ejemplo <code>e01-s1</code>.</td></tr>
+            <tr><td><code>verificar_procedencia</code></td><td>Credenciales C2PA de una imagen: quién la firmó, cuándo, si se declara generada con IA y si se alteró.</td></tr>
+            <tr><td><code>evaluar_audio</code></td><td>¿Voz clonada? Revisa la firma C2PA del audio y, si no tiene, usa el detector AASIST-L reentrenado por ECO.</td></tr>
           </tbody>
         </table>
         <p class="nota">Límites del servidor público: 30 peticiones por minuto por persona y un tope diario de análisis nuevos con el modelo.
@@ -427,7 +453,7 @@ pip install -r requirements.txt</pre><button class="copiar">Copiar</button></div
   </main>
 
   <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
-  <footer class="pie">ECO · Hackathon Def/Acc · AI Safety Colombia × IEEE CS Uniandes · Frente 4: defensa epistémica · Datos 100 % sintéticos</footer>
+  <footer class="pie">ECO · Hackathon Def/Acc · AI Safety Colombia × IEEE CS Uniandes · Frente 4: defensa epistémica · Datos sintéticos y públicos</footer>
   <script src="/web/app.js"></script>
 </body>
 </html>
