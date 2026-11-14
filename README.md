@@ -17,6 +17,7 @@ Tres capas de defensa epistémica, un mismo motor:
 | ¿Cuántas fuentes hay de verdad? | Independencia de fuentes (hechos atómicos + regla cronológica) | `motor/hechos.py` |
 | ¿De dónde viene esta foto o video? ¿Lo hizo una IA? | Procedencia C2PA + huella visual + marcas de IA en metadatos (IPTC, EXIF, PNG de Stable Diffusion, etiquetas de video) | `motor/procedencia.py` |
 | ¿Es real esta voz? | Detector AASIST-L reentrenado con audio tipo WhatsApp | `motor/voz.py`, `deteccion_voz/` |
+| ¿Qué dice esta nota de voz o captura, y es cierto? | Whisper / Claude visión → afirmación → agente con buscador (Exa) | `motor/multimodal.py`, `motor/web_real.py` |
 
 | Pieza | Para quién | Dónde |
 |---|---|---|
@@ -150,9 +151,32 @@ la lista de confianza aquí es una CA de demostración.
 
 ### Voz clonada (AASIST-L, In-the-Wild)
 
-Ver `deteccion_voz/` y `evaluacion/resultados/voz_aasist.json`: degradación con Opus a 16 y 8 kbps (como una nota de voz
-de WhatsApp y una red mala) y mitigación por reentrenamiento con aumento de códec, comparada con un control que se
-reentrena solo con audio limpio. Partición por hablante.
+Partición por hablante (37 personas para reentrenar, 17 para probar; 600 audios reales y 600 falsos de prueba).
+Opus a 16 kbps simula una nota de voz de WhatsApp y a 8 kbps una red mala. Tasa de error igual (EER, menor es mejor):
+
+| Detector | Limpio | Opus 16 kbps | Opus 8 kbps |
+|---|---|---|---|
+| AASIST preentrenado (ASVspoof 2019) | 49,7 % | 54,2 % | 56,7 % |
+| AASIST-L preentrenado | 48,5 % | 49,7 % | 55,7 % |
+| AASIST-L reentrenado solo con audio limpio (control) | **24,7 %** | **25,8 %** | 33,7 % |
+| AASIST-L reentrenado con aumento de códec (en producción) | 28,8 % | 28,7 % | **30,5 %** |
+
+- Los detectores de laboratorio fallan como el azar con voces reales: no sirven tal como vienen.
+- Reentrenar con audio real reduce el error a la mitad; el aumento de códec hace que casi no empeore al comprimir
+  (+1,7 puntos de limpio a 8 kbps, frente a +9,0 del control), a cambio de unos puntos en audio limpio.
+- Evaluado en inglés con figuras públicas: en producción se presenta como alerta («probablemente…», con su tasa de
+  error), nunca como prueba. Detalle: `evaluacion/resultados/voz_aasist.json`, código en `deteccion_voz/`.
+
+### Entradas de WhatsApp y agente en vivo
+
+- **Nota de voz** → transcripción con Whisper (`faster-whisper`, en el servidor) → afirmación y señales de manipulación
+  (urgencia, «reenvía», fuente vaga) → detector de voz → el agente busca qué fuentes la respaldan.
+- **Captura de pantalla** → Claude (visión, Bedrock) lee el texto → afirmación → procedencia/IA/filtros de la imagen →
+  el agente la investiga. La extensión puede capturar la pestaña actual.
+- **Agente en vivo** (`POST /api/agente`, eventos SSE): búsqueda con Exa, lectura, extracción con el modelo y la decisión
+  sobre cada página se muestran a medida que ocurren, con un grafo de procedencia interactivo.
+- **Conclusiones en lenguaje sencillo**: cada resultado empieza con un semáforo, qué está confirmado y qué hacer; lo
+  técnico queda plegado. La web es bilingüe (ES/EN).
 
 ## Estructura
 

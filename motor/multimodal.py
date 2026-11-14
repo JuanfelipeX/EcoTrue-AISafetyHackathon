@@ -23,7 +23,7 @@ from .llm import ClienteLLM, extraer_json
 SISTEMA_AFIRMACION = (
     "Eres un verificador. Te dan un texto (transcripción de una nota de voz o texto leído de una captura de pantalla). "
     "Devuelve SOLO JSON con: \"afirmacion\": la afirmación central verificable, en una frase neutra en español "
-    "(sin adjetivos ni opiniones, con quién/qué/dónde/cuándo si aparecen); \"consulta\": 4 a 10 palabras para buscar "
+    "(sin adjetivos ni opiniones; incluye quién/qué/dónde/cuándo SOLO si aparecen en el texto: nunca agregues fechas, años, cifras ni nombres que no estén escritos); \"consulta\": 4 a 10 palabras para buscar "
     "noticias sobre ella; \"tipo\": \"noticia\" si afirma un hecho comprobable, \"opinion\" si es opinión, "
     "\"sin_afirmacion\" si no hay nada que verificar; \"alertas\": lista corta de señales de manipulación en el texto "
     "(urgencia, pedido de reenviar, fuente vaga como 'me dijo un amigo', pedido de dinero o datos), en español.")

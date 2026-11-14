@@ -27,28 +27,26 @@ Enlace directo a un mundo: `https://eco.kibosecondbrain.com/?mundo=e08-c2#labora
 
 ## Guion de 3 minutos
 
-**0:00–0:30 · El problema.** "Con IA es casi gratis clonar una noticia en 50 sitios, reescribirla para que no parezca
-copia, acompañarla de fotos con fecha falsa y de una nota de voz clonada. Las personas y los agentes de IA cuentan esa
-repetición como confirmación."
+**0:00–0:25 · El problema.** "Te llega por WhatsApp un audio urgente: 'reenvíen, mañana cortan el agua por mercurio'.
+Lo buscas y lo ves en 8 páginas. ¿Es cierto? Con IA es gratis clonar la noticia, la foto y hasta la voz."
 
-**0:30–1:50 · Demo: tres preguntas.**
-1. *¿Cuántas fuentes hay de verdad?* Extensión sobre una noticia del mini-internet → *5 páginas → 1 fuente*. Panel: árbol
-   de origen y matriz de hechos (ninguna copia aporta un dato nuevo). Mundo orgánico: *4 → 4*.
-2. *¿De dónde viene?* Mundo de fecha falsa: la copia dice ser la primera, pero la foto que usa la firmó otro medio
-   después. Verificador: una foto alterada rompe la firma; otra se declara generada con IA.
-3. *¿Es real esta voz?* Subir un audio: primero se busca la firma; si no hay (WhatsApp nunca la conserva), el detector.
-4. Un agente (Claude) usa el MCP y responde "no está confirmado: las 5 páginas vienen de una sola fuente".
+**0:25–1:50 · Demo en vivo (https://eco.kibosecondbrain.com → Verificar).**
+1. *🎙️ Nota de voz*: subir el audio (o grabarlo). ECO lo transcribe, saca la afirmación, marca las señales de manipulación
+   (urgencia, «reenvía», fuente vaga) y dice si la voz parece clonada.
+2. *Verificar qué fuentes lo respaldan*: el agente trabaja en vivo — busca, encuentra notas, el modelo extrae los datos y
+   decide medio por medio. Conclusión: "🔴 Una sola fuente detrás de todo" o "🟢 N fuentes independientes" + grafo.
+3. *Extensión*: en una noticia real, "Analizar esta noticia"; clic derecho sobre una foto → "¿La hizo una IA?".
+4. *C2PA*: Laboratorio → filtro C2PA → `e08-c2`: la copia con fecha falsa queda delatada por la foto firmada.
+5. *Agente*: Claude con el MCP responde "no está confirmado: las 5 páginas vienen de una sola fuente".
 
 **1:50–2:35 · Resultados (pestaña Resultados).**
-- Prueba retenida: ECO 92 % frente a 83 % de la similitud de texto; ningún umbral de similitud sirve a la vez para
-  paráfrasis y cobertura real.
-- Agente: decir «confirmado» con un solo origen baja de 51 % a 22 %.
-- C2PA: el ataque de copias con detalles inventados pasa de 0 % a 100 % cuando reutilizan la foto firmada, incluso sin metadatos.
-- Voz: cuánto empeora AASIST con audio tipo WhatsApp y cuánto recupera el reentrenamiento con códec (tabla).
+- Prueba retenida: ECO 92 % vs 83 % de la similitud de texto. Agente: «confirmado» con un solo origen 51 % → 22 %.
+- C2PA: copias reescritas con detalles inventados que reutilizan la foto firmada, 0 % → 100 %.
+- Voz: los detectores de laboratorio fallan como el azar con voces reales (48,5 %); reentrenado con audio tipo WhatsApp,
+  28,7 %, y casi no empeora al comprimir.
 
-**2:35–3:00 · Límites.** "C2PA prueba quién firmó, no qué es verdad, y casi nada lo trae todavía. Si el atacante fabrica
-sus propias fotos sin firma, solo podemos decir 'sin procedencia'. El detector de voz se equivoca: es una alerta para
-llamar de vuelta, no una prueba. Y ECO mide independencia, no verdad."
+**2:35–3:00 · Límites.** "ECO mide independencia y procedencia, no verdad. Sin firma digital solo podemos decir
+'sin señales'. El detector de voz se equivoca ~29 de cada 100: es una alerta para llamar de vuelta, no una prueba."
 
 ## Preguntas probables del jurado
 

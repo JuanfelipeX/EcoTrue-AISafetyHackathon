@@ -182,7 +182,9 @@ def main():
         "fotos; la fecha firmada es un límite inferior de la publicación (una copia no puede fingir ser el origen) y usar "
         "la foto firmada por otro medio que publicó antes, sin foto propia, implica dependencia; la misma foto sin "
         "metadatos se reconoce por su huella visual (dHash). <b>(f) Voz:</b> un audio se revisa primero por C2PA y, si no "
-        "trae firma, con AASIST-L reentrenado con audio comprimido tipo WhatsApp. Se entrega como <b>extensión de "
+        "trae firma, con AASIST-L reentrenado con audio comprimido tipo WhatsApp. <b>(g) Entradas de WhatsApp:</b> una nota "
+        "de voz (transcrita con Whisper) o una captura (leída con Claude visión) se convierte en una afirmación que el agente "
+        "investiga en vivo con un buscador (Exa), mostrando cada paso. Se entrega como <b>extensión de "
         "Chrome</b>, <b>servidor MCP</b> (stdio y HTTP), <b>panel web</b> y <b>API</b>, desplegado en AWS detrás de "
         "Cloudflare, con cliente LLM agnóstico y respuestas en caché para auditoría.", p))
 
