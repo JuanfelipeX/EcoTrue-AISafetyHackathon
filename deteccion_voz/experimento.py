@@ -93,7 +93,7 @@ def modelo(raiz, nombre):
     from models.AASIST import Model
     conf = json.loads((raiz / "aasist" / "config" / f"{nombre}.conf").read_text())
     m = Model(conf["model_config"])
-    m.load_state_dict(torch.load(raiz / "aasist" / "models" / "weights" / f"{nombre}.pth", map_location="cpu"))
+    m.load_state_dict(torch.load(raiz / "aasist" / "models" / "weights" / f"{nombre}.pth", map_location="cpu", weights_only=True))
     return m, conf["model_config"]
 
 

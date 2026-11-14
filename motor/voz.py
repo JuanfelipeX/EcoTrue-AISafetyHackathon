@@ -46,7 +46,7 @@ def _modelo():
     pesos = DIR_AASIST / calibracion()["pesos"]
     if not pesos.exists():
         pesos = DIR_AASIST / "AASIST-L.pth"
-    m.load_state_dict(torch.load(pesos, map_location="cpu"))
+    m.load_state_dict(torch.load(pesos, map_location="cpu", weights_only=True))
     m.eval()
     torch.set_num_threads(2)
     return m, pesos.name
