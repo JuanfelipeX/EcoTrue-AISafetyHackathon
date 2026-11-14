@@ -646,5 +646,17 @@
 "✓ Firma confiable": "✓ Trusted signature",
 "✓ acierta": "✓ correct",
 "✕ Alterada después de firmar": "✕ Altered after signing",
-"✗ falla": "✗ fails"
+"✗ falla": "✗ fails",
+"📌 Fuente recomendada para leer primero": "📌 Recommended source to read first",
+"Fuente oficial": "Official source",
+"✓ es la fuente oficial (primaria)": "✓ it is the official (primary) source",
+"✓ publicó primero": "✓ it published first",
+"✓ es el origen: las demás notas la repiten": "✓ it is the origin: the other articles repeat it",
+"✓ otros medios independientes confirman # de sus datos": "✓ other independent outlets confirm # of its facts",
+"✓ aporta # dato propio": "✓ it contributes # fact of its own",
+"✓ aporta # datos propios": "✓ it contributes # facts of its own",
+"✓ usa una foto propia con firma digital (C2PA)": "✓ it uses its own photo with a digital signature (C2PA)",
+"Es la mejor fuente para leer sobre este hecho según la evidencia de este análisis, no un sello de verdad: un medio con reportería propia también puede equivocarse.": "It is the best source to read about this event according to the evidence in this analysis, not a seal of truth: an outlet with original reporting can also be wrong.",
+"Confirmados por otros": "Confirmed by others",
+"Primero la fuente oficial si la hay; luego quienes aportan datos propios que otros medios independientes confirman. ECO no juzga la reputación del medio: un medio con reportería propia también puede equivocarse.": "Official source first, if there is one; then those contributing their own facts that other independent outlets confirm. ECO does not judge an outlet's reputation: an outlet with original reporting can also be wrong."
 }

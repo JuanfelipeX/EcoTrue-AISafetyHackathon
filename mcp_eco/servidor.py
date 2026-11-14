@@ -59,6 +59,7 @@ def _compacto(res):
         "fechas_corregidas_por_firma": [{"pagina": p["id"], "nota": p["nota_fecha"]}
                                         for p in res.get("paginas", []) if p.get("nota_fecha")],
         "urls_con_error": res.get("urls_con_error", []),
+        "fuente_recomendada": (res.get("fuentes") or {}).get("recomendada"),
         "aviso": res.get("aviso"),
     }
 
@@ -167,6 +168,8 @@ def investigar_tema(tema: str, dias: int = 30) -> dict:
     Devuelve los medios con reportería propia (ordenados por cuántos datos propios aportan), los que solo repiten
     a otros, los datos corroborados por 2 o más fuentes independientes y los que dependen de una sola. Úselo antes
     de resumir "qué se sabe" de un tema: le dice en qué fuentes apoyarse y qué no está confirmado.
+    `fuente_recomendada` es la nota que conviene citar o leer primero (fuente oficial, datos propios confirmados por
+    otros medios independientes, foto firmada) con sus razones; no es un sello de verdad.
     """
     from motor import busqueda
     from motor.web_real import investigar_tema as investigar

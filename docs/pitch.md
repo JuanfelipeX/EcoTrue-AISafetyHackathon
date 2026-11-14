@@ -33,7 +33,8 @@ Y nos dice: **probablemente voz sintética**. *[señalar la tarjeta roja]*
 *[clic en "Verificar qué fuentes lo respaldan"]*
 Ahora el agente trabaja en vivo: busca, lee cada nota, un modelo extrae los datos y una regla auditable decide medio
 por medio quién aporta información propia y quién solo repite. *[señalar la bitácora y el grafo]*
-Conclusión: *[leer la tarjeta]*.
+Conclusión: *[leer la tarjeta]*. Y debajo, **qué fuente leer primero y por qué**: la oficial o la que aporta datos que
+otros medios confirman, no la más famosa. *[señalar «📌 Fuente recomendada»]*
 
 *[Extensión en una noticia real → clic derecho sobre una foto]*
 Lo mismo funciona como extensión del navegador, sobre cualquier noticia o imagen.
@@ -57,7 +58,7 @@ Somos honestos con los límites: C2PA prueba quién firmó, no qué es verdad; e
 por eso es una alerta para llamar de vuelta, nunca una prueba para acusar a alguien.
 
 Ya está desplegado, es bilingüe y cualquiera puede usarlo hoy.
-**ECO no te dice qué creer. Te dice cuántas fuentes reales hay detrás de lo que te llega.**
+**ECO no te dice qué creer. Te dice cuántas fuentes reales hay detrás de lo que te llega, y cuál leer primero.**
 
 ---
 
@@ -71,3 +72,6 @@ Ya está desplegado, es bilingüe y cualquiera puede usarlo hoy.
   producción, y priorizando firmas que el atacante no puede falsificar.
 - **¿Y las agencias como AP?** Si su nota se publica más tarde que una copia, la regla cronológica puede verla como
   repetición: ECO mide quién aporta datos en estas notas, no quién es la agencia de origen. Lo decimos como límite.
+- **¿Por qué recomiendan una fuente? ¿No es juzgar medios?** No usamos reputación: la recomendada es la fuente oficial
+  si la hay, o la que aporta datos propios que otros medios independientes confirman, con las razones a la vista. Así se
+  premia la reportería original y se baja el peso de quien solo copia, sin listas negras.

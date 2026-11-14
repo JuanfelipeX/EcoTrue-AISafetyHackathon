@@ -41,6 +41,9 @@
       </div>`;
     }).join("");
 
+    const reco = r.fuentes && r.fuentes.recomendada && r.fuentes.recomendada.url ? r.fuentes.recomendada : null;
+    const recoHtml = reco ? `<div class="eco-grupo"><div class="eco-grupo-titulo">📌 Léela primero: <a href="${esc(reco.url)}" target="_blank" rel="noopener"><b>${esc(reco.sitio)}</b></a></div>
+      <div class="eco-copias">${(reco.razones || []).map((x) => esc(x)).join(" · ")}</div></div>` : "";
     const hechos = r.hechos ? `
       <h3>Datos respaldados por 2 o más fuentes independientes</h3>${lista(r.corroborados, 6)}
       <h3>Datos que dependen de una sola fuente</h3>${lista(r.de_un_solo_origen, 6)}` : "";
@@ -68,7 +71,7 @@
       ${r.nota_web_real ? `<p class="eco-resumen"><b>Noticia real.</b> ${esc(r.nota_web_real)}</p>` : ""}
       ${r.aviso ? `<p class="eco-aviso">${esc(r.aviso)}</p>` : ""}
       ${(r.urls_con_error || []).length ? `<p class="eco-pie">${r.urls_con_error.length} enlace(s) no se pudieron leer (el sitio bloquea lectores automáticos o no es una nota).</p>` : ""}
-      <h3>Origen de la información</h3>${grupos}
+      <h3>Origen de la información</h3>${recoHtml}${grupos}
       ${procedencia}
       ${hechos}
       ${r.panel_url ? `<p><a class="eco-enlace" href="${esc(r.panel_url)}" target="_blank" rel="noopener">Ver el informe completo: árbol de origen, datos e imágenes ↗</a></p>` : ""}

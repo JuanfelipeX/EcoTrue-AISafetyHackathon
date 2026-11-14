@@ -353,21 +353,33 @@ function renderResultado(res, { comparar = false, plegar = !comparar } = {}) {
         Una paráfrasis hecha con IA baja la similitud y se escapa; dos medios que cubren el mismo hecho la suben y se fusionan por error.</p>
       ${tablaSimilitud(res, N)}</div>`;
   }
-  const conclusion = tarjetaConclusion(conclusionNoticia(res));
+  const conclusion = tarjetaConclusion(conclusionNoticia(res)) + tarjetaRecomendada(res);
   return plegar ? conclusion + `<details class="detalle-completo"><summary>Ver el análisis completo: árbol de origen, datos y fuentes</summary>${html}</details>`
     : conclusion + html;
+}
+
+// ---------------- fuente recomendada para leer primero ----------------
+function tarjetaRecomendada(res) {
+  const r = res.fuentes && res.fuentes.recomendada;
+  if (!r || !r.url) return "";
+  return `<div class="recomendada">
+    <div class="reco-cab"><span class="reco-etiqueta">📌 Fuente recomendada para leer primero</span>${r.oficial ? `<span class="insignia ok">Fuente oficial</span>` : ""}</div>
+    <a class="reco-sitio" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.sitio)} ↗</a>
+    ${r.titulo ? `<div class="reco-titulo">${esc(r.titulo)}</div>` : ""}
+    <ul class="reco-razones">${(r.razones || []).map((x) => `<li>✓ ${esc(x)}</li>`).join("")}</ul>
+    <p class="nota" style="margin:8px 0 0">${esc(r.aviso || "")}</p></div>`;
 }
 
 // ---------------- fuentes ordenadas por evidencia ----------------
 function tarjetaFuentes(f) {
   const propias = f.con_reporteria_propia.map((x) => `<tr><td><a href="${esc(x.url || "#")}" target="_blank" rel="noopener"><b>${esc(x.sitio)}</b></a>
-      <div class="nota" style="margin:0">${esc(x.titulo || "")}</div></td><td>${fechaCorta(x.fecha)}</td><td>${x.datos_propios}</td>
+      <div class="nota" style="margin:0">${esc(x.titulo || "")}</div></td><td>${fechaCorta(x.fecha)}</td><td>${x.datos_propios}</td><td>${x.corroborados ?? "—"}</td>
       <td>${x.lo_repiten.length ? esc(x.lo_repiten.join(", ")) : "—"}</td></tr>`).join("");
   const repiten = f.solo_repiten.map((x) => `<li><a href="${esc(x.url || "#")}" target="_blank" rel="noopener">${esc(x.sitio)}</a> repite a <b>${esc(x.repite_a)}</b></li>`).join("");
   return `<div class="tarjeta"><h2>Fuentes ordenadas por evidencia</h2>
-    <p class="nota">Primero, quienes aportan datos propios (reportería), por cuántos aportan. ECO no juzga la reputación del medio:
+    <p class="nota">Primero la fuente oficial si la hay; luego quienes aportan datos propios que otros medios independientes confirman. ECO no juzga la reputación del medio:
       un medio con reportería propia también puede equivocarse.</p>
-    <table class="tabla tabla-compacta"><thead><tr><th>Con reportería propia</th><th>Publicó</th><th>Datos propios</th><th>La repiten</th></tr></thead>
+    <table class="tabla tabla-compacta"><thead><tr><th>Con reportería propia</th><th>Publicó</th><th>Datos propios</th><th>Confirmados por otros</th><th>La repiten</th></tr></thead>
       <tbody>${propias}</tbody></table>
     ${repiten ? `<h3>Solo repiten a otros</h3><ul class="lista-simple">${repiten}</ul>` : ""}</div>`;
 }
@@ -401,7 +413,7 @@ function lanzarAgente(cuerpo, titulo, boton, destino = "#resultado-tema") {
       bit.terminar(true, `Listo: ${res.fuentes_aparentes} páginas → ${res.fuentes_efectivas} fuente${res.fuentes_efectivas === 1 ? "" : "s"} independiente${res.fuentes_efectivas === 1 ? "" : "s"}`);
       if (boton) boton.disabled = false;
       if (res.sin_cobertura) { $(`#final-${suf}`).innerHTML = tarjetaConclusion(conclusionNoticia(res)); return; }
-      $(`#final-${suf}`).innerHTML = tarjetaConclusion(conclusionNoticia(res))
+      $(`#final-${suf}`).innerHTML = tarjetaConclusion(conclusionNoticia(res)) + tarjetaRecomendada(res)
         + `<div class="tarjeta"><h2>Grafo de procedencia</h2><p class="nota">Cada columna es una fuente independiente; las líneas van de la publicación original a quien la repite. Toca un nodo.</p><div id="grafo-${suf}"></div></div>`
         + `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>`
         + renderResultado(res).replace(/^<div class="conclusion[\s\S]*?<\/div>\s*(?=<details)/, "")

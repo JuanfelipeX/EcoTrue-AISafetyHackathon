@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ECO — fuentes reales",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Muestra cuántas fuentes independientes hay detrás de una afirmación y de dónde salió.",
   "permissions": [
     "contextMenus",

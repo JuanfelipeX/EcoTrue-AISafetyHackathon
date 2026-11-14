@@ -62,16 +62,66 @@ def a_documento(resultado, indice):
                      enlaces=[], imagenes=[resultado["image"]] if resultado.get("image") else [])
 
 
+# Dominios de gobiernos y organismos públicos: una fuente primaria (el comunicado) va antes que quien lo cuenta.
+_OFICIAL = re.compile(r"(^|\.)(gov|gob|mil|gouv|gc\.ca|europa\.eu|who\.int|un\.org|paho\.org|oas\.org)(\.[a-z]{2})?$"
+                      r"|\.gov\.[a-z]{2}$|\.gob\.[a-z]{2}$")
+
+
+def es_oficial(dominio):
+    d = (dominio or "").lower().removeprefix("www.")
+    return bool(_OFICIAL.search(d))
+
+
+def _puntaje(x):
+    # Orden: fuente oficial, datos que otros medios independientes confirman, datos propios, foto firmada, quien publicó antes.
+    return (x["oficial"], x["corroborados"], x["datos_propios"], x["foto_firmada"], -(x["_orden"]))
+
+
+def _razones(x, primero, n_grupos):
+    r = []
+    if x["oficial"]:
+        r.append("es la fuente oficial (primaria)")
+    if primero and n_grupos > 1:
+        r.append("publicó primero")
+    elif n_grupos == 1:
+        r.append("es el origen: las demás notas la repiten")
+    if x["corroborados"]:
+        r.append(f"otros medios independientes confirman {x['corroborados']} de sus datos")
+    if x["datos_propios"]:
+        r.append(f"aporta {x['datos_propios']} dato{'s' if x['datos_propios'] != 1 else ''} propio{'s' if x['datos_propios'] != 1 else ''}")
+    if x["foto_firmada"]:
+        r.append("usa una foto propia con firma digital (C2PA)")
+    return r
+
+
+def recomendar(propias, n_grupos):
+    """La fuente recomendada para leer primero, con razones medibles del propio análisis (no reputación)."""
+    if not propias:
+        return None
+    mejor = propias[0]
+    primero = min(propias, key=lambda x: x["_orden"]) is mejor
+    return {"sitio": mejor["sitio"], "url": mejor["url"], "titulo": mejor["titulo"], "fecha": mejor["fecha"],
+            "oficial": mejor["oficial"], "razones": _razones(mejor, primero, n_grupos),
+            "aviso": "Es la mejor fuente para leer sobre este hecho según la evidencia de este análisis, no un sello de "
+                     "verdad: un medio con reportería propia también puede equivocarse."}
+
+
 def resumen_fuentes(res):
     """Fuentes ordenadas por evidencia: primero quien tiene reportería propia (origen de un grupo), por cuántos
     datos propios aporta; luego quienes solo repiten a otros. No es un juicio de reputación del medio."""
     docs = {d["id"]: d for d in res.get("documentos", [])}
     paginas = {p["id"]: p for p in res.get("paginas", [])}
     propias, repiten = [], []
-    for g in res.get("grupos", []):
+    grupos = res.get("grupos", [])
+    for i, g in enumerate(grupos):
         o = docs.get(g["origen"], {})
+        pag = paginas.get(g["origen"], {})
+        corro = sum(1 for h in res.get("hechos", []) if h.get("fuentes_independientes", 0) >= 2 and g["origen"] in h.get("grupos", []))
+        firmada = any(im.get("estado") == "confiable" and not im.get("generada_por_ia") for im in pag.get("imagenes", []) or [])
         propias.append({"sitio": g.get("origen_sitio"), "url": o.get("url"), "titulo": o.get("titulo"),
                         "fecha": g.get("origen_fecha"), "datos_propios": len(g.get("aporte", [])),
+                        "corroborados": corro, "foto_firmada": firmada,
+                        "oficial": es_oficial(o.get("dominio") or pag.get("dominio") or g.get("origen_sitio")), "_orden": i,
                         "lo_repiten": [docs.get(m, {}).get("sitio", m) for m in g["miembros"] if m != g["origen"]]})
         for m in g["miembros"]:
             if m == g["origen"]:
@@ -79,5 +129,8 @@ def resumen_fuentes(res):
             d = docs.get(m, {})
             repiten.append({"sitio": d.get("sitio"), "url": d.get("url"), "titulo": d.get("titulo"),
                             "repite_a": g.get("origen_sitio"), "motivo": paginas.get(m, {}).get("motivo")})
-    propias.sort(key=lambda x: -x["datos_propios"])
-    return {"con_reporteria_propia": propias, "solo_repiten": repiten}
+    propias.sort(key=_puntaje, reverse=True)
+    recomendada = recomendar(propias, len(grupos))
+    for x in propias:
+        x.pop("_orden", None)
+    return {"recomendada": recomendada, "con_reporteria_propia": propias, "solo_repiten": repiten}

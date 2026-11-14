@@ -144,6 +144,10 @@ function pintarResultado(d, api) {
       ${d.aviso ? `<div class="aviso">${esc(d.aviso)}</div>` : ""}
       ${d.aviso_buscador ? `<div class="aviso">${esc(d.aviso_buscador)}</div>` : ""}
     </section>
+    ${f && f.recomendada && f.recomendada.url ? `<section class="tarjeta recomendada"><div class="seccion-cab"><span>📌 Léela primero</span>${f.recomendada.oficial ? "<small>fuente oficial</small>" : ""}</div>
+      <a class="reco-sitio" href="${esc(f.recomendada.url)}" target="_blank">${esc(f.recomendada.sitio)} ↗</a>
+      <ul class="reco-razones">${(f.recomendada.razones || []).map((x) => `<li>✓ ${esc(x)}</li>`).join("")}</ul>
+      <p class="pista">Mejor fuente según este análisis, no un sello de verdad.</p></section>` : ""}
     ${propias ? `<section class="tarjeta"><div class="seccion-cab"><span>Con reportería propia</span><small>ordenadas por datos propios</small></div><ul class="fuentes">${propias}</ul>
       ${f.solo_repiten.length ? `<p class="pista">${f.solo_repiten.length} nota${f.solo_repiten.length === 1 ? "" : "s"} solo repite${f.solo_repiten.length === 1 ? "" : "n"} a otras.</p>` : ""}</section>` : ""}
     <section class="tarjeta"><div class="seccion-cab"><span>Grafo de procedencia</span></div><div id="grafo"></div></section>

@@ -54,7 +54,10 @@ headline, a forwarded message) is read by Claude vision. ECO extracts the centra
 (urgency, "forward this", vague sources such as "my cousin who works there"), checks the voice or the image, and then a
 **live agent** investigates the claim: it searches recent news through the Exa search API, reads each article, extracts
 facts and decides outlet by outlet — streaming every step to the user, ending with an interactive provenance graph and
-sources ranked by evidence (original reporting first), not by reputation.
+sources ranked by evidence (original reporting first), not by reputation — topped by a **recommended source to read
+first**, with its reasons: the official/primary source if present, otherwise the outlet whose own facts are most
+confirmed by other independent outlets (a signed photo of its own counts in its favor). It rewards original reporting
+and demotes copies without blacklisting anyone.
 
 ## Delivery and deployment
 
