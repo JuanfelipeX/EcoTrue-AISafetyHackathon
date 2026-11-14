@@ -400,7 +400,8 @@ function lanzarAgente(cuerpo, titulo, boton, destino = "#resultado-tema") {
       $(`#final-${suf}`).innerHTML = tarjetaConclusion(conclusionNoticia(res))
         + `<div class="tarjeta"><h2>Grafo de procedencia</h2><p class="nota">Cada columna es una fuente independiente; las líneas van de la publicación original a quien la repite. Toca un nodo.</p><div id="grafo-${suf}"></div></div>`
         + `<p class="nota">${esc(res.nota_web_real || "")} <a href="#informe/${esc(res.informe_id)}">Abrir como informe ↗</a></p>`
-        + renderResultado(res).replace(/^<div class="conclusion[\s\S]*?<\/div>\s*(?=<details)/, "");
+        + renderResultado(res).replace(/^<div class="conclusion[\s\S]*?<\/div>\s*(?=<details)/, "")
+        + ((res.urls_con_error || []).length ? `<div class="tarjeta"><h2>URLs que no se pudieron abrir</h2><ul class="lista-simple">${res.urls_con_error.map((x) => `<li>${esc(x.url)}: ${esc(x.error)}</li>`).join("")}</ul></div>` : "");
       ecoGrafo($(`#grafo-${suf}`), res);
     },
   });
@@ -862,20 +863,12 @@ $("#ejemplo-urls").addEventListener("click", () => {
   $("#afirmacion").value = m.afirmacion;
   $("#lista-urls").value = m.paginas.map((p) => p.url).join("\n");
 });
-$("#form-urls").addEventListener("submit", async (e) => {
+$("#form-urls").addEventListener("submit", (e) => {
   e.preventDefault();
   const urls = $("#lista-urls").value.split(/\s+/).map((u) => u.trim()).filter(Boolean);
-  const cont = $("#resultado-urls");
-  const parar = mostrarCarga(cont, urls.length, estado.modelo);
-  try {
-    const res = await api("/api/analizar", { afirmacion: $("#afirmacion").value.trim(), urls, metodo: estado.metodo, modelo: estado.modelo || null });
-    parar();
-    const errores = (res.urls_con_error || []).map((x) => `<li>${esc(x.url)}: ${esc(x.error)}</li>`).join("");
-    cont.innerHTML = renderResultado(res) + (errores ? `<div class="tarjeta"><h2>URLs que no se pudieron leer</h2><ul>${errores}</ul></div>` : "");
-  } catch (err) {
-    parar();
-    cont.innerHTML = `<div class="error">${esc(err.message)}</div>`;
-  }
+  if (!urls.length) return;
+  lanzarAgente({ modo: "urls", afirmacion: $("#afirmacion").value.trim(), urls },
+    `El agente está comparando ${urls.length} página${urls.length === 1 ? "" : "s"}`, $("#form-urls button[type=submit]"), "#resultado-urls");
 });
 
 // ---------------- resultados ----------------

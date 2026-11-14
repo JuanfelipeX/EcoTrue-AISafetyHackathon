@@ -175,3 +175,44 @@ def investigar_tema(tema, n=10, dias=30, modelo=None, progreso=_nada):
     res["modo"] = "tema"
     res["nota_web_real"] = f"Se analizaron {len(documentos)} noticias de los últimos {dias} días encontradas con el buscador."
     return _finalizar(res, {"buscador": len(documentos)}, problema)
+
+
+def comparar_urls(afirmacion, urls, modelo=None, progreso=_nada):
+    """Compara un conjunto de URLs elegido por la persona (reales o del mini-internet), mostrando cada paso."""
+    from .buscador import _ruta_local, cargar, normalizar_url
+    afirmacion = re.sub(r"\s+", " ", (afirmacion or "").strip())[:400]
+    documentos, errores, vistos = [], [], set()
+    for u in urls[:40]:
+        u = u.strip()
+        if not u or u in vistos:
+            continue
+        vistos.add(u)
+        progreso(etapa="leer", url=u, texto="Abriendo")
+        try:
+            d = cargar(u)
+        except Exception as e:
+            errores.append({"url": u, "error": f"{type(e).__name__}: {str(e)[:120]}"})
+            progreso(etapa="aviso", texto=f"No se pudo abrir {u[:80]}")
+            continue
+        documentos.append(d)
+        progreso(etapa="leida", sitio=d.sitio, titulo=d.titulo, parrafos=len(d.parrafos), imagenes=len(d.imagenes))
+    if not documentos:
+        raise ValueError("No se pudo abrir ninguna de las URLs.")
+    if not afirmacion:
+        afirmacion = _consulta(documentos[0].titulo) or "Afirmación de las páginas"
+    # Las páginas del mini-internet reutilizan las respuestas guardadas del laboratorio (mismo límite de tokens).
+    todas_locales = all(_ruta_local(normalizar_url(d.url)) for d in documentos)
+    from .config import config
+    nombre = modelo or next((m for m in [config.llm_modelo, *config.llm_modelos_respaldo]
+                             if not m.startswith(("claudecode/", "manual/"))), config.llm_modelo)
+    progreso(etapa="llm", modelo=nombre.split("/")[-1], paginas=len(documentos),
+             palabras=sum(len(" ".join(d.parrafos).split()) for d in documentos))
+    res = analizar_documentos(documentos, afirmacion, modelo=modelo, max_tokens=None if todas_locales else MAX_TOKENS_WEB)
+    progreso(etapa="hechos", n=len(res.get("hechos", [])), modelo=res.get("modelo"), aviso=res.get("aviso"))
+    progreso(etapa="regla", paginas=res.get("fuentes_aparentes"), independientes=res.get("fuentes_efectivas"))
+    _emitir_decisiones(res, progreso)
+    res["modo"] = "urls"
+    res["urls_con_error"] = errores
+    res["nota_web_real"] = (f"Se compararon {len(documentos)} páginas" +
+                            (f"; {len(errores)} no se pudieron abrir." if errores else "."))
+    return _finalizar(res, {"urls": len(documentos)}, None)

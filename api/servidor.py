@@ -179,7 +179,9 @@ class PeticionTema(BaseModel):
 
 
 class PeticionAgente(BaseModel):
-    modo: Literal["tema", "pagina"]
+    modo: Literal["tema", "pagina", "urls"]
+    afirmacion: str | None = Field(None, max_length=400)
+    urls: list[str] = Field(default_factory=list, max_length=40)
     tema: str | None = Field(None, max_length=400)
     url: str | None = None
     dias: int = Field(30, ge=1, le=365)
@@ -385,6 +387,9 @@ def agente(p: PeticionAgente):
         try:
             if p.modo == "tema":
                 res = investigar_tema(p.tema or "", dias=p.dias, modelo=_modelo_permitido(p.modelo), progreso=progreso)
+            elif p.modo == "urls":
+                from motor.web_real import comparar_urls
+                res = comparar_urls(p.afirmacion or "", p.urls, modelo=_modelo_permitido(p.modelo), progreso=progreso)
             else:
                 if not p.url:
                     raise ValueError("Falta la URL de la página.")
