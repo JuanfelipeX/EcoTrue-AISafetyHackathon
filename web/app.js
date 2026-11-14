@@ -336,23 +336,33 @@ function pintarVerificacion(info) {
   if (info.error || info.detail) { cont.innerHTML = `<div class="tarjeta error">${esc(info.error || info.detail)}</div>`; return; }
   const explicacion = {
     confiable: "La firma está íntegra y el emisor está en la lista de confianza.",
-    valida_no_confiable: "La firma está íntegra, pero el emisor no está en la lista de confianza: sabemos quién dice haberla firmado, no si es quien dice ser.",
-    rota: "La imagen cambió después de firmarse. Lo que dice el manifiesto ya no describe esta imagen.",
-    ausente: "No trae credenciales de contenido. Es lo normal en internet hoy y no la hace sospechosa por sí sola.",
-    error: "No se pudo leer el archivo como imagen.",
+    valida_no_confiable: "La firma está íntegra, pero el emisor no está en la lista de confianza: sabemos quién dice haberlo firmado, no si es quien dice ser.",
+    rota: "El archivo cambió después de firmarse. Lo que dice el manifiesto ya no lo describe.",
+    ausente: "No trae credenciales de contenido. Es lo normal en internet hoy y no lo hace sospechoso por sí solo.",
+    error: "No se pudo leer el archivo.",
   }[info.estado] || "";
+  const ia = { declarada: ["alerta", "Declarado como hecho con IA"], indicio: ["medio", "Indicios de herramientas de IA"],
+               sin_senales: ["neutro", "Sin señales de IA en los metadatos"] }[info.ia] || ["neutro", "—"];
+  const senales = (info.senales_ia || []).map((x) => `<li><b>${esc(x.fuente)}</b> (${x.fuerza === "declarada" ? "declarada" : "indicio"}): ${esc(x.detalle)}</li>`).join("");
   cont.innerHTML = `<div class="tarjeta c2pa-resultado">
+    <h3 style="margin-top:0">¿De dónde viene? · ${info.tipo === "video" ? "video" : "imagen"}</h3>
     <div>${chipEstado(info)}</div>
     <p style="margin:10px 0 6px">${esc(explicacion)}</p>
+    <h3>¿Lo hizo una IA?</h3>
+    <div><span class="c2pa-chip ${ia[0]}">${ia[1]}</span></div>
+    <p style="margin:8px 0 4px">${esc(info.ia_explicacion || "")}</p>
+    ${senales ? `<ul class="lista-simple">${senales}</ul>` : ""}
+    <h3>Detalles</h3>
     <dl class="c2pa-datos">
       <dt>Archivo</dt><dd>${esc(info.nombre || "")} · ${Math.round((info.bytes || 0) / 1024)} KB</dd>
       <dt>Firmante</dt><dd>${esc(info.firmante || "—")}</dd>
       <dt>Emisor del certificado</dt><dd>${esc(info.emisor || "—")}</dd>
+      <dt>Herramienta registrada</dt><dd>${esc(info.generador || "—")}</dd>
       <dt>Fecha de publicación firmada</dt><dd>${info.fecha_firmada ? esc(info.fecha_firmada) : "—"}</dd>
-      <dt>Origen declarado</dt><dd>${esc(info.fuente_digital || "—")}${info.generada_por_ia ? " (generada con IA)" : ""}</dd>
+      <dt>Origen declarado</dt><dd>${esc(info.fuente_digital || "—")}</dd>
       <dt>Acciones registradas</dt><dd>${esc((info.acciones || []).join(", ") || "—")}</dd>
       <dt>Códigos de validación</dt><dd>${esc((info.codigos || []).join(", ") || "ninguno")}</dd>
-      <dt>Huella visual</dt><dd><code>${esc(info.huella || "—")}</code></dd>
+      ${info.huella ? `<dt>Huella visual</dt><dd><code>${esc(info.huella)}</code></dd>` : ""}
     </dl></div>`;
 }
 
@@ -372,10 +382,13 @@ function prepararVerificador() {
     ev.preventDefault();
     const archivo = $("#archivo-imagen").files[0];
     if (archivo) {
-      if (archivo.size > 8 * 1024 * 1024) { pintarVerificacion({ error: "La imagen supera 8 MB." }); return; }
-      const lector = new FileReader();
-      lector.onload = () => verificarImagen({ datos_base64: lector.result, nombre: archivo.name });
-      lector.readAsDataURL(archivo);
+      const esVideo = archivo.type.startsWith("video/") || /\.(mp4|mov|m4v)$/i.test(archivo.name);
+      const limite = (esVideo ? 60 : 8) * 1024 * 1024;
+      if (archivo.size > limite) { pintarVerificacion({ error: `El archivo supera ${esVideo ? 60 : 8} MB.` }); return; }
+      $("#resultado-imagen").innerHTML = `<div class="tarjeta"><p class="nota">Verificando…</p></div>`;
+      fetch(`/api/verificar_archivo?nombre=${encodeURIComponent(archivo.name)}`, { method: "POST", body: archivo })
+        .then(async (r) => { const d = await r.json(); pintarVerificacion(r.ok ? d : { error: d.detail || "Error" }); })
+        .catch((e) => pintarVerificacion({ error: e.message }));
     } else if ($("#url-imagen").value.trim()) {
       verificarImagen({ url: $("#url-imagen").value.trim() });
     }
@@ -390,6 +403,13 @@ function prepararVerificador() {
     if (ej.firmada) document.querySelector("[data-ejemplo-imagen]").dataset.ejemploImagen = ej.firmada;
   }).catch(() => {});
   document.addEventListener("click", (ev) => {
+    const fijo = ev.target.closest("[data-ejemplo-fijo]");
+    if (fijo) {
+      $("#url-imagen").value = location.origin + fijo.dataset.ejemploFijo;
+      $("#archivo-imagen").value = "";
+      verificarImagen({ url: location.origin + fijo.dataset.ejemploFijo, nombre: fijo.dataset.ejemploFijo });
+      return;
+    }
     const b = ev.target.closest("[data-ejemplo-imagen]");
     if (!b) return;
     $("#url-imagen").value = location.origin + b.dataset.ejemploImagen;

@@ -116,18 +116,20 @@ app_http = _app_http()
 
 @mcp.tool()
 def verificar_procedencia(url_imagen: str) -> dict:
-    """Verifica la procedencia criptográfica (C2PA) de una imagen.
+    """Verifica la procedencia criptográfica (C2PA) de una imagen o un video, y si sus metadatos dicen que fue hecho con IA.
 
     Devuelve si trae credenciales de contenido, si la firma es válida y de un emisor confiable, quién la firmó,
     la fecha de publicación firmada, si se declara generada por IA y si fue alterada después de firmarse.
     Una imagen sin firma NO es sospechosa por sí sola: casi todo el contenido real no la trae.
     """
     try:
-        datos = procedencia._bytes_imagen(url_imagen)
+        datos = procedencia._bytes_imagen(url_imagen, procedencia.MAX_BYTES_VIDEO)
     except Exception as e:
-        return {"error": f"No se pudo descargar la imagen: {type(e).__name__}: {e}"}
-    sufijo = url_imagen.split("?")[0].rsplit(".", 1)[-1].lower()
-    info = procedencia.verificar(datos, procedencia.TIPOS_MIME.get("." + sufijo, "image/jpeg"))
+        return {"error": f"No se pudo descargar el archivo: {type(e).__name__}: {e}"}
+    try:
+        info = procedencia.analizar_archivo(datos, url_imagen.split("?")[0])
+    except ValueError as e:
+        return {"error": str(e)}
     info["url"] = url_imagen
     info["interpretacion"] = {
         "confiable": "Firma íntegra de un emisor de la lista de confianza.",

@@ -20,6 +20,7 @@ Endpoints:
   POST /api/analizar_pagina                {url, seleccion?, metodo?}  (usado por la extensión)
   GET  /descargas/eco-extension.zip        la extensión de Chrome lista para instalar
   POST /api/analizar_audio                 {url} o {datos_base64, nombre}: ¿voz clonada? (C2PA + AASIST-L)
+  POST /api/verificar_archivo?nombre=x.mp4 cuerpo binario: imagen o video → C2PA + señales de IA
   POST /api/verificar_imagen               {url} o {datos_base64, nombre}: procedencia C2PA de una imagen
   GET  /api/resultados                     resultados guardados de la evaluación y de la demo del agente
   POST /mcp                                servidor MCP por HTTP (Streamable HTTP) para agentes remotos
@@ -263,19 +264,29 @@ def verificar_imagen(p: PeticionImagen):
         nombre = p.nombre or "imagen.jpg"
     elif p.url:
         try:
-            datos = procedencia._bytes_imagen(p.url)
+            datos = procedencia._bytes_imagen(p.url, procedencia.MAX_BYTES_VIDEO)
         except Exception as e:
-            raise HTTPException(400, f"No se pudo descargar la imagen: {e}")
+            raise HTTPException(400, f"No se pudo descargar el archivo: {e}")
         nombre = p.url.split("?")[0]
     else:
         raise HTTPException(400, "Envíe una URL o un archivo.")
-    if len(datos) > procedencia.MAX_BYTES_IMAGEN:
-        raise HTTPException(413, "La imagen supera 8 MB.")
-    sufijo = "." + nombre.rsplit(".", 1)[-1].lower() if "." in nombre else ".jpg"
-    info = procedencia.verificar(datos, procedencia.TIPOS_MIME.get(sufijo, "image/jpeg"))
-    info["nombre"] = nombre.rsplit("/", 1)[-1]
-    info["bytes"] = len(datos)
-    return info
+    try:
+        return procedencia.analizar_archivo(datos, nombre)
+    except ValueError as e:
+        raise HTTPException(413, str(e))
+
+
+@app.post("/api/verificar_archivo")
+async def verificar_archivo(request: Request, nombre: str = "archivo.jpg"):
+    """Imagen o video subido como cuerpo binario (hasta 60 MB): procedencia C2PA y señales de IA en metadatos."""
+    from motor import procedencia
+    datos = await request.body()
+    if not datos:
+        raise HTTPException(400, "Envíe el archivo en el cuerpo de la petición.")
+    try:
+        return procedencia.analizar_archivo(datos, nombre)
+    except ValueError as e:
+        raise HTTPException(413, str(e))
 
 
 @app.post("/api/analizar_audio")
@@ -361,6 +372,8 @@ def resultados():
 
 # ---------------- archivos estáticos ----------------
 app.router.routes.extend(mcp_http.routes)  # POST /mcp (sin redirección a /mcp/)
+(RAIZ_PROYECTO / "corpus" / "ejemplos").mkdir(parents=True, exist_ok=True)
+app.mount("/ejemplos", StaticFiles(directory=RAIZ_PROYECTO / "corpus" / "ejemplos"), name="ejemplos")
 app.mount("/sitios", StaticFiles(directory=DIR_CORPUS / "sitios"), name="sitios")
 app.mount("/web", StaticFiles(directory=DIR_WEB), name="web")
 

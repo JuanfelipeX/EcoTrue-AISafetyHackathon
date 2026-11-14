@@ -30,7 +30,15 @@ DIR_PKI = RAIZ_PROYECTO / "corpus" / "c2pa"
 ETIQUETA_PUBLICACION = "org.eco.publicacion"
 FUENTE_IA = ("trainedAlgorithmicMedia", "compositeWithTrainedAlgorithmicMedia", "algorithmicMedia")
 MAX_BYTES_IMAGEN = 8 * 1024 * 1024
-TIPOS_MIME = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp"}
+MAX_BYTES_VIDEO = 60 * 1024 * 1024
+TIPOS_MIME = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp",
+              ".mp4": "video/mp4", ".m4v": "video/mp4", ".mov": "video/quicktime", ".avi": "video/x-msvideo"}
+
+# Nombres de herramientas de generación que aparecen en metadatos (EXIF, XMP, PNG, etiquetas de video, C2PA).
+GENERADORES_IA = ("midjourney", "stable diffusion", "stablediffusion", "dall-e", "dall·e", "dalle", "openai", "chatgpt",
+                  "sora", "firefly", "imagen", "veo", "gemini", "nano banana", "leonardo", "ideogram", "flux",
+                  "comfyui", "automatic1111", "novelai", "runway", "pika", "kling", "luma", "dream machine",
+                  "hailuo", "synthesia", "heygen", "elevenlabs", "grok", "aurora", "recraft", "krea")
 
 
 @lru_cache(maxsize=1)
@@ -96,6 +104,8 @@ def verificar(datos, mime="image/jpeg"):
     activo = store.get("manifests", {}).get(store.get("active_manifest"), {})
     firma = activo.get("signature_info") or {}
     info["firmante"] = firma.get("common_name")
+    generadores = [g.get("name", "") for g in activo.get("claim_generator_info", []) if isinstance(g, dict)]
+    info["generador"] = " ".join(filter(None, generadores + [activo.get("claim_generator") or ""])) or None
     info["emisor"] = firma.get("issuer")
     info["codigos"] = [v.get("code") for v in store.get("validation_status", []) if v.get("code")]
     for a in activo.get("assertions", []):
@@ -103,6 +113,10 @@ def verificar(datos, mime="image/jpeg"):
         if etiqueta.startswith("c2pa.actions"):
             for acc in datos_a.get("actions", []):
                 info["acciones"].append(acc.get("action"))
+                agente = acc.get("softwareAgent")
+                if agente:
+                    nombre_agente = agente.get("name") if isinstance(agente, dict) else str(agente)
+                    info["generador"] = " ".join(filter(None, [info.get("generador"), nombre_agente]))
                 fuente = acc.get("digitalSourceType") or ""
                 if fuente:
                     info["fuente_digital"] = fuente.rsplit("/", 1)[-1]
@@ -120,7 +134,128 @@ def verificar(datos, mime="image/jpeg"):
     return info
 
 
-def _bytes_imagen(url):
+def _menciona_generador(texto):
+    t = (texto or "").lower()
+    return next((g for g in GENERADORES_IA if g in t), None)
+
+
+def senales_ia(datos, mime="image/jpeg", c2pa_info=None):
+    """Señales de que una imagen o un video fue generado con IA, leídas de sus metadatos (sin modelos de píxeles).
+
+    Cada señal: {"fuente", "detalle", "fuerza"} con fuerza "declarada" (el archivo dice que es IA) o "indicio"
+    (menciona una herramienta de IA, que también se usa para editar). La ausencia de señales NO prueba que sea real:
+    los metadatos se borran al reenviar o al hacer una captura de pantalla.
+    """
+    senales = []
+    if c2pa_info:
+        if c2pa_info.get("generada_por_ia"):
+            senales.append({"fuente": "C2PA", "detalle": f"tipo de origen digital: {c2pa_info.get('fuente_digital')}",
+                            "fuerza": "declarada"})
+        g = _menciona_generador(" ".join(filter(None, [c2pa_info.get("generador"), c2pa_info.get("firmante")])))
+        if g:
+            senales.append({"fuente": "C2PA", "detalle": f"herramienta registrada en el manifiesto: {g}", "fuerza": "indicio"})
+
+    # IPTC DigitalSourceType en XMP (Google, Meta, Adobe y otros lo escriben aunque no haya C2PA).
+    bajo = datos[:4 * 1024 * 1024].lower() if mime.startswith("image/") else datos.lower()
+    for termino in (b"trainedalgorithmicmedia", b"compositewithtrainedalgorithmicmedia", b"compositesynthetic"):
+        if b"digitalsourcetype" in bajo and termino in bajo and not (c2pa_info or {}).get("generada_por_ia"):
+            senales.append({"fuente": "XMP / IPTC", "detalle": f"DigitalSourceType = {termino.decode()}",
+                            "fuerza": "declarada"})
+            break
+
+    if mime.startswith("image/"):
+        try:
+            from PIL import Image
+            img = Image.open(io.BytesIO(datos))
+            exif = img.getexif()
+            for tag, nombre in ((305, "Software"), (270, "ImageDescription"), (315, "Artist"), (37510, "UserComment")):
+                valor = exif.get(tag)
+                g = _menciona_generador(str(valor)) if valor else None
+                if g:
+                    senales.append({"fuente": f"EXIF {nombre}", "detalle": f"{str(valor)[:80]}", "fuerza": "indicio"})
+            for clave, valor in (img.info or {}).items():
+                if not isinstance(valor, str):
+                    continue
+                if clave.lower() in ("parameters", "prompt", "workflow", "sd-metadata", "dream", "comment", "software",
+                                     "description", "ai_metadata"):
+                    g = _menciona_generador(valor)
+                    if clave.lower() in ("parameters", "prompt", "workflow", "sd-metadata", "dream"):
+                        senales.append({"fuente": f"PNG texto «{clave}»",
+                                        "detalle": "parámetros de generación (Stable Diffusion / ComfyUI): " + valor[:90],
+                                        "fuerza": "declarada"})
+                    elif g:
+                        senales.append({"fuente": f"PNG texto «{clave}»", "detalle": valor[:90], "fuerza": "indicio"})
+        except Exception:
+            pass
+    elif mime.startswith("video/"):
+        for etiqueta, valor in _etiquetas_video(datos).items():
+            g = _menciona_generador(valor)
+            if g:
+                senales.append({"fuente": f"etiqueta de video «{etiqueta}»", "detalle": valor[:90], "fuerza": "indicio"})
+    vistos, unicas = set(), []
+    for s_ in senales:
+        clave = (s_["fuente"], s_["detalle"])
+        if clave not in vistos:
+            vistos.add(clave)
+            unicas.append(s_)
+    return unicas
+
+
+def _etiquetas_video(datos):
+    """Etiquetas del contenedor y de las pistas (codificador, comentario, handler…) con ffprobe, si está instalado."""
+    import shutil
+    import subprocess
+    import tempfile
+    if not shutil.which("ffprobe"):
+        return {}
+    with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as tmp:
+        tmp.write(datos)
+        ruta = tmp.name
+    try:
+        r = subprocess.run(["ffprobe", "-v", "error", "-print_format", "json", "-show_format", "-show_streams", ruta],
+                           capture_output=True, timeout=30)
+        d = json.loads(r.stdout or b"{}")
+    except Exception:
+        return {}
+    finally:
+        Path(ruta).unlink(missing_ok=True)
+    etiquetas = {}
+    for k, v in (d.get("format", {}).get("tags") or {}).items():
+        etiquetas[k] = str(v)
+    for i, st in enumerate(d.get("streams", [])):
+        for k, v in (st.get("tags") or {}).items():
+            etiquetas[f"pista{i}.{k}"] = str(v)
+    return etiquetas
+
+
+def resumen_ia(senales):
+    if any(x["fuerza"] == "declarada" for x in senales):
+        return "declarada", "El archivo declara que fue generado (o compuesto) con IA."
+    if senales:
+        return "indicio", "Menciona una herramienta de IA en sus metadatos: pudo generarse o solo editarse con ella."
+    return "sin_senales", ("No hay señales de IA en los metadatos. Eso no prueba que sea real: los metadatos se borran "
+                           "al reenviar o al hacer una captura de pantalla.")
+
+
+def analizar_archivo(datos, nombre):
+    """Procedencia C2PA + señales de IA de una imagen o un video."""
+    sufijo = "." + nombre.rsplit(".", 1)[-1].lower() if "." in nombre else ".jpg"
+    mime = TIPOS_MIME.get(sufijo, "image/jpeg")
+    limite = MAX_BYTES_VIDEO if mime.startswith("video/") else MAX_BYTES_IMAGEN
+    if len(datos) > limite:
+        raise ValueError(f"El archivo supera {limite // (1024 * 1024)} MB.")
+    info = verificar(datos, mime)
+    info["tipo"] = "video" if mime.startswith("video/") else "imagen"
+    info["senales_ia"] = senales_ia(datos, mime, info)
+    info["ia"], info["ia_explicacion"] = resumen_ia(info["senales_ia"])
+    info["nombre"] = nombre.rsplit("/", 1)[-1]
+    info["bytes"] = len(datos)
+    if info["tipo"] == "video":
+        info["huella"] = None
+    return info
+
+
+def _bytes_imagen(url, limite=MAX_BYTES_IMAGEN):
     """Imagen del mini-internet desde el disco; si no, descarga protegida (misma política que las páginas)."""
     from urllib.parse import urlparse
     from . import buscador
@@ -129,6 +264,10 @@ def _bytes_imagen(url):
 
     url = buscador.normalizar_url(url)
     p = urlparse(url)
+    if p.hostname in buscador.HOSTS_LOCALES and p.path.startswith("/ejemplos/"):
+        ruta = (buscador.DIR_CORPUS / p.path.lstrip("/")).resolve()
+        if buscador.DIR_CORPUS.resolve() in ruta.parents and ruta.exists():
+            return ruta.read_bytes()
     if p.hostname in buscador.HOSTS_LOCALES and p.path.startswith("/sitios/"):
         ruta = (buscador.DIR_CORPUS / p.path.lstrip("/")).resolve()
         if buscador.DIR_CORPUS.resolve() in ruta.parents and ruta.exists():
@@ -137,8 +276,8 @@ def _bytes_imagen(url):
     _verificar_destino(url)
     peticion = urllib.request.Request(url, headers={"User-Agent": "ECO/0.1 (laboratorio de defensa epistémica)"})
     with _ABRIDOR.open(peticion, timeout=15) as r:
-        datos = r.read(MAX_BYTES_IMAGEN + 1)
-    if len(datos) > MAX_BYTES_IMAGEN:
+        datos = r.read(limite + 1)
+    if len(datos) > limite:
         raise URLNoPermitida("La imagen supera el tamaño permitido")
     return datos
 

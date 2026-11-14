@@ -159,17 +159,19 @@
       <div id="resultado-urls" class="resultado"></div>
 
       <div class="intro" style="margin-top:28px">
-        <h1>Verifica la procedencia de una imagen</h1>
+        <h1>¿De dónde viene esta foto o video? ¿Lo hizo una IA?</h1>
         <p>Las credenciales de contenido (<b>C2PA</b>) son una firma criptográfica dentro del archivo: dicen quién lo creó,
-          cuándo y con qué herramienta, incluso si se generó con IA. Si alguien cambia un solo píxel, la firma se rompe.</p>
+          cuándo y con qué herramienta, incluso si se generó con IA. Si alguien cambia un solo píxel, la firma se rompe.
+          ECO también lee las marcas de IA que dejan los generadores en los metadatos (IPTC, EXIF, textos de Stable Diffusion,
+          etiquetas de video). No usa un “detector de píxeles”: fallan con generadores nuevos y acusarían a gente inocente.</p>
       </div>
       <form id="form-imagen" class="tarjeta form">
-        <label for="archivo-imagen">Sube una imagen (JPEG, PNG o WebP, máximo 8 MB)</label>
-        <input id="archivo-imagen" type="file" accept="image/jpeg,image/png,image/webp">
+        <label for="archivo-imagen">Sube una imagen (JPEG, PNG, WebP; máx. 8 MB) o un video (MP4, MOV; máx. 60 MB)</label>
+        <input id="archivo-imagen" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,.mp4,.mov,.m4v">
         <label for="url-imagen">…o pega su dirección</label>
-        <input id="url-imagen" type="url" placeholder="https://…/foto.jpg">
+        <input id="url-imagen" type="url" placeholder="https://…/foto.jpg o …/video.mp4">
         <div class="fila-botones">
-          <button type="submit" class="boton-primario">Verificar firma</button>
+          <button type="submit" class="boton-primario">Verificar</button>
         </div>
         <p class="nota" style="margin-top:14px">Ejemplos del mini-internet:</p>
         <div class="fila-botones" style="margin-top:0">
@@ -177,6 +179,9 @@
           <button type="button" class="boton-sec" data-ejemplo-ia>Ilustración declarada como IA</button>
           <button type="button" class="boton-sec" data-ejemplo-rota>Foto alterada después de firmar</button>
           <button type="button" class="boton-sec" data-ejemplo-sin>Foto reenviada sin metadatos</button>
+          <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/imagen_stable_diffusion.png">Imagen de Stable Diffusion</button>
+          <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/video_firmado_medio.mp4">Video firmado por un medio</button>
+          <button type="button" class="boton-sec" data-ejemplo-fijo="/ejemplos/video_generado_ia.mp4">Video declarado como IA</button>
         </div>
       </form>
       <div id="resultado-imagen" class="resultado"></div>
