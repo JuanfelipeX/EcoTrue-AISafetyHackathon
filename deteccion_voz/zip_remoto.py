@@ -63,6 +63,7 @@ def main():
     ap.add_argument("--por-clase-prueba", type=int, default=600)
     ap.add_argument("--por-clase-entreno", type=int, default=1000)
     ap.add_argument("--semilla", type=int, default=7)
+    ap.add_argument("--hilos", type=int, default=48)
     a = ap.parse_args()
     destino = Path(a.destino) / "release_in_the_wild"
     destino.mkdir(parents=True, exist_ok=True)
@@ -96,19 +97,18 @@ def main():
         info = infos[nombre]
         if (destino / nombre).exists():
             return
-        # Cabecera local: 30 bytes + nombre + extra; luego los datos (los WAV suelen ir sin comprimir).
-        req = urllib.request.Request(url_cdn, headers={"Range": f"bytes={info.header_offset}-{info.header_offset + 29}"})
-        cab = urllib.request.urlopen(req, timeout=60).read()
-        n_nombre, n_extra = int.from_bytes(cab[26:28], "little"), int.from_bytes(cab[28:30], "little")
-        inicio = info.header_offset + 30 + n_nombre + n_extra
+        # Una sola petición: cabecera local (30 bytes + nombre + extra) y el inicio de los datos.
+        req = urllib.request.Request(url_cdn, headers={
+            "Range": f"bytes={info.header_offset}-{info.header_offset + 30 + 512 + PREFIJO_BYTES}"})
+        bloque = urllib.request.urlopen(req, timeout=60).read()
+        n_nombre, n_extra = int.from_bytes(bloque[26:28], "little"), int.from_bytes(bloque[28:30], "little")
+        inicio = 30 + n_nombre + n_extra
         if info.compress_type == zipfile.ZIP_STORED:
-            fin = inicio + min(info.compress_size, PREFIJO_BYTES) - 1
-            req = urllib.request.Request(url_cdn, headers={"Range": f"bytes={inicio}-{fin}"})
-            (destino / nombre).write_bytes(urllib.request.urlopen(req, timeout=60).read())
+            (destino / nombre).write_bytes(bloque[inicio:inicio + min(info.compress_size, PREFIJO_BYTES)])
         else:
             (destino / nombre).write_bytes(z.read(info.filename))
 
-    with ThreadPoolExecutor(16) as ex:
+    with ThreadPoolExecutor(a.hilos) as ex:
         for i, _ in enumerate(ex.map(bajar, elegidos), start=1):
             if i % 400 == 0:
                 print(f"  {i}/{len(elegidos)}", flush=True)
