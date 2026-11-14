@@ -126,7 +126,7 @@ def foto(rng, ia=False):
     if ia:
         for i in range(0, w, 16):
             d.line([(i, 0), (w - i, h)], fill=(255, 0, 255), width=1)
-    etiqueta = "Ilustración generada con IA (sintética)" if ia else "Foto sintética · laboratorio ECO"
+    etiqueta = "Ilustracion generada con IA (sintetica)" if ia else "Foto sintetica - laboratorio ECO"  # la fuente basica de Pillow no tiene tildes
     d.rectangle([0, h - 26, w, h], fill=(0, 0, 0))
     d.text((10, h - 20), etiqueta, fill=(255, 255, 255))
     buffer = io.BytesIO()

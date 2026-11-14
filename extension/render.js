@@ -45,6 +45,16 @@
       <h3>Datos respaldados por 2 o más fuentes independientes</h3>${lista(r.corroborados, 6)}
       <h3>Datos que dependen de una sola fuente</h3>${lista(r.de_un_solo_origen, 6)}` : "";
 
+    const pr = r.procedencia;
+    const notasFecha = (r.paginas || []).filter((p) => p.nota_fecha);
+    const procedencia = pr ? `
+      <h3>Procedencia de las imágenes (C2PA)</h3>
+      <p class="eco-resumen">${pr.imagenes} imágenes · ${pr.firmadas_confiables} con firma confiable` +
+      `${pr.por_foto_ajena.length ? ` · ${pr.por_foto_ajena.length === 1 ? "1 página usa" : `${pr.por_foto_ajena.length} páginas usan`} la foto firmada por otro medio` : ""}` +
+      `${pr.generadas_por_ia.length ? ` · ${pr.generadas_por_ia.length} declaradas como IA` : ""}` +
+      `${pr.firma_rota.length ? ` · ${pr.firma_rota.length} con la firma rota` : ""}.</p>
+      ${notasFecha.map((p) => `<p class="eco-aviso"><b>Fecha imposible (${esc(sitios[p.id] || p.id)}):</b> ${esc(p.nota_fecha)}.</p>`).join("")}` : "";
+
     const metodo = { hibrido: "ECO híbrido (hechos + similitud)", hechos: "ECO por hechos", linea_base: "solo similitud de texto" }[r.metodo] || r.metodo;
 
     return `<div class="eco-res">
@@ -57,6 +67,7 @@
       <p class="eco-resumen">${esc(r.resumen)}</p>
       ${r.aviso ? `<p class="eco-aviso">${esc(r.aviso)}</p>` : ""}
       <h3>Origen de la información</h3>${grupos}
+      ${procedencia}
       ${hechos}
       ${r.panel_url ? `<p><a class="eco-enlace" href="${esc(r.panel_url)}" target="_blank" rel="noopener">Ver árbol de origen y matriz de hechos en el panel de ECO ↗</a></p>` : ""}
       <p class="eco-pie">Método: ${esc(metodo)}. ECO no dice si algo es verdad: mide cuánta evidencia independiente lo respalda.</p>
