@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\":[\"50 kilómetros\"]}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 462, "tokens_salida": 12, "segundos": 1.73}

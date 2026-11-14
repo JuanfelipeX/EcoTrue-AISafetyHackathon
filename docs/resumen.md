@@ -1,0 +1,7 @@
+# ECO: ¿cuántas fuentes hay de verdad detrás de una afirmación?
+
+Con IA es casi gratis clonar una afirmación en decenas de sitios y reescribirla para que no parezca copia. Las personas y los agentes de IA con búsqueda web interpretan esa repetición como corroboración: un modelo que encuentra cinco páginas parecidas responde que "varias fuentes lo confirman".
+
+ECO mide cuántas fuentes independientes respaldan una afirmación. Un LLM extrae los hechos verificables de cada página y los alinea aunque estén redactados distinto. Luego una regla auditable, sin LLM, recorre las páginas en orden cronológico: solo es fuente independiente la que aporta datos que nadie había publicado. El resultado muestra el origen, el árbol de copias y qué datos están corroborados.
+
+El motor se entrega como extensión de Chrome, servidor MCP para agentes, panel web y API. Lo evaluamos en un mini-internet sintético con respuesta conocida, incluido un conjunto de prueba de 18 mundos nunca usado para ajustar el método. Allí ECO acierta el conteo en el 92 % de los mundos principales, frente al 83 % de una línea base por similitud de texto, que falla en las paráfrasis, y no fusiona medios independientes. Con el informe de ECO, un agente (Claude Haiku) pasó de decir "confirmado por varias fuentes" en el 51 % de los casos con un solo origen al 22 %. Límite documentado: copias reescritas que inventan detalles siguen pasando como independientes. ECO no dice si algo es verdad; mide cuánta evidencia independiente lo respalda.

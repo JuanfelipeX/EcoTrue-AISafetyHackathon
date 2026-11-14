@@ -1,0 +1,303 @@
+{
+  "0.3": {
+    "organico": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 3.3333333333333335,
+      "fusion_falsa": 1.0
+    },
+    "literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "parafrasis": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "comunicado": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_parafrasis": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    }
+  },
+  "0.4": {
+    "organico": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 3.0,
+      "fusion_falsa": 1.0
+    },
+    "literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "parafrasis": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "comunicado": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_parafrasis": {
+      "n": 6,
+      "exactitud": 0.8333333333333334,
+      "error_medio": 0.16666666666666666,
+      "colapso": 0.8333333333333334,
+      "origen_ok": 1.0
+    }
+  },
+  "0.5": {
+    "organico": {
+      "n": 6,
+      "exactitud": 0.16666666666666666,
+      "error_medio": 1.0,
+      "fusion_falsa": 0.8333333333333334
+    },
+    "literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "parafrasis": {
+      "n": 6,
+      "exactitud": 0.6666666666666666,
+      "error_medio": 0.3333333333333333,
+      "colapso": 0.6666666666666666,
+      "origen_ok": 1.0
+    },
+    "comunicado": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_parafrasis": {
+      "n": 6,
+      "exactitud": 0.5,
+      "error_medio": 0.6666666666666666,
+      "colapso": 0.5,
+      "origen_ok": 1.0
+    }
+  },
+  "0.6": {
+    "organico": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "fusion_falsa": 0.0
+    },
+    "literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "parafrasis": {
+      "n": 6,
+      "exactitud": 0.3333333333333333,
+      "error_medio": 1.3333333333333333,
+      "colapso": 0.3333333333333333,
+      "origen_ok": 1.0
+    },
+    "comunicado": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_parafrasis": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 2.6666666666666665,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    }
+  },
+  "0.7": {
+    "organico": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "fusion_falsa": 0.0
+    },
+    "literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "parafrasis": {
+      "n": 6,
+      "exactitud": 0.16666666666666666,
+      "error_medio": 2.8333333333333335,
+      "colapso": 0.16666666666666666,
+      "origen_ok": 1.0
+    },
+    "comunicado": {
+      "n": 6,
+      "exactitud": 0.6666666666666666,
+      "error_medio": 0.3333333333333333,
+      "colapso": 0.6666666666666666,
+      "origen_ok": 1.0
+    },
+    "fabricado_literal": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 1.3333333333333333,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_parafrasis": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 3.6666666666666665,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    }
+  },
+  "0.8": {
+    "organico": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "fusion_falsa": 0.0
+    },
+    "literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "parafrasis": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 4.333333333333333,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    },
+    "comunicado": {
+      "n": 6,
+      "exactitud": 0.3333333333333333,
+      "error_medio": 1.0,
+      "colapso": 0.3333333333333333,
+      "origen_ok": 1.0
+    },
+    "fabricado_literal": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 2.6666666666666665,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_parafrasis": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 3.8333333333333335,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    }
+  },
+  "0.9": {
+    "organico": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "fusion_falsa": 0.0
+    },
+    "literal": {
+      "n": 6,
+      "exactitud": 0.3333333333333333,
+      "error_medio": 0.8333333333333334,
+      "colapso": 0.3333333333333333,
+      "origen_ok": 1.0
+    },
+    "parafrasis": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 4.666666666666667,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    },
+    "comunicado": {
+      "n": 6,
+      "exactitud": 0.3333333333333333,
+      "error_medio": 1.1666666666666667,
+      "colapso": 0.3333333333333333,
+      "origen_ok": 1.0
+    },
+    "fabricado_literal": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 2.8333333333333335,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_parafrasis": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 3.8333333333333335,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    }
+  }
+}

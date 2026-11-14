@@ -1,0 +1,8 @@
+.env
+.cache/pendientes/
+.cache/respuestas/
+__pycache__/
+*.pyc
+.venv/
+.navegador/
+node_modules/

@@ -1,0 +1,43 @@
+/* Estilos de ECO: tonos grafito y terracota. Se aplican al popup y al panel dentro de la página. */
+.eco-raiz, .eco-raiz * { box-sizing: border-box; }
+.eco-raiz { font: 13px/1.45 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: #1f1f1f; }
+.eco-raiz h1 { font-size: 16px; margin: 0; letter-spacing: .5px; }
+.eco-raiz h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .4px; color: #6b6560; margin: 14px 0 6px; }
+.eco-raiz ul { margin: 4px 0 0; padding-left: 18px; }
+.eco-raiz li { margin: 2px 0; }
+.eco-cabecera { display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; border-bottom: 2px solid #b4532a; }
+.eco-cabecera small { color: #6b6560; }
+.eco-cifras { display: flex; align-items: center; gap: 14px; padding: 12px; border-radius: 8px; margin: 10px 0 8px; }
+.eco-cifras > div { display: flex; flex-direction: column; align-items: center; }
+.eco-num { font-size: 28px; font-weight: 700; line-height: 1; }
+.eco-etq { font-size: 11px; color: #3a3a3a; text-align: center; }
+.eco-flecha { font-size: 22px; color: #6b6560; }
+.eco-alerta { background: #f6e3da; border: 1px solid #b4532a; }
+.eco-medio { background: #f6efdc; border: 1px solid #b08a2e; }
+.eco-ok { background: #e6efe3; border: 1px solid #5b7f4f; }
+.eco-afirmacion { font-weight: 600; margin: 6px 0; }
+.eco-resumen { margin: 6px 0; color: #3a3a3a; }
+.eco-aviso { background: #f6efdc; border-left: 3px solid #b08a2e; padding: 6px 8px; margin: 8px 0; }
+.eco-grupo { border: 1px solid #d8cfc8; border-radius: 6px; padding: 8px; margin: 6px 0; background: #fbf8f5; }
+.eco-grupo-titulo b { color: #1f1f1f; }
+.eco-fecha { float: right; color: #6b6560; font-size: 11px; }
+.eco-copias { margin-top: 4px; color: #3a3a3a; font-size: 12px; }
+.eco-aqui { background: #b4532a; color: #fff; border-radius: 3px; padding: 0 4px; font-size: 10px; margin-left: 4px; }
+.eco-vacio { color: #6b6560; margin: 2px 0; }
+.eco-mas { color: #6b6560; list-style: none; }
+.eco-pie { font-size: 11px; color: #6b6560; margin-top: 12px; border-top: 1px solid #d8cfc8; padding-top: 6px; }
+.eco-cargando { padding: 18px 4px; color: #3a3a3a; }
+.eco-error { background: #f6e3da; border-left: 3px solid #b4532a; padding: 8px; margin-top: 10px; }
+.eco-boton { background: #3a3a3a; color: #fff; border: 0; border-radius: 6px; padding: 7px 12px; cursor: pointer; font-size: 13px; }
+.eco-boton:hover { background: #1f1f1f; }
+
+/* Panel flotante dentro de la página */
+#eco-panel { position: fixed; top: 16px; right: 16px; width: 380px; max-height: calc(100vh - 32px); overflow: auto;
+  background: #fff; border: 1px solid #d8cfc8; border-radius: 10px; box-shadow: 0 8px 28px rgba(0,0,0,.18);
+  padding: 14px; z-index: 2147483647; }
+#eco-panel .eco-cerrar { background: none; border: 0; font-size: 18px; cursor: pointer; color: #6b6560; }
+
+.eco-enlace { color: #b4532a; font-weight: 600; text-decoration: none; }
+.eco-enlace:hover { text-decoration: underline; }
+.eco-ajustes { margin-top: 14px; font-size: 12px; color: #6b6560; }
+.eco-ajustes input { width: 100%; margin: 6px 0; padding: 5px 7px; border: 1px solid #d8cfc8; border-radius: 5px; }

@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\":[\"barrio Los Almendros\",\"andrés quintero\"]}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 617, "tokens_salida": 20, "segundos": 2.59}

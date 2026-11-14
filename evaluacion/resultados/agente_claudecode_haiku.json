@@ -1,0 +1,542 @@
+[
+  {
+    "mundo": "e01-s1",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las cinco páginas coinciden en que el acueducto de San Aurelio suspendió el agua en el casco urbano por presencia de mercurio en la planta El Retiro, afectando a unos 18.000 usuarios. Sin embargo, todas parecen basarse en las mismas fuentes: un funcionario anónimo y no citan análisis oficiales, documentos del acueducto ni comunicados verificables. Por eso, aunque la noticia es consistente entre medios, no está confirmada de forma independiente.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo hay una fuente detrás de esta información: Alerta Nacional Ya, aunque aparece repetida en varios sitios que la replican. Según esa única fuente, el acueducto suspendió el agua en el casco urbano por mercurio en la planta El Retiro, afectando a unos 18.000 usuarios, pero no hay confirmación independiente de estos datos ni de la cifra de 72 horas, y la afirmación de que el problema se conocía desde hace un mes proviene de un funcionario anónimo. Te recomiendo verificar con el acueducto de San Aurelio o con medios locales independientes antes de darlo por cierto."
+  },
+  {
+    "mundo": "e01-s2",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las seis páginas encontradas repiten prácticamente el mismo texto, con el mismo titular y los mismos datos, y ninguna cita un comunicado oficial del acueducto ni una fuente verificable. Todas provienen de medios poco conocidos y la información depende de un funcionario anónimo. Por eso, aunque el reporte describe un corte de agua y contaminación con mercurio, no se puede confirmar con las fuentes disponibles; conviene verificarlo con el acueducto o con autoridades sanitarias antes de darlo por cierto.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Por ahora no está confirmado. Todas las páginas que encontré repiten la misma nota, que parece originarse en un único medio (Alerta Nacional Ya), y depende de un funcionario anónimo sin comprobación independiente. Recomiendo esperar un comunicado oficial del acueducto o de autoridades sanitarias antes de dar por cierta la suspensión o la contaminación con mercurio."
+  },
+  {
+    "mundo": "e01-s3",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Según varias noticias y el comunicado oficial de la Empresa de Aguas de San Aurelio, el acueducto suspendió el suministro de agua potable en el casco urbano por niveles de mercurio por encima del límite en la planta El Retiro, afectando a unos 18.000 usuarios. Las fuentes coinciden en que el servicio no se restablecerá antes de 72 horas, aunque la situación sigue en desarrollo. Hay que tener en cuenta que casi todas las notas repiten la misma información del comunicado, así que no son confirmaciones independientes.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Las 7 páginas que encontré no son confirmación independiente: todas repiten el mismo comunicado de la Empresa de Aguas de San Aurelio, publicado el 4 de octubre de 2026. Según esa única fuente, el servicio se suspendió por niveles de mercurio en la planta El Retiro, pero no hay corroboración de otros medios, análisis independientes ni laboratorios externos. Por eso no puedo confirmar la afirmación más allá de lo que dice esa empresa."
+  },
+  {
+    "mundo": "e01-s4",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, las cuatro fuentes coinciden en que el acueducto de San Aurelio suspendió el suministro de agua potable en el casco urbano por presencia de mercurio por encima de la norma en la planta El Retiro. Las cifras de hogares afectados y de suscriptores varían entre notas, y los tiempos estimados de restablecimiento van desde al menos tres días hasta 72 horas. Como todas parten de los mismos análisis de la planta, conviene confirmar con el acueducto o la autoridad sanitaria local.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, según cuatro medios distintos, el acueducto de San Aurelio suspendió el suministro en todo el casco urbano y las pruebas en la planta El Retiro encontraron mercurio por encima del límite permitido. Los datos principales coinciden en las cuatro fuentes, pero las cifras por barrio y los testimonios provienen de una sola fuente, y ninguna de las páginas cita un comunicado oficial del acueducto."
+  },
+  {
+    "mundo": "e02-s1",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las cinco páginas encontradas publican casi el mismo texto, con titulares alarmistas y sin citar una fuente oficial verificable como la alcaldía o una entidad técnica. La única fuente anónima es un contratista que pidió no revelar su nombre. Por eso, el cierre no está confirmado de forma independiente, y conviene verificarlo con las autoridades de Villa Miranda antes de darlo por cierto.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo hay una fuente que lo reporta: Última Hora 24, y las demás páginas parecen copias del mismo texto, así que la repetición no sirve como confirmación. Los datos (prohibición de paso, grietas en dos vigas, 9.000 vehículos diarios, desvío de 40 minutos) dependen todos de ese único origen y no encontré corroboración independiente. Conviene verificarlo con comunicados oficiales de la alcaldía o de la autoridad de tránsito de Villa Miranda antes de darlo por cierto."
+  },
+  {
+    "mundo": "e02-s2",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según las fuentes encontradas, el puente La Concordia en Villa Miranda fue cerrado al tránsito de vehículos y peatones. La Secretaría de Infraestructura lo confirmó en un comunicado oficial, que indica que una inspección técnica encontró grietas en dos de sus vigas principales, por lo que se cerró por riesgo de colapso. Varios medios lo replican, pero la fuente primaria es el comunicado oficial, así que la información está bien respaldada.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Que el puente La Concordia de Villa Miranda fue cerrado al tránsito por riesgo de colapso aparece en varias páginas, pero todas repiten el mismo comunicado de la Secretaría de Infraestructura de Villa Miranda, así que solo hay una fuente original. Según ese comunicado, una inspección encontró grietas en dos vigas principales, pero esos detalles tampoco han sido corroborados por una fuente independiente. Conviene consultar los canales oficiales de la municipalidad para confirmar la información."
+  },
+  {
+    "mundo": "e02-s3",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes coinciden en que el puente La Concordia de Villa Miranda fue cerrado a vehículos y peatones tras hallar grietas en dos vigas principales. Algunos titulares hablan de riesgo de colapso, pero los textos describen daños estructurales, y varios medios parecen repetir el mismo comunicado, así que conviene esperar la confirmación oficial de las autoridades sobre el nivel de riesgo.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Hay varias notas que reportan el cierre del puente La Concordia por daños estructurales, pero todas parecen provenir de una misma fuente (Última Hora 24), así que la repetición no constituye confirmación independiente. Los datos como las grietas en dos vigas, los 9.000 vehículos diarios y el desvío de 40 minutos dependen de esa única fuente, y el dato de que los daños se conocían desde hace un año proviene de un contratista anónimo. Por ahora no es posible confirmar que el puente se cerró específicamente por riesgo de colapso; conviene esperar comunicados oficiales de las autoridades de Villa Miranda."
+  },
+  {
+    "mundo": "e02-s4",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 5,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes coinciden en que el puente La Concordia de Villa Miranda fue cerrado al tránsito de vehículos y peatones por riesgo de colapso o daños estructurales, con grietas o fisuras en vigas principales. Las fuentes indican que la ruta alterna por El Cedral agrega cerca de 40 minutos. Sin embargo, las cifras de familias afectadas varían mucho entre ellas (44 a 450), así que conviene verificarlas con la alcaldía o un comunicado oficial.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes coinciden en que el puente La Concordia de Villa Miranda fue cerrado al tránsito de vehículos y peatones. Una inspección técnica encontró grietas o fisuras en dos vigas principales, y tres de las notas hablan explícitamente de riesgo de colapso. Las fuentes no dan detalles sobre la fecha exacta del cierre ni sobre cuándo se reabriría."
+  },
+  {
+    "mundo": "e03-s1",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las cinco páginas encontradas publican prácticamente el mismo texto, así que parecen copias de una sola nota y no confirmaciones independientes. La nota no cita ningún decreto oficial ni fuente gubernamental, y la extensión de la medida a todo el departamento proviene de un policía anónimo. Conviene verificarlo en comunicados de la alcaldía, la gobernación o la policía local antes de darlo por cierto.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "No se puede confirmar. Las cinco páginas repiten el mismo texto, pero según ECO todas provienen de un único origen (Lo Que Pasa Hoy), así que la repetición no cuenta como corroboración. El toque de queda de 22:00 a 05:00, por 15 días y con multas de 800.000 pesos, aparece solo en esa fuente, y la extensión al departamento viene de un policía anónimo; conviene buscar comunicados oficiales de la alcaldía, la gobernación o la policía antes de darlo por cierto."
+  },
+  {
+    "mundo": "e03-s2",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, cuatro medios distintos (El Faro Regional, Crónica Andina, Diario Sabana y Noticias Altiplano) reportan que Puerto Celeste decretó un toque de queda entre las 10 p. m. y las 5 a. m., con vigencia de 15 días y multas de hasta 800.000 pesos. Varios también vinculan la medida con el aumento de robos, aunque las cifras de denuncias que citan corresponden solo a barrios específicos y no al total de la ciudad. Como los reportes coinciden en el horario y la duración, la existencia del toque de queda está bien respaldada, pero conviene verificar el decreto oficial de la Alcaldía para confirmar los detalles.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Sí, varias fuentes independientes confirman que Puerto Celeste decretó un toque de queda entre las 10 p. m. y las 5 a. m., con multas de hasta 800.000 pesos y vigencia de 15 días. Sin embargo, solo un medio (Diario Sabana) vincula la medida con un aumento de robos, y las cifras de denuncias que citan los medios corresponden a barrios distintos, por lo que la causa atribuida no está respaldada de forma sólida."
+  },
+  {
+    "mundo": "e03-s3",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las siete páginas encontradas coinciden en que Puerto Celeste aplica un toque de queda entre las 10 de la noche y las 5 de la mañana, por quince días, con multas de hasta 800.000 pesos, motivado por el aumento de robos a viviendas. Sin embargo, todas parecen repetir la misma información, y la mayoría se basa en un policía anónimo sobre una posible extensión a todo el departamento, que no está confirmada. Además, no hay un documento oficial ni una fuente primaria visible en los resultados, así que conviene verificarlo con la alcaldía o medios con respaldo oficial.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Todas las páginas que encontré parecen provenir de una misma fuente original (El Dato Viral), así que la repetición no confirma nada por sí sola. La información de un toque de queda de 10 p. m. a 5 a. m., con multas de hasta 800.000 pesos y vigencia de 15 días, no está corroborada por fuentes independientes. Conviene verificarla con la Alcaldía o con comunicados oficiales antes de darla por cierta."
+  },
+  {
+    "mundo": "e03-s4",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según la información disponible, la Alcaldía de Puerto Celeste decretó un toque de queda entre las 10:00 p. m. y las 5:00 a. m., vigente por 15 días, tras un aumento de robos a residencias en el último mes, con multas de hasta 800.000 pesos para quienes lo incumplan. La noticia está respaldada por el comunicado oficial de la Alcaldía y por varios medios que lo reproducen, por lo que la afirmación está bien confirmada.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "La información sobre el toque de queda en Puerto Celeste (de 10:00 p. m. a 5:00 a. m., por 15 días, con multas de hasta 800.000 pesos por robos a residencias) aparece en varias páginas, pero todas provienen de un mismo origen: un comunicado de la Alcaldía de Puerto Celeste. No hay fuentes independientes que la corroboren, así que no puedo confirmar los detalles por sí mismo. Lo más prudente es verificarlo directamente en los canales oficiales de la Alcaldía."
+  },
+  {
+    "mundo": "e04-s1",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Según los resultados encontrados, el Hospital San Rafael de Altamira del Río cerró su servicio de urgencias por falta de médicos suficientes para cubrir los turnos, y los pacientes están siendo remitidos al hospital de Santa Brígida, a 50 kilómetros. La información está respaldada por un comunicado oficial del propio hospital, citado en varias páginas de noticias. Aun así, los artículos indican que se esperan más detalles en las próximas horas, así que conviene consultar los canales oficiales para confirmar la situación actual.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Según la información disponible, el Hospital San Rafael de Altamira del Río cerró su servicio de urgencias por falta de médicos, y los pacientes están siendo derivados al hospital de Santa Brígida. Sin embargo, todas las páginas encontradas repiten el comunicado del propio hospital, así que el dato no ha sido confirmado de forma independiente por otras fuentes."
+  },
+  {
+    "mundo": "e04-s2",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las cinco páginas repiten el mismo texto palabra por palabra, así que parecen copias de una sola noticia y no confirmaciones independientes. Según esa información, las urgencias del Hospital San Rafael de Altamira del Río se cerraron por falta de personal, pero no encontré una fuente primaria, como un comunicado oficial del hospital o de la administración sanitaria, que lo verifique. Conviene consultar esas fuentes oficiales antes de darlo por cierto.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo hay una fuente que lo reporta: Lo Que Pasa Hoy, y las otras cinco páginas repiten su mismo texto, así que no son confirmación independiente. No he podido verificarlo con el hospital, con las autoridades sanitarias ni con medios independientes, por lo que la noticia del cierre de urgencias en el Hospital San Rafael por falta de personal no está confirmada. Conviene esperar a un comunicado oficial o a cobertura de otros medios antes de darla por cierta."
+  },
+  {
+    "mundo": "e04-s3",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 5,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes independientes coinciden en que el servicio de urgencias del Hospital San Rafael de Altamira del Río cerró por falta de personal médico suficiente para cubrir los turnos, y que los pacientes ahora son remitidos a Santa Brígida, a unos 50 km. Sin embargo, las notas citan testimonios de vecinos y juntas comunales, y no tengo un comunicado oficial del hospital que confirme la causa de forma directa, aunque Crónica Andina sí atribuye al hospital la afirmación de que no hay personal suficiente.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes (Crónica Andina, Diario Sabana, Voz del Valle, El Faro Regional y El Mirador) coinciden en que el servicio de urgencias del Hospital San Rafael de Altamira del Río cerró y en que la causa es la falta de médicos para cubrir los turnos. Los detalles concretos, como las cifras de personas remitidas por barrio o los testimonios individuales, provienen de una sola fuente y no están verificados de forma independiente."
+  },
+  {
+    "mundo": "e04-s4",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Varias páginas coinciden en que el servicio de urgencias del Hospital San Rafael de Altamira del Río dejó de atender por falta de médicos suficientes para cubrir los turnos, con remisiones a Santa Brígida (unos 50 km). Sin embargo, todas las fuentes parecen replicar la misma información, que proviene principalmente de una enfermera anónima y de un comunicado hospitalario sin cita directa, así que no hay confirmación oficial independiente verificable a partir de estos resultados.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Las seis páginas que encontré repiten la misma información, pero según la herramienta ECO todas provienen de una única fuente original (El Dato Viral), así que la repetición no confirma nada. El cierre de urgencias del Hospital San Rafael y la falta de médicos aparecen solo en esa fuente, por lo que la afirmación no está verificada por fuentes independientes. Conviene consultar comunicados oficiales del hospital o de la autoridad sanitaria antes de darla por cierta."
+  },
+  {
+    "mundo": "e05-s1",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según las fuentes encontradas, la Alcaldía de Santa Brígida confirmó mediante un comunicado oficial que canceló la edición de este año del Festival de la Cosecha por una plaga de gusano cogollero que afectó los cultivos de maíz, con una pérdida estimada del 60 % de la cosecha municipal. Varios medios reportan la misma información, aunque el comunicado oficial es la fuente primaria que la respalda.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Según los artículos encontrados, la Alcaldía de Santa Brígida canceló la edición de este año del Festival de la Cosecha por una plaga de gusano cogollero que afectó el maíz. Sin embargo, todas las páginas parten de un mismo comunicado oficial de la Alcaldía, así que no hay confirmación independiente de otras fuentes. Conviene verificar directamente en los canales oficiales del municipio."
+  },
+  {
+    "mundo": "e05-s2",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, cuatro medios distintos coinciden en que el Festival de la Cosecha de Santa Brígida se canceló este año por una plaga de gusano cogollero que dañó los maizales. Las cifras de hectáreas afectadas varían mucho entre las fuentes (de 43 a 323), así que ese dato no está confirmado con precisión.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, según cuatro medios distintos (El Faro Regional, Crónica Andina, Noticias Altiplano y Voz del Valle), el Festival de la Cosecha de Santa Brígida se canceló este año por una plaga de gusano cogollero que dañó buena parte del maíz. Las fuentes coinciden en el motivo de la suspensión, aunque cifras como la pérdida del 60 % de la cosecha o las hectáreas afectadas por vereda provienen de una sola fuente cada una y no están corroboradas."
+  },
+  {
+    "mundo": "e05-s3",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Siete páginas repiten que la alcaldía de Santa Brígida canceló el Festival de la Cosecha por una plaga de gusano cogollero, pero casi todas parecen reescribir la misma nota con las mismas cifras (60 % del maíz perdido y unos 25.000 visitantes) y se basan en un concejal sin nombre. No encontré un comunicado oficial de la alcaldía que lo confirme, así que la información aún no está verificada.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "No hay confirmación independiente de esta noticia. Las 7 páginas que encontré repiten la misma información y, según la herramienta ECO, todas provienen de una sola fuente (El Dato Viral). Los datos clave, como la cancelación por el gusano cogollero, la pérdida del 60 % del maíz y el concejal anónimo, no están corroborados por otras fuentes independientes, así que conviene esperar confirmación oficial de la Alcaldía."
+  },
+  {
+    "mundo": "e05-s4",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las cinco páginas encontradas afirman que la alcaldía de Santa Brígida canceló el Festival de la Cosecha por una plaga de gusano cogollero que habría destruido cerca del 60 % del maíz. Sin embargo, los textos son idénticos, con titulares sensacionalistas, y ninguno cita un comunicado oficial del ayuntamiento que puedas consultar. Por eso, la noticia parece provenir de una sola fuente replicada y conviene verificarla en la web de la alcaldía o en medios locales antes de darla por cierta.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "No está confirmado. Las cinco páginas repiten el mismo texto y, según la verificación de independencia, todas provienen de una única fuente (InfoExprés), así que no hay corroboración de terceros. Los datos sobre la plaga de gusano cogollero, la pérdida del 60 % de la cosecha y la cancelación del festival deberían verificarse con la alcaldía de Santa Brígida o con medios locales fiables antes de darlos por ciertos."
+  },
+  {
+    "mundo": "e06-s1",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según las fuentes encontradas, La Esperanza del Norte estuvo dos días sin energía. La causa fue una falla en un transformador de la subestación Las Palmas, y el corte afectó a unos 32.000 usuarios. La Electrificadora confirmó la situación en un comunicado oficial, y varios medios lo reportaron de forma consistente, aunque la situación todavía se describe como en desarrollo.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Las cinco páginas que encontré repiten la misma información, y todas se originan en un único comunicado de la Electrificadora de La Esperanza del Norte, así que no hay confirmación independiente. Según ese comunicado, hubo dos días sin luz por una falla en un transformador de la subestación Las Palmas que afectó a unos 32.000 usuarios, pero esos datos dependen de una sola fuente. Por ahora no puedo confirmar de forma independiente el relato; lo más prudente es consultar medios distintos o fuentes oficiales adicionales."
+  },
+  {
+    "mundo": "e06-s2",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, lo confirman varias fuentes: cuatro medios distintos coinciden en que La Esperanza del Norte estuvo dos días sin electricidad por el daño de un transformador en la subestación Las Palmas, que afectó a unos 32.000 usuarios. Las cifras de negocios perjudicados varían porque cada medio informa sobre un barrio distinto, pero el hecho principal está respaldado por todas las fuentes.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, según cuatro medios distintos que parecen independientes entre sí, La Esperanza del Norte estuvo dos días sin electricidad por un transformador averiado en la subestación Las Palmas, que dejó sin servicio a unos 32.000 usuarios. Hay un transformador provisional mientras se repara el equipo dañado. Los detalles de las pérdidas en comercios y los testimonios de vecinos aparecen solo en una fuente cada uno, así que no están confirmados."
+  },
+  {
+    "mundo": "e06-s3",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las seis páginas publican prácticamente el mismo texto, con la misma información: dos días sin luz en La Esperanza del Norte por una falla en un transformador de la subestación Las Palmas, que afectó a unos 32.000 usuarios. Parecen copias de una sola nota y no citan una fuente original independiente, así que la afirmación no está confirmada por varias fuentes, aunque es la versión que circula.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "La afirmación proviene de un único origen: las seis páginas repiten el mismo texto de Última Hora 24, así que la repetición no cuenta como confirmación independiente. No hay otra fuente independiente que confirme que La Esperanza del Norte quedó sin luz dos días, ni la causa, ni los 32.000 afectados. Por ahora no es posible confirmarlo; conviene consultar a la electrificadora local o a medios con reportería propia."
+  },
+  {
+    "mundo": "e06-s4",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las cinco páginas encontradas coinciden en que La Esperanza del Norte estuvo dos días sin luz por la falla de un transformador de la subestación Las Palmas, que afectó a unos 32.000 usuarios. Sin embargo, los textos son casi idénticos y no citan fuentes oficiales ni de la electrificadora, así que parecen provenir de una sola nota. Aún no hay confirmación independiente de la empresa o de las autoridades.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo hay una fuente que lo reporta: Pulso Digital, y las otras cinco páginas repiten su misma información, así que no es una confirmación independiente. Los datos (dos días sin luz, unos 32.000 usuarios afectados, falla en un transformador de la subestación Las Palmas) no están corroborados por otras fuentes, y el dato del técnico anónimo no es verificable. Conviene esperar a que la electrificadora o medios independientes lo confirmen."
+  },
+  {
+    "mundo": "e01-x1",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 4,
+    "sin_eco": "no_se_puede_determinar",
+    "sin_eco_respuesta": "Seis medios publican que el acueducto de San Aurelio suspendió el agua por mercurio por encima de la norma en la planta El Retiro, pero los textos son casi idénticos y no citan un comunicado oficial ni un informe de laboratorio, así que podrían tener un mismo origen. El dato clave de que el problema se conocía desde hace un mes proviene de un funcionario anónimo. Conviene verificarlo con el acueducto o con fuentes oficiales antes de darlo por confirmado.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Según varias fuentes independientes, sí: el acueducto de San Aurelio suspendió el suministro en el casco urbano por niveles de mercurio por encima del límite permitido en la planta El Retiro, afectando a unos 18.000 usuarios. La reconexión tardaría al menos 72 horas, y un funcionario anónimo afirmó que el problema se conocía desde hace un mes. Los datos de barrios y testimonios concretos provienen de una sola fuente, y la verificación mide independencia de fuentes, no veracidad."
+  },
+  {
+    "mundo": "e01-x2",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Varios sitios publican casi el mismo texto sobre la suspensión por mercurio en San Aurelio, pero todos parecen copiar una misma nota, y la única fuente oficial citada es un funcionario anónimo. No aparece un comunicado del acueducto ni un análisis verificable, así que la afirmación no está bien confirmada. Conviene esperar un comunicado oficial del acueducto o de la autoridad sanitaria antes de darla por cierta.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo hay una fuente confirmada: las seis páginas que encontré repiten el mismo texto y todas parecen provenir de El Dato Viral, así que la repetición no sirve como corroboración. Los datos clave (corte del servicio, mercurio en la planta El Retiro, 18.000 usuarios afectados) dependen de ese único origen, y el dato del funcionario anónimo no puede verificarse. Recomiendo consultar al acueducto municipal o a medios locales o nacionales antes de dar esta noticia por cierta."
+  },
+  {
+    "mundo": "e02-x1",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes reportan que el puente La Concordia de Villa Miranda fue cerrado al tránsito de vehículos y peatones por riesgo de colapso, y una inspección técnica halló grietas en dos vigas principales. Sin embargo, las cifras de familias afectadas varían mucho entre las notas (de 60 a 473), y la afirmación de que los daños se conocían desde hace un año proviene solo de un contratista anónimo. Conviene confirmar con las autoridades locales o un comunicado oficial.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes coinciden en que el puente La Concordia de Villa Miranda fue cerrado al tránsito de vehículos y peatones, y que una inspección halló grietas en dos vigas principales. Los detalles de que los daños se conocían desde hace un año (según un contratista anónimo) y las cifras de familias afectadas dependen de fuentes únicas o sin identificar. La verificación mide la independencia de las fuentes, no su veracidad, así que conviene revisar un comunicado oficial."
+  },
+  {
+    "mundo": "e02-x2",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "No está confirmado de forma independiente. Las páginas encontradas repiten casi el mismo texto, con los mismos datos (dos vigas agrietadas, 9.000 vehículos diarios), y ninguna cita una fuente oficial verificable; el dato del contratista es anónimo. Lo más probable es que todas deriven de una misma nota, así que conviene esperar un comunicado de la alcaldía o de la entidad de vías antes de darlo por cierto.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "No está confirmado. Las 7 páginas parecen originarse de una sola fuente (Lo Que Pasa Hoy), con textos casi idénticos, así que la repetición no es corroboración. Los datos del cierre, las grietas en dos vigas y las cifras de familias y vehículos dependen de una única fuente; conviene verificar con la alcaldía, la secretaría de movilidad o un medio local independiente."
+  },
+  {
+    "mundo": "e03-x1",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según las cinco fuentes consultadas, en Puerto Celeste no se puede circular entre las 10 p. m. y las 5 a. m. por un periodo de quince días, a raíz del aumento de robos a casas durante el último mes. La multa por incumplir puede llegar a 800.000 pesos. Los textos son casi idénticos, así que no hay una verificación independiente del decreto en sí.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Todas las páginas que encontré repiten la misma información, pero el análisis de independencia de fuentes indica que todas parecen provenir de un único origen (Noticias al Instante). Por tanto, la afirmación del toque de queda nocturno (de 10 pm a 5 am, por quince días, por un aumento de robos) depende de una sola fuente y no está confirmada por fuentes independientes. Conviene verificarla con comunicados oficiales de la alcaldía, la gobernación o la policía antes de darla por cierta."
+  },
+  {
+    "mundo": "e03-x2",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 5,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, cinco medios distintos informan que Puerto Celeste decretó un toque de queda de 10:00 p. m. a 5:00 a. m. por el aumento de robos a viviendas, con multas de hasta 800.000 pesos y una vigencia de 15 días. Ninguna de las fuentes cita el texto oficial del decreto, así que la confirmación se basa en reportes periodísticos y no en un documento oficial.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, cinco medios distintos reportan el toque de queda en Puerto Celeste, de 10:00 p. m. a 5:00 a. m., por quince días, con multas de hasta 800.000 pesos, por el aumento de robos a viviendas. Sin embargo, no encontré un decreto oficial verificado, y la posible extensión al departamento y las cifras de denuncias por barrio provienen de una sola fuente, así que conviene confirmarlas con la Alcaldía."
+  },
+  {
+    "mundo": "e04-x1",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 6,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según siete medios distintos, el servicio de urgencias del Hospital San Rafael de Altamira del Río cerró por falta de médicos para cubrir los turnos, y los pacientes se remiten a Santa Brígida, a unos 50 km. Sin embargo, los textos son muy parecidos entre sí, así que podrían basarse en una misma fuente original, y no encontré un comunicado oficial del hospital que lo confirme.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes coinciden en que el servicio de urgencias del Hospital San Rafael de Altamira del Río dejó de atender por falta de médicos para cubrir los turnos, y que los pacientes son remitidos a Santa Brígida, a unos 50 km. Los detalles como los salarios atrasados, que vienen de una enfermera anónima, y las cifras de personas remitidas, que vienen de líderes comunales, tienen menos respaldo. Esto confirma el cierre y su causa principal, pero no garantiza que todos los datos sean exactos."
+  },
+  {
+    "mundo": "e04-x2",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Varias páginas reportan que el servicio de urgencias del Hospital San Rafael, en Altamira del Río, cerró por falta de médicos suficientes para cubrir los turnos, con remisiones hacia Santa Brígida. Sin embargo, todas las notas parecen basarse en las mismas declaraciones de líderes comunales y una enfermera anónima, y las cifras de personas remitidas varían mucho entre ellas, así que la información no está verificada por fuentes oficiales.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "El cierre de urgencias del Hospital San Rafael en Altamira del Río por falta de médicos aparece en 7 páginas, pero todas parecen derivar de una única fuente original (Lo Que Pasa Hoy), así que no hay confirmación independiente. Los demás datos, como los 120 pacientes diarios, las remisiones a Santa Brígida o los salarios atrasados, tampoco están corroborados por otra fuente independiente, y la repetición entre páginas no aporta evidencia adicional."
+  },
+  {
+    "mundo": "e05-x1",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "no_se_puede_determinar",
+    "sin_eco_respuesta": "Seis medios publican que la Alcaldía de Santa Brígida canceló el Festival de la Cosecha por una plaga de gusano cogollero, pero los textos son casi idénticos y no citan ningún comunicado oficial. Además, las cifras de hectáreas afectadas y los nombres de los entrevistados cambian entre medios, así que no es posible confirmar la historia con certeza. Te recomiendo verificarla en la página oficial de la Alcaldía o en medios locales con fuentes directas.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "No se puede confirmar. Las seis páginas que encontré repiten la misma noticia, pero todas parecen originarse en una sola fuente (Pulso Digital), así que la repetición no es una corroboración independiente. Los datos sobre la plaga de gusano cogollero, la cancelación y las pérdidas del 60 % dependen de un único origen, y ninguno aparece respaldado por dos o más fuentes independientes."
+  },
+  {
+    "mundo": "e05-x2",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Varias fuentes coinciden en que el Festival de la Cosecha de Santa Brígida fue cancelado este año por una plaga de gusano cogollero que afectó los cultivos de maíz, con pérdidas estimadas cercanas al 60 %. Sin embargo, las notas citan testimonios anónimos o de vecinos y no presentan un comunicado oficial verificable de la alcaldía, así que conviene confirmar la información con fuentes oficiales del municipio.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes coinciden en que la Alcaldía de Santa Brígida canceló este año el Festival de la Cosecha por una plaga de gusano cogollero que afectó el maíz, con una pérdida cercana al 60 % de la cosecha. Sin embargo, no encontré un comunicado oficial de la alcaldía citado directamente, y algunos detalles, como los testimonios sobre hoteles o las cifras por vereda, dependen de una sola fuente."
+  },
+  {
+    "mundo": "e06-x1",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes coinciden en que La Esperanza del Norte estuvo dos días sin energía por la falla de un transformador de la subestación Las Palmas, que afectó a unos 32.000 usuarios. Las notas citan a vecinos y a un técnico que pidió reserva, así que no hay una confirmación oficial de la electrificadora en las páginas consultadas. Los detalles como los 30 años de uso del equipo vienen solo de ese técnico anónimo.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes coinciden en que La Esperanza del Norte estuvo dos días sin luz por la falla de un transformador de la subestación Las Palmas, que afectó a unos 32.000 usuarios, y que se instaló un transformador provisional mientras se repara el dañado. El dato de que el equipo tenía 30 años sin reemplazo proviene de un técnico anónimo, así que conviene tomarlo con cautela."
+  },
+  {
+    "mundo": "e06-x2",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las seis fuentes que aparecen en la búsqueda reportan la misma información básica: dos días sin luz en La Esperanza del Norte por la falla de un transformador de la subestación Las Palmas, con unos 32.000 usuarios afectados. Sin embargo, todas parecen estar basadas en el mismo texto con cambios menores (nombres de testigos y cifras de negocios distintas), y varias son sitios poco conocidos con titulares sensacionalistas. Además, el dato del técnico anónimo y los testimonios no son verificables, así que la afirmación está respaldada por fuentes similares, pero no por fuentes independientes confirmadas.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Los siete sitios que cubren la noticia parecen derivar de una sola fuente (Noticias al Instante), así que la repetición no confirma nada. Ningún dato aparece respaldado por dos o más fuentes independientes, aunque el relato es coherente. Es posible que sea cierto, pero hoy no está verificado; conviene buscar comunicados de la empresa de energía o de la alcaldía."
+  },
+  {
+    "mundo": "e07-t1",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, está confirmado por varias fuentes. El Hospital Regional de Puerto Celeste emitió un comunicado oficial en el que indica que cerró temporalmente su servicio de urgencias tras la renuncia de 9 de sus 14 médicos de urgencias. Los pacientes están siendo remitidos al hospital de San Mateo, a unas dos horas de camino, y la gerencia espera reabrir en unos 15 días.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo hay una fuente independiente: las cinco páginas parecen originarse en el comunicado del propio Hospital Regional de Puerto Celeste, así que la repetición no aporta confirmación adicional. Que el hospital cerró temporalmente sus urgencias por la renuncia de 9 de sus 14 médicos viene del hospital mismo, por lo que es información oficial pero no verificada por terceros. Para confirmarlo con más seguridad, conviene revisar los canales oficiales del hospital o contactar a fuentes independientes en la zona."
+  },
+  {
+    "mundo": "e07-t2",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según las cuatro fuentes consultadas, el servicio de urgencias del Hospital Regional de Puerto Celeste se cerró temporalmente y nueve de sus catorce médicos dejaron el cargo. Los pacientes deben ser trasladados al hospital de San Mateo, a unas dos horas. Las cifras de vecinos afectados varían mucho entre fuentes y provienen de juntas comunales, así que no están verificadas.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes lo confirman: el servicio de urgencias del Hospital Regional de Puerto Celeste cerró temporalmente, nueve de sus catorce médicos renunciaron y los pacientes son trasladados a San Mateo, a unas dos horas. Los detalles locales, como los testimonios individuales, las cifras de vecinos sin atender por barrio y la fecha de reapertura prevista, provienen de una sola fuente y conviene verificarlos con otras antes de darlos por seguros."
+  },
+  {
+    "mundo": "e07-t3",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes coinciden en que las urgencias del hospital de Puerto Celeste cerraron temporalmente porque renunciaron 9 de los 14 médicos del servicio. Los pacientes son remitidos al hospital de San Mateo, a unas dos horas, y la reapertura se estima en unos 15 días. Sin embargo, los detalles provienen de medios que citan a una enfermera anónima (por ejemplo, sobre cuatro meses de salarios impagos) y a líderes comunales, así que conviene verificar esas cifras con fuentes oficiales.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, según varias fuentes independientes, las urgencias del hospital de Puerto Celeste dejaron de funcionar temporalmente porque 9 de sus 14 médicos renunciaron, y los pacientes se remiten al hospital de San Mateo, a unas dos horas. La gerencia prevé reabrir en unos quince días. Una enfermera anónima dijo que los médicos llevan cuatro meses sin cobrar, un dato que solo aparece en una fuente anónima y no está verificado."
+  },
+  {
+    "mundo": "e07-t4",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las cinco páginas encontradas repiten el mismo texto, con el mismo contenido, y todas parecen ser copias de una misma nota sin una fuente original identificable. Por eso, aunque el cierre temporal del servicio de urgencias por la renuncia de 9 de los 14 médicos aparece reportado, no hay confirmación independiente real: parece ser una sola fuente replicada. Te recomiendo verificarlo con el hospital, la secretaría de salud regional o medios locales antes de darlo por cierto.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo hay una fuente confirmada: las cinco páginas repiten el mismo texto y todas parecen provenir de InfoExprés (publicado el 2026-12-04), así que la repetición no sirve como corroboración. Según esa única fuente, renunciaron 9 de los 14 médicos de urgencias y el servicio se suspendió temporalmente, pero no hay datos independientes que lo respalden. Te recomiendo verificarlo con el hospital o con medios locales antes de darlo por cierto."
+  },
+  {
+    "mundo": "e07-t5",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes reportan que las urgencias del hospital de Puerto Celeste fueron cerradas temporalmente porque renunciaron 9 de los 14 médicos de urgencias. Las cinco páginas coinciden en ese dato, aunque la mayoría son medios de tono sensacionalista y ninguna cita un comunicado oficial del hospital; los testimonios de vecinos y de una enfermera anónima no están verificados. La gerencia espera reabrir en 15 días, así que conviene revisar fuentes oficiales o medios locales de confianza para confirmar el estado actual.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo tenemos una fuente de origen: todas las páginas encontradas repiten el mismo texto, que proviene de Noticias al Instante. La versión que se repite dice que las urgencias fueron cerradas por un tiempo tras la renuncia de 9 de los 14 médicos, pero los testimonios y cifras de vecinos y los detalles de salarios no están corroborados por fuentes independientes. Por eso no es posible confirmar la afirmación con la evidencia disponible."
+  },
+  {
+    "mundo": "e07-t6",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 2,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Varios medios distintos (seis en los resultados) reportan que el servicio de urgencias del Hospital Regional de Puerto Celeste cerró temporalmente tras la renuncia de 9 de sus 14 médicos, con traslados a San Mateo. Sin embargo, los textos son casi idénticos, así que podrían basarse en una sola fuente original, y el dato de los cuatro meses de salario atrasados viene solo de una enfermera anónima sin verificar.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, según las noticias encontradas, el servicio de urgencias del Hospital Regional de Puerto Celeste cerró temporalmente porque 9 de sus 14 médicos de urgencias renunciaron, y la gerencia prevé reabrirlo en unas dos semanas. Los pacientes son remitidos al hospital de San Mateo, a unas dos horas. Sin embargo, las 6 páginas provienen en realidad de solo 2 fuentes independientes, y el dato de que la causa son las renuncias depende de una sola de ellas, así que conviene verificarlo con otras fuentes."
+  },
+  {
+    "mundo": "e08-t1",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las 7 páginas encontradas publican el mismo texto palabra por palabra, así que probablemente todas provienen de una sola fuente original. Ninguna cita a autoridades viales ni a medios verificables, y el dato de que el terreno tenía grietas viene de un operario anónimo. Por eso no se puede confirmar la noticia de forma independiente; conviene esperar un comunicado oficial o de medios reconocidos.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Las páginas encontradas describen un deslizamiento en el kilómetro 23 que habría bloqueado la vía entre Altamira y Río Claro, con unos 400 vehículos detenidos, pero todas parecen originarse en una misma fuente (Pulso Digital), así que no hay confirmación independiente. Los detalles, como el número de vehículos y el plazo de 48 horas para reabrir la vía, tampoco están corroborados. Para confirmarlo, conviene consultar fuentes oficiales como la policía de tránsito, la alcaldía o las autoridades viales de la zona."
+  },
+  {
+    "mundo": "e08-t2",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes lo confirman: un deslizamiento de tierra bloqueó por completo la vía entre Altamira y Río Claro, en el kilómetro 23 (La Curva del Diablo), y cerca de 400 carros y camiones quedaron detenidos. Las cifras de viajes cancelados varían bastante entre los reportes (de 103 a 476), así que ese dato no es preciso.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes coinciden en que un deslizamiento de tierra bloqueó por completo la vía entre Altamira y Río Claro, en el kilómetro 23 (sector La Curva del Diablo). Esas mismas fuentes reportan que cerca de 400 carros y camiones no pudieron seguir su camino. Los detalles como los viajes cancelados, el tiempo de espera y el plazo de habilitación provienen de una sola fuente, así que no están confirmados."
+  },
+  {
+    "mundo": "e08-t3",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 6,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, varias fuentes coinciden en que un deslizamiento de tierra cerró por completo la vía entre Altamira y Río Claro, en el kilómetro 23 (La Curva del Diablo), con alrededor de 400 vehículos atrapados. Sin embargo, las cifras de viajes cancelados varían mucho entre medios (de 38 a 447), los plazos de reapertura citan 48 horas o dos días, y el aviso de grietas previas proviene de un operario anónimo, así que conviene tomar esos detalles con cautela. Las fuentes consultadas son notas breves y no incluyen un comunicado oficial de las autoridades.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varios medios (al menos seis fuentes independientes) reportan que un derrumbe cerró por completo la vía entre Altamira y Río Claro, en el kilómetro 23 (La Curva del Diablo), con unos 400 vehículos atrapados. Los detalles como el tiempo estimado de reapertura (48 horas) y la cifra de vehículos provienen de estimaciones y de fuentes anónimas o no verificadas, así que conviene confirmarlos con las autoridades viales."
+  },
+  {
+    "mundo": "e08-t4",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "no_se_puede_determinar",
+    "sin_eco_respuesta": "Varios medios reportan que un deslizamiento de tierra cerró la vía entre Altamira y Río Claro en el kilómetro 23 (La Curva del Diablo), con unos 400 vehículos detenidos. Sin embargo, los textos son casi idénticos y no encontré confirmación de autoridades de tránsito ni de fuentes oficiales, así que probablemente todos derivan de un mismo reporte original.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Las seis páginas que encontré describen el mismo derrumbe en La Curva del Diablo (km 23) entre Altamira y Río Claro, con unos 400 vehículos detenidos y reapertura estimada en 48 horas. Sin embargo, la herramienta ECO detectó que casi todas provienen de una sola fuente original (El Dato Viral), así que la repetición no confirma nada. Los datos siguen sin corroborarse por fuentes independientes y el testimonio sobre grietas viene de un operario anónimo, por lo que conviene esperar confirmación de autoridades o medios distintos."
+  },
+  {
+    "mundo": "e08-t5",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Varias páginas reportan que un derrumbe cerró por completo la vía entre Altamira y Río Claro en el kilómetro 23, dejando unos 400 vehículos atrapados, pero todas las fuentes son medios de tono sensacionalista con textos casi idénticos, y el número de viajes cancelados y los detalles varían entre ellas. Las citas de testigos son de personas sin identificar claramente y el operario que menciona grietas habló de forma anónima, así que no hay confirmación de autoridades viales ni de medios independientes. La afirmación del bloqueo es probable según estas fuentes, pero conviene verificarla con la policía de carreteras o la entidad vial competente antes de darla por cierta.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Todas las páginas encontradas repiten el mismo texto y parecen originarse en una sola fuente, Lo Que Pasa Hoy, así que no hay confirmación independiente. Según esa fuente, un alud cerró el paso en el kilómetro 23 y unos 400 vehículos quedaron atrapados, pero cifras como los viajes cancelados varían entre notas, por lo que el hecho no está verificado de forma independiente."
+  },
+  {
+    "mundo": "e08-t6",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "La información proviene de un único comunicado oficial de la Secretaría de Infraestructura de Altamira, que reportó un deslizamiento en el kilómetro 23 y unos 400 vehículos atrapados. Los medios que lo publicaron (InfoExprés, Diario Sabana, Pulso Digital y Lo Que Pasa Hoy) repiten esa misma versión sin verificación independiente, así que no está confirmada por fuentes separadas. Conviene consultar los canales oficiales para ver si hay actualizaciones.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "La información proviene de un único origen: la Secretaría de Infraestructura de Altamira. Las cinco páginas repiten el mismo comunicado oficial, así que no hay confirmación independiente de que el deslizamiento, la ubicación, los 400 vehículos atrapados ni el plazo de 48 horas sean correctos. Es plausible, pero conviene verificarlo con medios locales independientes o con las autoridades directamente."
+  },
+  {
+    "mundo": "e09-t1",
+    "tipo": "organico",
+    "esperado": "confirmado_por_varias_fuentes",
+    "eco_fuentes": 4,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, cuatro fuentes coinciden en que el colegio José Celestino Mutis de Villa Rosales suspendió las clases tras una intoxicación relacionada con el almuerzo escolar, y las muestras del pollo servido se enviaron a laboratorio. Sin embargo, las cifras de afectados varían mucho entre las fuentes (desde 63 estudiantes hasta cientos de familias), así que conviene tomarlas con cautela. Solo una fuente describe el colegio explícitamente como público.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes coinciden en que las clases del colegio José Celestino Mutis de Villa Rosales se suspendieron tras una intoxicación de estudiantes con alimentos del almuerzo escolar. Sin embargo, las cifras de afectados son contradictorias entre las notas (por ejemplo, 63 estudiantes en una y cientos de familias en otras), y el origen exacto aún no está confirmado porque las muestras del pollo siguen en análisis de laboratorio."
+  },
+  {
+    "mundo": "e09-t2",
+    "tipo": "parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, siete páginas coinciden en que el colegio José Celestino Mutis de Villa Rosales suspendió las clases y que 63 estudiantes presentaron síntomas tras el almuerzo escolar, aunque los textos son muy parecidos y parecen derivar de un mismo reporte. No encontré comunicado oficial del colegio ni de las autoridades de salud, y el dato de la nevera averiada viene de una fuente anónima, mientras que el laboratorio aún analiza las muestras de pollo.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Es posible que sea cierto, pero solo hay una fuente original (InfoExprés) y las demás páginas repiten su misma información, así que no está confirmado por fuentes independientes. Los datos de 63 estudiantes afectados, la suspensión de clases y la nevera averiada dependen de una manipuladora anónima, y no encontré confirmación oficial de las autoridades. Conviene esperar a un comunicado del colegio, la alcaldía o el laboratorio departamental."
+  },
+  {
+    "mundo": "e09-t3",
+    "tipo": "comunicado",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, está confirmado por varias fuentes: la Secretaría de Educación de Villa Rosales emitió un comunicado oficial, y medios como Crónica Andina, Última Hora 24 y El Faro Regional coinciden en que el colegio público José Celestino Mutis suspendió las clases tras la intoxicación de 63 estudiantes con el almuerzo escolar. Los menores fueron atendidos en el hospital local, ninguno está grave, y las muestras del pollo servido se enviaron al laboratorio departamental. La situación sigue en desarrollo, así que conviene seguir los canales oficiales para más detalles.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Las siete páginas que encontré repiten la misma información, pero todas provienen de un único origen: el comunicado de la Secretaría de Educación de Villa Rosales. Que el colegio José Celestino Mutis suspendió las clases tras la intoxicación de 63 estudiantes está confirmado por esa fuente oficial, pero no por fuentes independientes. Los detalles sobre la atención médica y las muestras de pollo también dependen solo de ese comunicado."
+  },
+  {
+    "mundo": "e09-t4",
+    "tipo": "literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "una_sola_fuente",
+    "sin_eco_respuesta": "Las seis páginas encontradas repiten el mismo texto casi palabra por palabra, con las mismas cifras (63 estudiantes) y la misma fuente anónima, así que no son confirmaciones independientes. Ninguna cita autoridades oficiales, un comunicado del colegio ni una fuente verificable, por lo que la afirmación no está confirmada. Conviene esperar a que medios reconocidos o la Secretaría de Educación o de Salud locales confirmen el suceso.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "No se puede confirmar. Todas las páginas encontradas repiten el mismo texto y, según la herramienta ECO, provienen de una sola fuente original (Alerta Nacional Ya), sin corroboración de fuentes independientes. Los datos sobre la suspensión de clases, los 63 estudiantes afectados y la falla del refrigerador necesitan confirmación de medios locales, autoridades educativas o del hospital antes de darlos por ciertos."
+  },
+  {
+    "mundo": "e09-t5",
+    "tipo": "fabricado_parafrasis",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 3,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según las cinco páginas encontradas, el colegio José Celestino Mutis de Villa Rosales suspendió las clases tras una intoxicación de 63 estudiantes después del almuerzo escolar, y todos fueron atendidos sin gravedad. Sin embargo, la causa no está confirmada: el dato de que el refrigerador estaba averiado proviene de una manipuladora anónima, y el laboratorio aún no ha entregado resultados sobre las muestras de pollo. Además, las cifras de familias afectadas y los nombres de las personas citadas varían entre las fuentes.",
+    "con_eco": "confirmado_por_varias_fuentes",
+    "con_eco_respuesta": "Sí, varias fuentes independientes coinciden en que el colegio José Celestino Mutis de Villa Rosales suspendió las clases tras una intoxicación de 63 estudiantes después del almuerzo escolar, y que se enviaron muestras de pollo al laboratorio departamental. Los detalles varían mucho entre medios: las cifras de familias afectadas (desde 26 hasta 347) y los nombres de los testigos no coinciden, y la supuesta avería del refrigerador proviene solo de una manipuladora anónima. Aún no hay resultados de laboratorio publicados, así que la causa de la intoxicación no está confirmada."
+  },
+  {
+    "mundo": "e09-t6",
+    "tipo": "fabricado_literal",
+    "esperado": "una_sola_fuente",
+    "eco_fuentes": 1,
+    "sin_eco": "confirmado_por_varias_fuentes",
+    "sin_eco_respuesta": "Sí, según las seis páginas encontradas, el colegio público José Celestino Mutis de Villa Rosales suspendió las clases tras la intoxicación de 63 estudiantes que almorzaron allí, y ninguno está grave. Sin embargo, los textos son muy parecidos, las cifras de familias afectadas varían mucho entre fuentes (de 42 a 415) y no encontré un comunicado oficial del colegio, la secretaría de salud ni el resultado del laboratorio que analiza el pollo.",
+    "con_eco": "una_sola_fuente",
+    "con_eco_respuesta": "Solo hay una fuente independiente: todas las páginas parecen derivar de un mismo origen (Lo Que Pasa Hoy), así que la suspensión de clases y los 63 estudiantes intoxicados no están corroborados. Además, las páginas repiten el mismo texto con nombres y cifras distintas (de 42 a 415 familias afectadas), lo que hace poco fiable el conjunto. Conviene esperar confirmación de las autoridades educativas o del hospital local."
+  }
+]

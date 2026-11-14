@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="estilos.css">
+  <style>body { width: 400px; margin: 0; padding: 12px; }</style>
+</head>
+<body class="eco-raiz">
+  <div class="eco-cabecera">
+    <h1>ECO</h1>
+    <small>¿Cuántas fuentes hay de verdad?</small>
+  </div>
+  <div id="contenido">
+    <p>Analiza la página actual y las demás páginas que publican la misma afirmación.</p>
+    <button id="analizar" class="eco-boton">Analizar esta página</button>
+  </div>
+  <details class="eco-ajustes">
+    <summary>Servidor de ECO</summary>
+    <input id="servidor" type="url" placeholder="http://localhost:8765">
+    <button id="guardar-servidor" class="eco-boton">Guardar</button> <span id="estado-servidor"></span>
+  </details>
+  <script src="config.js"></script>
+  <script src="render.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\":[\"Gloria Cárdenas, líder comunal del barrio El Prado, contó a Diario Sabana que en su cuadra robaron tres casas en una semana.\"]}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 772, "tokens_salida": 48, "segundos": 5.43}

@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\": [\"pruebas de laboratorio hechas en la planta El Retiro mostraron mercurio en concentraciones superiores a la norma.\"]}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 722, "tokens_salida": 36, "segundos": 4.17}

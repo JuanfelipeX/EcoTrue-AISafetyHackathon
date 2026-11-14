@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "ECO — fuentes reales",
+  "version": "1.1.0",
+  "description": "Muestra cuántas fuentes independientes hay detrás de una afirmación y de dónde salió.",
+  "permissions": [
+    "contextMenus",
+    "scripting",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "ECO: ¿cuántas fuentes reales hay?",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "iconos/icono16.png",
+      "48": "iconos/icono48.png",
+      "128": "iconos/icono128.png"
+    }
+  },
+  "icons": {
+    "16": "iconos/icono16.png",
+    "48": "iconos/icono48.png",
+    "128": "iconos/icono128.png"
+  }
+}

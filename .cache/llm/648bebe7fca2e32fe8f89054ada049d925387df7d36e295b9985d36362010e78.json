@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\": [\"9.000 vehículos\"]}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 427, "tokens_salida": 15, "segundos": 2.0}

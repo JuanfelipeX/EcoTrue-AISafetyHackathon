@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\":[\"128 personas remitidas a otro municipio esta semana\"]}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 890, "tokens_salida": 20, "segundos": 2.57}

@@ -1,0 +1,439 @@
+{
+  "metodo": "linea_base",
+  "umbral": 0.6,
+  "resumen": {
+    "organico": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "fusion_falsa": 0.0
+    },
+    "literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "parafrasis": {
+      "n": 6,
+      "exactitud": 0.3333333333333333,
+      "error_medio": 1.3333333333333333,
+      "colapso": 0.3333333333333333,
+      "origen_ok": 1.0
+    },
+    "comunicado": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_literal": {
+      "n": 6,
+      "exactitud": 1.0,
+      "error_medio": 0.0,
+      "colapso": 1.0,
+      "origen_ok": 1.0
+    },
+    "fabricado_parafrasis": {
+      "n": 6,
+      "exactitud": 0.0,
+      "error_medio": 2.6666666666666665,
+      "colapso": 0.0,
+      "origen_ok": 1.0
+    }
+  },
+  "detalle": [
+    {
+      "escenario": "e01-s1",
+      "tipo": "parafrasis",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 3,
+      "exacto": false,
+      "error": 2,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e01-s2",
+      "tipo": "literal",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e01-s3",
+      "tipo": "comunicado",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e01-s4",
+      "tipo": "organico",
+      "aparentes": 4,
+      "esperado": 4,
+      "estimado": 4,
+      "exacto": true,
+      "error": 0,
+      "fusion_falsa": false
+    },
+    {
+      "escenario": "e02-s1",
+      "tipo": "literal",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e02-s2",
+      "tipo": "comunicado",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e02-s3",
+      "tipo": "parafrasis",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 4,
+      "exacto": false,
+      "error": 3,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e02-s4",
+      "tipo": "organico",
+      "aparentes": 5,
+      "esperado": 5,
+      "estimado": 5,
+      "exacto": true,
+      "error": 0,
+      "fusion_falsa": false
+    },
+    {
+      "escenario": "e03-s1",
+      "tipo": "literal",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e03-s2",
+      "tipo": "organico",
+      "aparentes": 4,
+      "esperado": 4,
+      "estimado": 4,
+      "exacto": true,
+      "error": 0,
+      "fusion_falsa": false
+    },
+    {
+      "escenario": "e03-s3",
+      "tipo": "parafrasis",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e03-s4",
+      "tipo": "comunicado",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e04-s1",
+      "tipo": "comunicado",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e04-s2",
+      "tipo": "literal",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e04-s3",
+      "tipo": "organico",
+      "aparentes": 5,
+      "esperado": 5,
+      "estimado": 5,
+      "exacto": true,
+      "error": 0,
+      "fusion_falsa": false
+    },
+    {
+      "escenario": "e04-s4",
+      "tipo": "parafrasis",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e05-s1",
+      "tipo": "comunicado",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e05-s2",
+      "tipo": "organico",
+      "aparentes": 4,
+      "esperado": 4,
+      "estimado": 4,
+      "exacto": true,
+      "error": 0,
+      "fusion_falsa": false
+    },
+    {
+      "escenario": "e05-s3",
+      "tipo": "parafrasis",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 3,
+      "exacto": false,
+      "error": 2,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e05-s4",
+      "tipo": "literal",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e06-s1",
+      "tipo": "comunicado",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e06-s2",
+      "tipo": "organico",
+      "aparentes": 4,
+      "esperado": 4,
+      "estimado": 4,
+      "exacto": true,
+      "error": 0,
+      "fusion_falsa": false
+    },
+    {
+      "escenario": "e06-s3",
+      "tipo": "literal",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e06-s4",
+      "tipo": "parafrasis",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 2,
+      "exacto": false,
+      "error": 1,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e01-x1",
+      "tipo": "fabricado_parafrasis",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 2,
+      "exacto": false,
+      "error": 1,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e01-x2",
+      "tipo": "fabricado_literal",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e02-x1",
+      "tipo": "fabricado_parafrasis",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 3,
+      "exacto": false,
+      "error": 2,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e02-x2",
+      "tipo": "fabricado_literal",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e03-x1",
+      "tipo": "fabricado_literal",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e03-x2",
+      "tipo": "fabricado_parafrasis",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 5,
+      "exacto": false,
+      "error": 4,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e04-x1",
+      "tipo": "fabricado_parafrasis",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 5,
+      "exacto": false,
+      "error": 4,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e04-x2",
+      "tipo": "fabricado_literal",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e05-x1",
+      "tipo": "fabricado_literal",
+      "aparentes": 6,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e05-x2",
+      "tipo": "fabricado_parafrasis",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 3,
+      "exacto": false,
+      "error": 2,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e06-x1",
+      "tipo": "fabricado_parafrasis",
+      "aparentes": 5,
+      "esperado": 1,
+      "estimado": 4,
+      "exacto": false,
+      "error": 3,
+      "colapso": false,
+      "origen_ok": true
+    },
+    {
+      "escenario": "e06-x2",
+      "tipo": "fabricado_literal",
+      "aparentes": 7,
+      "esperado": 1,
+      "estimado": 1,
+      "exacto": true,
+      "error": 0,
+      "colapso": true,
+      "origen_ok": true
+    }
+  ]
+}

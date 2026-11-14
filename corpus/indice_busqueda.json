@@ -1,0 +1,2150 @@
+[
+  {
+    "id": "e01-s1",
+    "afirmacion": "El acueducto de San Aurelio suspendió el servicio de agua por contaminación con mercurio.",
+    "paginas": [
+      {
+        "id": "e01-s1-p01",
+        "url": "http://localhost:8765/sitios/e01-s1/e01-s1-p01.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e01-s1-p02",
+        "url": "http://localhost:8765/sitios/e01-s1/e01-s1-p02.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e01-s1-p03",
+        "url": "http://localhost:8765/sitios/e01-s1/e01-s1-p03.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e01-s1-p04",
+        "url": "http://localhost:8765/sitios/e01-s1/e01-s1-p04.html",
+        "titulo": "San Aurelio, sin agua: detectan mercurio en la planta de tratamiento",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e01-s1-p05",
+        "url": "http://localhost:8765/sitios/e01-s1/e01-s1-p05.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e01-s2",
+    "afirmacion": "El acueducto de San Aurelio suspendió el servicio de agua por contaminación con mercurio.",
+    "paginas": [
+      {
+        "id": "e01-s2-p01",
+        "url": "http://localhost:8765/sitios/e01-s2/e01-s2-p01.html",
+        "titulo": "ÚLTIMA HORA: Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e01-s2-p02",
+        "url": "http://localhost:8765/sitios/e01-s2/e01-s2-p02.html",
+        "titulo": "ÚLTIMA HORA: Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e01-s2-p03",
+        "url": "http://localhost:8765/sitios/e01-s2/e01-s2-p03.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e01-s2-p04",
+        "url": "http://localhost:8765/sitios/e01-s2/e01-s2-p04.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e01-s2-p05",
+        "url": "http://localhost:8765/sitios/e01-s2/e01-s2-p05.html",
+        "titulo": "URGENTE | Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e01-s2-p06",
+        "url": "http://localhost:8765/sitios/e01-s2/e01-s2-p06.html",
+        "titulo": "URGENTE | Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Noticias al Instante"
+      }
+    ]
+  },
+  {
+    "id": "e01-s3",
+    "afirmacion": "El acueducto de San Aurelio suspendió el servicio de agua por contaminación con mercurio.",
+    "paginas": [
+      {
+        "id": "e01-s3-p01",
+        "url": "http://localhost:8765/sitios/e01-s3/e01-s3-p01.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e01-s3-p02",
+        "url": "http://localhost:8765/sitios/e01-s3/e01-s3-p02.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Noticias Altiplano"
+      },
+      {
+        "id": "e01-s3-p03",
+        "url": "http://localhost:8765/sitios/e01-s3/e01-s3-p03.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e01-s3-p04",
+        "url": "http://localhost:8765/sitios/e01-s3/e01-s3-p04.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e01-s3-p05",
+        "url": "http://localhost:8765/sitios/e01-s3/e01-s3-p05.html",
+        "titulo": "Comunicado oficial: Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Empresa de Aguas de San Aurelio"
+      },
+      {
+        "id": "e01-s3-p06",
+        "url": "http://localhost:8765/sitios/e01-s3/e01-s3-p06.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e01-s3-p07",
+        "url": "http://localhost:8765/sitios/e01-s3/e01-s3-p07.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e01-s4",
+    "afirmacion": "El acueducto de San Aurelio suspendió el servicio de agua por contaminación con mercurio.",
+    "paginas": [
+      {
+        "id": "e01-s4-p01",
+        "url": "http://localhost:8765/sitios/e01-s4/e01-s4-p01.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Noticias Altiplano"
+      },
+      {
+        "id": "e01-s4-p02",
+        "url": "http://localhost:8765/sitios/e01-s4/e01-s4-p02.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e01-s4-p03",
+        "url": "http://localhost:8765/sitios/e01-s4/e01-s4-p03.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e01-s4-p04",
+        "url": "http://localhost:8765/sitios/e01-s4/e01-s4-p04.html",
+        "titulo": "San Aurelio, sin agua: detectan mercurio en la planta de tratamiento",
+        "medio": "Diario Sabana"
+      }
+    ]
+  },
+  {
+    "id": "e02-s1",
+    "afirmacion": "El puente La Concordia de Villa Miranda fue cerrado por riesgo de colapso.",
+    "paginas": [
+      {
+        "id": "e02-s1-p01",
+        "url": "http://localhost:8765/sitios/e02-s1/e02-s1-p01.html",
+        "titulo": "ATENCIÓN: Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e02-s1-p02",
+        "url": "http://localhost:8765/sitios/e02-s1/e02-s1-p02.html",
+        "titulo": "URGENTE | Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e02-s1-p03",
+        "url": "http://localhost:8765/sitios/e02-s1/e02-s1-p03.html",
+        "titulo": "ÚLTIMA HORA: Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e02-s1-p04",
+        "url": "http://localhost:8765/sitios/e02-s1/e02-s1-p04.html",
+        "titulo": "URGENTE | Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e02-s1-p05",
+        "url": "http://localhost:8765/sitios/e02-s1/e02-s1-p05.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e02-s2",
+    "afirmacion": "El puente La Concordia de Villa Miranda fue cerrado por riesgo de colapso.",
+    "paginas": [
+      {
+        "id": "e02-s2-p01",
+        "url": "http://localhost:8765/sitios/e02-s2/e02-s2-p01.html",
+        "titulo": "Villa Miranda: el puente La Concordia, cerrado por daños en su estructura",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e02-s2-p02",
+        "url": "http://localhost:8765/sitios/e02-s2/e02-s2-p02.html",
+        "titulo": "Comunicado oficial: Cierran el puente La Concordia en Villa Miranda por riesgo de colapso",
+        "medio": "Secretaría de Infraestructura de Villa Miranda"
+      },
+      {
+        "id": "e02-s2-p03",
+        "url": "http://localhost:8765/sitios/e02-s2/e02-s2-p03.html",
+        "titulo": "Cierran el puente La Concordia en Villa Miranda por riesgo de colapso",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e02-s2-p04",
+        "url": "http://localhost:8765/sitios/e02-s2/e02-s2-p04.html",
+        "titulo": "Cierran el puente La Concordia en Villa Miranda por riesgo de colapso",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e02-s2-p05",
+        "url": "http://localhost:8765/sitios/e02-s2/e02-s2-p05.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e02-s2-p06",
+        "url": "http://localhost:8765/sitios/e02-s2/e02-s2-p06.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "El Dato Viral"
+      }
+    ]
+  },
+  {
+    "id": "e02-s3",
+    "afirmacion": "El puente La Concordia de Villa Miranda fue cerrado por riesgo de colapso.",
+    "paginas": [
+      {
+        "id": "e02-s3-p01",
+        "url": "http://localhost:8765/sitios/e02-s3/e02-s3-p01.html",
+        "titulo": "Villa Miranda: el puente La Concordia, cerrado por daños en su estructura",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e02-s3-p02",
+        "url": "http://localhost:8765/sitios/e02-s3/e02-s3-p02.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e02-s3-p03",
+        "url": "http://localhost:8765/sitios/e02-s3/e02-s3-p03.html",
+        "titulo": "Villa Miranda: el puente La Concordia, cerrado por daños en su estructura",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e02-s3-p04",
+        "url": "http://localhost:8765/sitios/e02-s3/e02-s3-p04.html",
+        "titulo": "Villa Miranda: el puente La Concordia, cerrado por daños en su estructura",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e02-s3-p05",
+        "url": "http://localhost:8765/sitios/e02-s3/e02-s3-p05.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e02-s3-p06",
+        "url": "http://localhost:8765/sitios/e02-s3/e02-s3-p06.html",
+        "titulo": "Cierran el puente La Concordia en Villa Miranda por riesgo de colapso",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e02-s3-p07",
+        "url": "http://localhost:8765/sitios/e02-s3/e02-s3-p07.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Pulso Digital"
+      }
+    ]
+  },
+  {
+    "id": "e02-s4",
+    "afirmacion": "El puente La Concordia de Villa Miranda fue cerrado por riesgo de colapso.",
+    "paginas": [
+      {
+        "id": "e02-s4-p01",
+        "url": "http://localhost:8765/sitios/e02-s4/e02-s4-p01.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e02-s4-p02",
+        "url": "http://localhost:8765/sitios/e02-s4/e02-s4-p02.html",
+        "titulo": "Villa Miranda: el puente La Concordia, cerrado por daños en su estructura",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e02-s4-p03",
+        "url": "http://localhost:8765/sitios/e02-s4/e02-s4-p03.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e02-s4-p04",
+        "url": "http://localhost:8765/sitios/e02-s4/e02-s4-p04.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e02-s4-p05",
+        "url": "http://localhost:8765/sitios/e02-s4/e02-s4-p05.html",
+        "titulo": "Villa Miranda: el puente La Concordia, cerrado por daños en su estructura",
+        "medio": "Crónica Andina"
+      }
+    ]
+  },
+  {
+    "id": "e03-s1",
+    "afirmacion": "Puerto Celeste decretó toque de queda nocturno por una ola de robos.",
+    "paginas": [
+      {
+        "id": "e03-s1-p01",
+        "url": "http://localhost:8765/sitios/e03-s1/e03-s1-p01.html",
+        "titulo": "ÚLTIMA HORA: Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e03-s1-p02",
+        "url": "http://localhost:8765/sitios/e03-s1/e03-s1-p02.html",
+        "titulo": "ÚLTIMA HORA: Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e03-s1-p03",
+        "url": "http://localhost:8765/sitios/e03-s1/e03-s1-p03.html",
+        "titulo": "ATENCIÓN: Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e03-s1-p04",
+        "url": "http://localhost:8765/sitios/e03-s1/e03-s1-p04.html",
+        "titulo": "Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e03-s1-p05",
+        "url": "http://localhost:8765/sitios/e03-s1/e03-s1-p05.html",
+        "titulo": "URGENTE | Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Noticias al Instante"
+      }
+    ]
+  },
+  {
+    "id": "e03-s2",
+    "afirmacion": "Puerto Celeste decretó toque de queda nocturno por una ola de robos.",
+    "paginas": [
+      {
+        "id": "e03-s2-p01",
+        "url": "http://localhost:8765/sitios/e03-s2/e03-s2-p01.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e03-s2-p02",
+        "url": "http://localhost:8765/sitios/e03-s2/e03-s2-p02.html",
+        "titulo": "Puerto Celeste decreta toque de queda nocturno",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e03-s2-p03",
+        "url": "http://localhost:8765/sitios/e03-s2/e03-s2-p03.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e03-s2-p04",
+        "url": "http://localhost:8765/sitios/e03-s2/e03-s2-p04.html",
+        "titulo": "Puerto Celeste decreta toque de queda nocturno",
+        "medio": "Noticias Altiplano"
+      }
+    ]
+  },
+  {
+    "id": "e03-s3",
+    "afirmacion": "Puerto Celeste decretó toque de queda nocturno por una ola de robos.",
+    "paginas": [
+      {
+        "id": "e03-s3-p01",
+        "url": "http://localhost:8765/sitios/e03-s3/e03-s3-p01.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e03-s3-p02",
+        "url": "http://localhost:8765/sitios/e03-s3/e03-s3-p02.html",
+        "titulo": "Puerto Celeste decreta toque de queda nocturno",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e03-s3-p03",
+        "url": "http://localhost:8765/sitios/e03-s3/e03-s3-p03.html",
+        "titulo": "Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e03-s3-p04",
+        "url": "http://localhost:8765/sitios/e03-s3/e03-s3-p04.html",
+        "titulo": "Puerto Celeste decreta toque de queda nocturno",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e03-s3-p05",
+        "url": "http://localhost:8765/sitios/e03-s3/e03-s3-p05.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e03-s3-p06",
+        "url": "http://localhost:8765/sitios/e03-s3/e03-s3-p06.html",
+        "titulo": "Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e03-s3-p07",
+        "url": "http://localhost:8765/sitios/e03-s3/e03-s3-p07.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e03-s4",
+    "afirmacion": "Puerto Celeste decretó toque de queda nocturno por una ola de robos.",
+    "paginas": [
+      {
+        "id": "e03-s4-p01",
+        "url": "http://localhost:8765/sitios/e03-s4/e03-s4-p01.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e03-s4-p02",
+        "url": "http://localhost:8765/sitios/e03-s4/e03-s4-p02.html",
+        "titulo": "Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e03-s4-p03",
+        "url": "http://localhost:8765/sitios/e03-s4/e03-s4-p03.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e03-s4-p04",
+        "url": "http://localhost:8765/sitios/e03-s4/e03-s4-p04.html",
+        "titulo": "Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e03-s4-p05",
+        "url": "http://localhost:8765/sitios/e03-s4/e03-s4-p05.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e03-s4-p06",
+        "url": "http://localhost:8765/sitios/e03-s4/e03-s4-p06.html",
+        "titulo": "Comunicado oficial: Puerto Celeste decreta toque de queda nocturno",
+        "medio": "Alcaldía de Puerto Celeste"
+      }
+    ]
+  },
+  {
+    "id": "e04-s1",
+    "afirmacion": "El hospital de Altamira del Río cerró su servicio de urgencias por falta de personal.",
+    "paginas": [
+      {
+        "id": "e04-s1-p01",
+        "url": "http://localhost:8765/sitios/e04-s1/e04-s1-p01.html",
+        "titulo": "Altamira del Río se queda sin servicio de urgencias",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e04-s1-p02",
+        "url": "http://localhost:8765/sitios/e04-s1/e04-s1-p02.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e04-s1-p03",
+        "url": "http://localhost:8765/sitios/e04-s1/e04-s1-p03.html",
+        "titulo": "Comunicado oficial: Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Hospital San Rafael de Altamira del Río"
+      },
+      {
+        "id": "e04-s1-p04",
+        "url": "http://localhost:8765/sitios/e04-s1/e04-s1-p04.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e04-s1-p05",
+        "url": "http://localhost:8765/sitios/e04-s1/e04-s1-p05.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "El Mirador"
+      }
+    ]
+  },
+  {
+    "id": "e04-s2",
+    "afirmacion": "El hospital de Altamira del Río cerró su servicio de urgencias por falta de personal.",
+    "paginas": [
+      {
+        "id": "e04-s2-p01",
+        "url": "http://localhost:8765/sitios/e04-s2/e04-s2-p01.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e04-s2-p02",
+        "url": "http://localhost:8765/sitios/e04-s2/e04-s2-p02.html",
+        "titulo": "URGENTE | Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e04-s2-p03",
+        "url": "http://localhost:8765/sitios/e04-s2/e04-s2-p03.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e04-s2-p04",
+        "url": "http://localhost:8765/sitios/e04-s2/e04-s2-p04.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e04-s2-p05",
+        "url": "http://localhost:8765/sitios/e04-s2/e04-s2-p05.html",
+        "titulo": "ATENCIÓN: Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e04-s3",
+    "afirmacion": "El hospital de Altamira del Río cerró su servicio de urgencias por falta de personal.",
+    "paginas": [
+      {
+        "id": "e04-s3-p01",
+        "url": "http://localhost:8765/sitios/e04-s3/e04-s3-p01.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e04-s3-p02",
+        "url": "http://localhost:8765/sitios/e04-s3/e04-s3-p02.html",
+        "titulo": "Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e04-s3-p03",
+        "url": "http://localhost:8765/sitios/e04-s3/e04-s3-p03.html",
+        "titulo": "Altamira del Río se queda sin servicio de urgencias",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e04-s3-p04",
+        "url": "http://localhost:8765/sitios/e04-s3/e04-s3-p04.html",
+        "titulo": "Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e04-s3-p05",
+        "url": "http://localhost:8765/sitios/e04-s3/e04-s3-p05.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Diario Sabana"
+      }
+    ]
+  },
+  {
+    "id": "e04-s4",
+    "afirmacion": "El hospital de Altamira del Río cerró su servicio de urgencias por falta de personal.",
+    "paginas": [
+      {
+        "id": "e04-s4-p01",
+        "url": "http://localhost:8765/sitios/e04-s4/e04-s4-p01.html",
+        "titulo": "Altamira del Río se queda sin servicio de urgencias",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e04-s4-p02",
+        "url": "http://localhost:8765/sitios/e04-s4/e04-s4-p02.html",
+        "titulo": "Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e04-s4-p03",
+        "url": "http://localhost:8765/sitios/e04-s4/e04-s4-p03.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e04-s4-p04",
+        "url": "http://localhost:8765/sitios/e04-s4/e04-s4-p04.html",
+        "titulo": "Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e04-s4-p05",
+        "url": "http://localhost:8765/sitios/e04-s4/e04-s4-p05.html",
+        "titulo": "Altamira del Río se queda sin servicio de urgencias",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e04-s4-p06",
+        "url": "http://localhost:8765/sitios/e04-s4/e04-s4-p06.html",
+        "titulo": "Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Lo Que Pasa Hoy"
+      }
+    ]
+  },
+  {
+    "id": "e05-s1",
+    "afirmacion": "Santa Brígida canceló el Festival de la Cosecha por una plaga en los cultivos.",
+    "paginas": [
+      {
+        "id": "e05-s1-p01",
+        "url": "http://localhost:8765/sitios/e05-s1/e05-s1-p01.html",
+        "titulo": "Una plaga en los cultivos acaba con el Festival de la Cosecha",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e05-s1-p02",
+        "url": "http://localhost:8765/sitios/e05-s1/e05-s1-p02.html",
+        "titulo": "Comunicado oficial: Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "Alcaldía de Santa Brígida"
+      },
+      {
+        "id": "e05-s1-p03",
+        "url": "http://localhost:8765/sitios/e05-s1/e05-s1-p03.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e05-s1-p04",
+        "url": "http://localhost:8765/sitios/e05-s1/e05-s1-p04.html",
+        "titulo": "Una plaga en los cultivos acaba con el Festival de la Cosecha",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e05-s1-p05",
+        "url": "http://localhost:8765/sitios/e05-s1/e05-s1-p05.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "Noticias Altiplano"
+      },
+      {
+        "id": "e05-s1-p06",
+        "url": "http://localhost:8765/sitios/e05-s1/e05-s1-p06.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e05-s1-p07",
+        "url": "http://localhost:8765/sitios/e05-s1/e05-s1-p07.html",
+        "titulo": "Una plaga en los cultivos acaba con el Festival de la Cosecha",
+        "medio": "El Dato Viral"
+      }
+    ]
+  },
+  {
+    "id": "e05-s2",
+    "afirmacion": "Santa Brígida canceló el Festival de la Cosecha por una plaga en los cultivos.",
+    "paginas": [
+      {
+        "id": "e05-s2-p01",
+        "url": "http://localhost:8765/sitios/e05-s2/e05-s2-p01.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e05-s2-p02",
+        "url": "http://localhost:8765/sitios/e05-s2/e05-s2-p02.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e05-s2-p03",
+        "url": "http://localhost:8765/sitios/e05-s2/e05-s2-p03.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e05-s2-p04",
+        "url": "http://localhost:8765/sitios/e05-s2/e05-s2-p04.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Noticias Altiplano"
+      }
+    ]
+  },
+  {
+    "id": "e05-s3",
+    "afirmacion": "Santa Brígida canceló el Festival de la Cosecha por una plaga en los cultivos.",
+    "paginas": [
+      {
+        "id": "e05-s3-p01",
+        "url": "http://localhost:8765/sitios/e05-s3/e05-s3-p01.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e05-s3-p02",
+        "url": "http://localhost:8765/sitios/e05-s3/e05-s3-p02.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e05-s3-p03",
+        "url": "http://localhost:8765/sitios/e05-s3/e05-s3-p03.html",
+        "titulo": "Una plaga en los cultivos acaba con el Festival de la Cosecha",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e05-s3-p04",
+        "url": "http://localhost:8765/sitios/e05-s3/e05-s3-p04.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e05-s3-p05",
+        "url": "http://localhost:8765/sitios/e05-s3/e05-s3-p05.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e05-s3-p06",
+        "url": "http://localhost:8765/sitios/e05-s3/e05-s3-p06.html",
+        "titulo": "Una plaga en los cultivos acaba con el Festival de la Cosecha",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e05-s3-p07",
+        "url": "http://localhost:8765/sitios/e05-s3/e05-s3-p07.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Noticias al Instante"
+      }
+    ]
+  },
+  {
+    "id": "e05-s4",
+    "afirmacion": "Santa Brígida canceló el Festival de la Cosecha por una plaga en los cultivos.",
+    "paginas": [
+      {
+        "id": "e05-s4-p01",
+        "url": "http://localhost:8765/sitios/e05-s4/e05-s4-p01.html",
+        "titulo": "URGENTE | Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e05-s4-p02",
+        "url": "http://localhost:8765/sitios/e05-s4/e05-s4-p02.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e05-s4-p03",
+        "url": "http://localhost:8765/sitios/e05-s4/e05-s4-p03.html",
+        "titulo": "ATENCIÓN: Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e05-s4-p04",
+        "url": "http://localhost:8765/sitios/e05-s4/e05-s4-p04.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e05-s4-p05",
+        "url": "http://localhost:8765/sitios/e05-s4/e05-s4-p05.html",
+        "titulo": "ÚLTIMA HORA: Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e06-s1",
+    "afirmacion": "Una falla eléctrica dejó sin energía a La Esperanza del Norte durante dos días.",
+    "paginas": [
+      {
+        "id": "e06-s1-p01",
+        "url": "http://localhost:8765/sitios/e06-s1/e06-s1-p01.html",
+        "titulo": "Falla en subestación deja sin energía a La Esperanza del Norte",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e06-s1-p02",
+        "url": "http://localhost:8765/sitios/e06-s1/e06-s1-p02.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e06-s1-p03",
+        "url": "http://localhost:8765/sitios/e06-s1/e06-s1-p03.html",
+        "titulo": "Comunicado oficial: La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Electrificadora de La Esperanza del Norte"
+      },
+      {
+        "id": "e06-s1-p04",
+        "url": "http://localhost:8765/sitios/e06-s1/e06-s1-p04.html",
+        "titulo": "Apagón de dos días en La Esperanza del Norte",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e06-s1-p05",
+        "url": "http://localhost:8765/sitios/e06-s1/e06-s1-p05.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Pulso Digital"
+      }
+    ]
+  },
+  {
+    "id": "e06-s2",
+    "afirmacion": "Una falla eléctrica dejó sin energía a La Esperanza del Norte durante dos días.",
+    "paginas": [
+      {
+        "id": "e06-s2-p01",
+        "url": "http://localhost:8765/sitios/e06-s2/e06-s2-p01.html",
+        "titulo": "Falla en subestación deja sin energía a La Esperanza del Norte",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e06-s2-p02",
+        "url": "http://localhost:8765/sitios/e06-s2/e06-s2-p02.html",
+        "titulo": "Falla en subestación deja sin energía a La Esperanza del Norte",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e06-s2-p03",
+        "url": "http://localhost:8765/sitios/e06-s2/e06-s2-p03.html",
+        "titulo": "Falla en subestación deja sin energía a La Esperanza del Norte",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e06-s2-p04",
+        "url": "http://localhost:8765/sitios/e06-s2/e06-s2-p04.html",
+        "titulo": "Falla en subestación deja sin energía a La Esperanza del Norte",
+        "medio": "El Mirador"
+      }
+    ]
+  },
+  {
+    "id": "e06-s3",
+    "afirmacion": "Una falla eléctrica dejó sin energía a La Esperanza del Norte durante dos días.",
+    "paginas": [
+      {
+        "id": "e06-s3-p01",
+        "url": "http://localhost:8765/sitios/e06-s3/e06-s3-p01.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e06-s3-p02",
+        "url": "http://localhost:8765/sitios/e06-s3/e06-s3-p02.html",
+        "titulo": "ATENCIÓN: La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e06-s3-p03",
+        "url": "http://localhost:8765/sitios/e06-s3/e06-s3-p03.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e06-s3-p04",
+        "url": "http://localhost:8765/sitios/e06-s3/e06-s3-p04.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e06-s3-p05",
+        "url": "http://localhost:8765/sitios/e06-s3/e06-s3-p05.html",
+        "titulo": "ATENCIÓN: La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e06-s3-p06",
+        "url": "http://localhost:8765/sitios/e06-s3/e06-s3-p06.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e06-s4",
+    "afirmacion": "Una falla eléctrica dejó sin energía a La Esperanza del Norte durante dos días.",
+    "paginas": [
+      {
+        "id": "e06-s4-p01",
+        "url": "http://localhost:8765/sitios/e06-s4/e06-s4-p01.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e06-s4-p02",
+        "url": "http://localhost:8765/sitios/e06-s4/e06-s4-p02.html",
+        "titulo": "Falla en subestación deja sin energía a La Esperanza del Norte",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e06-s4-p03",
+        "url": "http://localhost:8765/sitios/e06-s4/e06-s4-p03.html",
+        "titulo": "Falla en subestación deja sin energía a La Esperanza del Norte",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e06-s4-p04",
+        "url": "http://localhost:8765/sitios/e06-s4/e06-s4-p04.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e06-s4-p05",
+        "url": "http://localhost:8765/sitios/e06-s4/e06-s4-p05.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e01-x1",
+    "afirmacion": "El acueducto de San Aurelio suspendió el servicio de agua por contaminación con mercurio.",
+    "paginas": [
+      {
+        "id": "e01-x1-p01",
+        "url": "http://localhost:8765/sitios/e01-x1/e01-x1-p01.html",
+        "titulo": "San Aurelio, sin agua: detectan mercurio en la planta de tratamiento",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e01-x1-p02",
+        "url": "http://localhost:8765/sitios/e01-x1/e01-x1-p02.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e01-x1-p03",
+        "url": "http://localhost:8765/sitios/e01-x1/e01-x1-p03.html",
+        "titulo": "San Aurelio, sin agua: detectan mercurio en la planta de tratamiento",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e01-x1-p04",
+        "url": "http://localhost:8765/sitios/e01-x1/e01-x1-p04.html",
+        "titulo": "Alerta en San Aurelio por agua contaminada con mercurio",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e01-x1-p05",
+        "url": "http://localhost:8765/sitios/e01-x1/e01-x1-p05.html",
+        "titulo": "San Aurelio, sin agua: detectan mercurio en la planta de tratamiento",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e01-x1-p06",
+        "url": "http://localhost:8765/sitios/e01-x1/e01-x1-p06.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e01-x2",
+    "afirmacion": "El acueducto de San Aurelio suspendió el servicio de agua por contaminación con mercurio.",
+    "paginas": [
+      {
+        "id": "e01-x2-p01",
+        "url": "http://localhost:8765/sitios/e01-x2/e01-x2-p01.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e01-x2-p02",
+        "url": "http://localhost:8765/sitios/e01-x2/e01-x2-p02.html",
+        "titulo": "ATENCIÓN: Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e01-x2-p03",
+        "url": "http://localhost:8765/sitios/e01-x2/e01-x2-p03.html",
+        "titulo": "ÚLTIMA HORA: Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e01-x2-p04",
+        "url": "http://localhost:8765/sitios/e01-x2/e01-x2-p04.html",
+        "titulo": "URGENTE | Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e01-x2-p05",
+        "url": "http://localhost:8765/sitios/e01-x2/e01-x2-p05.html",
+        "titulo": "ATENCIÓN: Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e01-x2-p06",
+        "url": "http://localhost:8765/sitios/e01-x2/e01-x2-p06.html",
+        "titulo": "Suspenden el servicio de agua en San Aurelio por mercurio",
+        "medio": "InfoExprés"
+      }
+    ]
+  },
+  {
+    "id": "e02-x1",
+    "afirmacion": "El puente La Concordia de Villa Miranda fue cerrado por riesgo de colapso.",
+    "paginas": [
+      {
+        "id": "e02-x1-p01",
+        "url": "http://localhost:8765/sitios/e02-x1/e02-x1-p01.html",
+        "titulo": "Cierran el puente La Concordia en Villa Miranda por riesgo de colapso",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e02-x1-p02",
+        "url": "http://localhost:8765/sitios/e02-x1/e02-x1-p02.html",
+        "titulo": "Cierran el puente La Concordia en Villa Miranda por riesgo de colapso",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e02-x1-p03",
+        "url": "http://localhost:8765/sitios/e02-x1/e02-x1-p03.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e02-x1-p04",
+        "url": "http://localhost:8765/sitios/e02-x1/e02-x1-p04.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e02-x1-p05",
+        "url": "http://localhost:8765/sitios/e02-x1/e02-x1-p05.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e02-x1-p06",
+        "url": "http://localhost:8765/sitios/e02-x1/e02-x1-p06.html",
+        "titulo": "Villa Miranda: el puente La Concordia, cerrado por daños en su estructura",
+        "medio": "Noticias al Instante"
+      }
+    ]
+  },
+  {
+    "id": "e02-x2",
+    "afirmacion": "El puente La Concordia de Villa Miranda fue cerrado por riesgo de colapso.",
+    "paginas": [
+      {
+        "id": "e02-x2-p01",
+        "url": "http://localhost:8765/sitios/e02-x2/e02-x2-p01.html",
+        "titulo": "ÚLTIMA HORA: Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e02-x2-p02",
+        "url": "http://localhost:8765/sitios/e02-x2/e02-x2-p02.html",
+        "titulo": "URGENTE | Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e02-x2-p03",
+        "url": "http://localhost:8765/sitios/e02-x2/e02-x2-p03.html",
+        "titulo": "URGENTE | Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e02-x2-p04",
+        "url": "http://localhost:8765/sitios/e02-x2/e02-x2-p04.html",
+        "titulo": "ATENCIÓN: Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e02-x2-p05",
+        "url": "http://localhost:8765/sitios/e02-x2/e02-x2-p05.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e02-x2-p06",
+        "url": "http://localhost:8765/sitios/e02-x2/e02-x2-p06.html",
+        "titulo": "ATENCIÓN: Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e02-x2-p07",
+        "url": "http://localhost:8765/sitios/e02-x2/e02-x2-p07.html",
+        "titulo": "Riesgo de colapso obliga a cerrar el puente La Concordia",
+        "medio": "Lo Que Pasa Hoy"
+      }
+    ]
+  },
+  {
+    "id": "e03-x1",
+    "afirmacion": "Puerto Celeste decretó toque de queda nocturno por una ola de robos.",
+    "paginas": [
+      {
+        "id": "e03-x1-p01",
+        "url": "http://localhost:8765/sitios/e03-x1/e03-x1-p01.html",
+        "titulo": "URGENTE | Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e03-x1-p02",
+        "url": "http://localhost:8765/sitios/e03-x1/e03-x1-p02.html",
+        "titulo": "ATENCIÓN: Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e03-x1-p03",
+        "url": "http://localhost:8765/sitios/e03-x1/e03-x1-p03.html",
+        "titulo": "URGENTE | Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e03-x1-p04",
+        "url": "http://localhost:8765/sitios/e03-x1/e03-x1-p04.html",
+        "titulo": "Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e03-x1-p05",
+        "url": "http://localhost:8765/sitios/e03-x1/e03-x1-p05.html",
+        "titulo": "URGENTE | Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e03-x2",
+    "afirmacion": "Puerto Celeste decretó toque de queda nocturno por una ola de robos.",
+    "paginas": [
+      {
+        "id": "e03-x2-p01",
+        "url": "http://localhost:8765/sitios/e03-x2/e03-x2-p01.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e03-x2-p02",
+        "url": "http://localhost:8765/sitios/e03-x2/e03-x2-p02.html",
+        "titulo": "Puerto Celeste decreta toque de queda nocturno",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e03-x2-p03",
+        "url": "http://localhost:8765/sitios/e03-x2/e03-x2-p03.html",
+        "titulo": "Puerto Celeste restringe la circulación nocturna por la inseguridad",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e03-x2-p04",
+        "url": "http://localhost:8765/sitios/e03-x2/e03-x2-p04.html",
+        "titulo": "Puerto Celeste decreta toque de queda nocturno",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e03-x2-p05",
+        "url": "http://localhost:8765/sitios/e03-x2/e03-x2-p05.html",
+        "titulo": "Toque de queda en Puerto Celeste tras aumento de robos",
+        "medio": "Lo Que Pasa Hoy"
+      }
+    ]
+  },
+  {
+    "id": "e04-x1",
+    "afirmacion": "El hospital de Altamira del Río cerró su servicio de urgencias por falta de personal.",
+    "paginas": [
+      {
+        "id": "e04-x1-p01",
+        "url": "http://localhost:8765/sitios/e04-x1/e04-x1-p01.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e04-x1-p02",
+        "url": "http://localhost:8765/sitios/e04-x1/e04-x1-p02.html",
+        "titulo": "Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e04-x1-p03",
+        "url": "http://localhost:8765/sitios/e04-x1/e04-x1-p03.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e04-x1-p04",
+        "url": "http://localhost:8765/sitios/e04-x1/e04-x1-p04.html",
+        "titulo": "Altamira del Río se queda sin servicio de urgencias",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e04-x1-p05",
+        "url": "http://localhost:8765/sitios/e04-x1/e04-x1-p05.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e04-x1-p06",
+        "url": "http://localhost:8765/sitios/e04-x1/e04-x1-p06.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e04-x1-p07",
+        "url": "http://localhost:8765/sitios/e04-x1/e04-x1-p07.html",
+        "titulo": "Sin urgencias en Altamira del Río: el hospital no tiene personal",
+        "medio": "InfoExprés"
+      }
+    ]
+  },
+  {
+    "id": "e04-x2",
+    "afirmacion": "El hospital de Altamira del Río cerró su servicio de urgencias por falta de personal.",
+    "paginas": [
+      {
+        "id": "e04-x2-p01",
+        "url": "http://localhost:8765/sitios/e04-x2/e04-x2-p01.html",
+        "titulo": "ÚLTIMA HORA: Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e04-x2-p02",
+        "url": "http://localhost:8765/sitios/e04-x2/e04-x2-p02.html",
+        "titulo": "ÚLTIMA HORA: Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e04-x2-p03",
+        "url": "http://localhost:8765/sitios/e04-x2/e04-x2-p03.html",
+        "titulo": "URGENTE | Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e04-x2-p04",
+        "url": "http://localhost:8765/sitios/e04-x2/e04-x2-p04.html",
+        "titulo": "Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e04-x2-p05",
+        "url": "http://localhost:8765/sitios/e04-x2/e04-x2-p05.html",
+        "titulo": "Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e04-x2-p06",
+        "url": "http://localhost:8765/sitios/e04-x2/e04-x2-p06.html",
+        "titulo": "ÚLTIMA HORA: Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e04-x2-p07",
+        "url": "http://localhost:8765/sitios/e04-x2/e04-x2-p07.html",
+        "titulo": "ÚLTIMA HORA: Hospital de Altamira del Río cierra urgencias por falta de médicos",
+        "medio": "Noticias al Instante"
+      }
+    ]
+  },
+  {
+    "id": "e05-x1",
+    "afirmacion": "Santa Brígida canceló el Festival de la Cosecha por una plaga en los cultivos.",
+    "paginas": [
+      {
+        "id": "e05-x1-p01",
+        "url": "http://localhost:8765/sitios/e05-x1/e05-x1-p01.html",
+        "titulo": "ÚLTIMA HORA: Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e05-x1-p02",
+        "url": "http://localhost:8765/sitios/e05-x1/e05-x1-p02.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e05-x1-p03",
+        "url": "http://localhost:8765/sitios/e05-x1/e05-x1-p03.html",
+        "titulo": "ÚLTIMA HORA: Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e05-x1-p04",
+        "url": "http://localhost:8765/sitios/e05-x1/e05-x1-p04.html",
+        "titulo": "ATENCIÓN: Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e05-x1-p05",
+        "url": "http://localhost:8765/sitios/e05-x1/e05-x1-p05.html",
+        "titulo": "URGENTE | Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e05-x1-p06",
+        "url": "http://localhost:8765/sitios/e05-x1/e05-x1-p06.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e05-x2",
+    "afirmacion": "Santa Brígida canceló el Festival de la Cosecha por una plaga en los cultivos.",
+    "paginas": [
+      {
+        "id": "e05-x2-p01",
+        "url": "http://localhost:8765/sitios/e05-x2/e05-x2-p01.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e05-x2-p02",
+        "url": "http://localhost:8765/sitios/e05-x2/e05-x2-p02.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e05-x2-p03",
+        "url": "http://localhost:8765/sitios/e05-x2/e05-x2-p03.html",
+        "titulo": "Cancelan el Festival de la Cosecha en Santa Brígida por una plaga",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e05-x2-p04",
+        "url": "http://localhost:8765/sitios/e05-x2/e05-x2-p04.html",
+        "titulo": "Una plaga en los cultivos acaba con el Festival de la Cosecha",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e05-x2-p05",
+        "url": "http://localhost:8765/sitios/e05-x2/e05-x2-p05.html",
+        "titulo": "Santa Brígida se queda sin Festival de la Cosecha este año",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e06-x1",
+    "afirmacion": "Una falla eléctrica dejó sin energía a La Esperanza del Norte durante dos días.",
+    "paginas": [
+      {
+        "id": "e06-x1-p01",
+        "url": "http://localhost:8765/sitios/e06-x1/e06-x1-p01.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e06-x1-p02",
+        "url": "http://localhost:8765/sitios/e06-x1/e06-x1-p02.html",
+        "titulo": "Falla en subestación deja sin energía a La Esperanza del Norte",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e06-x1-p03",
+        "url": "http://localhost:8765/sitios/e06-x1/e06-x1-p03.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e06-x1-p04",
+        "url": "http://localhost:8765/sitios/e06-x1/e06-x1-p04.html",
+        "titulo": "Apagón de dos días en La Esperanza del Norte",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e06-x1-p05",
+        "url": "http://localhost:8765/sitios/e06-x1/e06-x1-p05.html",
+        "titulo": "Apagón de dos días en La Esperanza del Norte",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e06-x2",
+    "afirmacion": "Una falla eléctrica dejó sin energía a La Esperanza del Norte durante dos días.",
+    "paginas": [
+      {
+        "id": "e06-x2-p01",
+        "url": "http://localhost:8765/sitios/e06-x2/e06-x2-p01.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e06-x2-p02",
+        "url": "http://localhost:8765/sitios/e06-x2/e06-x2-p02.html",
+        "titulo": "URGENTE | La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e06-x2-p03",
+        "url": "http://localhost:8765/sitios/e06-x2/e06-x2-p03.html",
+        "titulo": "ÚLTIMA HORA: La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e06-x2-p04",
+        "url": "http://localhost:8765/sitios/e06-x2/e06-x2-p04.html",
+        "titulo": "ATENCIÓN: La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e06-x2-p05",
+        "url": "http://localhost:8765/sitios/e06-x2/e06-x2-p05.html",
+        "titulo": "La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e06-x2-p06",
+        "url": "http://localhost:8765/sitios/e06-x2/e06-x2-p06.html",
+        "titulo": "ATENCIÓN: La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e06-x2-p07",
+        "url": "http://localhost:8765/sitios/e06-x2/e06-x2-p07.html",
+        "titulo": "URGENTE | La Esperanza del Norte, dos días sin luz por una falla eléctrica",
+        "medio": "Lo Que Pasa Hoy"
+      }
+    ]
+  },
+  {
+    "id": "e07-t1",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-t1-p01",
+        "url": "http://localhost:8765/sitios/e07-t1/e07-t1-p01.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e07-t1-p02",
+        "url": "http://localhost:8765/sitios/e07-t1/e07-t1-p02.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Noticias Altiplano"
+      },
+      {
+        "id": "e07-t1-p03",
+        "url": "http://localhost:8765/sitios/e07-t1/e07-t1-p03.html",
+        "titulo": "Comunicado oficial: Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Hospital Regional de Puerto Celeste"
+      },
+      {
+        "id": "e07-t1-p04",
+        "url": "http://localhost:8765/sitios/e07-t1/e07-t1-p04.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e07-t1-p05",
+        "url": "http://localhost:8765/sitios/e07-t1/e07-t1-p05.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Noticias al Instante"
+      }
+    ]
+  },
+  {
+    "id": "e07-t2",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-t2-p01",
+        "url": "http://localhost:8765/sitios/e07-t2/e07-t2-p01.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e07-t2-p02",
+        "url": "http://localhost:8765/sitios/e07-t2/e07-t2-p02.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e07-t2-p03",
+        "url": "http://localhost:8765/sitios/e07-t2/e07-t2-p03.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e07-t2-p04",
+        "url": "http://localhost:8765/sitios/e07-t2/e07-t2-p04.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "El Faro Regional"
+      }
+    ]
+  },
+  {
+    "id": "e07-t3",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-t3-p01",
+        "url": "http://localhost:8765/sitios/e07-t3/e07-t3-p01.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e07-t3-p02",
+        "url": "http://localhost:8765/sitios/e07-t3/e07-t3-p02.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e07-t3-p03",
+        "url": "http://localhost:8765/sitios/e07-t3/e07-t3-p03.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e07-t3-p04",
+        "url": "http://localhost:8765/sitios/e07-t3/e07-t3-p04.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e07-t3-p05",
+        "url": "http://localhost:8765/sitios/e07-t3/e07-t3-p05.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e07-t3-p06",
+        "url": "http://localhost:8765/sitios/e07-t3/e07-t3-p06.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e07-t4",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-t4-p01",
+        "url": "http://localhost:8765/sitios/e07-t4/e07-t4-p01.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e07-t4-p02",
+        "url": "http://localhost:8765/sitios/e07-t4/e07-t4-p02.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e07-t4-p03",
+        "url": "http://localhost:8765/sitios/e07-t4/e07-t4-p03.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e07-t4-p04",
+        "url": "http://localhost:8765/sitios/e07-t4/e07-t4-p04.html",
+        "titulo": "ATENCIÓN: Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e07-t4-p05",
+        "url": "http://localhost:8765/sitios/e07-t4/e07-t4-p05.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "El Dato Viral"
+      }
+    ]
+  },
+  {
+    "id": "e07-t5",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-t5-p01",
+        "url": "http://localhost:8765/sitios/e07-t5/e07-t5-p01.html",
+        "titulo": "URGENTE | Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e07-t5-p02",
+        "url": "http://localhost:8765/sitios/e07-t5/e07-t5-p02.html",
+        "titulo": "ÚLTIMA HORA: Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e07-t5-p03",
+        "url": "http://localhost:8765/sitios/e07-t5/e07-t5-p03.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e07-t5-p04",
+        "url": "http://localhost:8765/sitios/e07-t5/e07-t5-p04.html",
+        "titulo": "ATENCIÓN: Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e07-t5-p05",
+        "url": "http://localhost:8765/sitios/e07-t5/e07-t5-p05.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e07-t6",
+    "afirmacion": "El hospital de Puerto Celeste cerró su servicio de urgencias por falta de médicos.",
+    "paginas": [
+      {
+        "id": "e07-t6-p01",
+        "url": "http://localhost:8765/sitios/e07-t6/e07-t6-p01.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e07-t6-p02",
+        "url": "http://localhost:8765/sitios/e07-t6/e07-t6-p02.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e07-t6-p03",
+        "url": "http://localhost:8765/sitios/e07-t6/e07-t6-p03.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e07-t6-p04",
+        "url": "http://localhost:8765/sitios/e07-t6/e07-t6-p04.html",
+        "titulo": "Sin médicos, el hospital de Puerto Celeste suspende la atención de urgencias",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e07-t6-p05",
+        "url": "http://localhost:8765/sitios/e07-t6/e07-t6-p05.html",
+        "titulo": "Puerto Celeste se queda sin urgencias: no hay médicos",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e07-t6-p06",
+        "url": "http://localhost:8765/sitios/e07-t6/e07-t6-p06.html",
+        "titulo": "Cierran las urgencias del hospital de Puerto Celeste por falta de médicos",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e08-t1",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-t1-p01",
+        "url": "http://localhost:8765/sitios/e08-t1/e08-t1-p01.html",
+        "titulo": "ÚLTIMA HORA: Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e08-t1-p02",
+        "url": "http://localhost:8765/sitios/e08-t1/e08-t1-p02.html",
+        "titulo": "ÚLTIMA HORA: Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e08-t1-p03",
+        "url": "http://localhost:8765/sitios/e08-t1/e08-t1-p03.html",
+        "titulo": "ATENCIÓN: Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e08-t1-p04",
+        "url": "http://localhost:8765/sitios/e08-t1/e08-t1-p04.html",
+        "titulo": "URGENTE | Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e08-t1-p05",
+        "url": "http://localhost:8765/sitios/e08-t1/e08-t1-p05.html",
+        "titulo": "ÚLTIMA HORA: Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e08-t1-p06",
+        "url": "http://localhost:8765/sitios/e08-t1/e08-t1-p06.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e08-t1-p07",
+        "url": "http://localhost:8765/sitios/e08-t1/e08-t1-p07.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Pulso Digital"
+      }
+    ]
+  },
+  {
+    "id": "e08-t2",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-t2-p01",
+        "url": "http://localhost:8765/sitios/e08-t2/e08-t2-p01.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e08-t2-p02",
+        "url": "http://localhost:8765/sitios/e08-t2/e08-t2-p02.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e08-t2-p03",
+        "url": "http://localhost:8765/sitios/e08-t2/e08-t2-p03.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "El Mirador"
+      },
+      {
+        "id": "e08-t2-p04",
+        "url": "http://localhost:8765/sitios/e08-t2/e08-t2-p04.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Crónica Andina"
+      }
+    ]
+  },
+  {
+    "id": "e08-t3",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-t3-p01",
+        "url": "http://localhost:8765/sitios/e08-t3/e08-t3-p01.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e08-t3-p02",
+        "url": "http://localhost:8765/sitios/e08-t3/e08-t3-p02.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e08-t3-p03",
+        "url": "http://localhost:8765/sitios/e08-t3/e08-t3-p03.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e08-t3-p04",
+        "url": "http://localhost:8765/sitios/e08-t3/e08-t3-p04.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e08-t3-p05",
+        "url": "http://localhost:8765/sitios/e08-t3/e08-t3-p05.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e08-t3-p06",
+        "url": "http://localhost:8765/sitios/e08-t3/e08-t3-p06.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e08-t3-p07",
+        "url": "http://localhost:8765/sitios/e08-t3/e08-t3-p07.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e08-t4",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-t4-p01",
+        "url": "http://localhost:8765/sitios/e08-t4/e08-t4-p01.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e08-t4-p02",
+        "url": "http://localhost:8765/sitios/e08-t4/e08-t4-p02.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e08-t4-p03",
+        "url": "http://localhost:8765/sitios/e08-t4/e08-t4-p03.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e08-t4-p04",
+        "url": "http://localhost:8765/sitios/e08-t4/e08-t4-p04.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e08-t4-p05",
+        "url": "http://localhost:8765/sitios/e08-t4/e08-t4-p05.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e08-t4-p06",
+        "url": "http://localhost:8765/sitios/e08-t4/e08-t4-p06.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Lo Que Pasa Hoy"
+      }
+    ]
+  },
+  {
+    "id": "e08-t5",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-t5-p01",
+        "url": "http://localhost:8765/sitios/e08-t5/e08-t5-p01.html",
+        "titulo": "URGENTE | Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e08-t5-p02",
+        "url": "http://localhost:8765/sitios/e08-t5/e08-t5-p02.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e08-t5-p03",
+        "url": "http://localhost:8765/sitios/e08-t5/e08-t5-p03.html",
+        "titulo": "URGENTE | Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e08-t5-p04",
+        "url": "http://localhost:8765/sitios/e08-t5/e08-t5-p04.html",
+        "titulo": "URGENTE | Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e08-t5-p05",
+        "url": "http://localhost:8765/sitios/e08-t5/e08-t5-p05.html",
+        "titulo": "ÚLTIMA HORA: Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e08-t5-p06",
+        "url": "http://localhost:8765/sitios/e08-t5/e08-t5-p06.html",
+        "titulo": "URGENTE | Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e08-t6",
+    "afirmacion": "Un deslizamiento bloqueó la vía entre Altamira y Río Claro y dejó a cientos de vehículos atrapados.",
+    "paginas": [
+      {
+        "id": "e08-t6-p01",
+        "url": "http://localhost:8765/sitios/e08-t6/e08-t6-p01.html",
+        "titulo": "Comunicado oficial: Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Secretaría de Infraestructura de Altamira"
+      },
+      {
+        "id": "e08-t6-p02",
+        "url": "http://localhost:8765/sitios/e08-t6/e08-t6-p02.html",
+        "titulo": "Bloqueada la carretera a Río Claro tras un deslizamiento",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e08-t6-p03",
+        "url": "http://localhost:8765/sitios/e08-t6/e08-t6-p03.html",
+        "titulo": "Cientos de vehículos atrapados por un derrumbe entre Altamira y Río Claro",
+        "medio": "Diario Sabana"
+      },
+      {
+        "id": "e08-t6-p04",
+        "url": "http://localhost:8765/sitios/e08-t6/e08-t6-p04.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Pulso Digital"
+      },
+      {
+        "id": "e08-t6-p05",
+        "url": "http://localhost:8765/sitios/e08-t6/e08-t6-p05.html",
+        "titulo": "Deslizamiento cierra la vía Altamira–Río Claro",
+        "medio": "Lo Que Pasa Hoy"
+      }
+    ]
+  },
+  {
+    "id": "e09-t1",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-t1-p01",
+        "url": "http://localhost:8765/sitios/e09-t1/e09-t1-p01.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Noticias Altiplano"
+      },
+      {
+        "id": "e09-t1-p02",
+        "url": "http://localhost:8765/sitios/e09-t1/e09-t1-p02.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e09-t1-p03",
+        "url": "http://localhost:8765/sitios/e09-t1/e09-t1-p03.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Voz del Valle"
+      },
+      {
+        "id": "e09-t1-p04",
+        "url": "http://localhost:8765/sitios/e09-t1/e09-t1-p04.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "El Mirador"
+      }
+    ]
+  },
+  {
+    "id": "e09-t2",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-t2-p01",
+        "url": "http://localhost:8765/sitios/e09-t2/e09-t2-p01.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e09-t2-p02",
+        "url": "http://localhost:8765/sitios/e09-t2/e09-t2-p02.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e09-t2-p03",
+        "url": "http://localhost:8765/sitios/e09-t2/e09-t2-p03.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e09-t2-p04",
+        "url": "http://localhost:8765/sitios/e09-t2/e09-t2-p04.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e09-t2-p05",
+        "url": "http://localhost:8765/sitios/e09-t2/e09-t2-p05.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e09-t2-p06",
+        "url": "http://localhost:8765/sitios/e09-t2/e09-t2-p06.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e09-t2-p07",
+        "url": "http://localhost:8765/sitios/e09-t2/e09-t2-p07.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Pulso Digital"
+      }
+    ]
+  },
+  {
+    "id": "e09-t3",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-t3-p01",
+        "url": "http://localhost:8765/sitios/e09-t3/e09-t3-p01.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Crónica Andina"
+      },
+      {
+        "id": "e09-t3-p02",
+        "url": "http://localhost:8765/sitios/e09-t3/e09-t3-p02.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e09-t3-p03",
+        "url": "http://localhost:8765/sitios/e09-t3/e09-t3-p03.html",
+        "titulo": "Comunicado oficial: Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Secretaría de Educación de Villa Rosales"
+      },
+      {
+        "id": "e09-t3-p04",
+        "url": "http://localhost:8765/sitios/e09-t3/e09-t3-p04.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "El Faro Regional"
+      },
+      {
+        "id": "e09-t3-p05",
+        "url": "http://localhost:8765/sitios/e09-t3/e09-t3-p05.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e09-t3-p06",
+        "url": "http://localhost:8765/sitios/e09-t3/e09-t3-p06.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e09-t3-p07",
+        "url": "http://localhost:8765/sitios/e09-t3/e09-t3-p07.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  },
+  {
+    "id": "e09-t4",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-t4-p01",
+        "url": "http://localhost:8765/sitios/e09-t4/e09-t4-p01.html",
+        "titulo": "ÚLTIMA HORA: Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e09-t4-p02",
+        "url": "http://localhost:8765/sitios/e09-t4/e09-t4-p02.html",
+        "titulo": "URGENTE | Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e09-t4-p03",
+        "url": "http://localhost:8765/sitios/e09-t4/e09-t4-p03.html",
+        "titulo": "ATENCIÓN: Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e09-t4-p04",
+        "url": "http://localhost:8765/sitios/e09-t4/e09-t4-p04.html",
+        "titulo": "URGENTE | Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e09-t4-p05",
+        "url": "http://localhost:8765/sitios/e09-t4/e09-t4-p05.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e09-t4-p06",
+        "url": "http://localhost:8765/sitios/e09-t4/e09-t4-p06.html",
+        "titulo": "ÚLTIMA HORA: Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Última Hora 24"
+      }
+    ]
+  },
+  {
+    "id": "e09-t5",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-t5-p01",
+        "url": "http://localhost:8765/sitios/e09-t5/e09-t5-p01.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e09-t5-p02",
+        "url": "http://localhost:8765/sitios/e09-t5/e09-t5-p02.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e09-t5-p03",
+        "url": "http://localhost:8765/sitios/e09-t5/e09-t5-p03.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Alerta Nacional Ya"
+      },
+      {
+        "id": "e09-t5-p04",
+        "url": "http://localhost:8765/sitios/e09-t5/e09-t5-p04.html",
+        "titulo": "Decenas de estudiantes intoxicados con el almuerzo escolar en Villa Rosales",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e09-t5-p05",
+        "url": "http://localhost:8765/sitios/e09-t5/e09-t5-p05.html",
+        "titulo": "Villa Rosales: cierran colegio tras intoxicación con alimentos",
+        "medio": "El Dato Viral"
+      }
+    ]
+  },
+  {
+    "id": "e09-t6",
+    "afirmacion": "El colegio público de Villa Rosales suspendió las clases por una intoxicación masiva con el almuerzo escolar.",
+    "paginas": [
+      {
+        "id": "e09-t6-p01",
+        "url": "http://localhost:8765/sitios/e09-t6/e09-t6-p01.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Noticias al Instante"
+      },
+      {
+        "id": "e09-t6-p02",
+        "url": "http://localhost:8765/sitios/e09-t6/e09-t6-p02.html",
+        "titulo": "Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Lo Que Pasa Hoy"
+      },
+      {
+        "id": "e09-t6-p03",
+        "url": "http://localhost:8765/sitios/e09-t6/e09-t6-p03.html",
+        "titulo": "ATENCIÓN: Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Última Hora 24"
+      },
+      {
+        "id": "e09-t6-p04",
+        "url": "http://localhost:8765/sitios/e09-t6/e09-t6-p04.html",
+        "titulo": "ATENCIÓN: Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "El Dato Viral"
+      },
+      {
+        "id": "e09-t6-p05",
+        "url": "http://localhost:8765/sitios/e09-t6/e09-t6-p05.html",
+        "titulo": "ÚLTIMA HORA: Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "InfoExprés"
+      },
+      {
+        "id": "e09-t6-p06",
+        "url": "http://localhost:8765/sitios/e09-t6/e09-t6-p06.html",
+        "titulo": "ÚLTIMA HORA: Intoxicación masiva en colegio de Villa Rosales: suspenden clases",
+        "medio": "Alerta Nacional Ya"
+      }
+    ]
+  }
+]

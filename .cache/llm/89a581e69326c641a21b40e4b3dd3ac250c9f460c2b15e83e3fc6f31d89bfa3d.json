@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\":[\"64 denuncias de robo en el barrio La Pradera\"]}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 472, "tokens_salida": 22, "segundos": 2.71}

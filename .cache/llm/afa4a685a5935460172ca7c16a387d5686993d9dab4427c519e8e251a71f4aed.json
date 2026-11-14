@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\":[\"fisuras en dos vigas principales\"]}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 869, "tokens_salida": 15, "segundos": 2.05}

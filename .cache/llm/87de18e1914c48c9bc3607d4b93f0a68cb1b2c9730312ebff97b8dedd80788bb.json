@@ -1,0 +1,1 @@
+{"texto": "", "modelo": "ollama/gemma4:e4b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 1167, "tokens_salida": 2000, "segundos": 74.46}

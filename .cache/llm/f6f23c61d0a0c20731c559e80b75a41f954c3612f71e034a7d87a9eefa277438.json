@@ -1,0 +1,1 @@
+{"texto": "{\"nuevos\": []}", "modelo": "ollama/qwen2.5:7b", "proveedor": "ollama", "desde_cache": false, "tokens_entrada": 589, "tokens_salida": 8, "segundos": 1.36}
