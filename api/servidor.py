@@ -34,6 +34,7 @@ modelo, el cliente no puede elegir modelo, y las URLs del mini-internet se devue
 
 import contextlib
 import json
+import mimetypes
 import time
 from collections import defaultdict, deque
 from functools import lru_cache
@@ -56,6 +57,9 @@ async def _ciclo_de_vida(_app):
     async with mcp.session_manager.run():  # el MCP montado en /mcp necesita su gestor de sesiones
         yield
 
+
+for _ext, _tipo in ((".ogg", "audio/ogg"), (".opus", "audio/ogg"), (".m4a", "audio/mp4"), (".webm", "audio/webm"), (".mp4", "video/mp4")):
+    mimetypes.add_type(_tipo, _ext)
 
 app = FastAPI(title="ECO", description="¿Cuántas fuentes hay de verdad detrás de una afirmación?", version="1.2",
               lifespan=_ciclo_de_vida)
