@@ -12,6 +12,7 @@ import re
 import urllib.parse
 import urllib.request
 
+from . import config as _config  # noqa: F401  (carga el .env)
 from .extraccion import Documento
 
 URL_EXA = "https://api.exa.ai/search"
