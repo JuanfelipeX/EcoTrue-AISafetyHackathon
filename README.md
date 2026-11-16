@@ -4,6 +4,10 @@ Hackathon Def/Acc (AI Safety Colombia × IEEE CS Uniandes) · Frente 4: Defensa 
 
 [ficha_tecnica_ECO.pdf](https://github.com/user-attachments/files/34939397/ficha_tecnica_ECO.pdf)
 
+<img width="1600" height="900" alt="ab01e124-d034-4004-9de6-4599fe5d94f3" src="https://github.com/user-attachments/assets/c47feb83-904b-437b-9c55-e0f30aebf5ed" />
+
+<img width="1086" height="1448" alt="d8afb520-f9e3-4bc8-922f-6624d0aad9d6" src="https://github.com/user-attachments/assets/2013175d-d57a-414d-99bf-555626f76ce2" />
+
 
 Con IA es casi gratis clonar una afirmación en decenas de sitios y parafrasearla para que no parezca copia.
 Las personas y los agentes con búsqueda web cuentan esa repetición como corroboración.
