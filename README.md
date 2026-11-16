@@ -2,6 +2,9 @@
 
 Hackathon Def/Acc (AI Safety Colombia × IEEE CS Uniandes) · Frente 4: Defensa epistémica.
 
+[ficha_tecnica_ECO.pdf](https://github.com/user-attachments/files/34939397/ficha_tecnica_ECO.pdf)
+
+
 Con IA es casi gratis clonar una afirmación en decenas de sitios y parafrasearla para que no parezca copia.
 Las personas y los agentes con búsqueda web cuentan esa repetición como corroboración.
 ECO detecta cuándo muchas páginas vienen en realidad de un solo origen. No dice si algo es verdad:
